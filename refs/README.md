@@ -1,0 +1,24 @@
+# References
+
+Research papers for the OSI Hackathon.
+
+## Adding a paper
+
+1. Name the file `YYYY_Short_Title.pdf` (underscores, capitalized words, acronyms as written), e.g. `2023_IIT_4.pdf`.
+2. Commit each PDF once. Don't overwrite it with revised or annotated copies, because git keeps every version forever. Put notes in the table below or in a matching `.md` file instead.
+3. Add a row to the table.
+
+This repo is public, so only commit openly licensed PDFs (e.g. CC BY). For papers that aren't, link to them in the File column instead of committing the PDF.
+
+## Papers
+
+One reference per scoring framework.
+
+| File | Citation | Link / DOI | License | Why it matters |
+|------|----------|------------|---------|----------------|
+| [2023_Functionalism (web)](https://plato.stanford.edu/entries/functionalism/) | Levin J. "Functionalism." *Stanford Encyclopedia of Philosophy* (substantive revision 4 Apr 2023). | https://plato.stanford.edu/entries/functionalism/ | © Janet Levin / Stanford; free to read, not openly licensed | **Functionalism.** A mental state is defined by its causal and functional role, not by what it is made of. This is the most substrate-permissive framework, so any substrate that implements the right functional organization can score well. It sets the baseline the other frameworks add requirements to. |
+| [2020_Global_Workspace (web)](https://doi.org/10.1016/j.neuron.2020.01.026) | Mashour GA, Roelfsema P, Changeux J-P, Dehaene S. "Conscious Processing and the Global Neuronal Workspace Hypothesis." *Neuron* 105(5):776–798 (2020). | [10.1016/j.neuron.2020.01.026](https://doi.org/10.1016/j.neuron.2020.01.026) | PMC author manuscript; free to read, not CC | **Global workspace.** Makes architectural criteria concrete: specialized local processors, a workspace with long-range recurrent connections, and non-linear "ignition" that broadcasts content globally. Also covers evidence from anesthesia. Useful for checking whether a substrate supports broadcast and sustained recurrent activity. |
+| [2023_IIT_4.pdf](2023_IIT_4.pdf) | Albantakis L, Barbosa L, Findlay G, et al., Tononi G. "Integrated information theory (IIT) 4.0: Formulating the properties of phenomenal existence in physical terms." *PLoS Comput Biol* 19(10):e1011465 (2023). | [10.1371/journal.pcbi.1011465](https://doi.org/10.1371/journal.pcbi.1011465) | CC BY 4.0 | **Integrated information theory.** Sets out IIT's current axioms and postulates. Scores a substrate's intrinsic physical cause-effect structure (Φ), not the function it computes, so a digital computer can score low even when it behaves the same way as a brain. Its reference code is [PyPhi (iit-4.0 branch)](https://github.com/wmayner/pyphi/tree/feature/iit-4.0/pyphi), which could compute Φ for small toy substrates. |
+| [2010_Active_Inference (web)](https://doi.org/10.1038/nrn2787) | Friston K. "The free-energy principle: a unified brain theory?" *Nat Rev Neurosci* 11:127–138 (2010). | [10.1038/nrn2787](https://doi.org/10.1038/nrn2787) | © Macmillan, all rights reserved | **Active inference.** Under the free-energy principle, a self-organizing system minimizes surprise, bounded by free energy, through perception, action and learning under a generative model. Suggests criteria such as whether the substrate maintains its own states (homeostasis), holds a predictive model, and acts on its environment. |
+| [2020_EM_Field.pdf](2020_EM_Field.pdf) | McFadden J. "Integrating information in the brain's EM field: the cemi field theory of consciousness." *Neurosci Conscious* 2020(1):niaa016 (2020). | [10.1093/nc/niaa016](https://doi.org/10.1093/nc/niaa016) | CC BY 4.0 | **EM field theory.** Argues that consciousness is information integrated in space by the brain's electromagnetic field, which acts back on neurons. Conventional computing integrates information only over time and so falls short. Discusses what artificial consciousness would need, which makes it directly relevant to scoring OECT networks, ionic hydrogels and other field-coupled substrates. |
+| [2014_Orch_OR (web)](https://doi.org/10.1016/j.plrev.2013.08.002) | Hameroff S, Penrose R. "Consciousness in the universe: A review of the 'Orch OR' theory." *Phys Life Rev* 11(1):39–78 (2014). | [10.1016/j.plrev.2013.08.002](https://doi.org/10.1016/j.plrev.2013.08.002) | © Elsevier, all rights reserved | **Orch-OR.** Holds that consciousness arises from orchestrated quantum computation in neuronal microtubules, ending in Diósi–Penrose objective reduction. This is the most substrate-restrictive framework: it favors living neural tissue and gel–neuron hybrids and scores most engineered substrates near zero. Reviews the main criticisms of the theory. |
