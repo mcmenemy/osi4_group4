@@ -59,7 +59,6 @@ Setup complete: Fisher White (2026-10-19)
 ## Open Questions & Ideas
 Add anything here: frameworks to add or drop, substrates to test, demo ideas, scope cuts.
 - Which 2–3 theory of mind frameworks are the MVP if we run short on time?
-- What does the hackathon allow us to prepare before kickoff?
 
 ## Next Steps
 - Please commit to this repo, even if it's just adding a sentence to the README. That way we know everyone's development setup works.
