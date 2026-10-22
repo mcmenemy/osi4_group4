@@ -43,3 +43,11 @@ def test_extract_pasted_text_flags_quotes_not_in_that_text():
 def test_extract_rejects_unreadable_pdf():
     response = client.post("/api/extract", files={"file": ("x.pdf", b"not a pdf", "application/pdf")})
     assert response.status_code == 422
+
+
+def test_scorecard_endpoint_returns_baseline_and_accepts_weights():
+    data = client.get("/api/scorecard").json()
+    assert data["baseline"]["material_key"] == "su8"
+    assert {"ranked", "no_neuron_evidence", "summary", "weights"} <= data.keys()
+    assert client.get("/api/scorecard", params={"survival": 1}).json()["weights"]["survival"] == 1
+    assert client.get("/api/scorecard", params={"survival": 99}).status_code == 422

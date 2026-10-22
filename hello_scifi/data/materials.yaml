@@ -28,7 +28,7 @@ materials:
       citation: SU-8 2000 series data sheet (Kayaku Advanced Materials); fully crosslinked epoxy.
       status: to verify
     typical_modulus_pa:
-      range: [2.0e9, 4.0e9]
+      range: [2.0e+9, 4.0e+9]
       citation: SU-8 2000 series data sheet (Kayaku Advanced Materials), Young's modulus about 2 GPa.
       status: to verify
 
@@ -46,7 +46,7 @@ materials:
       citation: Yue K. et al., Biomaterials 73, 254-271 (2015); gelatin backbone is MMP-cleavable.
       status: to verify
     typical_modulus_pa:
-      range: [3.08e3, 1.845e5]
+      range: [3.08e+3, 1.845e+5]
       method: tension
       citation: Wu Y. et al., Biosci. Rep. 39, BSR20181748 (2019); 5-30% GelMA.
       status: checked against the paper text on PMC

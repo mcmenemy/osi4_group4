@@ -14,7 +14,7 @@ from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from app import data, llm, phi, sim
+from app import data, llm, phi, scorecard, sim
 from app.extraction import extract, pdf_text
 from app.schemas import Record
 
@@ -137,6 +137,28 @@ async def score(body: ScoreRequest, request: Request) -> dict:
 @app.get("/api/records")
 async def records() -> list[Record]:
     return data.load_records()
+
+
+@app.get("/api/scorecard")
+async def scorecard_endpoint(
+    survival: float | None = None,
+    soft: float | None = None,
+    in_vivo_brain: float | None = None,
+    clear_degradable: float | None = None,
+    conductive: float | None = None,
+) -> dict:
+    """Candidate well fills, scored server-side. Query params override the default weights."""
+    overrides = {
+        "survival": survival,
+        "soft": soft,
+        "in_vivo_brain": in_vivo_brain,
+        "clear_degradable": clear_degradable,
+        "conductive": conductive,
+    }
+    for name, value in overrides.items():
+        if value is not None and not 0 <= value <= 10:
+            raise HTTPException(422, f"Weight {name} must be between 0 and 10.")
+    return scorecard.build_scorecard(data.reviewed_records(), overrides)
 
 
 @app.get("/api/references")
