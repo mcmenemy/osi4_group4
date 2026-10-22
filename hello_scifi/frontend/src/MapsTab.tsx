@@ -7,6 +7,7 @@ import {
   MATERIAL_CLASSES,
   SETTING_LABELS,
   classLabel,
+  methodLabel,
   sourceLabel,
   withPrefix,
   type MaterialRecord,
@@ -61,6 +62,7 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
 
       <StiffnessConductivity records={records} references={references} targetWindow={targetWindow} onPoint={onPoint} />
       <CellOutcomes records={records} references={references} onPoint={onPoint} />
+      <Degradation records={records} onPoint={onPoint} />
       <Coverage records={records} onCell={openIds} />
 
       {selected && (
@@ -95,6 +97,14 @@ function hoverFor(r: MaterialRecord, lines: string[]): string {
   return `<b>${r.material}</b><br>${sourceLabel(r.source)} · ${classLabel(r.material_class)}<br>${lines.join('<br>')}${flagged}<extra></extra>`
 }
 
+const STIFFNESS_AXIS = "Stiffness (Pa): Young's modulus, or G′ where noted"
+
+function stiffnessLine(r: MaterialRecord): string {
+  const f = r.properties.youngs_modulus!
+  const m = methodLabel(f.test_method)
+  return `Stiffness = ${withPrefix(f.value_si!, 'Pa')}${m ? ` (${m})` : ''}`
+}
+
 /* 1. Stiffness vs conductivity */
 
 function StiffnessConductivity({
@@ -123,7 +133,7 @@ function StiffnessConductivity({
         customdata: rs.map((r) => r.record_id),
         hovertemplate: rs.map((r) =>
           hoverFor(r, [
-            `E = ${withPrefix(r.properties.youngs_modulus!.value_si!, 'Pa')}`,
+            stiffnessLine(r),
             `σ = ${withPrefix(r.properties.conductivity!.value_si!, 'S/m')}`,
             r.biology ? 'Has cell data' : 'No cell data',
           ]),
@@ -155,9 +165,9 @@ function StiffnessConductivity({
         x1: ref.modulus_pa[1],
         y0: box ? box[0] : 0,
         y1: box ? box[1] : 1,
-        fillcolor: t.muted,
-        opacity: 0.14,
-        line: { width: 0 },
+        fillcolor: ref.kind === 'hydrogel' ? t.categorical[2] : t.muted,
+        opacity: ref.kind === 'hydrogel' ? 0.12 : 0.14,
+        line: ref.kind === 'hydrogel' ? { width: 1, color: t.categorical[2], dash: 'dot' } : { width: 0 },
         layer: 'below',
       })
       const mid = Math.sqrt(ref.modulus_pa[0] * ref.modulus_pa[1])
@@ -169,7 +179,7 @@ function StiffnessConductivity({
         text: ref.label,
         showarrow: false,
         yanchor: 'bottom',
-        font: { size: 11, color: t.muted },
+        font: { size: 11, color: ref.kind === 'hydrogel' ? t.categorical[2] : t.muted },
         hovertext: `${ref.label}: ${withPrefix(ref.modulus_pa[0], 'Pa')}–${withPrefix(ref.modulus_pa[1], 'Pa')} (${ref.status}). ${ref.citation}`,
       })
     })
@@ -200,7 +210,7 @@ function StiffnessConductivity({
       data: traces,
       layout: {
         ...baseLayout(t),
-        xaxis: logAxis(t, "Young's modulus (Pa)", [10, 1e12]),
+        xaxis: logAxis(t, STIFFNESS_AXIS, [10, 1e12]),
         yaxis: logAxis(t, 'Conductivity (S/m)', [1e-4, 1e6]),
         shapes,
         annotations,
@@ -214,8 +224,8 @@ function StiffnessConductivity({
         <h2>Stiffness vs. conductivity</h2>
         <p>
           Each point is one material with both values reported, using the conductivity the paper states (electronic for
-          conductive gels and films); gray bands are reference materials and the dashed box is the soft,
-          electronically conductive target window. {CAVEAT}
+          conductive gels and films); gray bands are rigid and tissue references, dotted bands are common cell-culture
+          hydrogels, and the dashed box is the soft, electronically conductive target window. {CAVEAT}
         </p>
       </figcaption>
       <Plot data={data} layout={layout} height={520} label="Log-log scatter of Young's modulus against conductivity" onClick={onPoint} />
@@ -226,7 +236,13 @@ function StiffnessConductivity({
             {references.stiffness.map((r) => (
               <li key={r.id}>
                 <strong>{r.label}</strong>: {withPrefix(r.modulus_pa[0], 'Pa')}–{withPrefix(r.modulus_pa[1], 'Pa')}
-                {r.conductivity_s_m && `, ${r.conductivity_s_m[0]}–${r.conductivity_s_m[1]} S/m`} ({r.status}). {r.citation}
+                {r.conductivity_s_m && `, ${r.conductivity_s_m[0]}–${r.conductivity_s_m[1]} S/m`}
+                {r.test_method && `, ${methodLabel(r.test_method)}`} ({r.status}). {r.citation}{' '}
+                {r.url && (
+                  <a href={r.url} target="_blank" rel="noreferrer">
+                    Source
+                  </a>
+                )}
               </li>
             ))}
             {targetWindow && (
@@ -292,7 +308,7 @@ function CellOutcomes({
         customdata: rs.map((r) => r.record_id),
         hovertemplate: rs.map((r) =>
           hoverFor(r, [
-            `E = ${withPrefix(r.properties.youngs_modulus!.value_si!, 'Pa')}`,
+            stiffnessLine(r),
             outcome === 'viability' ? `Viability ${value(r)}%` : `Neurite length ${Number(toY(value(r)!).toPrecision(3))} µm`,
             `${r.biology?.cell_type ?? 'cells'} · ${r.biology?.setting ? SETTING_LABELS[r.biology.setting] : 'setting not stated'}`,
           ]),
@@ -347,7 +363,7 @@ function CellOutcomes({
       data: traces,
       layout: {
         ...baseLayout(t),
-        xaxis: logAxis(t, "Young's modulus (Pa)", [10, 1e12]),
+        xaxis: logAxis(t, STIFFNESS_AXIS, [10, 1e12]),
         yaxis: {
           title: { text: outcome === 'viability' ? 'Viability (%)' : 'Neurite length (µm)', font: { color: t.muted } },
           gridcolor: t.border,
@@ -384,7 +400,76 @@ function CellOutcomes({
   )
 }
 
-/* 3. Coverage heatmap */
+/* 3. Stiffness vs degradation time */
+
+function Degradation({ records, onPoint }: { records: MaterialRecord[]; onPoint: (p: PlotPoint) => void }) {
+  const t = useTheme()
+  const points = useMemo(
+    () =>
+      records.filter(
+        (r) => r.properties.youngs_modulus?.value_si != null && r.properties.degradation_time?.value_si != null,
+      ),
+    [records],
+  )
+  const onlyDegradation = records.filter((r) => r.properties.degradation_time?.value_si != null).length
+  const { data, layout } = useMemo(() => {
+    const traces = MATERIAL_CLASSES.map((c) => {
+      const rs = points.filter((r) => r.material_class === c.key)
+      return {
+        type: 'scatter',
+        mode: 'markers',
+        name: c.label,
+        x: rs.map((r) => r.properties.youngs_modulus!.value_si),
+        y: rs.map((r) => r.properties.degradation_time!.value_si),
+        customdata: rs.map((r) => r.record_id),
+        hovertemplate: rs.map((r) =>
+          hoverFor(r, [stiffnessLine(r), `Degrades in ${Number(r.properties.degradation_time!.value_si!.toPrecision(3))} days`]),
+        ),
+        marker: { size: 12, color: classColor(t, c.key), line: { width: 2, color: t.panel } },
+        showlegend: rs.length > 0,
+      }
+    })
+    return {
+      data: traces,
+      layout: {
+        ...baseLayout(t),
+        xaxis: logAxis(t, STIFFNESS_AXIS, [10, 1e12]),
+        yaxis: logAxis(t, 'Degradation time (days)', [0.1, 1000]),
+        shapes: [
+          {
+            // Brown et al. assess graft success at ~3 weeks; a temporary gel should last at least the first days.
+            type: 'line', xref: 'paper', x0: 0, x1: 1, y0: 21, y1: 21,
+            line: { color: t.accent, width: 1.5, dash: 'dash' },
+          },
+        ],
+        annotations: [
+          {
+            xref: 'paper', x: 1, y: Math.log10(21), xanchor: 'right', yanchor: 'bottom', showarrow: false,
+            text: '~3 weeks: Science Corp graft check', font: { size: 11, color: t.accent },
+          },
+        ],
+      },
+    }
+  }, [points, t])
+
+  return (
+    <figure className="map-card">
+      <figcaption>
+        <h2>Stiffness vs. degradation time</h2>
+        <p>
+          For a temporary gel fill, how soft it is and how long it lasts; the dashed line marks the ~3-week point where
+          Brown et al. assess the graft. {CAVEAT}
+        </p>
+      </figcaption>
+      <Plot data={data} layout={layout} height={440} label="Scatter of stiffness against degradation time" onClick={onPoint} />
+      <p className="muted small">
+        {points.length} records report both; {onlyDegradation} report a degradation time at all.
+      </p>
+    </figure>
+  )
+}
+
+/* 4. Coverage heatmap */
 
 function Coverage({ records, onCell }: { records: MaterialRecord[]; onCell: (ids: string[]) => void }) {
   const t = useTheme()

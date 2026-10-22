@@ -26,6 +26,7 @@
       "evidence": "PEDOT:DS + EG34 65 ± 46 0.0064 ± 0.0046 0.42 ± 0.4 2.2 ± 0.9",
       "location": "p. 4, Table 1",
       "confidence": "high",
+      "test_method": null,
       "evidence_verified": true
     },
     "mu_c_star": {
@@ -35,15 +36,17 @@
       "evidence": "PEDOT:DS + EG34 65 ± 46 0.0064 ± 0.0046 0.42 ± 0.4 2.2 ± 0.9",
       "location": "p. 4, Table 1",
       "confidence": "high",
+      "test_method": null,
       "evidence_verified": true
     },
     "ionic_time_constant": null,
+    "degradation_time": null,
     "stability": null
   },
   "biology": null,
-  "notes": "Dextran sulfate dopant. Measured in 0.1 M NaCl with Ag/AgCl gate. OECT mobility 0.0064 cm2 V-1 s-1.",
+  "notes": "Dextran sulfate dopant; measured in 0.1 M NaCl with Ag/AgCl gate/reference.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:41:31+00:00",
+  "extracted_at": "2026-10-22T02:55:22+00:00",
   "schema_version": "0.1.0"
 }

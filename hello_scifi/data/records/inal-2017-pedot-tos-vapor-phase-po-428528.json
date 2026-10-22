@@ -26,6 +26,7 @@
       "evidence": "PEDOT:TOS [VPP]33 136 ± 50 0.93 ± 0.72 126 ± 108 72 ± 14",
       "location": "p. 4, Table 1",
       "confidence": "high",
+      "test_method": null,
       "evidence_verified": true
     },
     "mu_c_star": {
@@ -35,15 +36,17 @@
       "evidence": "PEDOT:TOS [VPP]33 136 ± 50 0.93 ± 0.72 126 ± 108 72 ± 14",
       "location": "p. 4, Table 1",
       "confidence": "high",
+      "test_method": null,
       "evidence_verified": true
     },
     "ionic_time_constant": null,
+    "degradation_time": null,
     "stability": null
   },
   "biology": null,
-  "notes": "Measured in 0.1 M NaCl with Ag/AgCl gate. OECT mobility 0.93 cm2 V-1 s-1.",
+  "notes": "Measured in 0.1 M NaCl with Ag/AgCl gate/reference.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:41:31+00:00",
+  "extracted_at": "2026-10-22T02:55:22+00:00",
   "schema_version": "0.1.0"
 }

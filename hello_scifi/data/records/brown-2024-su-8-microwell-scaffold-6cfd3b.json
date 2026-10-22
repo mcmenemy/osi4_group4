@@ -1,0 +1,175 @@
+{
+  "record_id": "brown-2024-su-8-microwell-scaffold-6cfd3b",
+  "source": {
+    "doi": "10.1101/2024.11.22.624907",
+    "title": "Optogenetic stimulation of a cortical biohybrid implant guides goal directed behavior",
+    "first_author": "Brown",
+    "year": 2024,
+    "url": "https://doi.org/10.1101/2024.11.22.624907",
+    "file": "brown2024.pdf"
+  },
+  "material_class": "other",
+  "material": "SU-8 microwell scaffold on fused silica bonded to glass coverslip (biohybrid implant)",
+  "formulation": [
+    {
+      "component": "poly-d-Lysine",
+      "amount": "0.1",
+      "unit": "mg/mL",
+      "evidence": "0.1 mg/mL poly-d-Lysine (Gibco)",
+      "evidence_verified": true
+    },
+    {
+      "component": "Laminin",
+      "amount": "0.1",
+      "unit": "mg/mL",
+      "evidence": "0.1 mg/mL Laminin (Millipore Sigma, L2020) in DI water",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "spin coating SU-8 2010",
+      "parameter": "speed",
+      "value": "3000",
+      "unit": "rpm",
+      "evidence": "SU-8 2010 photoresist (Kayaku) was spun at 3000 rpm",
+      "evidence_verified": true
+    },
+    {
+      "step": "soft bake",
+      "parameter": "temperature",
+      "value": "95",
+      "unit": "℃",
+      "evidence": "soft-baked at 95℃ for 3.5 minutes on a hotplate",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV exposure",
+      "parameter": "dose",
+      "value": "294",
+      "unit": "mJ/cm2",
+      "evidence": "a total UV dose of 294mJ/cm2",
+      "evidence_verified": true
+    },
+    {
+      "step": "post exposure bake",
+      "parameter": "temperature",
+      "value": "95",
+      "unit": "℃",
+      "evidence": "post\nexposure bake of 4 minutes at 95 ℃",
+      "evidence_verified": true
+    },
+    {
+      "step": "hard bake",
+      "parameter": "temperature",
+      "value": "200",
+      "unit": "℃",
+      "evidence": "ramping to 200℃ for 2 minutes on a hotplate",
+      "evidence_verified": true
+    },
+    {
+      "step": "epoxy cure",
+      "parameter": "temperature",
+      "value": "65",
+      "unit": "℃",
+      "evidence": "cured in an oven at 65℃ for 2 hours",
+      "evidence_verified": true
+    },
+    {
+      "step": "cell loading centrifugation",
+      "parameter": "force",
+      "value": "300",
+      "unit": "RCF",
+      "evidence": "centrifuged at 300 RCF for 5 minutes at room temperature",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": {
+      "description": {
+        "value": "no visible sign of structural deterioration of the microwell scaffold",
+        "unit": null,
+        "value_si": null,
+        "evidence": "no visible sign of\nstructural deterioration of the microwell scaffold even months after implantation",
+        "location": "p. 3",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": false
+      },
+      "duration_days": null,
+      "conditions": "in vivo, implanted on mouse cortex"
+    }
+  },
+  "biology": {
+    "cell_type": "primary embryonic cortical neurons (E14.5-E15.5)",
+    "species": "mouse (C57/B6J)",
+    "setting": "in_vivo",
+    "coating": "poly-d-Lysine and Laminin",
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "77",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "determined that on average we filled 77±15% (mean ± s.d., n=23 microwell scaffolds",
+        "location": "p. 3",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "microwell loading fraction (24 h after loading)"
+      },
+      {
+        "value": "52",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "we found 52±23% (mean±s.d.) of microwells to be\nloaded with neurons expressing fluorescent protein",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "microwells with fluorescent engrafted neurons three weeks after surgery"
+      },
+      {
+        "value": "Five of nine",
+        "unit": null,
+        "value_si": null,
+        "evidence": "Five of nine mice in this\ncohort passed criterion performance",
+        "location": "p. 6",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "biohybrid mice reaching criterion performance"
+      },
+      {
+        "value": "0.25",
+        "unit": "bits per second",
+        "value_si": null,
+        "evidence": "best session performance for biohybrid rate averaged 0.25±0.24 bits\nper second",
+        "location": "p. 6",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "best session bit rate (biohybrid)"
+      }
+    ]
+  },
+  "notes": "Microwells: 10 µm diameter, 15 µm deep, 15 µm pitch hexagonal lattice; implanted on cortical surface after craniectomy and duratomy. Neurons transduced with AAV CheRiff-eGFP or jRGECO1a.",
+  "flags": [
+    "unverified_quote:stability"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T02:54:35+00:00",
+  "schema_version": "0.1.0"
+}

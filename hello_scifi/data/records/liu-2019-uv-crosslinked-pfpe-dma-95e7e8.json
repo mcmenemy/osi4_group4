@@ -1,5 +1,5 @@
 {
-  "record_id": "liu-2019-uv-crosslinked-pfpe-dma-2363e0",
+  "record_id": "liu-2019-uv-crosslinked-pfpe-dma-95e7e8",
   "source": {
     "doi": "10.1038/s41551-018-0335-6",
     "title": "Soft and elastic hydrogel-based microelectronics for localized low-voltage neuromodulation",
@@ -9,10 +9,10 @@
     "file": "liu2019.pdf"
   },
   "material_class": "other",
-  "material": "UV-crosslinked PFPE-DMA fluorinated elastomer (12 kDa)",
+  "material": "UV-crosslinked PFPE-DMA fluorinated elastomer (elastic photoresist)",
   "formulation": [
     {
-      "component": "photoinitiator bis(2,4,6-trimethylbenzoyl)-phenylphosphineoxide",
+      "component": "bis(2,4,6-trimethylbenzoyl)-phenylphosphineoxide photoinitiator",
       "amount": "2",
       "unit": "wt%",
       "evidence": "The encapsulating PFPE-DMA with 2wt% photoinitiator",
@@ -29,7 +29,7 @@
       "evidence_verified": true
     },
     {
-      "step": "UV exposure",
+      "step": "UV crosslinking",
       "parameter": "intensity",
       "value": "10",
       "unit": "mWcm−2",
@@ -45,6 +45,7 @@
       "evidence": "to be <30 kPa (Fig. 1j) by using a PFPE-DMA with a number averaged molecular weight of 12 kDa",
       "location": "p. 2",
       "confidence": "medium",
+      "test_method": "tension",
       "evidence_verified": true
     },
     "conductivity": null,
@@ -55,12 +56,13 @@
     "volumetric_capacitance": null,
     "mu_c_star": null,
     "ionic_time_constant": null,
+    "degradation_time": null,
     "stability": null
   },
   "biology": null,
-  "notes": "Stretchable up to 200%; dielectric constant 2.4±0.1.",
+  "notes": "Used as insulation/encapsulation layer.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:42:12+00:00",
+  "extracted_at": "2026-10-22T02:56:13+00:00",
   "schema_version": "0.1.0"
 }

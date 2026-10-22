@@ -1,0 +1,91 @@
+{
+  "record_id": "lu-2019-pure-pedot-pss-hydrogels-f47b17",
+  "source": {
+    "doi": "10.1038/s41467-019-09003-5",
+    "title": "Pure PEDOT:PSS hydrogels",
+    "first_author": "Lu",
+    "year": 2019,
+    "url": "https://doi.org/10.1038/s41467-019-09003-5",
+    "file": "lu2019.pdf"
+  },
+  "material_class": "conductive_hydrogel",
+  "material": "Pure PEDOT:PSS hydrogels (5–50 vol.% DMSO series)",
+  "formulation": [
+    {
+      "component": "DMSO",
+      "amount": "5–50",
+      "unit": "vol.%",
+      "evidence": "in the range of 5–50 vol.%",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "drying",
+      "parameter": "temperature/time",
+      "value": "60 °C, 24 h",
+      "unit": null,
+      "evidence": "24 h at 60 °C drying followed by three\ncycles of 30 min annealing at 130 °C",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "2–10",
+      "unit": "MPa",
+      "value_si": 6000000.0,
+      "evidence": "the Young’s moduli of pure PEDOT:PSS\nhydrogels in PBS are in the range of 2–10 MPa",
+      "location": "p. 5",
+      "confidence": "medium",
+      "test_method": "tension",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": {
+      "value": "80–87",
+      "unit": "wt.%",
+      "value_si": null,
+      "evidence": "high water contents (80–87 wt.%\nwater)",
+      "location": "p. 4",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": {
+      "description": {
+        "value": "no observable mechanical damage",
+        "unit": null,
+        "value_si": null,
+        "evidence": "no observable damage over\n3 months in PBS",
+        "location": "p. 4",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "duration_days": {
+        "value": "3",
+        "unit": "months",
+        "value_si": null,
+        "evidence": "no observable damage over\n3 months in PBS",
+        "location": "p. 4",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "conditions": "in PBS"
+    }
+  },
+  "biology": null,
+  "notes": "Range over DMSO concentrations; swollen state.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T02:56:39+00:00",
+  "schema_version": "0.1.0"
+}

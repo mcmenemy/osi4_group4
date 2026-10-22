@@ -16,6 +16,7 @@ export interface FieldValue {
   evidence: string | null
   location: string | null
   confidence: Confidence | null
+  test_method?: string | null
   evidence_verified: boolean | null
 }
 
@@ -65,6 +66,7 @@ export interface Properties {
   volumetric_capacitance: FieldValue | null
   mu_c_star: FieldValue | null
   ionic_time_constant: FieldValue | null
+  degradation_time?: FieldValue | null
   stability: Stability | null
 }
 
@@ -98,6 +100,9 @@ export interface MaterialRecord {
 export interface StiffnessReference {
   id: string
   label: string
+  kind: 'tissue' | 'rigid' | 'hydrogel'
+  test_method?: string
+  url?: string
   modulus_pa: [number, number]
   conductivity_s_m: [number, number] | null
   status: string
@@ -165,7 +170,19 @@ const PROPERTY_FIELDS: { key: keyof Omit<Properties, 'stability'>; label: string
   { key: 'volumetric_capacitance', label: 'Volumetric capacitance C*', unit: 'F/cm³' },
   { key: 'mu_c_star', label: 'μC*', unit: 'F cm⁻¹ V⁻¹ s⁻¹' },
   { key: 'ionic_time_constant', label: 'Ionic time constant', unit: 's' },
+  { key: 'degradation_time', label: 'Degradation time', unit: 'days' },
 ]
+
+export const TEST_METHOD_LABELS: Record<string, string> = {
+  compression: 'compression',
+  tension: 'tension',
+  shear_rheology: "shear rheology (G′)",
+  indentation_afm: 'indentation / AFM',
+  dma: 'DMA',
+  other: 'other method',
+}
+
+export const methodLabel = (m?: string | null) => (m ? (TEST_METHOD_LABELS[m] ?? m) : null)
 
 const BIOLOGY_FIELDS: { key: 'culture_days' | 'viability_percent' | 'neurite_length'; label: string; unit: string }[] = [
   { key: 'culture_days', label: 'Culture time', unit: 'days' },

@@ -1,5 +1,5 @@
 {
-  "record_id": "lu-2019-pure-pedot-pss-hydrogel-a111e1",
+  "record_id": "lu-2019-pure-pedot-pss-hydrogel-746cb7",
   "source": {
     "doi": "10.1038/s41467-019-09003-5",
     "title": "Pure PEDOT:PSS hydrogels",
@@ -9,13 +9,13 @@
     "file": "lu2019.pdf"
   },
   "material_class": "conductive_hydrogel",
-  "material": "Pure PEDOT:PSS hydrogel, 20 vol.% DMSO",
+  "material": "Pure PEDOT:PSS hydrogel (20 vol.% DMSO)",
   "formulation": [
     {
       "component": "DMSO",
       "amount": "20",
-      "unit": "vol.%",
-      "evidence": "The ultimate tensile strain of the pure PEDOT:PSS hydrogels (20 vol. % DMSO) can reach over 35% in PBS",
+      "unit": "vol. %",
+      "evidence": "PEDOT:PSS hydrogels (20 vol. % DMSO) can reach over 35% in\nPBS",
       "evidence_verified": true
     }
   ],
@@ -30,12 +30,13 @@
     "volumetric_capacitance": null,
     "mu_c_star": null,
     "ionic_time_constant": null,
+    "degradation_time": null,
     "stability": null
   },
   "biology": null,
-  "notes": "Fully swollen free-standing films.",
+  "notes": "Tensile tests submerged in PBS or deionized water.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:42:39+00:00",
+  "extracted_at": "2026-10-22T02:56:39+00:00",
   "schema_version": "0.1.0"
 }

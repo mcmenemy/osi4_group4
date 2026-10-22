@@ -1,5 +1,5 @@
 {
-  "record_id": "boufidis-2025-ppy-pedot-pss-hybrid-hyd-2e3bbf",
+  "record_id": "boufidis-2025-ppy-pedot-pss-hybrid-hyd-052537",
   "source": {
     "doi": "10.1038/s41467-025-57016-0",
     "title": "Bio-inspired electronics: Soft, biohybrid, and \"living\" neural interfaces",
@@ -9,7 +9,7 @@
     "file": "review2025.pdf"
   },
   "material_class": "conductive_hydrogel",
-  "material": "PPy-PEDOT:PSS hybrid hydrogel with hierarchical porous structure",
+  "material": "PPy-PEDOT:PSS hybrid hydrogel (hierarchical porous)",
   "formulation": [],
   "processing": [],
   "properties": {
@@ -18,9 +18,10 @@
       "value": "867",
       "unit": "S m–1",
       "value_si": 867.0,
-      "evidence": "Highly conductive (867 S m–1",
+      "evidence": "Highly conductive (867 S m–1\n) PPy-PEDOT:PSS hybrid hydro",
       "location": "p. 5",
       "confidence": "medium",
+      "test_method": null,
       "evidence_verified": true
     },
     "water_content": null,
@@ -30,6 +31,7 @@
     "volumetric_capacitance": null,
     "mu_c_star": null,
     "ionic_time_constant": null,
+    "degradation_time": null,
     "stability": null
   },
   "biology": {
@@ -42,9 +44,9 @@
     "neurite_length": null,
     "other_outcomes": []
   },
-  "notes": "Review article; value cited from ref. 111, not measured by the review authors. Reported to enhance PC12 cell viability and enable electrochemical dopamine biosensing in vitro. The culture setting was inferred as 2D and is not stated in the text.",
+  "notes": "Review article; value cited from ref. 111. Enhanced PC12 cell viability and dopamine biosensing reported qualitatively.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:42:51+00:00",
+  "extracted_at": "2026-10-22T02:56:51+00:00",
   "schema_version": "0.1.0"
 }

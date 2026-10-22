@@ -1,5 +1,5 @@
 {
-  "record_id": "boulingre-2025-pva-gelatin-biosynthetic-537673",
+  "record_id": "boulingre-2025-pva-gel-biosynthetic-hyd-95a03b",
   "source": {
     "doi": "10.1039/d4tb02651a",
     "title": "Multi-layered electrode constructs for neural tissue engineering",
@@ -9,13 +9,13 @@
     "file": "boulingre2025.pdf"
   },
   "material_class": "nonconductive_hydrogel",
-  "material": "PVA–gelatin biosynthetic hydrogel (stand-alone BH, control on glass)",
+  "material": "PVA–GEL biosynthetic hydrogel (stand-alone BH control)",
   "formulation": [
     {
       "component": "PVA–Nb : gelatin–Nb",
       "amount": "25 : 75",
       "unit": "weight ratio",
-      "evidence": "PVA–Nb and gelatin–Nb were mixed in at 25 : 75 weight\nratio",
+      "evidence": "PVA–Nb and gelatin–Nb were mixed in at 25 : 75 weight",
       "evidence_verified": true
     }
   ],
@@ -30,6 +30,7 @@
     "volumetric_capacitance": null,
     "mu_c_star": null,
     "ionic_time_constant": null,
+    "degradation_time": null,
     "stability": null
   },
   "biology": {
@@ -44,6 +45,7 @@
       "evidence": "samples were maintained in vitro for 14 days before\nbeing fixed for staining",
       "location": "p. 5",
       "confidence": "high",
+      "test_method": null,
       "evidence_verified": true
     },
     "viability_percent": null,
@@ -56,6 +58,7 @@
         "evidence": "compared to 35 000\ncells per cm2 on stand-alone BHs",
         "location": "p. 11",
         "confidence": "medium",
+        "test_method": null,
         "evidence_verified": true,
         "name": "astrocyte cell density"
       },
@@ -66,6 +69,7 @@
         "evidence": "around 1400 mm2 per cell in stand-alone BHs",
         "location": "p. 11",
         "confidence": "medium",
+        "test_method": null,
         "evidence_verified": true,
         "name": "cell spreading area"
       }
@@ -74,6 +78,6 @@
   "notes": "Formed in 6-mm PDMS moulds on glass coverslips.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:40:37+00:00",
+  "extracted_at": "2026-10-22T02:54:16+00:00",
   "schema_version": "0.1.0"
 }

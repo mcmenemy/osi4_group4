@@ -1,0 +1,47 @@
+{
+  "record_id": "liu-2019-pristine-pedot-pss-thin-a65ed2",
+  "source": {
+    "doi": "10.1038/s41551-018-0335-6",
+    "title": "Soft and elastic hydrogel-based microelectronics for localized low-voltage neuromodulation",
+    "first_author": "Liu",
+    "year": 2019,
+    "url": "https://doi.org/10.1038/s41551-018-0335-6",
+    "file": "liu2019.pdf"
+  },
+  "material_class": "omiec_film",
+  "material": "Pristine PEDOT:PSS thin film (control)",
+  "formulation": [],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": {
+      "description": {
+        "value": "absorption at 800 nm completely disappeared",
+        "unit": null,
+        "value_si": null,
+        "evidence": "the absorption at 800nm completely disappeared for a regular PEDOT:PSS thin film",
+        "location": "p. 2",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "duration_days": null,
+      "conditions": "soaking in water"
+    }
+  },
+  "biology": null,
+  "notes": "Unstable in water; absorbance lost after only 6 h soaking.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T02:56:13+00:00",
+  "schema_version": "0.1.0"
+}

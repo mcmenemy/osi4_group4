@@ -153,7 +153,7 @@ Open the **Review** tab, enter your name, and go through the records: compare ea
 
 ### Reference markers
 
-`data/references.json` holds the hand-entered reference values on the maps (brain tissue, SU-8, dry PEDOT:PSS, polyimide, silicon) and the Science Corp numbers. Each carries a citation and is labeled "approximate literature value, to verify". `data/target_window.json` sets the shaded soft-and-conductive region; its bounds are a team choice, not a literature value.
+`data/references.json` holds the hand-entered reference values on the maps (brain tissue, SU-8, dry PEDOT:PSS, polyimide, silicon, plus GelMA and HyStem culture hydrogels) and the Science Corp numbers. Each carries a citation and a status saying how far it has been checked. `data/target_window.json` sets the shaded soft-and-conductive region; its bounds are a team choice, not a literature value.
 
 ## Configuration
 

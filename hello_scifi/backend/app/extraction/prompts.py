@@ -18,6 +18,7 @@ paraphrase, fix typos, or join text from different places.
 - Report units exactly as written ("kPa", "S cm-1", "mS/cm"). Use "" when there is no unit.
 - location: the nearest "[page N]" marker before the quote, plus a figure or table label if \
 the quote is in a caption or table (e.g. "p. 4, Table 1"). Use "" if unknown.
+- method: how the value was measured, from the allowed list; "" when not stated or not relevant.
 - confidence: high when the value is stated plainly for this exact material; medium when it is \
 approximate ("~", "about") or the material it applies to is slightly ambiguous; low otherwise.
 
@@ -38,7 +39,13 @@ metal electrodes used as comparisons).
 "temperature", "140", "°C").
 
 values (use these names):
-- youngs_modulus, conductivity, water_content, swelling_ratio, impedance_1khz (impedance at \
+- youngs_modulus: Young's, elastic, or compressive modulus. If the paper only reports a shear \
+storage modulus (G'), report that value here with method shear_rheology; never convert between them. \
+Always set method for stiffness values (compression, tension, shear_rheology, indentation_afm, dma, \
+other) when the text says how it was measured.
+- degradation_time: how long the material takes to degrade, dissolve, or lose a stated fraction of \
+its mass; label = conditions (e.g. "50% mass loss in collagenase", "in vivo"). Leave out if not stated.
+- conductivity, water_content, swelling_ratio, impedance_1khz (impedance at \
 or near 1 kHz; put the electrode area in a separate electrode_area value if stated), \
 volumetric_capacitance (C*), mu_c_star (μC*), ionic_time_constant (OECT or ionic response time).
 - stability: value = short description of what stayed stable; label = conditions. If a duration \

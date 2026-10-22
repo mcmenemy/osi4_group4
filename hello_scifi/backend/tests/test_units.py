@@ -82,3 +82,5 @@ def test_normalize_value_by_property():
     assert normalize_value("neurite_length", "150", "µm") == pytest.approx(150e-6)
     assert normalize_value("viability_percent", "85", "%") == 85
     assert normalize_value("youngs_modulus", "2", "") is None
+    assert normalize_value("degradation_time", "2", "weeks") == pytest.approx(14)
+    assert normalize_value("degradation_time", "36", "h") == pytest.approx(1.5)

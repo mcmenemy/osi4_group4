@@ -46,3 +46,13 @@ def test_merge_combines_same_material_across_chunks():
     merged = extract.merge_extractions([a, b])
     assert len(merged.records) == 1
     assert len(merged.records[0].values) == len(a.records[0].values) + 1
+
+
+def test_test_method_and_degradation_time_carry_through():
+    llm = extract.mock_extraction().records[0]
+    llm.values[0].method = "compression"
+    llm.values.append(llm.values[0].model_copy(update={"name": "degradation_time", "value": "3", "unit": "weeks", "method": ""}))
+    record = extract.to_record(llm, Source(), "mock", 0)
+    assert record.properties.youngs_modulus.test_method == "compression"
+    assert record.properties.degradation_time.value_si == pytest.approx(21)
+    assert record.properties.degradation_time.test_method is None

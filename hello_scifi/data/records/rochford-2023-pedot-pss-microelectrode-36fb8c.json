@@ -43,26 +43,10 @@
       "evidence_verified": true
     },
     {
-      "step": "PEDOT:PSS soft bake",
-      "parameter": "time",
-      "value": "60",
-      "unit": "s",
-      "evidence": "The solution is spin-coated three times with soft bakes for 60 s at 120°C.",
-      "evidence_verified": true
-    },
-    {
       "step": "PEDOT:PSS hard bake",
       "parameter": "temperature",
       "value": "130",
       "unit": "°C",
-      "evidence": "After the final spin-coat, there is a hard bake for 1 hour at 130°C.",
-      "evidence_verified": true
-    },
-    {
-      "step": "PEDOT:PSS hard bake",
-      "parameter": "time",
-      "value": "1",
-      "unit": "hour",
       "evidence": "After the final spin-coat, there is a hard bake for 1 hour at 130°C.",
       "evidence_verified": true
     },
@@ -81,14 +65,6 @@
       "unit": "W",
       "evidence": "The devices are plasma-treated at 25 W for 1 min to make the surface hydrophilic for cell culture.",
       "evidence_verified": true
-    },
-    {
-      "step": "cell seeding",
-      "parameter": "density",
-      "value": "100,000",
-      "unit": "cells/cm2",
-      "evidence": "They were seeded onto devices with densities of 100,000 cells/cm2",
-      "evidence_verified": true
     }
   ],
   "properties": {
@@ -102,7 +78,8 @@
       "value_si": null,
       "evidence": "before cell seeding: 97% yield, 1.84 ± 2.20 kilohm",
       "location": "p. 3",
-      "confidence": "high",
+      "confidence": "medium",
+      "test_method": null,
       "evidence_verified": true
     },
     "electrode_area": {
@@ -111,36 +88,18 @@
       "value_si": null,
       "evidence": "MEA occupied a 2-mm by 2-mm area within the larger parylene device",
       "location": "p. 3",
-      "confidence": "medium",
+      "confidence": "low",
+      "test_method": null,
       "evidence_verified": true
     },
     "volumetric_capacitance": null,
     "mu_c_star": null,
     "ionic_time_constant": null,
-    "stability": {
-      "description": {
-        "value": "device stability with acceptable increase in impedance",
-        "unit": null,
-        "value_si": null,
-        "evidence": "exhibiting an acceptable and expected increase in impedance over 4 weeks of in vivo culture",
-        "location": "p. 3",
-        "confidence": "medium",
-        "evidence_verified": true
-      },
-      "duration_days": {
-        "value": "4",
-        "unit": "weeks",
-        "value_si": 28.0,
-        "evidence": "exhibiting an acceptable and expected increase in impedance over 4 weeks of in vivo culture",
-        "location": "p. 3",
-        "confidence": "high",
-        "evidence_verified": true
-      },
-      "conditions": "in vivo, rat subcutaneous/forearm nerve"
-    }
+    "degradation_time": null,
+    "stability": null
   },
   "biology": {
-    "cell_type": "human iPSC-derived skeletal myocytes; host rat forearm nerve",
+    "cell_type": "human iPSC-derived skeletal myocytes; host rat forearm nerve (ulnar and median)",
     "species": "human cells in rat (athymic nude)",
     "setting": "in_vivo",
     "coating": "fibrin hydrogel",
@@ -151,11 +110,23 @@
       "evidence": "mature multinucleated myotubes are formed on the surface of the biohybrid device by day 8",
       "location": "p. 3",
       "confidence": "high",
+      "test_method": null,
       "evidence_verified": true
     },
     "viability_percent": null,
     "neurite_length": null,
     "other_outcomes": [
+      {
+        "value": "28",
+        "unit": "days",
+        "value_si": null,
+        "evidence": "implanted human iPSC-derived myocytes can survive in a rat model for up to 28 days",
+        "location": "p. 6",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "in vivo cell survival duration"
+      },
       {
         "value": "32.0",
         "unit": "dB",
@@ -163,24 +134,26 @@
         "evidence": "weeks 1 to 4: 12.9-, 11.3-, 19.7-, and 32.0-dB mean signal￾to-noise ratio (SNR), respectively",
         "location": "p. 3",
         "confidence": "high",
+        "test_method": null,
         "evidence_verified": true,
         "name": "SNR week 4 awake recording"
       },
       {
-        "value": "12.9",
-        "unit": "dB",
+        "value": "100,000",
+        "unit": "cells/cm2",
         "value_si": null,
-        "evidence": "weeks 1 to 4: 12.9-, 11.3-, 19.7-, and 32.0-dB mean signal￾to-noise ratio (SNR), respectively",
-        "location": "p. 3",
+        "evidence": "They were seeded onto devices with densities of 100,000 cells/cm2",
+        "location": "p. 8",
         "confidence": "high",
+        "test_method": null,
         "evidence_verified": true,
-        "name": "SNR week 1 awake recording"
+        "name": "cell seeding density"
       }
     ]
   },
-  "notes": "Impedance at 1000 Hz measured in DPBS (three-electrode); 32 PEDOT:PSS electrodes. Controls lacking cells showed no CAPs.",
+  "notes": "Impedance measured at 1000 Hz in DPBS, three-electrode configuration; yield 97% before seeding and 25% at week 4 in vivo. Implanted 4 weeks in immunodeficient rats.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:43:06+00:00",
+  "extracted_at": "2026-10-22T02:57:04+00:00",
   "schema_version": "0.1.0"
 }

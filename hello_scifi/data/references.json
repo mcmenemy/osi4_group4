@@ -12,7 +12,8 @@
         1
       ],
       "status": "approximate literature value, to verify",
-      "citation": "Stiffness: Budday S. et al., Mechanical properties of gray and white matter brain tissue by indentation, J. Mech. Behav. Biomed. Mater. 46, 318-330 (2015). Conductivity: Gabriel S., Lau R.W. & Gabriel C., The dielectric properties of biological tissues, Phys. Med. Biol. 41, 2251 (1996)."
+      "citation": "Stiffness: Budday S. et al., Mechanical properties of gray and white matter brain tissue by indentation, J. Mech. Behav. Biomed. Mater. 46, 318-330 (2015). Conductivity: Gabriel S., Lau R.W. & Gabriel C., The dielectric properties of biological tissues, Phys. Med. Biol. 41, 2251 (1996).",
+      "kind": "tissue"
     },
     {
       "id": "su8",
@@ -23,7 +24,8 @@
       ],
       "conductivity_s_m": null,
       "status": "approximate literature value, to verify",
-      "citation": "SU-8 2000 series data sheet (MicroChem / Kayaku), Young's modulus about 2 GPa; used for the microwells in Brown et al., bioRxiv 2024."
+      "citation": "SU-8 2000 series data sheet (MicroChem / Kayaku), Young's modulus about 2 GPa; used for the microwells in Brown et al., bioRxiv 2024.",
+      "kind": "rigid"
     },
     {
       "id": "pedot_dry",
@@ -34,7 +36,8 @@
       ],
       "conductivity_s_m": null,
       "status": "approximate literature value, to verify",
-      "citation": "Lang U. et al., Mechanical characterization of PEDOT:PSS thin films, Synth. Met. 159, 473-479 (2009)."
+      "citation": "Lang U. et al., Mechanical characterization of PEDOT:PSS thin films, Synth. Met. 159, 473-479 (2009).",
+      "kind": "rigid"
     },
     {
       "id": "polyimide",
@@ -45,7 +48,8 @@
       ],
       "conductivity_s_m": null,
       "status": "approximate literature value, to verify",
-      "citation": "DuPont Kapton HN polyimide film data sheet (tensile modulus about 2.5 GPa)."
+      "citation": "DuPont Kapton HN polyimide film data sheet (tensile modulus about 2.5 GPa).",
+      "kind": "rigid"
     },
     {
       "id": "silicon",
@@ -56,7 +60,36 @@
       ],
       "conductivity_s_m": null,
       "status": "approximate literature value, to verify",
-      "citation": "Hopcroft M.A., Nix W.D. & Kenny T.W., What is the Young's modulus of silicon?, J. Microelectromech. Syst. 19, 229-238 (2010)."
+      "citation": "Hopcroft M.A., Nix W.D. & Kenny T.W., What is the Young's modulus of silicon?, J. Microelectromech. Syst. 19, 229-238 (2010).",
+      "kind": "rigid"
+    },
+    {
+      "id": "gelma_wu2019",
+      "label": "GelMA 5–30%",
+      "kind": "hydrogel",
+      "modulus_pa": [
+        3080.0,
+        184500.0
+      ],
+      "conductivity_s_m": null,
+      "test_method": "tension",
+      "status": "from the paper's text on PMC; to verify against the PDF",
+      "citation": "Wu Y. et al., The influence of the stiffness of GelMA substrate on the outgrowth of PC12 cells, Biosci. Rep. 39, BSR20181748 (2019), doi:10.1042/BSR20181748. 3.08 kPa (5%), 34.9 kPa (10%), 184.5 kPa (30%) by uniaxial tension; PC12 neurite length peaked at 10%.",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6340955/"
+    },
+    {
+      "id": "hystem",
+      "label": "HyStem HA kits",
+      "kind": "hydrogel",
+      "modulus_pa": [
+        23,
+        3500
+      ],
+      "conductivity_s_m": null,
+      "test_method": "shear_rheology",
+      "status": "vendor-reported storage modulus G' (not Young's modulus); to verify (vendor page blocks automated access)",
+      "citation": "Advanced BioMatrix, HyStem hydrogel stiffness: tunable from about 23 Pa to 3500 Pa (G') by thiolated HA, thiolated gelatin and Extralink crosslinker concentration.",
+      "url": "https://advancedbiomatrix.com/hystem-hydrogel-stiffness.html"
     }
   ],
   "science_corp": {

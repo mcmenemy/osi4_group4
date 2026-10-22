@@ -1,0 +1,55 @@
+{
+  "record_id": "adewole-2020-agarose-microcolumn-tenn-ee531e",
+  "source": {
+    "doi": "10.1101/333526",
+    "title": "Development of Optically-Controlled \"Living Electrodes\" with Long-Projecting Axon Tracts for a Synaptic Brain-Machine Interface",
+    "first_author": "Adewole",
+    "year": 2020,
+    "url": "https://doi.org/10.1101/333526",
+    "file": "Adewole2024.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Agarose microcolumn µTENN with collagen-laminin ECM, implanted in rat cortex",
+  "formulation": [],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "cortical neuron aggregates (GCaMP-expressing)",
+    "species": "rat",
+    "setting": "in_vivo",
+    "coating": "collagen-laminin ECM",
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "one month",
+        "unit": null,
+        "value_si": null,
+        "evidence": "One week and one month-post 431 injection in the rodent brain, constructs were found to have survived",
+        "location": "p. 9",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "construct survival post-implant"
+      }
+    ]
+  },
+  "notes": "~1.5 mm bidirectional µTENNs microinjected into V1 of Sprague-Dawley rats; GCaMP activity in delta band at 5 and 10 days post-implant.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T02:53:50+00:00",
+  "schema_version": "0.1.0"
+}

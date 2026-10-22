@@ -25,6 +25,8 @@ class FieldValue(BaseModel):
     evidence: str | None = None  # verbatim quote from the source
     location: str | None = None  # page / figure / table, if known
     confidence: Confidence | None = None
+    # How it was measured, e.g. compression vs. shear rheology (G') for stiffness.
+    test_method: str | None = None
     # Set by validation: did the evidence quote match the source text?
     evidence_verified: bool | None = None
 
@@ -71,6 +73,7 @@ class Properties(BaseModel):
     volumetric_capacitance: FieldValue | None = None  # F/cm^3
     mu_c_star: FieldValue | None = None  # F cm^-1 V^-1 s^-1
     ionic_time_constant: FieldValue | None = None  # SI: s
+    degradation_time: FieldValue | None = None  # normalized: days
     stability: Stability | None = None
 
 
@@ -120,6 +123,7 @@ PropertyName = Literal[
     "volumetric_capacitance",
     "mu_c_star",
     "ionic_time_constant",
+    "degradation_time",
     "stability",
     "stability_duration",
     "culture_days",
@@ -127,6 +131,9 @@ PropertyName = Literal[
     "neurite_length",
     "other_outcome",
 ]
+
+
+TestMethod = Literal["", "compression", "tension", "shear_rheology", "indentation_afm", "dma", "other"]
 
 
 class LLMValue(BaseModel):
@@ -137,6 +144,7 @@ class LLMValue(BaseModel):
     evidence: str  # verbatim quote containing the value
     location: str  # "p. 3", "Fig. 2b", "Table 1", or ""
     confidence: Confidence
+    method: TestMethod  # how the value was measured; "" if not stated or not applicable
 
 
 class LLMFormulation(BaseModel):

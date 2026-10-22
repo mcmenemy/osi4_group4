@@ -61,6 +61,7 @@ NORMALIZED_UNITS = {
     "mu_c_star": "F cm^-1 V^-1 s^-1",
     "ionic_time_constant": "s",
     "culture_days": "days",
+    "degradation_time": "days",
     "stability_duration": "days",
     "neurite_length": "m",
 }
@@ -188,7 +189,7 @@ def normalize_value(prop: str, value: str | float | None, unit: str | None) -> f
             return to_siemens_per_meter(number, unit)
         case "ionic_time_constant":
             return to_seconds(number, unit)
-        case "culture_days" | "stability_duration":
+        case "culture_days" | "stability_duration" | "degradation_time":
             seconds = to_seconds(number, unit or "day")
             return None if seconds is None else seconds / 86400
         case "neurite_length":
@@ -217,6 +218,7 @@ SANITY_RANGES = {
     "volumetric_capacitance": (0.0, 1e4),
     "ionic_time_constant": (0.0, 1e6),
     "culture_days": (0.0, 3650.0),
+    "degradation_time": (0.0, 3650.0),
     "stability_duration": (0.0, 3650.0),
     "neurite_length": (0.0, 1.0),
 }
@@ -237,6 +239,7 @@ def _fields(record: Record) -> Iterator[tuple[str, FieldValue]]:
         "volumetric_capacitance",
         "mu_c_star",
         "ionic_time_constant",
+        "degradation_time",
     ):
         f = getattr(props, name)
         if f is not None:

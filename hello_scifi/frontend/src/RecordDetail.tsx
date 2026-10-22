@@ -5,6 +5,7 @@ import {
   fieldEntries,
   formatReported,
   formatSi,
+  methodLabel,
   sourceLabel,
   sourceUrl,
   type FieldEntry,
@@ -79,6 +80,7 @@ export default function RecordDetail({ record: r, fieldExtra }: Props) {
                   <dt>
                     {e.label}
                     {e.field.confidence && <span className={`conf ${e.field.confidence}`}>{e.field.confidence}</span>}
+                    {e.field.test_method && <span className="conf">{methodLabel(e.field.test_method)}</span>}
                   </dt>
                   <dd>
                     <span className="value">{formatReported(e.field)}</span>

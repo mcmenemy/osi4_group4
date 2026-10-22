@@ -43,6 +43,7 @@ _SIMPLE_PROPERTIES = {
     "volumetric_capacitance",
     "mu_c_star",
     "ionic_time_constant",
+    "degradation_time",
 }
 
 
@@ -138,6 +139,7 @@ def _field(v: LLMValue) -> FieldValue:
         evidence=v.evidence or None,
         location=v.location or None,
         confidence=v.confidence,
+        test_method=v.method or None,
     )
 
 
@@ -245,7 +247,7 @@ def mock_extraction() -> LLMExtraction:
 
     def value(name: str, val: str, unit: str, evidence: str) -> LLMValue:
         return LLMValue(
-            name=name, label="", value=val, unit=unit, evidence=evidence, location="p. 1", confidence="high"
+            name=name, label="", value=val, unit=unit, evidence=evidence, location="p. 1", confidence="high", method=""
         )
 
     return LLMExtraction(

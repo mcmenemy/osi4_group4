@@ -1,0 +1,190 @@
+{
+  "record_id": "liu-2019-pedot-pss-electrically-c-9a2210",
+  "source": {
+    "doi": "10.1038/s41551-018-0335-6",
+    "title": "Soft and elastic hydrogel-based microelectronics for localized low-voltage neuromodulation",
+    "first_author": "Liu",
+    "year": 2019,
+    "url": "https://doi.org/10.1038/s41551-018-0335-6",
+    "file": "liu2019.pdf"
+  },
+  "material_class": "conductive_hydrogel",
+  "material": "PEDOT:PSS electrically conductive hydrogel (ECH/MECH) from ionic liquid ion gel after water exchange",
+  "formulation": [
+    {
+      "component": "ionic liquid (4-(3-butyl-1-imidazolio)-1-butanesulfonic acid triflate)",
+      "amount": "50",
+      "unit": "wt%",
+      "evidence": "Approximately 50wt% of ionic liquid versus PEDOT:PSS was added to PEDOT:PSS aqueous solution (0.172 g in 15ml of PH1000 solution)",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "spin coating",
+      "parameter": "speed",
+      "value": "2,000",
+      "unit": "r.p.m.",
+      "evidence": "spun coated on SiO2, PFPE or PDMS substrate at a speed of 2,000 r.p.m. for 1min",
+      "evidence_verified": true
+    },
+    {
+      "step": "anneal",
+      "parameter": "temperature",
+      "value": "130",
+      "unit": "°C",
+      "evidence": "followed by annealing at 130 °C for 30min",
+      "evidence_verified": true
+    },
+    {
+      "step": "ionic liquid–water exchange",
+      "parameter": "duration",
+      "value": "over 24",
+      "unit": "h",
+      "evidence": "the film was soaked in a copious amount of deionized water (Millipore water purification system) for over 24h",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "32",
+      "unit": "kPa",
+      "value_si": 32000.0,
+      "evidence": "values of the ECH were estimated to be 32±5.1 kPa when measured via compression tests",
+      "location": "p. 2",
+      "confidence": "high",
+      "test_method": "compression",
+      "evidence_verified": true
+    },
+    "conductivity": {
+      "value": "47.4",
+      "unit": "S cm−1",
+      "value_si": 4740.0,
+      "evidence": "Our ECH has an electrical conductivity of 47.4±1.2 S cm−1",
+      "location": "p. 2",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "water_content": {
+      "value": "85",
+      "unit": "wt%",
+      "value_si": null,
+      "evidence": "and stabilized at 85wt% (Fig. 1d)",
+      "location": "p. 2",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "swelling_ratio": {
+      "value": "2.1",
+      "unit": null,
+      "value_si": null,
+      "evidence": "with a swelling ratio of 2.1 when sandwiched by the elastic PFPE-DMA",
+      "location": "p. 2",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": {
+      "description": {
+        "value": "CSC maintained, less than 4.3% change",
+        "unit": null,
+        "value_si": null,
+        "evidence": "the ECH maintained its high CSC value after 19 days of incubation, with less than 4.3% change",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "duration_days": {
+        "value": "19",
+        "unit": "days",
+        "value_si": 19.0,
+        "evidence": "the ECH maintained its high CSC value after 19 days of incubation, with less than 4.3% change",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "conditions": "PBS incubation"
+    }
+  },
+  "biology": {
+    "cell_type": "sciatic nerve",
+    "species": "mouse (C57BL/6J)",
+    "setting": "in_vivo",
+    "coating": null,
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "164",
+        "unit": "mCcm−2",
+        "value_si": null,
+        "evidence": "the ECH showed a CSC of 164 mCcm−2",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "charge storage capacity"
+      },
+      {
+        "value": "9,800",
+        "unit": "µFcm−2",
+        "value_si": null,
+        "evidence": "We also calculated a capacitance of 9,800µFcm−2",
+        "location": "p. 5",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "capacitance (areal)"
+      },
+      {
+        "value": "1,359",
+        "unit": "mAcm−2",
+        "value_si": null,
+        "evidence": "the MECH electrode showed a current density of 1,359mAcm−2 under a bipolar pulsed voltage of 0.5V at 50Hz",
+        "location": "p. 5",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "current density at 0.5 V bipolar pulse, 50 Hz"
+      },
+      {
+        "value": "50",
+        "unit": "mV",
+        "value_si": null,
+        "evidence": "leg response at an ultralow voltage of 50mV",
+        "location": "p. 7",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "leg response stimulation voltage in vivo"
+      },
+      {
+        "value": "6",
+        "unit": "weeks",
+        "value_si": null,
+        "evidence": "leaving it inside the freely moving mice for 6 weeks",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "implantation duration around sciatic nerve"
+      }
+    ]
+  },
+  "notes": "Hydrated in water/DMEM/PBS. Water content ~82 wt% within 1 min soaking. Biocompatibility: no significant change in neurofilament/S-100 vs sham; inflammatory area comparable to sham.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T02:56:13+00:00",
+  "schema_version": "0.1.0"
+}
