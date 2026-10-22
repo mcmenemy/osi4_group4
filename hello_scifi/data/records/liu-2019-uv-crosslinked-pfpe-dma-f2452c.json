@@ -1,5 +1,5 @@
 {
-  "record_id": "liu-2019-uv-crosslinked-pfpe-dma-95e7e8",
+  "record_id": "liu-2019-uv-crosslinked-pfpe-dma-f2452c",
   "source": {
     "doi": "10.1038/s41551-018-0335-6",
     "title": "Soft and elastic hydrogel-based microelectronics for localized low-voltage neuromodulation",
@@ -9,13 +9,14 @@
     "file": "liu2019.pdf"
   },
   "material_class": "other",
-  "material": "UV-crosslinked PFPE-DMA fluorinated elastomer (elastic photoresist)",
+  "material": "UV-crosslinked PFPE-DMA elastomer (fluorinated elastic photoresist)",
+  "material_key": "other:uv-crosslinked-pfpe-dma-elastomer-fluori",
   "formulation": [
     {
       "component": "bis(2,4,6-trimethylbenzoyl)-phenylphosphineoxide photoinitiator",
       "amount": "2",
       "unit": "wt%",
-      "evidence": "The encapsulating PFPE-DMA with 2wt% photoinitiator",
+      "evidence": "The encapsulating PFPE-DMA with 2wt% photoinitiator bis(2,4,6-trimethylbenzoyl)-phenylphosphineoxide",
       "evidence_verified": true
     }
   ],
@@ -25,7 +26,7 @@
       "parameter": "speed",
       "value": "500",
       "unit": "r.p.m.",
-      "evidence": "was spin coated at 500 r.p.m. for 1min",
+      "evidence": "was spin coated at 500 r.p.m. for 1min and then prebaked at 100 °C for 1min",
       "evidence_verified": true
     },
     {
@@ -33,7 +34,7 @@
       "parameter": "intensity",
       "value": "10",
       "unit": "mWcm−2",
-      "evidence": "at 10mWcm−2 for 20 s was used to crosslink PFPE-DMA",
+      "evidence": "UV exposure (Quintel Q4000, Hg Lamp, 350–450nm) at 10mWcm−2 for 20 s was used to crosslink PFPE-DMA",
       "evidence_verified": true
     }
   ],
@@ -42,7 +43,7 @@
       "value": "<30",
       "unit": "kPa",
       "value_si": 30000.0,
-      "evidence": "to be <30 kPa (Fig. 1j) by using a PFPE-DMA with a number averaged molecular weight of 12 kDa",
+      "evidence": "we carefully tuned the Young’s modulus of the UV-crosslinked dimethacrylate-functionalized perfluoropolyether (PFPE-DMA) monomer (Fig. 1i) to be <30 kPa",
       "location": "p. 2",
       "confidence": "medium",
       "test_method": "tension",
@@ -60,9 +61,11 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Used as insulation/encapsulation layer.",
-  "flags": [],
+  "notes": "Stretchable up to 200%; dielectric constant 2.4±0.1.",
+  "flags": [
+    "material_key:unmatched"
+  ],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:56:13+00:00",
+  "extracted_at": "2026-10-22T12:32:46+00:00",
   "schema_version": "0.1.0"
 }

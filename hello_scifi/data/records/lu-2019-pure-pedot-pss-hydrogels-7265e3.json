@@ -1,5 +1,5 @@
 {
-  "record_id": "lu-2019-pure-pedot-pss-hydrogels-f47b17",
+  "record_id": "lu-2019-pure-pedot-pss-hydrogels-7265e3",
   "source": {
     "doi": "10.1038/s41467-019-09003-5",
     "title": "Pure PEDOT:PSS hydrogels",
@@ -9,13 +9,14 @@
     "file": "lu2019.pdf"
   },
   "material_class": "conductive_hydrogel",
-  "material": "Pure PEDOT:PSS hydrogels (5–50 vol.% DMSO series)",
+  "material": "Pure PEDOT:PSS hydrogels (5–50 vol.% DMSO, general)",
+  "material_key": "pedot_pss_hydrogel",
   "formulation": [
     {
       "component": "DMSO",
-      "amount": "5–50",
+      "amount": "0–50",
       "unit": "vol.%",
-      "evidence": "in the range of 5–50 vol.%",
+      "evidence": "dimethyl sulfoxide (DMSO, Sigma–Aldrich) was added in the range of 0–50 vol.% of the final solution",
       "evidence_verified": true
     }
   ],
@@ -23,9 +24,17 @@
     {
       "step": "drying",
       "parameter": "temperature/time",
-      "value": "60 °C, 24 h",
+      "value": "60 °C for 24 h",
       "unit": null,
-      "evidence": "24 h at 60 °C drying followed by three\ncycles of 30 min annealing at 130 °C",
+      "evidence": "dried at 60 °C for 24 h followed by multiple cycles of annealing at 130 °C",
+      "evidence_verified": true
+    },
+    {
+      "step": "anneal",
+      "parameter": "temperature",
+      "value": "130",
+      "unit": "°C",
+      "evidence": "three cycles of 30 min annealing at 130 °C",
       "evidence_verified": true
     }
   ],
@@ -34,9 +43,9 @@
       "value": "2–10",
       "unit": "MPa",
       "value_si": 6000000.0,
-      "evidence": "the Young’s moduli of pure PEDOT:PSS\nhydrogels in PBS are in the range of 2–10 MPa",
+      "evidence": "the Young’s moduli of pure PEDOT:PSS hydrogels in PBS are in the range of 2–10 MPa",
       "location": "p. 5",
-      "confidence": "medium",
+      "confidence": "high",
       "test_method": "tension",
       "evidence_verified": true
     },
@@ -45,9 +54,9 @@
       "value": "80–87",
       "unit": "wt.%",
       "value_si": null,
-      "evidence": "high water contents (80–87 wt.%\nwater)",
+      "evidence": "The resultant pure PEDOT:PSS hydrogels show high water contents (80–87 wt.% water)",
       "location": "p. 4",
-      "confidence": "medium",
+      "confidence": "high",
       "test_method": null,
       "evidence_verified": true
     },
@@ -60,12 +69,12 @@
     "degradation_time": null,
     "stability": {
       "description": {
-        "value": "no observable mechanical damage",
+        "value": "electrical conductivity negligible decrease",
         "unit": null,
         "value_si": null,
-        "evidence": "no observable damage over\n3 months in PBS",
-        "location": "p. 4",
-        "confidence": "medium",
+        "evidence": "with negligible decrease over 3 months both in PBS and in deionized water",
+        "location": "p. 7",
+        "confidence": "high",
         "test_method": null,
         "evidence_verified": true
       },
@@ -73,19 +82,19 @@
         "value": "3",
         "unit": "months",
         "value_si": null,
-        "evidence": "no observable damage over\n3 months in PBS",
-        "location": "p. 4",
-        "confidence": "medium",
+        "evidence": "with negligible decrease over 3 months both in PBS and in deionized water",
+        "location": "p. 7",
+        "confidence": "high",
         "test_method": null,
         "evidence_verified": true
       },
-      "conditions": "in PBS"
+      "conditions": "in PBS and deionized water"
     }
   },
   "biology": null,
-  "notes": "Range over DMSO concentrations; swollen state.",
+  "notes": "Values reported across DMSO concentration series; swollen state in PBS or DI water.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:56:39+00:00",
+  "extracted_at": "2026-10-22T12:33:27+00:00",
   "schema_version": "0.1.0"
 }

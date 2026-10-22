@@ -1,4 +1,6 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import ScorecardTable from './ScorecardTable'
+import { SHORT_LABELS, type RequirementKey, type Scorecard } from './scorecard'
 import { baseLayout, logAxis, useTheme, type Theme } from './chartTheme'
 import Plot, { type PlotPoint } from './Plot'
 import RecordDetail, { SidePanel } from './RecordDetail'
@@ -60,6 +62,10 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
         </p>
       )}
 
+      <ScorecardSection records={records} onOpenRecords={openIds} />
+
+      <h2 className="details-heading">Details for materials scientists</h2>
+      <p className="muted">The underlying property maps. Click any point for its values, quotes, and source.</p>
       <StiffnessConductivity records={records} references={references} targetWindow={targetWindow} onPoint={onPoint} />
       <CellOutcomes records={records} references={references} onPoint={onPoint} />
       <Degradation records={records} onPoint={onPoint} />
@@ -85,6 +91,69 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
         </SidePanel>
       )}
     </div>
+  )
+}
+
+const WEIGHT_KEYS: RequirementKey[] = ['survival', 'soft', 'in_vivo_brain', 'clear_degradable', 'conductive']
+
+function ScorecardSection({ records, onOpenRecords }: { records: MaterialRecord[]; onOpenRecords: (ids: string[]) => void }) {
+  const [card, setCard] = useState<Scorecard | null>(null)
+  const [weights, setWeights] = useState<Record<RequirementKey, number> | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  // Scoring happens on the server; refetch (debounced) when the weights change.
+  useEffect(() => {
+    const controller = new AbortController()
+    const timer = window.setTimeout(() => {
+      const params = new URLSearchParams()
+      if (weights) for (const [k, v] of Object.entries(weights)) params.set(k, String(v))
+      setLoading(true)
+      fetch(`/api/scorecard?${params}`, { signal: controller.signal })
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+        .then((data: Scorecard) => {
+          setCard(data)
+          setError('')
+        })
+        .catch((e) => e.name !== 'AbortError' && setError("Couldn't load the scorecard."))
+        .finally(() => setLoading(false))
+    }, weights ? 200 : 0)
+    return () => {
+      controller.abort()
+      window.clearTimeout(timer)
+    }
+  }, [weights])
+
+  const current = weights ?? card?.weights
+  return (
+    <section className="scorecard-section">
+      {error && <p className="error">{error}</p>}
+      {card && <ScorecardTable card={card} records={records} loading={loading} onOpenRecords={onOpenRecords} />}
+      {card && current && (
+        <details className="weights-panel">
+          <summary>Adjust weights</summary>
+          <p className="muted small">
+            Weights are team judgment, not measurements. The table re-sorts as you move them (switch the view to Most
+            promising to see the ranking change). Defaults live in <code>data/scorecard.yaml</code>.
+          </p>
+          <div className="weights-grid">
+            {WEIGHT_KEYS.map((k) => (
+              <label key={k} className="slider">
+                <span className="slider-head">
+                  <span>{SHORT_LABELS[k]}</span>
+                  <output>{current[k]}</output>
+                </span>
+                <input type="range" min={0} max={5} step={0.5} value={current[k]}
+                  onChange={(e) => setWeights({ ...current, [k]: Number(e.target.value) })} />
+              </label>
+            ))}
+          </div>
+          <button type="button" className="link-btn" onClick={() => setWeights({ ...card.default_weights })}>
+            Reset to defaults
+          </button>
+        </details>
+      )}
+    </section>
   )
 }
 
@@ -226,7 +295,7 @@ function StiffnessConductivity({
         <p>
           Each point is one material with both values reported, using the conductivity the paper states (electronic for
           conductive gels and films); gray bands are rigid and tissue references, dotted bands are common cell-culture
-          hydrogels, and the dashed box is the soft, electronically conductive target window. {CAVEAT}
+          hydrogels, and the dashed box is the future recording-layer window (soft and ≥10 S/m), which only matters once wells carry electrodes. {CAVEAT}
         </p>
       </figcaption>
       <Plot data={data} layout={layout} height={520} label="Log-log scatter of Young's modulus against conductivity" onClick={onPoint} />

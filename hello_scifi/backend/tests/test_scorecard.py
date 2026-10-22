@@ -25,7 +25,7 @@ def rec(rid, key, *, cells=None, setting=None, survival=(), modulus=None, in_bra
 
 def test_brown_style_occupancy_is_partial_and_baseline_is_separate():
     card = build_scorecard(
-        [rec("brown", "su8", cells="primary_neuron", setting="in_vivo", in_brain=True, survival=[("occupancy", 52, 21)])]
+        [rec("brown", "su8", cells="primary_neuron", setting="in_vivo", in_brain=True, survival=[("occupancy", 77, 1), ("occupancy", 52, 21)])]
     )
     base = card["baseline"]
     assert base["material_key"] == "su8"

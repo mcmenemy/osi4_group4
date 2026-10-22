@@ -20,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app.data import PAPERS_DIR, RECORDS_DIR  # noqa: E402
 from app.extraction import extract, pdf_text  # noqa: E402
 from app.extraction.validate import SourceText, renormalize_record, validate_record  # noqa: E402
+from app.extraction.vocab import assign_material_key, check_cell_category  # noqa: E402
 from app.schemas import Record, Source  # noqa: E402
 
 FIELD_GROUPS = ("properties", "biology")
@@ -59,7 +60,17 @@ def revalidate() -> int:
         if file not in sources:
             sources[file] = SourceText(pdf_text.with_page_markers(pdf_text.pdf_pages(PAPERS_DIR / file)))
         before = path.read_text()
-        after = validate_record(renormalize_record(record), sources[file]).model_dump_json(indent=2) + "\n"
+        # Re-run the vocabulary checks too, so edits to data/materials.yaml apply without re-extracting.
+        # The model's original proposal isn't stored, so a previously matched key stands in for it.
+        old_key = record.material_key
+        kept = [f for f in record.flags if f.startswith("material_key:model_said")]
+        proposed = old_key if old_key and not old_key.startswith("other") else "other"
+        vocab_flags = assign_material_key(record, proposed) + check_cell_category(record)
+        if record.material_key == old_key:
+            vocab_flags = kept + vocab_flags  # the model's disagreement still stands
+        validate_record(renormalize_record(record), sources[file])
+        record.flags = vocab_flags + record.flags
+        after = record.model_dump_json(indent=2) + "\n"
         if after != before:
             path.write_text(after)
             changed += 1

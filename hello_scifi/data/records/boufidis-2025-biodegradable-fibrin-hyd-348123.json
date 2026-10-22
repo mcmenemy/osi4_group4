@@ -1,5 +1,5 @@
 {
-  "record_id": "boufidis-2025-fibrin-hydrogel-coating-01b000",
+  "record_id": "boufidis-2025-biodegradable-fibrin-hyd-348123",
   "source": {
     "doi": "10.1038/s41467-025-57016-0",
     "title": "Bio-inspired electronics: Soft, biohybrid, and \"living\" neural interfaces",
@@ -9,7 +9,8 @@
     "file": "review2025.pdf"
   },
   "material_class": "nonconductive_hydrogel",
-  "material": "Fibrin hydrogel coating on hybrid microelectrodes (cell-laden)",
+  "material": "Biodegradable fibrin hydrogel coating on cell-seeded microelectrodes",
+  "material_key": "fibrin",
   "formulation": [],
   "processing": [],
   "properties": {
@@ -26,7 +27,7 @@
       "value": "7",
       "unit": "days",
       "value_si": 7.0,
-      "evidence": "the complete reabsorption of the fibrin hydrogel within\n7 days",
+      "evidence": "complete reabsorption of the fibrin hydrogel within 7 days",
       "location": "p. 7",
       "confidence": "medium",
       "test_method": null,
@@ -36,17 +37,22 @@
   },
   "biology": {
     "cell_type": "hippocampal neurons or astrocytes",
+    "cell_category": "primary_neuron",
     "species": null,
     "setting": "in_vivo",
+    "in_brain": true,
     "coating": "fibrin hydrogel",
     "culture_days": null,
     "viability_percent": null,
     "neurite_length": null,
-    "other_outcomes": []
+    "other_outcomes": [],
+    "survival": []
   },
-  "notes": "Review article; cited from ref. 164. Reduced reactive astrocytes without significantly altering electrode impedance.",
-  "flags": [],
+  "notes": "Value cited in a review article (ref. 164); intracortical implants; reduced reactive astrocytes without significantly altering electrode impedance.",
+  "flags": [
+    "cell_category:check_glia"
+  ],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:56:51+00:00",
+  "extracted_at": "2026-10-22T12:33:44+00:00",
   "schema_version": "0.1.0"
 }

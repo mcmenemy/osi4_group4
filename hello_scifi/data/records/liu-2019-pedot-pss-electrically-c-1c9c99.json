@@ -1,5 +1,5 @@
 {
-  "record_id": "liu-2019-pedot-pss-electrically-c-9a2210",
+  "record_id": "liu-2019-pedot-pss-electrically-c-1c9c99",
   "source": {
     "doi": "10.1038/s41551-018-0335-6",
     "title": "Soft and elastic hydrogel-based microelectronics for localized low-voltage neuromodulation",
@@ -9,12 +9,13 @@
     "file": "liu2019.pdf"
   },
   "material_class": "conductive_hydrogel",
-  "material": "PEDOT:PSS electrically conductive hydrogel (ECH/MECH) from ionic liquid ion gel after water exchange",
+  "material": "PEDOT:PSS electrically conductive hydrogel (ECH/MECH) from ionic liquid-modified PEDOT:PSS after water exchange",
+  "material_key": "pedot_pss_hydrogel",
   "formulation": [
     {
       "component": "ionic liquid (4-(3-butyl-1-imidazolio)-1-butanesulfonic acid triflate)",
       "amount": "50",
-      "unit": "wt%",
+      "unit": "wt% vs PEDOT:PSS",
       "evidence": "Approximately 50wt% of ionic liquid versus PEDOT:PSS was added to PEDOT:PSS aqueous solution (0.172 g in 15ml of PH1000 solution)",
       "evidence_verified": true
     }
@@ -37,6 +38,14 @@
       "evidence_verified": true
     },
     {
+      "step": "oxygen plasma substrate treatment",
+      "parameter": "power",
+      "value": "150",
+      "unit": "W",
+      "evidence": "treated with oxygen plasma (Technics Micro-RIE Series 800) at 150W for 1min before spin coating",
+      "evidence_verified": true
+    },
+    {
       "step": "ionic liquid–water exchange",
       "parameter": "duration",
       "value": "over 24",
@@ -50,7 +59,7 @@
       "value": "32",
       "unit": "kPa",
       "value_si": 32000.0,
-      "evidence": "values of the ECH were estimated to be 32±5.1 kPa when measured via compression tests",
+      "evidence": "The Young’s modulus values of the ECH were estimated to be 32±5.1 kPa when measured via compression tests",
       "location": "p. 2",
       "confidence": "high",
       "test_method": "compression",
@@ -67,12 +76,12 @@
       "evidence_verified": true
     },
     "water_content": {
-      "value": "85",
+      "value": "~82",
       "unit": "wt%",
       "value_si": null,
-      "evidence": "and stabilized at 85wt% (Fig. 1d)",
+      "evidence": "The water content in the hydrogel was estimated to be ~82wt% within 1min of soaking in water",
       "location": "p. 2",
-      "confidence": "high",
+      "confidence": "medium",
       "test_method": null,
       "evidence_verified": true
     },
@@ -94,97 +103,44 @@
     "degradation_time": null,
     "stability": {
       "description": {
-        "value": "CSC maintained, less than 4.3% change",
+        "value": "resistance stabilized",
         "unit": null,
         "value_si": null,
-        "evidence": "the ECH maintained its high CSC value after 19 days of incubation, with less than 4.3% change",
-        "location": "p. 4",
-        "confidence": "high",
+        "evidence": "Resistance then became stabilized at a more constant value from 1,000 to 10,000 cycles",
+        "location": "p. 2",
+        "confidence": "medium",
         "test_method": null,
         "evidence_verified": true
       },
       "duration_days": {
-        "value": "19",
-        "unit": "days",
-        "value_si": 19.0,
-        "evidence": "the ECH maintained its high CSC value after 19 days of incubation, with less than 4.3% change",
-        "location": "p. 4",
+        "value": "48",
+        "unit": "h",
+        "value_si": 2.0,
+        "evidence": "after 48h of soaking in water",
+        "location": "p. 2",
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true
       },
-      "conditions": "PBS incubation"
+      "conditions": "stretch-and-release cycling"
     }
   },
   "biology": {
-    "cell_type": "sciatic nerve",
+    "cell_type": "mouse sciatic nerve (chronic implant, 6 weeks)",
+    "cell_category": "tissue",
     "species": "mouse (C57BL/6J)",
     "setting": "in_vivo",
+    "in_brain": false,
     "coating": null,
     "culture_days": null,
     "viability_percent": null,
     "neurite_length": null,
-    "other_outcomes": [
-      {
-        "value": "164",
-        "unit": "mCcm−2",
-        "value_si": null,
-        "evidence": "the ECH showed a CSC of 164 mCcm−2",
-        "location": "p. 4",
-        "confidence": "high",
-        "test_method": null,
-        "evidence_verified": true,
-        "name": "charge storage capacity"
-      },
-      {
-        "value": "9,800",
-        "unit": "µFcm−2",
-        "value_si": null,
-        "evidence": "We also calculated a capacitance of 9,800µFcm−2",
-        "location": "p. 5",
-        "confidence": "high",
-        "test_method": null,
-        "evidence_verified": true,
-        "name": "capacitance (areal)"
-      },
-      {
-        "value": "1,359",
-        "unit": "mAcm−2",
-        "value_si": null,
-        "evidence": "the MECH electrode showed a current density of 1,359mAcm−2 under a bipolar pulsed voltage of 0.5V at 50Hz",
-        "location": "p. 5",
-        "confidence": "high",
-        "test_method": null,
-        "evidence_verified": true,
-        "name": "current density at 0.5 V bipolar pulse, 50 Hz"
-      },
-      {
-        "value": "50",
-        "unit": "mV",
-        "value_si": null,
-        "evidence": "leg response at an ultralow voltage of 50mV",
-        "location": "p. 7",
-        "confidence": "high",
-        "test_method": null,
-        "evidence_verified": true,
-        "name": "leg response stimulation voltage in vivo"
-      },
-      {
-        "value": "6",
-        "unit": "weeks",
-        "value_si": null,
-        "evidence": "leaving it inside the freely moving mice for 6 weeks",
-        "location": "p. 4",
-        "confidence": "high",
-        "test_method": null,
-        "evidence_verified": true,
-        "name": "implantation duration around sciatic nerve"
-      }
-    ]
+    "other_outcomes": [],
+    "survival": []
   },
-  "notes": "Hydrated in water/DMEM/PBS. Water content ~82 wt% within 1 min soaking. Biocompatibility: no significant change in neurofilament/S-100 vs sham; inflammatory area comparable to sham.",
+  "notes": "Moduli on fully hydrated hydrogel. CSC 164 mC cm−2 and areal capacitance 9,800 µF cm−2 reported. Implant showed no significant change in neurofilament/S-100 intensity vs sham and minimal inflammation. Stimulation at 50 mV in vivo.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:56:13+00:00",
+  "extracted_at": "2026-10-22T12:32:46+00:00",
   "schema_version": "0.1.0"
 }

@@ -1,5 +1,5 @@
 {
-  "record_id": "lu-2019-dry-annealed-pure-pedot-29b142",
+  "record_id": "lu-2019-dry-annealed-pure-pedot-809169",
   "source": {
     "doi": "10.1038/s41467-019-09003-5",
     "title": "Pure PEDOT:PSS hydrogels",
@@ -9,25 +9,17 @@
     "file": "lu2019.pdf"
   },
   "material_class": "omiec_film",
-  "material": "Dry-annealed pure PEDOT:PSS film (DMSO-treated), dry state",
+  "material": "Dry-annealed pure PEDOT:PSS film (before swelling)",
+  "material_key": "pedot_film",
   "formulation": [],
-  "processing": [
-    {
-      "step": "anneal",
-      "parameter": "temperature",
-      "value": "130",
-      "unit": "°C",
-      "evidence": "multiple cycles of annealing at 130 °C",
-      "evidence_verified": true
-    }
-  ],
+  "processing": [],
   "properties": {
     "youngs_modulus": null,
     "conductivity": {
       "value": "~500",
       "unit": "S cm−1",
       "value_si": 50000.0,
-      "evidence": "from ~500 S cm−1 in the dry state",
+      "evidence": "decreasing its electrical conductivity from ~500 S cm−1 in the dry state to less than 50 S cm−1 in the swollen state",
       "location": "p. 7",
       "confidence": "medium",
       "test_method": null,
@@ -44,9 +36,9 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Dry state before rehydration.",
+  "notes": "Dry state, before rehydration.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:56:39+00:00",
+  "extracted_at": "2026-10-22T12:33:27+00:00",
   "schema_version": "0.1.0"
 }

@@ -1,5 +1,5 @@
 {
-  "record_id": "boulingre-2025-pva-tau-pedot-conductive-4a3646",
+  "record_id": "boulingre-2025-pva-tau-pedot-conductive-73f826",
   "source": {
     "doi": "10.1039/d4tb02651a",
     "title": "Multi-layered electrode constructs for neural tissue engineering",
@@ -10,6 +10,7 @@
   },
   "material_class": "conductive_hydrogel",
   "material": "PVA–Tau/PEDOT conductive hydrogel (CH) coating on Pt electrode",
+  "material_key": "pva_pedot",
   "formulation": [
     {
       "component": "PVA–MA–Tau",
@@ -38,11 +39,18 @@
       "unit": "M",
       "evidence": "0.05 M pTS",
       "evidence_verified": true
+    },
+    {
+      "component": "EDOT (in-gel polymerisation)",
+      "amount": "0.03",
+      "unit": "mM",
+      "evidence": "from an aqueous solution of 0.03 mM EDOT in PBS",
+      "evidence_verified": true
     }
   ],
   "processing": [
     {
-      "step": "PEDOT/pTS pre-layer electrodeposition",
+      "step": "PEDOT/pTS pre-layer galvanostatic electrodeposition",
       "parameter": "current density",
       "value": "1",
       "unit": "mA cm2",
@@ -50,35 +58,35 @@
       "evidence_verified": true
     },
     {
-      "step": "photocrosslinking",
-      "parameter": "UV intensity",
-      "value": "30",
-      "unit": "mW cm2",
-      "evidence": "photocrosslinking via UV light at an intensity of 30",
+      "step": "PEDOT/pTS pre-layer galvanostatic electrodeposition",
+      "parameter": "time",
+      "value": "1",
+      "unit": "min",
+      "evidence": "galvanostatic electrodeposition using a current density of 1 mA cm2 for 1 min",
       "evidence_verified": true
     },
     {
-      "step": "photocrosslinking",
-      "parameter": "time",
-      "value": "3",
-      "unit": "min",
-      "evidence": "mW cm2 for 3 min",
+      "step": "UV photocrosslinking",
+      "parameter": "intensity",
+      "value": "30",
+      "unit": "mW cm2",
+      "evidence": "photocrosslinking via UV light at an intensity of 30\nmW cm2 for 3 min",
       "evidence_verified": true
     },
     {
       "step": "PEDOT electrodeposition in hydrogel",
-      "parameter": "current density / time",
-      "value": "1 mA cm2 for 10 min",
-      "unit": null,
-      "evidence": "applying a current density of 1 mA cm2 for 10 min",
+      "parameter": "time",
+      "value": "10",
+      "unit": "min",
+      "evidence": "applying\na current density of 1 mA cm2 for 10 min",
       "evidence_verified": true
     },
     {
-      "step": "sterilisation",
-      "parameter": "autoclave",
-      "value": "121",
-      "unit": "1C",
-      "evidence": "sterilized in an autoclave at 121 1C for 15 minutes",
+      "step": "autoclave sterilisation",
+      "parameter": "time",
+      "value": "15",
+      "unit": "minutes",
+      "evidence": "sterilized in\nan autoclave at 121 1C for 15 minutes",
       "evidence_verified": true
     }
   ],
@@ -88,7 +96,7 @@
       "value": "0.234",
       "unit": "S m1",
       "value_si": 0.234,
-      "evidence": "0.234 S m1 and 0.261 S m1",
+      "evidence": "0.234 S m1 and 0.261 S m1\n, respectively",
       "location": "p. 7",
       "confidence": "high",
       "test_method": null,
@@ -100,9 +108,9 @@
       "value": "43.78",
       "unit": "O cm1",
       "value_si": null,
-      "evidence": "5.40 O cm1 for CH-coated electrodes",
+      "evidence": "43.78 \n5.40 O cm1 for CH-coated electrodes",
       "location": "p. 6",
-      "confidence": "medium",
+      "confidence": "high",
       "test_method": null,
       "evidence_verified": true
     },
@@ -123,9 +131,9 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Measured in PBS. Real part of impedance at 1 kHz 42.58 Ω (circuit-derived).",
+  "notes": "Electrochemistry measured in PBS on 8 mm Pt disk.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:54:16+00:00",
+  "extracted_at": "2026-10-22T12:31:09+00:00",
   "schema_version": "0.1.0"
 }

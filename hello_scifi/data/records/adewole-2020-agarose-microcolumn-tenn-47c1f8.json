@@ -1,5 +1,5 @@
 {
-  "record_id": "adewole-2020-planar-cortical-neuron-c-2fa37e",
+  "record_id": "adewole-2020-agarose-microcolumn-tenn-47c1f8",
   "source": {
     "doi": "10.1101/333526",
     "title": "Development of Optically-Controlled \"Living Electrodes\" with Long-Projecting Axon Tracts for a Synaptic Brain-Machine Interface",
@@ -8,8 +8,9 @@
     "url": "https://doi.org/10.1101/333526",
     "file": "Adewole2024.pdf"
   },
-  "material_class": "other",
-  "material": "Planar cortical neuron culture on polystyrene (control)",
+  "material_class": "nonconductive_hydrogel",
+  "material": "Agarose microcolumn µTENN (~1.5 mm, bidirectional, GCaMP) implanted in rat V1",
+  "material_key": "agarose",
   "formulation": [],
   "processing": [],
   "properties": {
@@ -26,39 +27,33 @@
     "stability": null
   },
   "biology": {
-    "cell_type": "primary cortical neurons",
+    "cell_type": "primary rat cortical neurons (aggregates)",
+    "cell_category": "primary_neuron",
     "species": "rat",
-    "setting": "in_vitro_2d",
-    "coating": null,
+    "setting": "in_vivo",
+    "in_brain": true,
+    "coating": "collagen-laminin ECM",
     "culture_days": null,
-    "viability_percent": {
-      "value": "97.7",
-      "unit": "%",
-      "value_si": 97.7,
-      "evidence": "(80.3%) (p < 0.05), LEBI (84.8%) (p < 0.001), and planar cultures (97.7%) (p < 0.0001) at 10 DIV.",
-      "location": "p. 9",
-      "confidence": "high",
-      "test_method": null,
-      "evidence_verified": true
-    },
+    "viability_percent": null,
     "neurite_length": null,
     "other_outcomes": [
       {
-        "value": "38.6",
-        "unit": "microns/day",
+        "value": "1-5",
+        "unit": "Hz",
         "value_si": null,
-        "evidence": "yielding a cumulative average growth rate of 38.6±20.0 microns/day",
-        "location": "p. 8",
-        "confidence": "high",
+        "evidence": "Non-artifact changes in GCaMP intensity were present in the delta band (1-5 Hz)",
+        "location": "p. 10",
+        "confidence": "medium",
         "test_method": null,
         "evidence_verified": true,
-        "name": "cumulative average axonal growth rate"
+        "name": "GCaMP activity frequency band in vivo"
       }
-    ]
+    ],
+    "survival": []
   },
-  "notes": "Age-matched planar control cultures.",
+  "notes": "Constructs survived and maintained architecture at one week and one month post-injection (qualitative).",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:53:50+00:00",
+  "extracted_at": "2026-10-22T12:30:41+00:00",
   "schema_version": "0.1.0"
 }

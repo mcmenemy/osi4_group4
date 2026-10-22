@@ -10,6 +10,7 @@
   },
   "material_class": "omiec_film",
   "material": "p(g2T-TT)",
+  "material_key": "glycolated_polythiophene",
   "formulation": [],
   "processing": [],
   "properties": {
@@ -44,9 +45,9 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Glycolated thiophene-thienothiophene polymer; measured in 0.1 M NaCl with Ag/AgCl gate/reference; thickness measured dry. Top performer.",
+  "notes": "Measured in 0.1 M NaCl with Ag/AgCl gate; C* by EIS normalized by dry film volume. µOECT 0.94 cm2 V−1 s−1.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:55:22+00:00",
+  "extracted_at": "2026-10-22T12:32:01+00:00",
   "schema_version": "0.1.0"
 }

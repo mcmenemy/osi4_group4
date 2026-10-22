@@ -1,6 +1,12 @@
 {
-  "label": "Target window: soft and electronically conductive",
-  "modulus_pa": [100, 100000],
-  "conductivity_s_m": [10, 100000],
-  "note": "Team-chosen bounds for discussion, not a literature value: roughly brain-like stiffness (0.1-100 kPa) with conductivity of at least 10 S/m. The lower bound sits above what saline (~1.5 S/m) and brain tissue (~0.1-1 S/m) conduct through ions alone, so a plain hydrogel soaked in buffer doesn't count as conductive. Edit this file to change the shaded region."
+  "label": "Future recording-layer window (soft, ≥10 S/m)",
+  "modulus_pa": [
+    100,
+    100000
+  ],
+  "conductivity_s_m": [
+    10,
+    100000
+  ],
+  "note": "Team-chosen bounds for discussion, not a literature value: roughly brain-like stiffness (0.1-100 kPa) with conductivity of at least 10 S/m. This only matters for a future version of the wells with electrodes; the first experiment uses a clear, non-conductive, degradable gel. The lower bound sits above what saline (~1.5 S/m) and brain tissue (~0.1-1 S/m) conduct through ions alone. Edit this file to change the shaded region."
 }

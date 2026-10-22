@@ -73,7 +73,7 @@ materials:
   - key: agarose
     label: Agarose
     class: nonconductive_hydrogel
-    patterns: ['agarose']
+    patterns: ['agarose', 'micro-?column', 'µ?tenn\b']
     note: Used for the Penn micro-tissue engineered neural networks (Adewole et al.). Often described as non-degradable in mammals; needs a citation.
     transparency: null
     degradable: null

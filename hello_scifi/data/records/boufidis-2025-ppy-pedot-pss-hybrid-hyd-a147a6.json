@@ -1,5 +1,5 @@
 {
-  "record_id": "boufidis-2025-ppy-pedot-pss-hybrid-hyd-052537",
+  "record_id": "boufidis-2025-ppy-pedot-pss-hybrid-hyd-a147a6",
   "source": {
     "doi": "10.1038/s41467-025-57016-0",
     "title": "Bio-inspired electronics: Soft, biohybrid, and \"living\" neural interfaces",
@@ -9,7 +9,8 @@
     "file": "review2025.pdf"
   },
   "material_class": "conductive_hydrogel",
-  "material": "PPy-PEDOT:PSS hybrid hydrogel (hierarchical porous)",
+  "material": "PPy-PEDOT:PSS hybrid hydrogel",
+  "material_key": "pedot_pss_hydrogel",
   "formulation": [],
   "processing": [],
   "properties": {
@@ -18,7 +19,7 @@
       "value": "867",
       "unit": "S m–1",
       "value_si": 867.0,
-      "evidence": "Highly conductive (867 S m–1\n) PPy-PEDOT:PSS hybrid hydro",
+      "evidence": "Highly conductive (867 S m–1",
       "location": "p. 5",
       "confidence": "medium",
       "test_method": null,
@@ -35,18 +36,21 @@
     "stability": null
   },
   "biology": {
-    "cell_type": "PC12 cells",
+    "cell_type": "PC12",
+    "cell_category": "neuron_like_line",
     "species": null,
     "setting": "in_vitro_2d",
+    "in_brain": null,
     "coating": null,
     "culture_days": null,
     "viability_percent": null,
     "neurite_length": null,
-    "other_outcomes": []
+    "other_outcomes": [],
+    "survival": []
   },
-  "notes": "Review article; value cited from ref. 111. Enhanced PC12 cell viability and dopamine biosensing reported qualitatively.",
+  "notes": "Value cited in a review article (ref. 111); hierarchical porous structure; enhanced PC12 cell viability reported qualitatively.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:56:51+00:00",
+  "extracted_at": "2026-10-22T12:33:44+00:00",
   "schema_version": "0.1.0"
 }

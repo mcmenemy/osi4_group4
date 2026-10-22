@@ -1,5 +1,5 @@
 {
-  "record_id": "rochford-2023-pedot-pss-microelectrode-36fb8c",
+  "record_id": "rochford-2023-pedot-pss-microelectrode-51ca6f",
   "source": {
     "doi": "10.1126/sciadv.add8162",
     "title": "Functional neurological restoration of amputated peripheral nerve using biohybrid regenerative bioelectronics",
@@ -9,33 +9,20 @@
     "file": "rochford2023.pdf"
   },
   "material_class": "omiec_film",
-  "material": "PEDOT:PSS microelectrode array on parylene C with fibrin hydrogel and iPSC-derived myocytes (biohybrid device)",
-  "formulation": [
-    {
-      "component": "fibrinogen",
-      "amount": "3.125, 6.25, 12.5, and 25",
-      "unit": "mg/ml",
-      "evidence": "Final concentrations are as follows: FG = 3.125, 6.25, 12.5, and 25 mg/ml; Th = 1 U/ml; and CaCl2 = 20 mM.",
-      "evidence_verified": true
-    },
-    {
-      "component": "thrombin",
-      "amount": "1",
-      "unit": "U/ml",
-      "evidence": "Th = 1 U/ml",
-      "evidence_verified": true
-    },
-    {
-      "component": "CaCl2",
-      "amount": "20",
-      "unit": "mM",
-      "evidence": "CaCl2 = 20 mM",
-      "evidence_verified": true
-    }
-  ],
+  "material": "PEDOT:PSS microelectrodes on parylene C MEA (biohybrid device with fibrin hydrogel and iPSC-derived myocytes)",
+  "material_key": "fibrin",
+  "formulation": [],
   "processing": [
     {
-      "step": "PEDOT:PSS soft bake",
+      "step": "spin coating",
+      "parameter": "number of coats",
+      "value": "three",
+      "unit": null,
+      "evidence": "The solution is spin-coated three times with soft bakes for 60 s at 120°C.",
+      "evidence_verified": true
+    },
+    {
+      "step": "soft bake",
       "parameter": "temperature",
       "value": "120",
       "unit": "°C",
@@ -43,7 +30,15 @@
       "evidence_verified": true
     },
     {
-      "step": "PEDOT:PSS hard bake",
+      "step": "soft bake",
+      "parameter": "time",
+      "value": "60",
+      "unit": "s",
+      "evidence": "The solution is spin-coated three times with soft bakes for 60 s at 120°C.",
+      "evidence_verified": true
+    },
+    {
+      "step": "hard bake",
       "parameter": "temperature",
       "value": "130",
       "unit": "°C",
@@ -51,11 +46,11 @@
       "evidence_verified": true
     },
     {
-      "step": "parylene C deposition",
-      "parameter": "thickness",
-      "value": "2",
-      "unit": "μm",
-      "evidence": "A 2-μm-thick parylene C layer was deposited on silicon wafers",
+      "step": "hard bake",
+      "parameter": "time",
+      "value": "1",
+      "unit": "hour",
+      "evidence": "After the final spin-coat, there is a hard bake for 1 hour at 130°C.",
       "evidence_verified": true
     },
     {
@@ -78,7 +73,7 @@
       "value_si": null,
       "evidence": "before cell seeding: 97% yield, 1.84 ± 2.20 kilohm",
       "location": "p. 3",
-      "confidence": "medium",
+      "confidence": "high",
       "test_method": null,
       "evidence_verified": true
     },
@@ -88,7 +83,7 @@
       "value_si": null,
       "evidence": "MEA occupied a 2-mm by 2-mm area within the larger parylene device",
       "location": "p. 3",
-      "confidence": "low",
+      "confidence": "medium",
       "test_method": null,
       "evidence_verified": true
     },
@@ -96,12 +91,27 @@
     "mu_c_star": null,
     "ionic_time_constant": null,
     "degradation_time": null,
-    "stability": null
+    "stability": {
+      "description": null,
+      "duration_days": {
+        "value": "4",
+        "unit": "weeks",
+        "value_si": 28.0,
+        "evidence": "exhibiting an acceptable and expected increase in impedance over 4 weeks of in vivo culture",
+        "location": "p. 3",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "conditions": null
+    }
   },
   "biology": {
-    "cell_type": "human iPSC-derived skeletal myocytes; host rat forearm nerve (ulnar and median)",
+    "cell_type": "human iPSC-derived skeletal myocytes (OPTi-OX), implanted with rat forearm nerve bundle",
+    "cell_category": "non_neural",
     "species": "human cells in rat (athymic nude)",
     "setting": "in_vivo",
+    "in_brain": false,
     "coating": "fibrin hydrogel",
     "culture_days": {
       "value": "8",
@@ -117,17 +127,6 @@
     "neurite_length": null,
     "other_outcomes": [
       {
-        "value": "28",
-        "unit": "days",
-        "value_si": null,
-        "evidence": "implanted human iPSC-derived myocytes can survive in a rat model for up to 28 days",
-        "location": "p. 6",
-        "confidence": "high",
-        "test_method": null,
-        "evidence_verified": true,
-        "name": "in vivo cell survival duration"
-      },
-      {
         "value": "32.0",
         "unit": "dB",
         "value_si": null,
@@ -136,24 +135,28 @@
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "SNR week 4 awake recording"
+        "name": "mean SNR week 4"
       },
       {
-        "value": "100,000",
-        "unit": "cells/cm2",
+        "value": "25",
+        "unit": "%",
         "value_si": null,
-        "evidence": "They were seeded onto devices with densities of 100,000 cells/cm2",
-        "location": "p. 8",
+        "evidence": "week 4 in vivo: 25% yield, 159.00 ± 35.80 kilohm",
+        "location": "p. 3",
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "cell seeding density"
+        "name": "electrode yield week 4 in vivo"
       }
-    ]
+    ],
+    "survival": []
   },
-  "notes": "Impedance measured at 1000 Hz in DPBS, three-electrode configuration; yield 97% before seeding and 25% at week 4 in vivo. Implanted 4 weeks in immunodeficient rats.",
-  "flags": [],
+  "notes": "Impedance at 1000 Hz measured in DPBS, three-electrode configuration. Devices implanted subcutaneously sutured to transected ulnar/median nerve for 4 weeks; cells survived 28 days.",
+  "flags": [
+    "material_key:model_said_pedot_film",
+    "cell_category:check_sc_neuron"
+  ],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:57:04+00:00",
+  "extracted_at": "2026-10-22T12:34:02+00:00",
   "schema_version": "0.1.0"
 }

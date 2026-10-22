@@ -1,5 +1,5 @@
 {
-  "record_id": "adewole-2020-agarose-microcolumn-3-w-fd563a",
+  "record_id": "adewole-2020-agarose-microcolumn-3-w-efbcc0",
   "source": {
     "doi": "10.1101/333526",
     "title": "Development of Optically-Controlled \"Living Electrodes\" with Long-Projecting Axon Tracts for a Synaptic Brain-Machine Interface",
@@ -9,13 +9,14 @@
     "file": "Adewole2024.pdf"
   },
   "material_class": "nonconductive_hydrogel",
-  "material": "Agarose microcolumn (3% w/v) with collagen-laminin ECM core (µTENN, aggregate-based, in vitro)",
+  "material": "Agarose microcolumn (3% w/v) with collagen-laminin ECM core (µTENN), in vitro",
+  "material_key": "agarose",
   "formulation": [
     {
       "component": "agarose",
       "amount": "3",
       "unit": "% weight/volume",
-      "evidence": "(agarose: 3% weight/volume)",
+      "evidence": "agarose: 3% weight/volume",
       "evidence_verified": true
     },
     {
@@ -35,19 +36,11 @@
   ],
   "processing": [
     {
-      "step": "sterilization",
-      "parameter": "UV exposure time",
-      "value": "30",
-      "unit": "min",
-      "evidence": "Microcolumns were sterilized via UV light for 30 min",
-      "evidence_verified": true
-    },
-    {
       "step": "molding",
       "parameter": "outer diameter",
       "value": "398",
       "unit": "µm",
-      "evidence": "resulting in microcolumns with a 398 µm OD and a 180 µm ID.",
+      "evidence": "resulting in microcolumns with a 398 µm OD and a 180 µm ID",
       "evidence_verified": true
     },
     {
@@ -55,7 +48,15 @@
       "parameter": "inner diameter",
       "value": "180",
       "unit": "µm",
-      "evidence": "resulting in microcolumns with a 398 µm OD and a 180 µm ID.",
+      "evidence": "resulting in microcolumns with a 398 µm OD and a 180 µm ID",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV sterilization",
+      "parameter": "time",
+      "value": "30",
+      "unit": "min",
+      "evidence": "Microcolumns were sterilized via UV light for 30 min",
       "evidence_verified": true
     }
   ],
@@ -73,25 +74,27 @@
     "stability": null
   },
   "biology": {
-    "cell_type": "primary cortical neurons (E18) aggregates",
+    "cell_type": "primary embryonic day 18 rat cortical neurons (aggregates)",
+    "cell_category": "primary_neuron",
     "species": "rat",
     "setting": "in_vitro_3d",
+    "in_brain": null,
     "coating": "collagen-laminin ECM",
     "culture_days": {
       "value": "40",
       "unit": "DIV",
       "value_si": null,
-      "evidence": "with further demonstration of survival out to 40",
-      "location": "p. 8",
+      "evidence": "µTENN neuronal viability was shown to persist for up to 40 DIV",
+      "location": "p. 11",
       "confidence": "high",
       "test_method": null,
       "evidence_verified": true
     },
     "viability_percent": {
-      "value": "80.3",
+      "value": "68.1",
       "unit": "%",
-      "value_si": 80.3,
-      "evidence": "(80.3%) (p < 0.05), LEBI (84.8%) (p < 0.001), and planar cultures (97.7%) (p < 0.0001) at 10 DIV.",
+      "value_si": 68.1,
+      "evidence": "LEUNI (68.1%) and LEBI (69.0%) at",
       "location": "p. 9",
       "confidence": "high",
       "test_method": null,
@@ -108,13 +111,13 @@
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "peak axonal growth rate (bidirectional 9 mm)"
+        "name": "peak axonal growth rate (bidirectional 9 mm aggregate µTENN)"
       },
       {
         "value": "61.7",
         "unit": "microns/day",
         "value_si": null,
-        "evidence": "rate of 61.7±5 microns/day at 1 DIV",
+        "evidence": "dissociated µTENNs exhibited a peak growth rate of 61.7±5 microns/day at 1 DIV",
         "location": "p. 8",
         "confidence": "high",
         "test_method": null,
@@ -130,13 +133,67 @@
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "maximum growth rate (unidirectional 2 mm)"
+        "name": "maximum growth rate (unidirectional 2 mm µTENN)"
+      }
+    ],
+    "survival": [
+      {
+        "value": "80.3",
+        "unit": "%",
+        "value_si": 80.3,
+        "evidence": "(80.3%) (p < 0.05)",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "10 DIV",
+        "timepoint_days": 10.0
+      },
+      {
+        "value": "84.8",
+        "unit": "%",
+        "value_si": 84.8,
+        "evidence": "LEBI (84.8%) (p < 0.001)",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "10 DIV",
+        "timepoint_days": 10.0
+      },
+      {
+        "value": "68.1",
+        "unit": "%",
+        "value_si": 68.1,
+        "evidence": "LEUNI (68.1%) and LEBI (69.0%) at",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "28 DIV",
+        "timepoint_days": 28.0
+      },
+      {
+        "value": "69.0",
+        "unit": "%",
+        "value_si": 69.0,
+        "evidence": "LEUNI (68.1%) and LEBI (69.0%) at",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "28 DIV",
+        "timepoint_days": 28.0
       }
     ]
   },
-  "notes": "Agarose in DPBS; neurons in ECM-filled lumen of hollow agarose microcolumn; cultured in Neurobasal/B27 at 37 °C, 5% CO2. Viability by calcein-AM/EthD-1 area ratio.",
+  "notes": "Agarose in DPBS; viability by calcein-AM/EthD-1 live/dead area ratio. Planar controls on polystyrene: 97.7% at 10 DIV, 53.6% at 28 DIV.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:53:50+00:00",
+  "extracted_at": "2026-10-22T12:30:41+00:00",
   "schema_version": "0.1.0"
 }

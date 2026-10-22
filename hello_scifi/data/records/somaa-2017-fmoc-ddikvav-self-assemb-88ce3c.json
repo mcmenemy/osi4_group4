@@ -1,5 +1,5 @@
 {
-  "record_id": "somaa-2017-fmoc-ddikvav-self-assemb-c79b23",
+  "record_id": "somaa-2017-fmoc-ddikvav-self-assemb-88ce3c",
   "source": {
     "doi": "10.1016/j.celrep.2017.07.069",
     "title": "Peptide-Based Scaffolds Support Human Cortical Progenitor Graft Integration to Reduce Atrophy and Promote Functional Repair in a Model of Stroke",
@@ -9,17 +9,18 @@
     "file": "somaa2017.pdf"
   },
   "material_class": "nonconductive_hydrogel",
-  "material": "Fmoc-DDIKVAV self-assembling peptide hydrogel (IKVAV SAP)",
+  "material": "Fmoc-DDIKVAV self-assembling peptide hydrogel",
+  "material_key": "peptide_sap",
   "formulation": [
     {
-      "component": "Fmoc-SAP powder",
+      "component": "Fmoc-SAP powder (Fmoc-DDIKVAV)",
       "amount": "20",
       "unit": "mg/mL",
       "evidence": "Fmoc-SAP powder was dissolved to 20 mg/mL in deionized water and pH corrected to 7.4.",
       "evidence_verified": true
     },
     {
-      "component": "Fmoc-DDIKVAV SAP (final implanted)",
+      "component": "Fmoc-SAP gel (final implanted concentration)",
       "amount": "10",
       "unit": "mg/mL",
       "evidence": "Final concentration of implanted SAP gels was 10 mg/mL and total number of cells 100,000/rat.",
@@ -42,6 +43,14 @@
       "unit": null,
       "evidence": "the gel underwent mechanical sheering and was mixed 1:1 with Hank’s balanced salt solution (HBSS) or cells.",
       "evidence_verified": true
+    },
+    {
+      "step": "implantation",
+      "parameter": "injection volume",
+      "value": "1",
+      "unit": "mL",
+      "evidence": "animals received two intra￾cortical injections (1 mL each) of hESC-derived cortical progenitor and/or SAP gels into the lesion site",
+      "evidence_verified": true
     }
   ],
   "properties": {
@@ -57,7 +66,7 @@
     "degradation_time": null,
     "stability": {
       "description": {
-        "value": "SAP fibers visible within slices, maintained integrity of the SAP scaffold gel",
+        "value": "SAP fibers visible within brain slices, maintained integrity of scaffold gel",
         "unit": null,
         "value_si": null,
         "evidence": "SAP fibers were visible within the slices, indicating maintained integrity of the SAP scaffold gel at 9 months",
@@ -80,17 +89,19 @@
     }
   },
   "biology": {
-    "cell_type": "hESC-derived cortical progenitors (HES3-ENVY, GFP) transplanted into ischemic cortex",
+    "cell_type": "hESC (HES3-ENVY)-derived cortical progenitors",
+    "cell_category": "sc_neuron",
     "species": "human cells in athymic nude rat",
     "setting": "in_vivo",
+    "in_brain": true,
     "coating": null,
     "culture_days": {
-      "value": "36",
-      "unit": "weeks",
-      "value_si": 252.0,
-      "evidence": "At 36 weeks after receiving implants into the ischemic cortex, the majority of animals were taken for histological analysis.",
+      "value": "17",
+      "unit": "DIV",
+      "value_si": null,
+      "evidence": "showed maintained GFP, OTX2, and Nestin expression at the time of transplantation (Figures 1L and 1M, 17 DIV).",
       "location": "p. 3",
-      "confidence": "high",
+      "confidence": "medium",
       "test_method": null,
       "evidence_verified": true
     },
@@ -112,18 +123,18 @@
         "value": "69.6",
         "unit": "%",
         "value_si": null,
-        "evidence": "SAP grafts were more differentiated and homogeneous with 69.6% ± 2.9% NEUN+",
+        "evidence": "cell + SAP grafts were more differentiated and homogeneous with 69.6% ± 2.9% NEUN+",
         "location": "p. 5",
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "NEUN+/GFP+ DAPI+ neuronal proportion (cells+SAP)"
+        "name": "NEUN+ neuronal proportion in graft (cells+SAP)"
       },
       {
         "value": "65.8",
         "unit": "%",
         "value_si": null,
-        "evidence": "significant increase in the proportion of both BRN2 (65.8 ±",
+        "evidence": "significant increase in the proportion of both BRN2 (65.8 ± 4.4%) and TBR1 (20.0 ± 2.7%) neurons",
         "location": "p. 5",
         "confidence": "high",
         "test_method": null,
@@ -134,7 +145,7 @@
         "value": "20.0",
         "unit": "%",
         "value_si": null,
-        "evidence": "TBR1 (20.0 ± 2.7%) neurons",
+        "evidence": "significant increase in the proportion of both BRN2 (65.8 ± 4.4%) and TBR1 (20.0 ± 2.7%) neurons",
         "location": "p. 5",
         "confidence": "high",
         "test_method": null,
@@ -145,29 +156,18 @@
         "value": "11.4",
         "unit": "%",
         "value_si": null,
-        "evidence": "an effect that was greatest in cells+SAP-grafted ani­mals (11.4 ± 1.3% cortical atrophy",
+        "evidence": "an effect that was greatest in cells+SAP-grafted ani￾mals (11.4 ± 1.3% cortical atrophy; Figures 7A and 7I)",
         "location": "p. 8",
-        "confidence": "medium",
+        "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
         "name": "cortical atrophy (cells+SAP, 3 week implant)"
       },
       {
-        "value": "28.3",
-        "unit": "%",
-        "value_si": null,
-        "evidence": "SAP implants alone minimally protected against atro­phy of the host tissue (28.3 ± 2.6%",
-        "location": "p. 8",
-        "confidence": "medium",
-        "test_method": null,
-        "evidence_verified": true,
-        "name": "cortical atrophy (SAP only)"
-      },
-      {
         "value": "4.9",
         "unit": "%",
         "value_si": null,
-        "evidence": "early implants of cells+SAP significantly reduced atrophy (4.9 ±",
+        "evidence": "early implants of cells+SAP significantly reduced atrophy (4.9 ± 0.8%)",
         "location": "p. 9",
         "confidence": "high",
         "test_method": null,
@@ -175,15 +175,26 @@
         "name": "cortical atrophy (cells+SAP, 6 day implant)"
       },
       {
+        "value": "28.3",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "SAP implants alone minimally protected against atro￾phy of the host tissue (28.3 ± 2.6%; Figures 7A and 7G).",
+        "location": "p. 8",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "cortical atrophy (SAP alone)"
+      },
+      {
         "value": "13.9",
         "unit": "%",
         "value_si": null,
-        "evidence": "cells+SAP graft: 13.9 ± 0.7%",
+        "evidence": "cells+SAP graft: 13.9 ± 0.7%; Figure 5C",
         "location": "p. 7",
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "vessel area covered by RECA1+ in cells+SAP graft"
+        "name": "RECA1+ vessel area coverage in cells+SAP graft"
       },
       {
         "value": "61",
@@ -200,18 +211,19 @@
         "value": "41.3",
         "unit": "%",
         "value_si": null,
-        "evidence": "cells+SAP implants continued to provide a significant benefit (41.3 ± 1.3%)",
+        "evidence": "By 36 weeks cells+SAP implants continued to provide a significant benefit (41.3 ± 1.3%)",
         "location": "p. 3",
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "staircase left paw retrieval at 36 weeks (cells+SAP)"
+        "name": "staircase impaired paw pellet retrieval (cells+SAP)"
       }
-    ]
+    ],
+    "survival": []
   },
-  "notes": "Rheology showed modulus similar to rat brain but value only in figure. Some characters in quotes may contain soft hyphens from source text.",
+  "notes": "Fmoc-DDIKVAV laminin-epitope SAP, assembled at pH 7.4; implanted with cells into ET1-induced cortical ischemic lesion in athymic rats at 3 weeks or 6 days post-lesion. Modulus only shown in figure (similar to rat brain).",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:57:22+00:00",
+  "extracted_at": "2026-10-22T12:34:24+00:00",
   "schema_version": "0.1.0"
 }

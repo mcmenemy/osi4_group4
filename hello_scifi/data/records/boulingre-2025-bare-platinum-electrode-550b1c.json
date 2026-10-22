@@ -1,5 +1,5 @@
 {
-  "record_id": "boulingre-2025-bare-pt-electrode-1a05a6",
+  "record_id": "boulingre-2025-bare-platinum-electrode-550b1c",
   "source": {
     "doi": "10.1039/d4tb02651a",
     "title": "Multi-layered electrode constructs for neural tissue engineering",
@@ -9,7 +9,8 @@
     "file": "boulingre2025.pdf"
   },
   "material_class": "other",
-  "material": "Bare Pt electrode",
+  "material": "Bare platinum electrode",
+  "material_key": "other:bare-platinum-electrode",
   "formulation": [],
   "processing": [],
   "properties": {
@@ -21,7 +22,7 @@
       "value": "47.58",
       "unit": "O cm1",
       "value_si": null,
-      "evidence": "the impedance\nmodulus of bare Pt was 47.58  8.35 O cm1",
+      "evidence": "At 1 kHz, the impedance\nmodulus of bare Pt was 47.58  8.35 O cm1",
       "location": "p. 6",
       "confidence": "high",
       "test_method": null,
@@ -36,8 +37,10 @@
   },
   "biology": null,
   "notes": "Measured in PBS.",
-  "flags": [],
+  "flags": [
+    "material_key:unmatched"
+  ],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:54:16+00:00",
+  "extracted_at": "2026-10-22T12:31:09+00:00",
   "schema_version": "0.1.0"
 }

@@ -1,5 +1,5 @@
 {
-  "record_id": "boulingre-2025-pva-gel-biosynthetic-hyd-95a03b",
+  "record_id": "boulingre-2025-pva-gel-biosynthetic-hyd-3bc3ce",
   "source": {
     "doi": "10.1039/d4tb02651a",
     "title": "Multi-layered electrode constructs for neural tissue engineering",
@@ -9,13 +9,14 @@
     "file": "boulingre2025.pdf"
   },
   "material_class": "nonconductive_hydrogel",
-  "material": "PVA–GEL biosynthetic hydrogel (stand-alone BH control)",
+  "material": "PVA–GEL biosynthetic hydrogel (stand-alone BH)",
+  "material_key": "other:pva-gel-biosynthetic-hydrogel-stand-alon",
   "formulation": [
     {
-      "component": "PVA–Nb : gelatin–Nb",
+      "component": "PVA–Nb:gelatin–Nb",
       "amount": "25 : 75",
       "unit": "weight ratio",
-      "evidence": "PVA–Nb and gelatin–Nb were mixed in at 25 : 75 weight",
+      "evidence": "PVA–Nb and gelatin–Nb were mixed in at 25 : 75 weight\nratio",
       "evidence_verified": true
     }
   ],
@@ -35,8 +36,10 @@
   },
   "biology": {
     "cell_type": "primary hippocampal astrocytes",
+    "cell_category": "glia",
     "species": "rat",
     "setting": "in_vitro_3d",
+    "in_brain": null,
     "coating": null,
     "culture_days": {
       "value": "14",
@@ -55,7 +58,7 @@
         "value": "35 000",
         "unit": "cells per cm2",
         "value_si": null,
-        "evidence": "compared to 35 000\ncells per cm2 on stand-alone BHs",
+        "evidence": "with around 55 000 cells per cm2 compared to 35 000\ncells per cm2 on stand-alone BHs",
         "location": "p. 11",
         "confidence": "medium",
         "test_method": null,
@@ -73,11 +76,14 @@
         "evidence_verified": true,
         "name": "cell spreading area"
       }
-    ]
+    ],
+    "survival": []
   },
-  "notes": "Formed in 6-mm PDMS moulds on glass coverslips.",
-  "flags": [],
+  "notes": "Formed in 6-mm PDMS moulds on glass coverslips as control.",
+  "flags": [
+    "material_key:unmatched"
+  ],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:54:16+00:00",
+  "extracted_at": "2026-10-22T12:31:09+00:00",
   "schema_version": "0.1.0"
 }

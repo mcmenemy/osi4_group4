@@ -10,6 +10,7 @@
   },
   "material_class": "omiec_film",
   "material": "p(g2T-T)",
+  "material_key": "glycolated_polythiophene",
   "formulation": [],
   "processing": [],
   "properties": {
@@ -44,9 +45,9 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Measured in 0.1 M NaCl with Ag/AgCl gate/reference.",
+  "notes": "Measured in 0.1 M NaCl.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:55:22+00:00",
+  "extracted_at": "2026-10-22T12:32:01+00:00",
   "schema_version": "0.1.0"
 }

@@ -12,7 +12,7 @@ from pathlib import Path
 
 import yaml
 
-from app.materials import fallback_key, material
+from app.materials import fallback_key, match_material, material
 from app.schemas import Record
 
 _DATA_DIR = Path(os.environ.get("DATA_DIR", Path(__file__).resolve().parents[2] / "data"))
@@ -59,7 +59,9 @@ def _unknown(detail: str = "No evidence yet") -> dict:
 def _survival(recs: list[Record], cfg: dict) -> tuple[dict, dict | None]:
     th = cfg["thresholds"]
     sv = cfg["state_values"]
-    best: tuple[float, int, dict, dict] | None = None  # (points-ish, state order, requirement, survival info)
+    # Best = highest (points, state, evidence multiplier, latest timepoint); later timepoints win ties
+    # because a 3-week result says more about survival than a day-1 one.
+    best: tuple | None = None
     ids = []
     for r in recs:
         if not r.biology or not r.biology.survival:
@@ -94,12 +96,12 @@ def _survival(recs: list[Record], cfg: dict) -> tuple[dict, dict | None]:
                 "location": s.location,
                 "label": detail,
             }
-            key = (sv[state] * mult, _STATE_ORDER[state], mult)
-            if best is None or key > best[0:3]:
-                best = (*key, _requirement(state, "extracted", [], detail, mult), info)  # type: ignore[assignment]
+            key = (sv[state] * mult, _STATE_ORDER[state], mult, days or 0)
+            if best is None or key > best[0]:
+                best = (key, _requirement(state, "extracted", [], detail, mult), info)
     if best is None:
         return _unknown(), None
-    req, info = best[3], best[4]
+    req, info = best[1], best[2]
     req["records"] = ids
     return req, info
 
@@ -238,7 +240,8 @@ def build_scorecard(records: list[Record], weight_overrides: dict[str, float] | 
     weights = {**cfg["weights"], **{k: v for k, v in (weight_overrides or {}).items() if v is not None}}
     groups: dict[str, list[Record]] = defaultdict(list)
     for r in records:
-        groups[r.material_key or fallback_key(r.material)].append(r)
+        # Older records may predate material_key; match them by name the same way extraction does.
+        groups[r.material_key or match_material(r.material) or fallback_key(r.material)].append(r)
 
     baseline = None
     ranked, no_neuron = [], []

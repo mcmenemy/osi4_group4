@@ -1,5 +1,5 @@
 {
-  "record_id": "brown-2024-su-8-microwell-scaffold-6cfd3b",
+  "record_id": "brown-2024-su-8-microwell-scaffold-18acfd",
   "source": {
     "doi": "10.1101/2024.11.22.624907",
     "title": "Optogenetic stimulation of a cortical biohybrid implant guides goal directed behavior",
@@ -9,24 +9,33 @@
     "file": "brown2024.pdf"
   },
   "material_class": "other",
-  "material": "SU-8 microwell scaffold on fused silica bonded to glass coverslip (biohybrid implant)",
+  "material": "SU-8 microwell scaffold on fused silica bonded to glass coverslip",
+  "material_key": "su8",
   "formulation": [
     {
       "component": "poly-d-Lysine",
       "amount": "0.1",
       "unit": "mg/mL",
-      "evidence": "0.1 mg/mL poly-d-Lysine (Gibco)",
+      "evidence": "0.1 mg/mL poly-d-Lysine (Gibco) and 0.1 mg/mL Laminin (Millipore Sigma, L2020) in DI water",
       "evidence_verified": true
     },
     {
       "component": "Laminin",
       "amount": "0.1",
       "unit": "mg/mL",
-      "evidence": "0.1 mg/mL Laminin (Millipore Sigma, L2020) in DI water",
+      "evidence": "0.1 mg/mL poly-d-Lysine (Gibco) and 0.1 mg/mL Laminin (Millipore Sigma, L2020) in DI water",
       "evidence_verified": true
     }
   ],
   "processing": [
+    {
+      "step": "wafer dehydration",
+      "parameter": "temperature",
+      "value": "200",
+      "unit": "℃",
+      "evidence": "dehydrated for 15",
+      "evidence_verified": true
+    },
     {
       "step": "spin coating SU-8 2010",
       "parameter": "speed",
@@ -53,10 +62,18 @@
     },
     {
       "step": "post exposure bake",
-      "parameter": "temperature",
-      "value": "95",
-      "unit": "℃",
-      "evidence": "post\nexposure bake of 4 minutes at 95 ℃",
+      "parameter": "time",
+      "value": "4",
+      "unit": "minutes",
+      "evidence": "We completed a post",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV flood exposure for biocompatibility",
+      "parameter": "energy",
+      "value": "~1.86",
+      "unit": "J",
+      "evidence": "a UV flood-exposure was used with a total UV energy",
       "evidence_verified": true
     },
     {
@@ -97,79 +114,85 @@
     "degradation_time": null,
     "stability": {
       "description": {
-        "value": "no visible sign of structural deterioration of the microwell scaffold",
+        "value": "no visible structural deterioration of the microwell scaffold",
         "unit": null,
         "value_si": null,
-        "evidence": "no visible sign of\nstructural deterioration of the microwell scaffold even months after implantation",
+        "evidence": "showed no visible sign of",
         "location": "p. 3",
         "confidence": "medium",
         "test_method": null,
-        "evidence_verified": false
+        "evidence_verified": true
       },
       "duration_days": null,
       "conditions": "in vivo, implanted on mouse cortex"
     }
   },
   "biology": {
-    "cell_type": "primary embryonic cortical neurons (E14.5-E15.5)",
-    "species": "mouse (C57/B6J)",
+    "cell_type": "embryonic primary cortical neurons (E14.5-E15.5), C57/B6J mice",
+    "cell_category": "primary_neuron",
+    "species": "mouse",
     "setting": "in_vivo",
+    "in_brain": true,
     "coating": "poly-d-Lysine and Laminin",
     "culture_days": null,
     "viability_percent": null,
     "neurite_length": null,
     "other_outcomes": [
       {
+        "value": "Five of nine",
+        "unit": null,
+        "value_si": null,
+        "evidence": "Five of nine mice in this",
+        "location": "p. 6",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "mice reaching criterion performance in optogenetic detection task"
+      },
+      {
+        "value": "9.6",
+        "unit": "days",
+        "value_si": null,
+        "evidence": "9.6±4.0 days to criterion mean±s.d.",
+        "location": "p. 6",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "days to criterion"
+      }
+    ],
+    "survival": [
+      {
         "value": "77",
         "unit": "%",
-        "value_si": null,
-        "evidence": "determined that on average we filled 77±15% (mean ± s.d., n=23 microwell scaffolds",
+        "value_si": 77.0,
+        "evidence": "These experiments determined that on average we filled 77±15% (mean ± s.d., n=23 microwell scaffolds",
         "location": "p. 3",
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "microwell loading fraction (24 h after loading)"
+        "measure": "occupancy",
+        "timepoint": "24 hours after loading",
+        "timepoint_days": 1.0
       },
       {
         "value": "52",
         "unit": "%",
-        "value_si": null,
-        "evidence": "we found 52±23% (mean±s.d.) of microwells to be\nloaded with neurons expressing fluorescent protein",
+        "value_si": 52.0,
+        "evidence": "we found 52±23% (mean±s.d.) of microwells to be",
         "location": "p. 4",
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "microwells with fluorescent engrafted neurons three weeks after surgery"
-      },
-      {
-        "value": "Five of nine",
-        "unit": null,
-        "value_si": null,
-        "evidence": "Five of nine mice in this\ncohort passed criterion performance",
-        "location": "p. 6",
-        "confidence": "high",
-        "test_method": null,
-        "evidence_verified": true,
-        "name": "biohybrid mice reaching criterion performance"
-      },
-      {
-        "value": "0.25",
-        "unit": "bits per second",
-        "value_si": null,
-        "evidence": "best session performance for biohybrid rate averaged 0.25±0.24 bits\nper second",
-        "location": "p. 6",
-        "confidence": "high",
-        "test_method": null,
-        "evidence_verified": true,
-        "name": "best session bit rate (biohybrid)"
+        "measure": "occupancy",
+        "timepoint": "three weeks after surgery",
+        "timepoint_days": 21.0
       }
     ]
   },
-  "notes": "Microwells: 10 µm diameter, 15 µm deep, 15 µm pitch hexagonal lattice; implanted on cortical surface after craniectomy and duratomy. Neurons transduced with AAV CheRiff-eGFP or jRGECO1a.",
-  "flags": [
-    "unverified_quote:stability"
-  ],
+  "notes": "Hexagonal microwell array (10 µm diameter, 15 µm deep, 15 µm pitch) of SU-8 placed cell side down on cortical surface after duratomy. Neurons transduced with AAV CheRiff-eGFP/jRGECO1a. Spontaneous calcium activity observed three weeks after implantation.",
+  "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T02:54:35+00:00",
+  "extracted_at": "2026-10-22T12:31:28+00:00",
   "schema_version": "0.1.0"
 }
