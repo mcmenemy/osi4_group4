@@ -25,6 +25,13 @@ export interface OtherOutcome extends FieldValue {
   name: string
 }
 
+export interface SurvivalValue extends FieldValue {
+  measure: 'viability' | 'occupancy' | 'retention' | 'neurite_outgrowth'
+  timepoint: string | null
+  culture_days: number | null
+  setting: Setting | null
+}
+
 export interface Source {
   doi: string | null
   title: string | null
@@ -73,13 +80,16 @@ export interface Properties {
 
 export interface Biology {
   cell_type: string | null
+  cell_category?: string | null
   species: string | null
   setting: Setting | null
+  tissue_site?: 'brain' | 'spinal_cord' | 'peripheral_nerve' | 'other' | 'not_applicable' | null
   coating: string | null
   culture_days: FieldValue | null
   viability_percent: FieldValue | null
   neurite_length: FieldValue | null
   other_outcomes: OtherOutcome[]
+  survival?: SurvivalValue[]
 }
 
 export interface MaterialRecord {
@@ -88,6 +98,7 @@ export interface MaterialRecord {
   material_class: MaterialClass
   material: string
   material_key?: string | null
+  electrode_material?: string | null
   formulation: FormulationItem[]
   processing: ProcessingStep[]
   properties: Properties
@@ -210,6 +221,17 @@ export function fieldEntries(r: MaterialRecord): FieldEntry[] {
       const f = r.biology[b.key]
       if (f) out.push({ path: `biology.${b.key}`, label: b.label, normalizedUnit: b.unit, field: f })
     }
+    ;(r.biology.survival ?? []).forEach((sv, i) => {
+      const where = [sv.setting && SETTING_LABELS[sv.setting], sv.culture_days != null && `${sv.culture_days} d`]
+        .filter(Boolean)
+        .join(', ')
+      out.push({
+        path: `biology.survival.${i}`,
+        label: `Survival: ${sv.measure.replace('_', ' ')}${where ? ` (${where})` : ''}`,
+        normalizedUnit: '%',
+        field: sv,
+      })
+    })
     r.biology.other_outcomes.forEach((o, i) =>
       out.push({ path: `biology.other_outcomes.${i}`, label: o.name || 'Other outcome', normalizedUnit: '', field: o }),
     )

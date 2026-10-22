@@ -888,6 +888,19 @@ table.scorecard-table {
   font-weight: 500;
 }
 
+.badge.unverified {
+  margin-left: 0.3rem;
+  color: var(--warn);
+  border-style: dashed;
+  font-weight: 500;
+}
+
+.badge.some {
+  margin-left: 0.3rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
 .badge.baseline-badge {
   margin-left: 0.4rem;
   color: var(--accent);

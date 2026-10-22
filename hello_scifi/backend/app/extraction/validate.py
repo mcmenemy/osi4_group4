@@ -291,7 +291,7 @@ def renormalize_record(record: Record) -> Record:
     for name, f in _fields(record):
         if name.startswith("survival"):
             f.value_si = normalize_value("viability_percent", f.value, f.unit or "%")
-            f.timepoint_days = timepoint_days(f.timepoint)
+            f.culture_days = timepoint_days(f.timepoint)
         elif not name.startswith("other_outcome"):
             f.value_si = normalize_value(name, f.value, f.unit)
     return record

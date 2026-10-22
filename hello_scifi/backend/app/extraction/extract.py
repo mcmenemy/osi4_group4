@@ -171,7 +171,8 @@ def to_record(rec: LLMRecord, source: Source, model: str, index: int) -> Record:
                 SurvivalValue(
                     measure=v.survival_measure,
                     timepoint=v.timepoint or None,
-                    timepoint_days=timepoint_days(v.timepoint),
+                    culture_days=timepoint_days(v.timepoint),
+                    setting=v.setting or None,
                     **field,
                 )
             )
@@ -181,8 +182,8 @@ def to_record(rec: LLMRecord, source: Source, model: str, index: int) -> Record:
     if bio.viability_percent is None:
         viability = [s for s in bio.survival if s.measure == "viability"]
         if viability:
-            best = max(viability, key=lambda s: s.timepoint_days or 0)
-            bio.viability_percent = FieldValue(**best.model_dump(exclude={"measure", "timepoint", "timepoint_days"}))
+            best = max(viability, key=lambda s: s.culture_days or 0)
+            bio.viability_percent = FieldValue(**best.model_dump(exclude={"measure", "timepoint", "culture_days", "setting"}))
 
     biology = None
     if rec.has_biology:
@@ -191,7 +192,10 @@ def to_record(rec: LLMRecord, source: Source, model: str, index: int) -> Record:
         bio.cell_category = b.cell_category
         bio.species = b.species or None
         bio.setting = None if b.setting == "none" else b.setting
-        bio.in_brain = b.in_brain if bio.setting == "in_vivo" else None
+        bio.tissue_site = b.tissue_site if bio.setting == "in_vivo" else "not_applicable"
+        # A survival value without its own setting inherits the record's.
+        for sv in bio.survival:
+            sv.setting = sv.setting or bio.setting
         bio.coating = b.coating or None
         biology = bio
 
@@ -222,6 +226,7 @@ def to_record(rec: LLMRecord, source: Source, model: str, index: int) -> Record:
         properties=props,
         biology=biology,
         notes=rec.notes or None,
+        electrode_material=rec.electrode_material or None,
         extraction_model=model,
         extracted_at=datetime.now(UTC).isoformat(timespec="seconds"),
     )
@@ -280,6 +285,7 @@ def mock_extraction() -> LLMExtraction:
         return LLMValue(
             name=name, label="", value=val, unit=unit, evidence=evidence, location="p. 1", confidence="high",
             method="", survival_measure="viability" if name == "survival" else "", timepoint="7 days" if name == "survival" else "",
+            setting="in_vitro_2d" if name == "survival" else "",
         )
 
     return LLMExtraction(
@@ -289,6 +295,7 @@ def mock_extraction() -> LLMExtraction:
                 material_class="conductive_hydrogel",
                 material="MOCK PEDOT:PSS hydrogel",
                 material_key="pedot_pss_hydrogel",
+                electrode_material="",
                 formulation=[
                     LLMFormulation(
                         component="DMSO",
@@ -310,7 +317,7 @@ def mock_extraction() -> LLMExtraction:
                     cell_category="primary_neuron",
                     species="rat",
                     setting="in_vitro_2d",
-                    in_brain=False,
+                    tissue_site="not_applicable",
                     coating="",
                 ),
                 notes="MOCK_LLM=1: canned example record, not extracted from your input.",

@@ -5,9 +5,11 @@
 # Anything that matches no family keeps an "other:<name>" key and is flagged for review.
 #
 # Curated facts (transparency, degradable, literature-typical stiffness in kPa) are hand-entered, not extracted.
-# Each needs a citation; a value without one counts as "unknown" in the scorecard. Citations
-# here were entered from memory and are marked "to verify" until someone checks them: a good
-# first contribution, since each one is a lookup plus a citation.
+# Each needs a citation; a value without one counts as "unknown" in the scorecard. Every
+# cited value has `verified: true/false`: set it to true only after someone has read the cited
+# source and confirmed the value. Unverified values still count (at the curated weight) but show an
+# "unverified" badge. `uv run python scripts/list_unverified.py` lists what's left to check; each one
+# is a lookup plus a citation, a good first contribution.
 #
 # transparency: clear | translucent | opaque | unknown
 # degradable:   "yes" | "no" | tunable | unknown  (quoted so YAML keeps them as strings)
@@ -25,17 +27,17 @@ materials:
   transparency:
     value: clear
     citation: SU-8 2000 series data sheet (Kayaku Advanced Materials), optical transmission in the visible.
-    status: to verify
+    verified: false
   degradable:
     value: 'no'
     citation: SU-8 2000 series data sheet (Kayaku Advanced Materials); fully crosslinked epoxy.
-    status: to verify
+    verified: false
   literature_typical_stiffness_kpa:
     range:
     - 2000000.0
     - 4000000.0
     citation: SU-8 2000 series data sheet (Kayaku Advanced Materials), Young's modulus about 2 GPa.
-    status: to verify
+    verified: false
   candidate: true
 - key: gelma
   label: GelMA (gelatin methacryloyl)
@@ -49,18 +51,19 @@ materials:
     value: clear
     citation: Yue K. et al., Synthesis, properties, and biomedical applications of gelatin methacryloyl (GelMA)
       hydrogels, Biomaterials 73, 254-271 (2015).
-    status: to verify
+    verified: false
   degradable:
     value: 'yes'
     citation: Yue K. et al., Biomaterials 73, 254-271 (2015); gelatin backbone is MMP-cleavable.
-    status: to verify
+    verified: false
   literature_typical_stiffness_kpa:
     range:
     - 3.08
     - 184.5
     method: tension
     citation: Wu Y. et al., Biosci. Rep. 39, BSR20181748 (2019); 5-30% GelMA.
-    status: checked against the paper text on PMC
+    verified: false
+    note: checked against the paper text on PMC
   candidate: true
 - key: hyaluronic_acid
   label: Hyaluronic acid gels (HAMA, HyStem)
@@ -76,18 +79,19 @@ materials:
     value: clear
     citation: Burdick J.A. & Prestwich G.D., Hyaluronic acid hydrogels for biomedical applications, Adv. Mater.
       23, H41-H56 (2011).
-    status: to verify
+    verified: false
   degradable:
     value: 'yes'
     citation: Burdick J.A. & Prestwich G.D., Adv. Mater. 23, H41-H56 (2011); degraded by hyaluronidases.
-    status: to verify
+    verified: false
   literature_typical_stiffness_kpa:
     range:
     - 0.023
     - 3.5
     method: shear_rheology
     citation: Advanced BioMatrix, HyStem hydrogel stiffness (G', thiolated HA kits).
-    status: vendor-reported G', to verify
+    verified: false
+    note: vendor-reported G', to verify
   candidate: true
 - key: agarose
   label: Agarose
@@ -106,18 +110,6 @@ materials:
     citation: null
   literature_typical_stiffness_kpa: null
   candidate: true
-- key: pedot_fibrin_biohybrid
-  label: PEDOT:PSS array + fibrin cell layer (biohybrid)
-  class: biohybrid_device
-  patterns: []
-  note: Rochford et al. 2023 biohybrid device; assigned through data/overrides.yaml.
-  transparency:
-    value: unknown
-    citation: null
-  degradable:
-    value: unknown
-    citation: null
-  literature_typical_stiffness_kpa: null
 - key: alginate
   label: Alginate
   class: nonconductive_hydrogel
@@ -132,7 +124,7 @@ materials:
     value: 'no'
     citation: 'Lee K.Y. & Mooney D.J., Alginate: properties and biomedical applications, Prog. Polym. Sci. 37, 106-126
       (2012); mammals lack enzymes that cleave alginate, though ionically crosslinked gels can dissolve.'
-    status: to verify
+    verified: false
   literature_typical_stiffness_kpa: null
   candidate: true
 - key: chitosan
@@ -161,7 +153,7 @@ materials:
     value: 'yes'
     citation: Janmey P.A., Winer J.P. & Weisel J.W., Fibrin gels and their clinical and bioengineering applications,
       J. R. Soc. Interface 6, 1-10 (2009).
-    status: to verify
+    verified: false
   literature_typical_stiffness_kpa: null
   candidate: true
 - key: peptide_sap
@@ -196,11 +188,11 @@ materials:
     value: clear
     citation: Tse J.R. & Engler A.J., Preparation of hydrogel substrates with tunable mechanical properties, Curr.
       Protoc. Cell Biol. 47, 10.16.1-10.16.16 (2010).
-    status: to verify
+    verified: false
   degradable:
     value: 'no'
     citation: Tse J.R. & Engler A.J., Curr. Protoc. Cell Biol. (2010).
-    status: to verify
+    verified: false
   literature_typical_stiffness_kpa: null
 - key: peg
   label: PEG hydrogels
@@ -214,11 +206,11 @@ materials:
     value: clear
     citation: Lutolf M.P. & Hubbell J.A., Synthetic biomaterials as instructive extracellular microenvironments
       for morphogenesis in tissue engineering, Nat. Biotechnol. 23, 47-55 (2005).
-    status: to verify
+    verified: false
   degradable:
     value: tunable
     citation: Lutolf M.P. & Hubbell J.A., Nat. Biotechnol. 23, 47-55 (2005).
-    status: to verify
+    verified: false
   literature_typical_stiffness_kpa: null
 - key: pva_pedot
   label: PVA–PEDOT conductive gels

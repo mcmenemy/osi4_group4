@@ -20,6 +20,7 @@ MaterialClass = Literal[
 Setting = Literal["in_vitro_2d", "in_vitro_3d", "in_vivo"]
 CellCategory = Literal["primary_neuron", "sc_neuron", "neuron_like_line", "glia", "non_neural", "tissue", "other"]
 SurvivalMeasure = Literal["viability", "occupancy", "retention", "neurite_outgrowth"]
+TissueSite = Literal["brain", "spinal_cord", "peripheral_nerve", "other", "not_applicable"]
 # Families from data/materials.yaml, plus "other" for anything outside the vocabulary.
 MaterialKey = Literal[tuple(material_keys() + ["other"])]  # type: ignore[valid-type]
 
@@ -88,11 +89,16 @@ class OtherOutcome(FieldValue):
 
 
 class SurvivalValue(FieldValue):
-    """A cell survival result. Different measures are never compared with each other."""
+    """A cell survival result. Different measures are never compared with each other.
+
+    Each value carries its own setting and day count: one paper can report an in vitro value at
+    24 h and an in vivo value at 3 weeks, and the record-level setting can't describe both.
+    """
 
     measure: SurvivalMeasure
     timepoint: str | None = None  # as reported, e.g. "3 weeks after implantation"
-    timepoint_days: float | None = None
+    culture_days: float | None = None
+    setting: Setting | None = None
 
 
 class Biology(BaseModel):
@@ -100,7 +106,7 @@ class Biology(BaseModel):
     cell_category: CellCategory | None = None
     species: str | None = None
     setting: Setting | None = None
-    in_brain: bool | None = None  # in vivo, implanted in brain / CNS
+    tissue_site: TissueSite | None = None  # where in vivo work was done
     coating: str | None = None
     culture_days: FieldValue | None = None  # SI: days
     viability_percent: FieldValue | None = None
@@ -116,6 +122,10 @@ class Record(BaseModel):
     material: str
     # Family from data/materials.yaml, or "other:<name>" when nothing matches.
     material_key: str | None = None
+    # For devices: the electrode material (e.g. "PEDOT:PSS") when it differs from the gel or
+    # scaffold the cells sit in. Electrical values of such records describe the electrode, not
+    # the family, so the scorecard doesn't use them for the family's properties.
+    electrode_material: str | None = None
     formulation: list[FormulationItem] = Field(default_factory=list)
     processing: list[ProcessingStep] = Field(default_factory=list)
     properties: Properties = Field(default_factory=Properties)
@@ -167,6 +177,7 @@ class LLMValue(BaseModel):
     method: TestMethod  # how the value was measured; "" if not stated or not applicable
     survival_measure: Literal["", "viability", "occupancy", "retention", "neurite_outgrowth"]  # for "survival"
     timepoint: str  # for "survival": when it was measured, e.g. "21 days in vitro"; "" otherwise
+    setting: Literal["", "in_vitro_2d", "in_vitro_3d", "in_vivo"]  # for "survival": where this value was measured
 
 
 class LLMFormulation(BaseModel):
@@ -189,7 +200,7 @@ class LLMBiology(BaseModel):
     cell_category: CellCategory
     species: str
     setting: Literal["in_vitro_2d", "in_vitro_3d", "in_vivo", "none"]
-    in_brain: bool
+    tissue_site: TissueSite
     coating: str
 
 
@@ -197,6 +208,7 @@ class LLMRecord(BaseModel):
     material_class: MaterialClass
     material: str
     material_key: MaterialKey
+    electrode_material: str  # "" unless the record is a device whose electrodes differ from the cell carrier
     formulation: list[LLMFormulation]
     processing: list[LLMProcessing]
     values: list[LLMValue]

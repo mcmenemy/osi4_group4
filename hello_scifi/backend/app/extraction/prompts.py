@@ -12,8 +12,10 @@ Rules:
 - Extract only values the text states explicitly. Never infer, compute, convert, or estimate. \
 If a value is only shown in a figure without being stated in the text, skip it.
 - Every value, formulation item, and processing step needs an evidence quote copied verbatim \
-from the text: a short span (ideally one sentence or less) that contains the value. Do not \
-paraphrase, fix typos, or join text from different places.
+from the text: a span (ideally one sentence or less) that contains the value AND the condition it \
+applies to (timepoint, sample, group). "(80.3%) (p < 0.05)" is too short; quote enough to show \
+it is "LEUNI (80.3%) ... at 10 DIV". Do not paraphrase, fix typos, or join text from different \
+places. You may leave out margin line numbers that interrupt a sentence.
 - Leave things out rather than guess. An empty list is a good answer.
 - Report units exactly as written ("kPa", "S cm-1", "mS/cm"). Use "" when there is no unit.
 - location: the nearest "[page N]" marker before the quote, plus a figure or table label if \
@@ -59,17 +61,25 @@ timepoint. survival_measure is viability (fraction of cells alive, e.g. live/dea
 (fraction of wells, sites or devices that still contain cells), retention (fraction of the \
 originally seeded or grafted cells still present), or neurite_outgrowth (fraction of cells \
 extending neurites). Never relabel one measure as another. timepoint as reported, including \
-units and the reference event ("21 days after implantation", "24 h after loading").
+units and the reference event ("21 days after implantation", "24 h after loading"). setting: where \
+this particular value was measured (in_vitro_2d, in_vitro_3d, in_vivo), which can differ between \
+values in the same record (e.g. loading checked in vitro, survival checked in vivo).
 - For ranges write value as reported ("10-20"); for mean ± sd write only the mean.
 
 biology: when has_biology is false, fill biology with "" strings, setting "none", cell_category \
-"other", and in_brain false. setting is in_vitro_2d (cells on a surface), in_vitro_3d (cells \
-inside a gel/scaffold), or in_vivo (implanted in an animal); in_brain is true only for in vivo \
-work in the brain or spinal cord. cell_category: primary_neuron (neurons isolated from animals, \
+"other", and tissue_site "not_applicable". setting is in_vitro_2d (cells on a surface), in_vitro_3d \
+(cells inside a gel/scaffold), or in_vivo (implanted in an animal). tissue_site for in vivo work: \
+brain, spinal_cord, peripheral_nerve (e.g. sciatic nerve), or other (muscle, skin, \
+subcutaneous); not_applicable for in vitro work. cell_category: primary_neuron (neurons isolated from animals, \
 including DRG), sc_neuron (neurons or neural progenitors derived from stem cells or iPSCs), \
 neuron_like_line (PC12, SH-SY5Y and similar lines), glia (astrocytes, microglia, Schwann cells), \
 non_neural (fibroblasts, epithelial and other non-neural cells), tissue (engineered tissue \
 constructs, organoids, explants), other.
+
+electrode_material: for devices whose electrodes differ from the gel or scaffold carrying the \
+cells (e.g. a PEDOT:PSS electrode array under a fibrin cell layer), name the electrode material \
+("PEDOT:PSS"); "" otherwise. Put values measured on the electrodes (impedance, electrode \
+conductivity) in a separate record whose material is the electrode itself.
 
 material_key: the family this material belongs to, from the allowed list (e.g. gelma, \
 hyaluronic_acid, agarose, fibrin, peptide_sap, polyacrylamide, peg, pva_pedot, \

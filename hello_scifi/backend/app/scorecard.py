@@ -33,27 +33,63 @@ def load_config() -> dict:
     return yaml.safe_load((_DATA_DIR / "scorecard.yaml").read_text())
 
 
-def evidence_multiplier(record: Record, cfg: dict) -> float:
+def multiplier_for(cell_category: str | None, setting: str | None, cfg: dict) -> float:
     m = cfg["evidence_multipliers"]
-    bio = record.biology
-    if not bio or not bio.cell_category:
+    if not cell_category:
         return m["no_cells"]
-    if bio.cell_category in ("primary_neuron", "sc_neuron"):
-        return {
-            "in_vivo": m["neuron_in_vivo"],
-            "in_vitro_3d": m["neuron_in_vitro_3d"],
-        }.get(bio.setting or "", m["neuron_in_vitro_2d"])
-    if bio.cell_category == "neuron_like_line":
+    if cell_category in ("primary_neuron", "sc_neuron"):
+        return {"in_vivo": m["neuron_in_vivo"], "in_vitro_3d": m["neuron_in_vitro_3d"]}.get(
+            setting or "", m["neuron_in_vitro_2d"]
+        )
+    if cell_category == "neuron_like_line":
         return m["neuron_like_line"]
     return m["other_cells"]
 
 
-def _requirement(state: str, source: str | None, records: list[str], detail: str, multiplier: float) -> dict:
-    return {"state": state, "source": source, "records": records, "detail": detail, "multiplier": multiplier}
+def evidence_multiplier(record: Record, cfg: dict) -> float:
+    bio = record.biology
+    return multiplier_for(bio.cell_category if bio else None, bio.setting if bio else None, cfg)
+
+
+def _requirement(
+    state: str, source: str | None, records: list[str], detail: str, multiplier: float, **extra
+) -> dict:
+    return {"state": state, "source": source, "records": records, "detail": detail, "multiplier": multiplier, **extra}
 
 
 def _unknown(detail: str = "No evidence yet") -> dict:
     return _requirement("unknown", None, [], detail, 0.0)
+
+
+def _coverage(met: int, measured: int) -> dict:
+    """How many family members meet a requirement; "met" for a family can mean only some do."""
+    if measured == 0:
+        return {}
+    return {
+        "members_met": met,
+        "members_measured": measured,
+        "coverage": "all members" if met == measured else "some members" if met else "no members",
+    }
+
+
+def fmt_pa(pa: float) -> str:
+    for factor, unit in ((1e9, "GPa"), (1e6, "MPa"), (1e3, "kPa")):
+        if pa >= factor:
+            return f"{pa / factor:.3g} {unit}"
+    return f"{pa:.3g} Pa"
+
+
+def _survival_state(s, th: dict) -> str | None:
+    pct, days = s.value_si, s.culture_days
+    if s.measure in ("viability", "retention") and pct is not None:
+        if pct < th["survival_fail_percent"]:
+            return "fails"
+        if days is not None and days >= th["survival_days"] and pct >= th["survival_min_percent"]:
+            return "met"
+        return "partial"
+    if s.measure in ("occupancy", "neurite_outgrowth"):
+        return "partial"  # cells present, but not shown to be healthy
+    return None
 
 
 def _survival(recs: list[Record], cfg: dict) -> tuple[dict, dict | None]:
@@ -62,34 +98,28 @@ def _survival(recs: list[Record], cfg: dict) -> tuple[dict, dict | None]:
     # Best = highest (points, state, evidence multiplier, latest timepoint); later timepoints win ties
     # because a 3-week result says more about survival than a day-1 one.
     best: tuple | None = None
-    ids = []
+    ids, members_met = [], 0
     for r in recs:
         if not r.biology or not r.biology.survival:
             continue
         ids.append(r.record_id)
-        mult = evidence_multiplier(r, cfg)
+        record_met = False
         for s in r.biology.survival:
-            pct, days = s.value_si, s.timepoint_days
-            when = f"{days:g} d" if days is not None else "time not stated"
-            setting = (r.biology.setting or "setting not stated").replace("_", " ")
-            if s.measure in ("viability", "retention") and pct is not None:
-                if pct < th["survival_fail_percent"]:
-                    state = "fails"
-                elif days is not None and days >= th["survival_days"] and pct >= th["survival_min_percent"]:
-                    state = "met"
-                else:
-                    state = "partial"
-            elif s.measure in ("occupancy", "neurite_outgrowth"):
-                state = "partial"  # cells present, but not shown to be healthy
-            else:
+            state = _survival_state(s, th)
+            if state is None:
                 continue
-            detail = f"{s.value}% {s.measure.replace('_', ' ')}, {setting}, {when}"
+            record_met |= state == "met"
+            setting = s.setting or r.biology.setting
+            mult = multiplier_for(r.biology.cell_category, setting, cfg)
+            days = s.culture_days
+            when = f"{days:g} d" if days is not None else "time not stated"
+            detail = f"{s.value}% {s.measure.replace('_', ' ')}, {(setting or 'setting not stated').replace('_', ' ')}, {when}"
             info = {
-                "value": pct,
+                "value": s.value_si,
                 "measure": s.measure,
-                "setting": r.biology.setting,
+                "setting": setting,
                 "cell_category": r.biology.cell_category,
-                "timepoint_days": days,
+                "culture_days": days,
                 "is_neuron": r.biology.cell_category in NEURON_CATEGORIES,
                 "record_id": r.record_id,
                 "evidence": s.evidence,
@@ -99,23 +129,42 @@ def _survival(recs: list[Record], cfg: dict) -> tuple[dict, dict | None]:
             key = (sv[state] * mult, _STATE_ORDER[state], mult, days or 0)
             if best is None or key > best[0]:
                 best = (key, _requirement(state, "extracted", [], detail, mult), info)
+        members_met += record_met
     if best is None:
         return _unknown(), None
     req, info = best[1], best[2]
     req["records"] = ids
+    req.update(_coverage(members_met, len(ids)))
     return req, info
 
 
+def _in_vivo_records(recs: list[Record]) -> list[Record]:
+    return [
+        r for r in recs
+        if r.biology and (r.biology.setting == "in_vivo" or any(s.setting == "in_vivo" for s in r.biology.survival))
+    ]
+
+
 def _in_vivo_brain(recs: list[Record], cfg: dict) -> dict:
-    vivo = [r for r in recs if r.biology and r.biology.setting == "in_vivo"]
+    """Met only for tissue_site = brain; spinal cord, peripheral nerve, or other sites are partial."""
+    vivo = _in_vivo_records(recs)
     if not vivo:
         return _unknown()
-    brain = [r for r in vivo if r.biology.in_brain]
+    brain = [r for r in vivo if r.biology.tissue_site == "brain"]
     pool, state = (brain, "met") if brain else (vivo, "partial")
-    best = max(pool, key=lambda r: evidence_multiplier(r, cfg))
-    cells = (best.biology.cell_type or "cells not stated") if best.biology else ""
-    where = "in brain" if brain else "in vivo, not brain"
-    return _requirement(state, "extracted", [r.record_id for r in pool], f"{where}: {cells}", evidence_multiplier(best, cfg))
+    best = max(pool, key=lambda r: multiplier_for(r.biology.cell_category, "in_vivo", cfg))
+    site = (best.biology.tissue_site or "site not stated").replace("_", " ")
+    cells = best.biology.cell_type or "cells not stated"
+    return _requirement(
+        state, "extracted", [r.record_id for r in pool], f"{site}: {cells}",
+        multiplier_for(best.biology.cell_category, "in_vivo", cfg),
+        **_coverage(len(brain), len(vivo)),
+    )
+
+
+def _property_members(recs: list[Record]) -> list[Record]:
+    # Values measured on a device's electrodes describe the electrode, not this family.
+    return [r for r in recs if not r.electrode_material]
 
 
 def _soft(recs: list[Record], fam: dict | None, cfg: dict) -> dict:
@@ -126,21 +175,28 @@ def _soft(recs: list[Record], fam: dict | None, cfg: dict) -> dict:
             return "met"
         return "partial" if pa <= th["soft_partial_max_pa"] else "fails"
 
-    measured = [r for r in recs if r.properties.youngs_modulus and r.properties.youngs_modulus.value_si]
+    measured = [
+        r for r in _property_members(recs) if r.properties.youngs_modulus and r.properties.youngs_modulus.value_si
+    ]
     if measured:
+        values = sorted(r.properties.youngs_modulus.value_si for r in measured)
         softest = min(measured, key=lambda r: r.properties.youngs_modulus.value_si)
-        f = softest.properties.youngs_modulus
-        method = f" ({f.test_method.replace('_', ' ')})" if f.test_method else ""
+        methods = sorted({r.properties.youngs_modulus.test_method for r in measured if r.properties.youngs_modulus.test_method})
+        span = fmt_pa(values[0]) if len(values) == 1 else f"{fmt_pa(values[0])} to {fmt_pa(values[-1])}"
+        met = sum(1 for v in values if v <= th["soft_max_pa"])
+        method = f" ({', '.join(m.replace('_', ' ') for m in methods)})" if methods else ""
         return _requirement(
-            state_for(f.value_si), "extracted", [r.record_id for r in measured],
-            f"softest reported: {f.value} {f.unit or ''}{method}".strip(), 1.0,
+            state_for(softest.properties.youngs_modulus.value_si), "extracted", [r.record_id for r in measured],
+            f"{span}{method}; {met} of {len(values)} ≤ {fmt_pa(th['soft_max_pa'])}", 1.0,
+            range=span, **_coverage(met, len(values)),
         )
     typical = (fam or {}).get("literature_typical_stiffness_kpa")
     if typical and typical.get("citation"):
         lo, hi = (float(x) for x in typical["range"])
+        span = f"{fmt_pa(lo * 1e3)} to {fmt_pa(hi * 1e3)}"
         return _requirement(
-            state_for(lo * 1e3), "curated", [], f"literature-typical {lo:g}-{hi:g} kPa ({typical.get('status', '')})",
-            cfg["curated_multiplier"],
+            state_for(lo * 1e3), "curated", [], f"literature-typical {span}", cfg["curated_multiplier"],
+            range=span, verified=bool(typical.get("verified")),
         )
     return _unknown()
 
@@ -172,18 +228,24 @@ def _clear_degradable(recs: list[Record], fam: dict | None, cfg: dict) -> dict:
         state = "partial"
     detail = f"transparency: {transparency or 'unknown'}, degradable: {degradable or 'unknown'}"
     mult = 1.0 if source == "extracted" else cfg["curated_multiplier"]
-    return _requirement(state, source, [r.record_id for r in degraded], detail, mult)
+    verified = all(((fam or {}).get(f) or {}).get("verified") for f in ("transparency", "degradable") if _curated(fam, f))
+    return _requirement(state, source, [r.record_id for r in degraded], detail, mult, verified=verified)
 
 
 def _conductive(recs: list[Record], cfg: dict) -> dict:
     th = cfg["thresholds"]
-    measured = [r for r in recs if r.properties.conductivity and r.properties.conductivity.value_si]
+    measured = [r for r in _property_members(recs) if r.properties.conductivity and r.properties.conductivity.value_si]
     if not measured:
         return _unknown()
-    best = max(measured, key=lambda r: r.properties.conductivity.value_si)
-    s = best.properties.conductivity.value_si
-    state = "met" if s >= th["conductive_min_s_m"] else "partial" if s >= th["conductive_partial_min_s_m"] else "fails"
-    return _requirement(state, "extracted", [r.record_id for r in measured], f"up to {s:g} S/m", 1.0)
+    values = sorted(r.properties.conductivity.value_si for r in measured)
+    best = values[-1]
+    state = "met" if best >= th["conductive_min_s_m"] else "partial" if best >= th["conductive_partial_min_s_m"] else "fails"
+    span = f"{values[0]:.3g} S/m" if len(values) == 1 else f"{values[0]:.3g} to {values[-1]:.3g} S/m"
+    met = sum(1 for v in values if v >= th["conductive_min_s_m"])
+    return _requirement(
+        state, "extracted", [r.record_id for r in measured], f"{span}; {met} of {len(values)} ≥ {th['conductive_min_s_m']} S/m",
+        1.0, range=span, **_coverage(met, len(values)),
+    )
 
 
 def _row(key: str, recs: list[Record], cfg: dict, weights: dict) -> dict:

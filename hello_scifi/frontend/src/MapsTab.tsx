@@ -212,7 +212,7 @@ function StiffnessByFamily({ records, onPoint }: { records: MaterialRecord[]; on
         name: 'Literature-typical range (curated)',
         legendgroup: 'typical',
         showlegend: !traces.some((tr) => (tr as { legendgroup?: string }).legendgroup === 'typical'),
-        hovertemplate: `<b>${f.label}</b><br>Literature-typical ${typ.range[0]}–${typ.range[1]} kPa${typ.method ? ` (${typ.method.replace('_', ' ')})` : ''}<br>${typ.citation}<br>${typ.status ?? ''}<extra></extra>`,
+        hovertemplate: `<b>${f.label}</b><br>Literature-typical ${typ.range[0]}–${typ.range[1]} kPa${typ.method ? ` (${typ.method.replace('_', ' ')})` : ''}<br>${typ.citation}<br>${typ.verified ? 'verified' : 'unverified citation'}<extra></extra>`,
       })
     }
     // Extracted values: one filled marker per record.

@@ -209,6 +209,8 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
         <li><span className="state unknown">?</span> unknown</li>
         <li><span className="state fails">✕</span> fails</li>
         <li><span className="badge curated">curated</span> from data/materials.yaml, not extracted</li>
+        <li><span className="badge unverified">unverified</span> citation not yet checked</li>
+        <li><span className="badge some">some</span> met by some family members, not all</li>
         <li>Survival marker: ● viability · ■ occupancy · ◆ retention · ▲ neurite outgrowth; hollow = non-neuron cells</li>
       </ul>
     </div>
@@ -247,7 +249,10 @@ function ScoreRowView({
           return (
             <td key={k} className="state-col" title={`${req.state}: ${req.detail}`}>
               <span className={`state ${req.state}`} role="img" aria-label={req.state}>{STATE_ICON[req.state]}</span>
-              {req.source === 'curated' && <span className="badge curated">curated</span>}
+              {req.state === 'met' && req.coverage === 'some members' && (
+                <span className="badge some" title={`${req.members_met} of ${req.members_measured} members`}>some</span>
+              )}
+              <SourceBadge req={req} />
             </td>
           )
         })}
@@ -327,7 +332,11 @@ function RowDetail({
             return (
               <tr key={b.requirement}>
                 <td>{b.label}</td>
-                <td><span className={`state ${b.state}`}>{STATE_ICON[b.state]}</span> {b.state}{req.source === 'curated' && <span className="badge curated">curated</span>}</td>
+                <td>
+                  <span className={`state ${b.state}`}>{STATE_ICON[b.state]}</span> {b.state}
+                  {req.coverage && req.members_measured ? <span className="badge some">{req.members_met} of {req.members_measured} members</span> : null}
+                  <SourceBadge req={req} />
+                </td>
                 <td className="num">{b.weight} × {b.state_value} × {b.multiplier}</td>
                 <td className="num">{b.points.toFixed(2)}</td>
                 <td>{req.detail}</td>
@@ -368,8 +377,9 @@ function RowDetail({
         const fact = row.curated[k]
         return fact && fact.citation && fact.value !== 'unknown' ? (
           <p key={k} className="small muted">
-            <span className="badge curated">curated</span> {k}: <strong>{fact.value}</strong>. {fact.citation}
-            {fact.status && ` (${fact.status})`}
+            <span className="badge curated">curated</span>
+            {!fact.verified && <span className="badge unverified">unverified</span>} {k}: <strong>{fact.value}</strong>.{' '}
+            {fact.citation}
           </p>
         ) : null
       })}
@@ -379,5 +389,15 @@ function RowDetail({
         </button>
       )}
     </div>
+  )
+}
+
+function SourceBadge({ req }: { req: { source: string | null; verified?: boolean } }) {
+  if (req.source !== 'curated') return null
+  return (
+    <>
+      <span className="badge curated">curated</span>
+      {req.verified === false && <span className="badge unverified">unverified</span>}
+    </>
   )
 }

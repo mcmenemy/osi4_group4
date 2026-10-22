@@ -1,7 +1,7 @@
 # Team corrections applied on top of extracted records when they load (data.load_records).
 # Kept separate from the records so re-extraction can't undo them and every change is visible.
 # Match records by their source PDF (file) or by record_id; set any top-level record fields
-# (material_class, material_key) or source fields, and say why in `note`.
+# (material_class, material_key, electrode_material) or source fields, and say why in `note`.
 
 by_file:
   Adewole2024.pdf:
@@ -15,5 +15,6 @@ by_file:
 
   rochford2023.pdf:
     material_class: biohybrid_device
-    material_key: pedot_fibrin_biohybrid
-    note: Reclassified as a biohybrid device (PEDOT:PSS electrode array + fibrin cell layer), not an OMIEC film.
+    material_key: fibrin
+    electrode_material: PEDOT:PSS
+    note: Biohybrid device (PEDOT:PSS electrode array + fibrin cell layer). Grouped with fibrin as the cell carrier; the PEDOT:PSS array's electrical values describe the electrode and don't set fibrin's properties.

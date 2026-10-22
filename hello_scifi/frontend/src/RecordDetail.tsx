@@ -58,6 +58,9 @@ export default function RecordDetail({ record: r, fieldExtra }: Props) {
           )}
           {r.source.title && <> · {r.source.title}</>}
         </p>
+        {r.electrode_material && (
+          <p className="small">Electrode material: <strong>{r.electrode_material}</strong> (its electrical values describe the electrode, not this material family)</p>
+        )}
         {r.flags.length > 0 && (
           <ul className="flag-list">
             {r.flags.map((f) => (
@@ -99,7 +102,13 @@ export default function RecordDetail({ record: r, fieldExtra }: Props) {
         <section>
           <h4>Cells</h4>
           <p>
-            {[r.biology.cell_type, r.biology.species, r.biology.setting && SETTING_LABELS[r.biology.setting]]
+            {[
+              r.biology.cell_type,
+              r.biology.cell_category?.replace(/_/g, ' '),
+              r.biology.species,
+              r.biology.setting && SETTING_LABELS[r.biology.setting],
+              r.biology.tissue_site && r.biology.tissue_site !== 'not_applicable' && r.biology.tissue_site.replace('_', ' '),
+            ]
               .filter(Boolean)
               .join(' · ') || 'Not specified'}
             {r.biology.coating && <> · coating: {r.biology.coating}</>}

@@ -10,6 +10,11 @@ export interface Requirement {
   records: string[]
   detail: string
   multiplier: number
+  range?: string
+  coverage?: 'all members' | 'some members' | 'no members'
+  members_met?: number
+  members_measured?: number
+  verified?: boolean
 }
 
 export interface BestSurvival {
@@ -17,7 +22,7 @@ export interface BestSurvival {
   measure: SurvivalMeasure
   setting: string | null
   cell_category: string | null
-  timepoint_days: number | null
+  culture_days: number | null
   is_neuron: boolean
   record_id: string
   evidence: string | null
@@ -38,7 +43,8 @@ export interface BreakdownTerm {
 export interface CuratedFact {
   value: string
   citation: string | null
-  status?: string
+  verified?: boolean
+  note?: string
 }
 
 export interface ScoreRow {
@@ -49,7 +55,7 @@ export interface ScoreRow {
   curated: {
     transparency: CuratedFact | null
     degradable: CuratedFact | null
-    literature_typical_stiffness_kpa: { range: [number, number]; citation: string; status?: string; method?: string } | null
+    literature_typical_stiffness_kpa: { range: [number, number]; citation: string; verified?: boolean; method?: string; note?: string } | null
   }
   requirements: Record<RequirementKey, Requirement>
   unknown_count: number
