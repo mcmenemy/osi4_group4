@@ -1,0 +1,19 @@
+# Team corrections applied on top of extracted records when they load (data.load_records).
+# Kept separate from the records so re-extraction can't undo them and every change is visible.
+# Match records by their source PDF (file) or by record_id; set any top-level record fields
+# (material_class, material_key) or source fields, and say why in `note`.
+
+by_file:
+  Adewole2024.pdf:
+    source:
+      title: Development of optically controlled "living electrodes" with long-projecting axon tracts for a synaptic brain-machine interface
+      first_author: Adewole
+      year: 2021
+      doi: 10.1126/sciadv.aay5347
+      url: https://doi.org/10.1126/sciadv.aay5347
+    note: Cited as the published Science Advances 2021 version (Crossref); the PDF is the bioRxiv preprint.
+
+  rochford2023.pdf:
+    material_class: biohybrid_device
+    material_key: pedot_fibrin_biohybrid
+    note: Reclassified as a biohybrid device (PEDOT:PSS electrode array + fibrin cell layer), not an OMIEC film.

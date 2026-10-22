@@ -6,6 +6,7 @@ export type MaterialClass =
   | 'nonconductive_hydrogel'
   | 'omiec_film'
   | 'oect_device'
+  | 'biohybrid_device'
   | 'other'
 export type Setting = 'in_vitro_2d' | 'in_vitro_3d' | 'in_vivo'
 
@@ -86,6 +87,7 @@ export interface MaterialRecord {
   source: Source
   material_class: MaterialClass
   material: string
+  material_key?: string | null
   formulation: FormulationItem[]
   processing: ProcessingStep[]
   properties: Properties
@@ -118,6 +120,7 @@ export interface ScienceReference {
   days: number
   measure: string
   outcome: string
+  cells?: string
   modulus_ref: string
   status: string
   citation: string
@@ -141,6 +144,7 @@ export const MATERIAL_CLASSES: { key: MaterialClass; label: string }[] = [
   { key: 'nonconductive_hydrogel', label: 'Non-conductive hydrogel' },
   { key: 'omiec_film', label: 'OMIEC film' },
   { key: 'oect_device', label: 'OECT device' },
+  { key: 'biohybrid_device', label: 'Biohybrid device' },
   { key: 'other', label: 'Other' },
 ]
 

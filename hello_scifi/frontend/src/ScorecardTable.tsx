@@ -14,7 +14,12 @@ const PAGE_SIZE = 10
 const REQS: RequirementKey[] = ['survival', 'soft', 'in_vivo_brain', 'clear_degradable', 'conductive']
 
 type View = 'evidence' | 'promising' | 'gaps' | 'custom'
-type SortKey = 'label' | 'score' | 'papers' | 'survival' | RequirementKey
+type SortKey = 'label' | 'score' | 'papers' | 'survival' | 'gaps' | RequirementKey
+
+// Points from material properties alone (not cell evidence).
+const PROPERTY_REQS: RequirementKey[] = ['soft', 'clear_degradable', 'conductive']
+const propertyPoints = (row: ScoreRow) =>
+  row.breakdown.filter((b) => PROPERTY_REQS.includes(b.requirement)).reduce((sum, b) => sum + b.points, 0)
 interface Sort {
   key: SortKey
   dir: 1 | -1
@@ -23,12 +28,12 @@ interface Sort {
 const VIEWS: { key: Exclude<View, 'custom'>; label: string; sort: Sort }[] = [
   { key: 'evidence', label: 'Most evidence', sort: { key: 'papers', dir: -1 } },
   { key: 'promising', label: 'Most promising', sort: { key: 'score', dir: -1 } },
-  { key: 'gaps', label: 'Biggest gaps', sort: { key: 'survival', dir: 1 } },
+  { key: 'gaps', label: 'Biggest gaps', sort: { key: 'gaps', dir: -1 } },
 ]
 
 const STATE_ICON: Record<State, string> = { met: '✓', partial: '◐', unknown: '?', fails: '✕' }
 
-function sortValue(row: ScoreRow, key: SortKey, view: View): number | string {
+function sortValue(row: ScoreRow, key: SortKey): number | string {
   switch (key) {
     case 'label':
       return row.label.toLowerCase()
@@ -38,17 +43,19 @@ function sortValue(row: ScoreRow, key: SortKey, view: View): number | string {
       // Most evidence: neuron records first, then all records, then papers.
       return row.neuron_record_count * 1e6 + row.record_count * 1e3 + row.paper_count
     case 'survival':
-      // Biggest gaps sorts by unknown count (descending) via the ascending "survival" preset.
-      return view === 'gaps' ? -row.unknown_count : (row.best_survival?.value ?? -1)
+      return row.best_survival?.value ?? -1
+    case 'gaps':
+      // Biggest gaps: promising on properties, thin on neuron evidence.
+      return propertyPoints(row) - row.neuron_record_count
     default:
       return STATE_ORDER[row.requirements[key].state]
   }
 }
 
-function sortRows(rows: ScoreRow[], sort: Sort, view: View): ScoreRow[] {
+function sortRows(rows: ScoreRow[], sort: Sort): ScoreRow[] {
   return [...rows].sort((a, b) => {
-    const va = sortValue(a, sort.key, view)
-    const vb = sortValue(b, sort.key, view)
+    const va = sortValue(a, sort.key)
+    const vb = sortValue(b, sort.key)
     if (va < vb) return -sort.dir
     if (va > vb) return sort.dir
     return b.score - a.score || a.label.localeCompare(b.label)
@@ -78,12 +85,12 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
 
   const rows = useMemo(() => {
     const keep = (r: ScoreRow) => classes.length === 0 || classes.includes(r.material_class)
-    const ranked = sortRows(card.ranked.filter(keep), sort, view).map((r) => ({ row: r, group: 'ranked' as const }))
+    const ranked = sortRows(card.ranked.filter(keep), sort).map((r) => ({ row: r, group: 'ranked' as const }))
     const rest = neuronOnly
       ? []
-      : sortRows(card.no_neuron_evidence.filter(keep), sort, view).map((r) => ({ row: r, group: 'none' as const }))
+      : sortRows(card.no_neuron_evidence.filter(keep), sort).map((r) => ({ row: r, group: 'none' as const }))
     return [...ranked, ...rest]
-  }, [card, sort, view, classes, neuronOnly])
+  }, [card, sort, classes, neuronOnly])
 
   const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE))
   const current = Math.min(page, pages - 1)
@@ -115,9 +122,9 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
   return (
     <div className={loading ? 'scorecard stale' : 'scorecard'} tabIndex={0} onKeyDown={onKey} aria-label="Candidate well fills">
       <p className="confidence">
-        Ranking based on <strong>{s.ranked_materials}</strong> material{s.ranked_materials === 1 ? '' : 's'} with neuron
-        evidence and <strong>{s.neuron_records}</strong> neuron record{s.neuron_records === 1 ? '' : 's'}.{' '}
-        <strong>{s.unknown_cells}</strong> requirement cells are unknown. Add papers to firm this up.
+        Ranking based on <strong>{s.ranked_materials}</strong> material{s.ranked_materials === 1 ? '' : 's'} and{' '}
+        <strong>{s.neuron_records}</strong> neuron record{s.neuron_records === 1 ? '' : 's'};{' '}
+        <strong>{s.unknown_cells}</strong> cells unknown. Add papers to firm this up.
       </p>
 
       <div className="scorecard-controls">
@@ -359,7 +366,7 @@ function RowDetail({
 
       {(['transparency', 'degradable'] as const).map((k) => {
         const fact = row.curated[k]
-        return fact ? (
+        return fact && fact.citation && fact.value !== 'unknown' ? (
           <p key={k} className="small muted">
             <span className="badge curated">curated</span> {k}: <strong>{fact.value}</strong>. {fact.citation}
             {fact.status && ` (${fact.status})`}

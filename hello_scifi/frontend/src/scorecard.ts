@@ -37,7 +37,7 @@ export interface BreakdownTerm {
 
 export interface CuratedFact {
   value: string
-  citation: string
+  citation: string | null
   status?: string
 }
 
@@ -49,7 +49,7 @@ export interface ScoreRow {
   curated: {
     transparency: CuratedFact | null
     degradable: CuratedFact | null
-    typical_modulus_pa: { range: [number, number]; citation: string; status?: string; method?: string } | null
+    literature_typical_stiffness_kpa: { range: [number, number]; citation: string; status?: string; method?: string } | null
   }
   requirements: Record<RequirementKey, Requirement>
   unknown_count: number

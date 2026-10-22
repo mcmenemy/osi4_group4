@@ -32,7 +32,7 @@
       "label": "Dry PEDOT:PSS film",
       "modulus_pa": [
         1000000000.0,
-        2000000000.0
+        3000000000.0
       ],
       "conductivity_s_m": null,
       "status": "approximate literature value, to verify",
@@ -100,7 +100,7 @@
     "occupancy_at_3_weeks_percent": 52,
     "days": 21,
     "measure": "Well occupancy, not cell viability. At loading: microwells containing a DAPI-stained nucleus 24 h after loading, in vitro (77 ± 15%, n = 23 scaffolds). At 3 weeks: microwells with neurons expressing fluorescent protein, in vivo (52 ± 23%, n = 13 implants). The two counts use different labels, so they are not a strict survival rate",
-    "outcome": "Neurons extended processes into superficial cortex; some axons were seen throughout the cortical layers",
+    "outcome": "Neurites mostly stayed in superficial cortex; only sparse axons were detected deeper",
     "modulus_ref": "su8",
     "status": "checked against the preprint text (bioRxiv v1, posted Nov 23, 2024)",
     "citation": "Brown J. et al. (Science Corporation), Optogenetic stimulation of a cortical biohybrid implant guides goal directed behavior, bioRxiv (2024), doi:10.1101/2024.11.22.624907",
@@ -108,9 +108,11 @@
     "evidence": [
       "These experiments determined that on average we filled 77±15% (mean ± s.d., n=23 microwell scaffolds, Figure 1d-f). With this loading density, the mean implants contained ~9 x 104 neurons.",
       "At this time point, we found 52±23% (mean±s.d.) of microwells to be loaded with neurons expressing fluorescent protein (n=13 implants, Figure 2b-c, e).",
-      "engrafted neurons extended extensive processes into the superficial layers of cortex",
-      "we were able to observe axons throughout the layers of the cerebral cortex",
-      "0.1 mg/mL poly-d-Lysine (Gibco) and 0.1 mg/mL Laminin (Millipore Sigma, L2020)"
-    ]
+      "0.1 mg/mL poly-d-Lysine (Gibco) and 0.1 mg/mL Laminin (Millipore Sigma, L2020)",
+      "most grafted cell processes were located in the superficial cortex, although sparse axons were detected throughout the cortex",
+      "We performed embryonic dissections to obtain primary cortical neurons from C57/B6J mice at E14.5-E15.5",
+      "pregnant C57/B6 mice at embryonic day E14.5-E16.5 were sacrificed"
+    ],
+    "cells": "Primary cortical neurons from embryonic C57BL/6 mice (E14.5-E15.5 in Results; E14.5-E16.5 in Methods)"
   }
 }

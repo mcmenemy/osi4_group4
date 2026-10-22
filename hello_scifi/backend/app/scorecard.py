@@ -135,19 +135,22 @@ def _soft(recs: list[Record], fam: dict | None, cfg: dict) -> dict:
             state_for(f.value_si), "extracted", [r.record_id for r in measured],
             f"softest reported: {f.value} {f.unit or ''}{method}".strip(), 1.0,
         )
-    typical = (fam or {}).get("typical_modulus_pa")
+    typical = (fam or {}).get("literature_typical_stiffness_kpa")
     if typical and typical.get("citation"):
         lo, hi = (float(x) for x in typical["range"])
         return _requirement(
-            state_for(lo), "curated", [], f"literature-typical {lo:g}-{hi:g} Pa ({typical.get('status', '')})",
+            state_for(lo * 1e3), "curated", [], f"literature-typical {lo:g}-{hi:g} kPa ({typical.get('status', '')})",
             cfg["curated_multiplier"],
         )
     return _unknown()
 
 
 def _curated(fam: dict | None, field: str) -> str | None:
+    """A curated value counts only with a citation; "unknown" counts as no value."""
     entry = (fam or {}).get(field)
-    return entry["value"] if entry and entry.get("citation") else None
+    if not entry or not entry.get("citation") or entry.get("value") in (None, "unknown"):
+        return None
+    return entry["value"]
 
 
 def _clear_degradable(recs: list[Record], fam: dict | None, cfg: dict) -> dict:
@@ -220,7 +223,7 @@ def _row(key: str, recs: list[Record], cfg: dict, weights: dict) -> dict:
         "curated": {
             "transparency": (fam or {}).get("transparency"),
             "degradable": (fam or {}).get("degradable"),
-            "typical_modulus_pa": (fam or {}).get("typical_modulus_pa"),
+            "literature_typical_stiffness_kpa": (fam or {}).get("literature_typical_stiffness_kpa"),
         },
         "requirements": reqs,
         "unknown_count": sum(1 for r in reqs.values() if r["state"] == "unknown"),

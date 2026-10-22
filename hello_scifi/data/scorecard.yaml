@@ -19,7 +19,7 @@ state_values:
   met: 1.0
   partial: 0.5
   unknown: 0.0
-  fails: -0.5
+  fails: 0.0
 
 evidence_multipliers:
   neuron_in_vivo: 1.0        # primary or stem-cell-derived neurons, in vivo

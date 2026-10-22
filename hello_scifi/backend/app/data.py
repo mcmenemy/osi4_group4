@@ -2,6 +2,8 @@
 
 import json
 import logging
+
+import yaml
 import os
 from functools import lru_cache
 from pathlib import Path
@@ -22,11 +24,35 @@ PAPERS_DIR = DATA_DIR / "papers"
 
 
 @lru_cache
+def load_overrides() -> dict:
+    path = DATA_DIR / "overrides.yaml"
+    return (yaml.safe_load(path.read_text()) or {}) if path.exists() else {}
+
+
+def apply_overrides(record: Record, overrides: dict) -> Record:
+    """Team corrections from data/overrides.yaml, matched by source file or record_id."""
+    rules = [
+        (overrides.get("by_file") or {}).get(record.source.file or ""),
+        (overrides.get("by_record") or {}).get(record.record_id),
+    ]
+    for rule in filter(None, rules):
+        for field, value in rule.items():
+            if field == "source":
+                record.source = record.source.model_copy(update=value)
+            elif field == "note":
+                record.notes = f"{record.notes} Team correction: {value}".strip() if record.notes else f"Team correction: {value}"
+            else:
+                setattr(record, field, value)
+    return record
+
+
+@lru_cache
 def load_records() -> list[Record]:
     records = []
+    overrides = load_overrides()
     for path in sorted(RECORDS_DIR.glob("*.json")):
         try:
-            records.append(Record.model_validate_json(path.read_text()))
+            records.append(apply_overrides(Record.model_validate_json(path.read_text()), overrides))
         except ValidationError:
             logger.exception("Skipping invalid record file %s", path.name)
     return records

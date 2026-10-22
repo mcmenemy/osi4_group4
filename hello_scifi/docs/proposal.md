@@ -4,7 +4,7 @@
 
 ## Motivation
 
-Science Corporation's cortical biohybrid implant holds about 90,000 neurons in SU-8 microwells coated with poly-D-lysine and laminin. SU-8 is a rigid epoxy with a stiffness in the gigapascal range, roughly a million times stiffer than brain tissue. In their preprint, 77% of wells held a cell at loading (DAPI) and 52% held neurons expressing a fluorescent label at about three weeks (two different counts, so not a strict survival rate), and neurites grew mainly into superficial cortex, with some axons reaching deeper layers (Brown et al., bioRxiv 2024).
+Science Corporation's cortical biohybrid implant holds about 90,000 neurons in SU-8 microwells coated with poly-D-lysine and laminin. SU-8 is a rigid epoxy with a stiffness in the gigapascal range, roughly a million times stiffer than brain tissue. In their preprint, 77% of wells held a cell at loading (DAPI) and 52% held neurons expressing a fluorescent label at about three weeks (two different counts, so not a strict survival rate), and neurites mostly stayed in superficial cortex, with only sparse axons detected deeper (Brown et al., bioRxiv 2024).
 
 Soft hydrogels, including conductive PEDOT:PSS gels, are the leading approach for keeping grafted cells alive and integrated. We have not found a published head-to-head comparison of neurons in bare microwells vs. the same microwells filled with a soft gel. Our literature maps (Maps tab) show which gel formulations have been characterized for stiffness, conductivity, and neural cell outcomes, and where the gaps are.
 

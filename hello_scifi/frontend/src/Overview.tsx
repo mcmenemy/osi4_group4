@@ -33,7 +33,7 @@ export default function Overview({ records, references }: { records: MaterialRec
             <p>
               Science Corporation's cortical biohybrid implant holds ~90,000 neurons in microwells made of SU-8 (a rigid
               epoxy, gigapascal stiffness) coated with poly-D-lysine and laminin. In their preprint, 77% of wells held a cell at loading, and 52% held labeled neurons
-              at ~3 weeks; and neurites grew mainly into superficial cortex, with some axons reaching deeper layers
+              at ~3 weeks; and neurites mostly stayed in superficial cortex, with only sparse axons detected deeper
               (Brown et al., bioRxiv 2024).
             </p>
             <p>
@@ -77,6 +77,12 @@ export default function Overview({ records, references }: { records: MaterialRec
                   <dt>Neurons per implant</dt>
                   <dd>{sci.neurons}</dd>
                 </div>
+                {sci.cells && (
+                  <div>
+                    <dt>Cells</dt>
+                    <dd>{sci.cells}</dd>
+                  </div>
+                )}
                 <div>
                   <dt>Well material</dt>
                   <dd>{sci.material}</dd>

@@ -66,6 +66,7 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
 
       <h2 className="details-heading">Details for materials scientists</h2>
       <p className="muted">The underlying property maps. Click any point for its values, quotes, and source.</p>
+      <StiffnessByFamily records={records} onPoint={onPoint} />
       <StiffnessConductivity records={records} references={references} targetWindow={targetWindow} onPoint={onPoint} />
       <CellOutcomes records={records} references={references} onPoint={onPoint} />
       <Degradation records={records} onPoint={onPoint} />
@@ -173,6 +174,95 @@ function stiffnessLine(r: MaterialRecord): string {
   const f = r.properties.youngs_modulus!
   const m = methodLabel(f.test_method)
   return `Stiffness = ${withPrefix(f.value_si!, 'Pa')}${m ? ` (${m})` : ''}`
+}
+
+/* Stiffness by material family: extracted values filled, literature-typical ranges hollow */
+
+function StiffnessByFamily({ records, onPoint }: { records: MaterialRecord[]; onPoint: (p: PlotPoint) => void }) {
+  const t = useTheme()
+  const [card, setCard] = useState<Scorecard | null>(null)
+  useEffect(() => {
+    fetch('/api/scorecard')
+      .then((r) => (r.ok ? r.json() : null))
+      .then(setCard)
+      .catch(() => setCard(null))
+  }, [])
+
+  const { data, layout, rowCount } = useMemo(() => {
+    const rows = card ? [...(card.baseline ? [card.baseline] : []), ...card.ranked, ...card.no_neuron_evidence] : []
+    const families = rows.filter(
+      (row) =>
+        row.curated.literature_typical_stiffness_kpa?.citation ||
+        records.some((r) => row.record_ids.includes(r.record_id) && r.properties.youngs_modulus?.value_si),
+    )
+    const labels = families.map((f) => f.label)
+    const traces: object[] = []
+    // Literature-typical ranges (curated): a line between two hollow markers.
+    for (const f of families) {
+      const typ = f.curated.literature_typical_stiffness_kpa
+      if (!typ?.citation) continue
+      const xs = typ.range.map((k) => k * 1e3)
+      traces.push({
+        type: 'scatter',
+        mode: 'lines+markers',
+        x: xs,
+        y: [f.label, f.label],
+        line: { color: t.muted, width: 2 },
+        marker: { symbol: 'circle-open', size: 11, color: t.muted, line: { width: 2 } },
+        name: 'Literature-typical range (curated)',
+        legendgroup: 'typical',
+        showlegend: !traces.some((tr) => (tr as { legendgroup?: string }).legendgroup === 'typical'),
+        hovertemplate: `<b>${f.label}</b><br>Literature-typical ${typ.range[0]}–${typ.range[1]} kPa${typ.method ? ` (${typ.method.replace('_', ' ')})` : ''}<br>${typ.citation}<br>${typ.status ?? ''}<extra></extra>`,
+      })
+    }
+    // Extracted values: one filled marker per record.
+    const pts = records.filter((r) => r.properties.youngs_modulus?.value_si)
+    const family = (r: MaterialRecord) => families.find((f) => f.record_ids.includes(r.record_id))
+    const plotted = pts.filter(family)
+    traces.push({
+      type: 'scatter',
+      mode: 'markers',
+      name: 'Extracted from a paper',
+      x: plotted.map((r) => r.properties.youngs_modulus!.value_si),
+      y: plotted.map((r) => family(r)!.label),
+      customdata: plotted.map((r) => r.record_id),
+      hovertemplate: plotted.map((r) => hoverFor(r, [stiffnessLine(r)])),
+      marker: { size: 12, color: t.categorical[0], line: { width: 2, color: t.panel } },
+    })
+    return {
+      rowCount: labels.length,
+      data: traces,
+      layout: {
+        ...baseLayout(t),
+        margin: { l: 230, r: 20, t: 10, b: 60 },
+        xaxis: logAxis(t, STIFFNESS_AXIS, [10, 1e12]),
+        yaxis: { type: 'category', categoryarray: [...labels].reverse(), automargin: true, gridcolor: t.border },
+        shapes: [
+          {
+            type: 'line', x0: 1e5, x1: 1e5, yref: 'paper', y0: 0, y1: 1,
+            line: { color: t.accent, width: 1.5, dash: 'dash' },
+          },
+        ],
+        annotations: [
+          { x: 5, xref: 'x', y: 1, yref: 'paper', yanchor: 'bottom', showarrow: false, text: '100 kPa', font: { size: 11, color: t.accent } },
+        ],
+      },
+    }
+  }, [card, records, t])
+
+  return (
+    <figure className="map-card">
+      <figcaption>
+        <h2>Stiffness by material family</h2>
+        <p>
+          Filled points are moduli extracted from papers; hollow markers joined by a line are literature-typical ranges
+          from data/materials.yaml for families without an extracted value. The dashed line is the 100 kPa
+          requirement. {CAVEAT}
+        </p>
+      </figcaption>
+      <Plot data={data} layout={layout} height={Math.max(300, 120 + rowCount * 34)} label="Stiffness of each material family" onClick={onPoint} />
+    </figure>
+  )
 }
 
 /* 1. Stiffness vs conductivity */

@@ -15,7 +15,7 @@ SCHEMA_VERSION = "0.1.0"
 
 Confidence = Literal["low", "medium", "high"]
 MaterialClass = Literal[
-    "conductive_hydrogel", "nonconductive_hydrogel", "omiec_film", "oect_device", "other"
+    "conductive_hydrogel", "nonconductive_hydrogel", "omiec_film", "oect_device", "biohybrid_device", "other"
 ]
 Setting = Literal["in_vitro_2d", "in_vitro_3d", "in_vivo"]
 CellCategory = Literal["primary_neuron", "sc_neuron", "neuron_like_line", "glia", "non_neural", "tissue", "other"]

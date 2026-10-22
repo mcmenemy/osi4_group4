@@ -32,7 +32,8 @@ conditions (in PBS, in water, dry, at 37 °C) in the record's notes.
 - material_class: conductive_hydrogel (a hydrogel that conducts electronically, e.g. PEDOT:PSS \
 hydrogel), nonconductive_hydrogel (PAAm, GelMA, hyaluronic acid, peptide gels...), omiec_film \
 (a thin film of a mixed conductor, e.g. spin-coated PEDOT:PSS, p(g2T-TT)), oect_device (values \
-reported for a transistor rather than the film), other (anything else, e.g. SU-8, silicone, \
+reported for a transistor rather than the film), biohybrid_device (a device that combines \
+electronics with a living cell layer, e.g. an electrode array carrying cells in a gel), other (anything else, e.g. SU-8, silicone, \
 metal electrodes used as comparisons).
 - formulation: components with amounts (e.g. "ethylene glycol", "5", "vol%"; "GOPS", "1", "wt%").
 - processing: steps with parameters (e.g. "spin coating", "speed", "3000", "rpm"; "anneal", \
