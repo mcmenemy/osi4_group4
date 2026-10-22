@@ -1,14 +1,20 @@
-"""Plain text from PDFs, one string per page."""
+"""Plain text from PDFs, one string per page.
 
-from io import BytesIO
+Uses pypdfium2 (PDFium): it keeps word spacing on PDFs where pypdf runs words together,
+which matters for both the model's reading and the evidence-quote check.
+"""
+
 from pathlib import Path
 
-from pypdf import PdfReader
+import pypdfium2 as pdfium
 
 
 def pdf_pages(source: Path | bytes) -> list[str]:
-    reader = PdfReader(BytesIO(source) if isinstance(source, bytes) else source)
-    return [page.extract_text() or "" for page in reader.pages]
+    pdf = pdfium.PdfDocument(source if isinstance(source, bytes) else str(source))
+    try:
+        return [pdf[i].get_textpage().get_text_range().replace("\r\n", "\n") for i in range(len(pdf))]
+    finally:
+        pdf.close()
 
 
 def with_page_markers(pages: list[str]) -> str:

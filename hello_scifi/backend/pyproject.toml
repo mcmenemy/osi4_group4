@@ -6,7 +6,7 @@ dependencies = [
     "anthropic>=1.15.0",
     "brian2>=2.10.1",
     "fastapi>=0.149.0",
-    "pypdf>=6.21.2",
+    "pypdfium2>=5.14.0",
     "pyphi==2.0.0rc4",
     "python-multipart>=0.0.32",
     "rapidfuzz>=3.14.6",

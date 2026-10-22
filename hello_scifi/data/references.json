@@ -3,15 +3,24 @@
     {
       "id": "brain",
       "label": "Brain tissue",
-      "modulus_pa": [100, 10000],
-      "conductivity_s_m": [0.1, 1],
+      "modulus_pa": [
+        100,
+        10000
+      ],
+      "conductivity_s_m": [
+        0.1,
+        1
+      ],
       "status": "approximate literature value, to verify",
       "citation": "Stiffness: Budday S. et al., Mechanical properties of gray and white matter brain tissue by indentation, J. Mech. Behav. Biomed. Mater. 46, 318-330 (2015). Conductivity: Gabriel S., Lau R.W. & Gabriel C., The dielectric properties of biological tissues, Phys. Med. Biol. 41, 2251 (1996)."
     },
     {
       "id": "su8",
       "label": "SU-8",
-      "modulus_pa": [2e9, 4e9],
+      "modulus_pa": [
+        2000000000.0,
+        4000000000.0
+      ],
       "conductivity_s_m": null,
       "status": "approximate literature value, to verify",
       "citation": "SU-8 2000 series data sheet (MicroChem / Kayaku), Young's modulus about 2 GPa; used for the microwells in Brown et al., bioRxiv 2024."
@@ -19,7 +28,10 @@
     {
       "id": "pedot_dry",
       "label": "Dry PEDOT:PSS film",
-      "modulus_pa": [1e9, 2e9],
+      "modulus_pa": [
+        1000000000.0,
+        2000000000.0
+      ],
       "conductivity_s_m": null,
       "status": "approximate literature value, to verify",
       "citation": "Lang U. et al., Mechanical characterization of PEDOT:PSS thin films, Synth. Met. 159, 473-479 (2009)."
@@ -27,7 +39,10 @@
     {
       "id": "polyimide",
       "label": "Polyimide",
-      "modulus_pa": [2e9, 3e9],
+      "modulus_pa": [
+        2000000000.0,
+        3000000000.0
+      ],
       "conductivity_s_m": null,
       "status": "approximate literature value, to verify",
       "citation": "DuPont Kapton HN polyimide film data sheet (tensile modulus about 2.5 GPa)."
@@ -35,7 +50,10 @@
     {
       "id": "silicon",
       "label": "Silicon",
-      "modulus_pa": [1.3e11, 1.7e11],
+      "modulus_pa": [
+        130000000000.0,
+        170000000000.0
+      ],
       "conductivity_s_m": null,
       "status": "approximate literature value, to verify",
       "citation": "Hopcroft M.A., Nix W.D. & Kenny T.W., What is the Young's modulus of silicon?, J. Microelectromech. Syst. 19, 229-238 (2010)."
@@ -44,15 +62,22 @@
   "science_corp": {
     "label": "Science Corp SU-8 microwells",
     "material": "SU-8 microwells coated with poly-D-lysine and laminin",
-    "neurons": "about 90,000",
+    "neurons": "about 9 × 10⁴ (~90,000)",
     "occupancy_at_loading_percent": 77,
     "occupancy_at_3_weeks_percent": 52,
     "days": 21,
-    "measure": "Wells with labeled neurons (well occupancy), not cell viability",
-    "outcome": "Neurites mostly stayed in superficial cortex",
+    "measure": "Well occupancy, not cell viability. At loading: microwells containing a DAPI-stained nucleus 24 h after loading, in vitro (77 ± 15%, n = 23 scaffolds). At 3 weeks: microwells with neurons expressing fluorescent protein, in vivo (52 ± 23%, n = 13 implants). The two counts use different labels, so they are not a strict survival rate",
+    "outcome": "Neurons extended processes into superficial cortex; some axons were seen throughout the cortical layers",
     "modulus_ref": "su8",
-    "status": "from the preprint as summarized by the team; check against the figure before citing",
-    "citation": "Brown et al., Optogenetic stimulation of a cortical biohybrid implant guides goal directed behavior, bioRxiv (2024)",
-    "url": "https://www.biorxiv.org/content/10.1101/2024.11.22.624907v1"
+    "status": "checked against the preprint text (bioRxiv v1, posted Nov 23, 2024)",
+    "citation": "Brown J. et al. (Science Corporation), Optogenetic stimulation of a cortical biohybrid implant guides goal directed behavior, bioRxiv (2024), doi:10.1101/2024.11.22.624907",
+    "url": "https://www.biorxiv.org/content/10.1101/2024.11.22.624907v1",
+    "evidence": [
+      "These experiments determined that on average we filled 77±15% (mean ± s.d., n=23 microwell scaffolds, Figure 1d-f). With this loading density, the mean implants contained ~9 x 104 neurons.",
+      "At this time point, we found 52±23% (mean±s.d.) of microwells to be loaded with neurons expressing fluorescent protein (n=13 implants, Figure 2b-c, e).",
+      "engrafted neurons extended extensive processes into the superficial layers of cortex",
+      "we were able to observe axons throughout the layers of the cerebral cortex",
+      "0.1 mg/mL poly-d-Lysine (Gibco) and 0.1 mg/mL Laminin (Millipore Sigma, L2020)"
+    ]
   }
 }
