@@ -54,7 +54,6 @@ const TIER_PLAIN: Record<TierKey, string> = {
 const MEASURES: { key: Measure; label: string; plain: string; axis: string }[] = [
   { key: 'viability', label: 'Viability', plain: 'Cells alive', axis: 'Viability (%)' },
   { key: 'retention', label: 'Retention', plain: 'Cells kept', axis: 'Retention (%)' },
-  { key: 'occupancy', label: 'Well occupancy', plain: 'Wells with cells', axis: 'Well occupancy (%)' },
   { key: 'neurite_outgrowth', label: 'Neurite outgrowth', plain: 'Cells growing fibers', axis: 'Cells with neurites (%)' },
 ]
 const MIN_DAYS = [0, 7, 21]
@@ -112,7 +111,12 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
   }, [data, theme])
 
   const measureInfo = MEASURES.find((m) => m.key === measure)!
+  // Science Corp's chip has no viability measurement, only well occupancy at loading and at ~3 weeks in vivo.
+  // Their ratio estimates the share of loaded neurons still detected: a rough, conservative stand-in.
   const baselinePts = (data?.points ?? []).filter((p) => p.baseline && p.measure === 'occupancy').sort((a, b) => (a.days ?? 0) - (b.days ?? 0))
+  const [chipLoad, chipLater] = [baselinePts[0], baselinePts[baselinePts.length - 1]]
+  const chipEstimate = chipLoad && chipLater && chipLoad !== chipLater ? (chipLater.percent / chipLoad.percent) * 100 : null
+  const showChip = yMode === 'percent' && measure === 'viability' && chipEstimate != null
 
   let plot: { data: object[]; layout: object } | null = null
   if (data && property && shown.length) {
@@ -161,18 +165,17 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
       key(t('Hollow: property from other papers', 'Hollow: family-level or curated x value'), { symbol: 'circle-open', size: 10, line: { width: 2 } })
     key(t('Small: under a day · large: 3+ weeks', `Size: experiment length (largest at ≥${full} d)`), { symbol: 'circle', size: 14 })
 
-    // Today's chip is a reference for the measure it was measured in (occupancy), not a competitor.
+    // Today's chip as a target line (estimated; see the footnote under the chart).
     const shapes: object[] = []
     const annotations: object[] = []
     const ref = (y: number, text: string) => {
       shapes.push({ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: y, y1: y, line: { color: theme.accent, width: 1.5, dash: 'dash' } })
       annotations.push({ xref: 'paper', x: 0, xanchor: 'left', y, yanchor: 'bottom', showarrow: false, text, font: { size: 11, color: theme.accent } })
     }
-    const [load, later] = [baselinePts[0], baselinePts[baselinePts.length - 1]]
-    if (yMode === 'percent' && measure === 'occupancy' && load && later && load !== later)
-      ref(later.percent, t(
-        `Today's chip: ${load.percent}% at loading → ${later.percent}% at 3 weeks (in mice)`,
-        `SU-8 baseline: ${load.percent}% at loading (in vitro) → ${later.percent}% at ~${later.days} d (in vivo)`,
+    if (showChip)
+      ref(chipEstimate!, t(
+        `Science Corp's chip, in mice at 3 weeks: about ${chipEstimate!.toFixed(0)}%*`,
+        `Science Corp SU-8 chip, in vivo ~${chipLater!.days} d: est. ${chipEstimate!.toFixed(0)}%*`,
       ))
     const bestBaseline = data.points.filter((p) => p.baseline).sort((a, b) => b.score - a.score)[0]
     if (yMode === 'score' && bestBaseline) ref(bestBaseline.score, `SU-8 baseline score: ${bestBaseline.score.toFixed(1)}`)
@@ -207,16 +210,16 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
           t(
             <p>
               Each point is one result from a paper: what share of neurons survived on a material. Bigger points come
-              from longer experiments, which say more about whether neurons last. Pick a property to see whether it lines
-              up with survival. Numbers were pulled from papers by AI, and not all have been checked by a person yet.
+              from longer experiments, which say more about whether neurons last. The dashed line is our estimate for
+              Science Corp's chip today. Pick a property to see whether it lines up with survival. Numbers were pulled from papers by AI, and not all have been checked by a person yet.
             </p>,
             <p>
               One point per survival result, plotted as the reported %, one measure at a time (measures aren't
               comparable). Marker size is experiment length, full size at ≥{cfg.full_credit_days} d; use the minimum-days
               filter for long-term evidence only. Filled points have the property from the same paper; hollow points use
               the family median or curated literature range, so cells and property come from different formulations.
-              The SU-8 baseline is shown on the occupancy view, the measure it was reported in. Values are extracted by
-              an LLM and partly unreviewed.
+              The dashed line is an estimate for Science Corp's chip (see the note under the chart). Values are
+              extracted by an LLM and partly unreviewed.
             </p>,
           )}
       </figcaption>
@@ -282,6 +285,14 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
       {plot && (
         <Plot data={plot.data} layout={plot.layout} height={480} label="Scatter of neuron survival against the chosen material property"
           onClick={(p: PlotPoint) => typeof p.customdata === 'string' && onOpenRecord(p.customdata)} />
+      )}
+      {plot && showChip && chipLoad && chipLater && (
+        <p className="small muted chip-note">
+          {t(
+            `* An estimate, not a direct measurement. Science Corp counted wells holding neurons: ${chipLoad.percent}% when the chip was loaded and ${chipLater.percent}% about three weeks after implantation in mice, so roughly ${chipEstimate!.toFixed(0)}% of the loaded neurons were still there (${chipLater.percent} ÷ ${chipLoad.percent}). Neurons that moved out of their wells or stopped glowing count as lost, so the real number may be higher. Their result comes from living brains over 3 weeks; most dots here come from a few days in a dish, which is an easier test.`,
+            `* Estimated, not a viability measurement: ${chipLater.percent}% of wells with fluorescent neurons at ~${chipLater.days} d in vivo (n=13) ÷ ${chipLoad.percent}% of wells with DAPI+ cells at 24 h in vitro (n=23) ≈ ${chipEstimate!.toFixed(0)}% of loaded neurons still detected (Brown et al., bioRxiv 2024). The two counts come from different chips, so this is approximate. It is conservative: cells that migrated out of wells or lost reporter fluorescence count as lost, and it doesn't separate death from loss. It is an in vivo 3-week figure, while most points here are in vitro over days, so the comparison favors the gels.`,
+          )}
+        </p>
       )}
       {data && property && shown.length === 0 && (
         <p className="notice">
