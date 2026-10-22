@@ -117,6 +117,9 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
   const [chipLoad, chipLater] = [baselinePts[0], baselinePts[baselinePts.length - 1]]
   const chipEstimate = chipLoad && chipLater && chipLoad !== chipLater ? (chipLater.percent / chipLoad.percent) * 100 : null
   const showChip = yMode === 'percent' && measure === 'viability' && chipEstimate != null
+  // The chip's stiffness (curated SU-8 data-sheet range), drawn as a vertical line on the stiffness axis.
+  const chipStiffness = baselinePts.map((p) => p.x.youngs_modulus).find(Boolean)
+  const showChipStiffness = prop === 'youngs_modulus' && !!chipStiffness
 
   let plot: { data: object[]; layout: object } | null = null
   if (data && property && shown.length) {
@@ -172,6 +175,32 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
       shapes.push({ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: y, y1: y, line: { color: theme.accent, width: 1.5, dash: 'dash' } })
       annotations.push({ xref: 'paper', x: 0, xanchor: 'left', y, yanchor: 'bottom', showarrow: false, text, font: { size: 11, color: theme.accent } })
     }
+    if (showChipStiffness) {
+      const cs = chipStiffness!
+      const range = cs.range ? `${withPrefix(cs.range[0], 'Pa')}–${withPrefix(cs.range[1], 'Pa')}` : withPrefix(cs.value, 'Pa')
+      shapes.push({ type: 'line', yref: 'paper', y0: 0, y1: 1, x0: cs.value, x1: cs.value, line: { color: theme.accent, width: 1.5, dash: 'dash' } })
+      annotations.push({
+        x: Math.log10(cs.value), y: 1, yref: 'paper', xanchor: 'right', yanchor: 'top', showarrow: false,
+        text: t(`Science Corp's wells: hard plastic, ${range} `, `SU-8 wells: ${range} (data sheet) `),
+        font: { size: 11, color: theme.accent },
+      })
+    }
+    if (showChip && chipStiffness && prop === 'youngs_modulus') {
+      const cs = chipStiffness
+      traces.push({
+        type: 'scatter',
+        mode: 'markers',
+        name: t("Science Corp's chip (estimate*)", 'Science Corp SU-8 chip (est.*)'),
+        x: [cs.value],
+        y: [chipEstimate],
+        customdata: [chipLater!.record_id],
+        hovertemplate:
+          `<b>${chipLater!.family_label}</b><br>${chipLater!.source} · ${chipLater!.cell_type ?? 'neurons'} · ${TIER_PLAIN.in_vivo}<br>` +
+          `~${chipEstimate!.toFixed(0)}% of loaded neurons still detected at ~${chipLater!.days} d* (${chipLater!.percent}% ÷ ${chipLoad!.percent}% of wells)<br>` +
+          `Stiffness ${withPrefix(cs.value, 'Pa')}: ${cs.citation ?? 'curated'}${cs.source === 'curated' ? ' (curated, unverified)' : ''}<br>Click for the paper<extra></extra>`,
+        marker: { symbol: 'star', size: 20, color: theme.accent, line: { width: 1.5, color: theme.panel } },
+      })
+    }
     if (showChip)
       ref(chipEstimate!, t(
         `Science Corp's chip, in mice at 3 weeks: about ${chipEstimate!.toFixed(0)}%*`,
@@ -180,7 +209,7 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
     const bestBaseline = data.points.filter((p) => p.baseline).sort((a, b) => b.score - a.score)[0]
     if (yMode === 'score' && bestBaseline) ref(bestBaseline.score, `SU-8 baseline score: ${bestBaseline.score.toFixed(1)}`)
 
-    const xs = shown.map((p) => p.x[prop].value)
+    const xs = [...shown.map((p) => p.x[prop].value), ...(showChipStiffness ? [chipStiffness!.value] : [])]
     const xTitle = `${property.label}${property.unit ? ` (${property.unit})` : ''}`
     plot = {
       data: traces,
