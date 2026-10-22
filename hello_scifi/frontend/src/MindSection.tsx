@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import BiohybridArt from './BiohybridArt'
 import CustomScore from './CustomScore'
 import { useModeText } from './mode'
 import { FRAMEWORKS, SUBSTRATES, carryOver, type FrameworkKey, type Substrate } from './benchmark'
@@ -29,6 +30,8 @@ export default function MindSection() {
     <section id="mind" className="mind">
       <div className="container">
         <p className="kicker">For fun · our earlier framing</p>
+        <div className="mind-intro">
+        <div>
         <h2 className="section-title">What can carry a mind?</h2>
         <p className="lede">
           {t(
@@ -36,6 +39,9 @@ export default function MindSection() {
             'For a patient losing cortex, could anything on the device side take over some of the lost function? We score candidate substrates 0–3 under six theories of mind (carry-over, 0–18) and on how hard each is to keep running in a patient (maintainability, 0–3). The scores are provisional judgment calls, made to be argued with.',
           )}
         </p>
+        </div>
+        <BiohybridArt />
+        </div>
 
         <div className="explorer">
           <fieldset>

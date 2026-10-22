@@ -238,6 +238,86 @@ a {
 }
 
 /* For fun: What can carry a mind? */
+/* For fun: the earlier "what can carry a mind?" illustration (BiohybridArt.tsx) */
+.mind-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.biohybrid-art {
+  width: 100%;
+  max-width: 26rem;
+  height: auto;
+  justify-self: end;
+}
+
+@media (max-width: 760px) {
+  .mind-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .biohybrid-art {
+    justify-self: center;
+  }
+}
+
+.art-device rect {
+  fill: var(--blue-soft);
+  stroke: var(--fg);
+  stroke-width: 1.5;
+}
+
+.art-device .art-unknown {
+  fill: var(--panel);
+  stroke: var(--blue);
+  stroke-dasharray: 5 4;
+}
+
+.art-device text,
+.art-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  fill: var(--muted);
+}
+
+.art-device .art-question {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--blue);
+}
+
+.art-neuron circle {
+  fill: var(--tissue);
+  stroke: var(--fg);
+  stroke-width: 1.5;
+}
+
+.art-axon,
+.art-leader,
+.art-fold {
+  fill: none;
+  stroke: var(--fg);
+  stroke-width: 1.3;
+}
+
+.art-leader {
+  stroke: var(--muted);
+}
+
+.art-fold {
+  stroke: var(--tissue-line);
+}
+
+.art-brain {
+  fill: var(--tissue);
+  stroke: var(--tissue-line);
+  stroke-width: 1.5;
+}
+
 .mind {
   padding: 4rem 0;
   background: var(--panel);
