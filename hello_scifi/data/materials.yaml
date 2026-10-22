@@ -58,6 +58,39 @@ materials:
     value: unknown
     citation: null
   literature_typical_stiffness_kpa: null
+- key: no_carrier
+  label: No gel (cells delivered alone)
+  class: other
+  control: true
+  patterns:
+  - cells alone
+  - no hydrogel
+  - cells[- ]only
+  - without (a )?(hydro)?gel
+  note: Transplant controls where cells were injected without any carrier; the comparison for "does a gel help?". Never ranked.
+  transparency:
+    value: unknown
+    citation: null
+  degradable:
+    value: unknown
+    citation: null
+  literature_typical_stiffness_kpa: null
+- key: conductive_composite_gel
+  label: Conductive composite gels (PEDOT or polypyrrole in a biopolymer gel)
+  class: conductive_hydrogel
+  patterns:
+  - polypyrrole
+  - \bppy[1-9]
+  - alg\W+lam\W+pedot
+  - gel-0\.\d+\s*edot
+  note: A natural gel (alginate, collagen, chitosan/gelatin) with a conductive polymer added, e.g. Wang 2025, Xu 2022, Guan 2022.
+  transparency:
+    value: unknown
+    citation: null
+  degradable:
+    value: unknown
+    citation: null
+  literature_typical_stiffness_kpa: null
 - key: gelma
   label: GelMA (gelatin methacryloyl)
   class: nonconductive_hydrogel
@@ -226,6 +259,33 @@ materials:
     value: 'no'
     citation: Tse J.R. & Engler A.J., Curr. Protoc. Cell Biol. (2010).
     verified: false
+  literature_typical_stiffness_kpa: null
+- key: collagen
+  label: Collagen gels
+  class: nonconductive_hydrogel
+  candidate: true
+  patterns:
+  - collagen
+  note: Type I collagen gels, often crosslinked (StarPEG, genipin) or loaded with growth factors; a common carrier for neural transplants.
+  transparency:
+    value: unknown
+    citation: null
+  degradable:
+    value: unknown
+    citation: null
+  literature_typical_stiffness_kpa: null
+- key: matrigel
+  label: Matrigel (basement-membrane extract)
+  class: nonconductive_hydrogel
+  patterns:
+  - matrigel
+  note: Mouse tumor-derived basement-membrane extract; common in culture but not used clinically.
+  transparency:
+    value: unknown
+    citation: null
+  degradable:
+    value: unknown
+    citation: null
   literature_typical_stiffness_kpa: null
 - key: peg
   label: PEG hydrogels

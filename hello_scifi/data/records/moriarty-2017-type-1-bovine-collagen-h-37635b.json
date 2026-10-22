@@ -1,0 +1,100 @@
+{
+  "record_id": "moriarty-2017-type-1-bovine-collagen-h-37635b",
+  "source": {
+    "doi": "10.1038/s41598-017-15970-w",
+    "title": "Encapsulation of primary dopaminergic neurons in a GDNF-loaded collagen hydrogel increases their survival, re-innervation and function after intra-striatal transplantation",
+    "first_author": "Moriarty",
+    "year": 2017,
+    "url": "https://doi.org/10.1038/s41598-017-15970-w",
+    "file": "moriarty2017.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Type 1 bovine collagen hydrogel cross-linked with 4s-StarPEG (1, 2 or 4 mg/ml)",
+  "material_key": "collagen",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "type 1 collagen (5 mg/ml stock)",
+      "amount": "40",
+      "unit": "µl",
+      "evidence": "For a final volume of 100 µl, 40µl of 5mg/ml type 1 collagen (Vornia Biomaterials), neutralised with 1M NaOH until PH 7 reached, was added to 20 µl of 10x phosphate buffer saline (PBS) containing 4s-StarPEG.",
+      "evidence_verified": true
+    },
+    {
+      "component": "10x PBS containing 4s-StarPEG",
+      "amount": "20",
+      "unit": "µl",
+      "evidence": "was added to 20 µl of 10x phosphate buffer saline (PBS) containing 4s-StarPEG.",
+      "evidence_verified": true
+    },
+    {
+      "component": "4s-StarPEG",
+      "amount": "1, 2, or 4",
+      "unit": "mg/ml",
+      "evidence": "incubated with unseeded collagen hydrogels (2×50 µl gels per well) of various 4s-StarPEG concentrations (1, 2, or 4mg/ml) for 48h or left untreated.",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "gelation",
+      "parameter": "temperature",
+      "value": "37",
+      "unit": "°C",
+      "evidence": "surface (Teflon®) and placed at 37 °C to gel.",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "E14 ventral mesencephalon primary dopaminergic neurons; GFP bone marrow MSCs",
+    "cell_category": "primary_neuron",
+    "species": "rat",
+    "setting": "in_vitro_2d",
+    "tissue_site": "not_applicable",
+    "coating": "poly-D-lysine",
+    "culture_days": {
+      "value": "48",
+      "unit": "h",
+      "value_si": 2.0,
+      "evidence": "Dopaminergic neuron survival and outgrowth was assessed 48 h after treatment with collagen hydrogels (as described above)",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "still present 7 days post-infusion",
+        "unit": null,
+        "value_si": null,
+        "evidence": "the collagen hydrogels successfully formed in situ, were still present 7 days post-infusion (Fig. 3D) and did not result in any striatal damage (not shown).",
+        "location": "p. 5",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "in vivo hydrogel persistence"
+      }
+    ],
+    "survival": []
+  },
+  "notes": "Hydrogels incubated with cultures (not seeded); no negative effect on MSC/VM metabolic activity, TH+ survival or outgrowth; values only in figures. In vivo GFP-MSC grafts at days 1, 4, 7 showed similar graft volume.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:04:35+00:00",
+  "schema_version": "0.1.0"
+}

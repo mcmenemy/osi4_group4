@@ -1,0 +1,65 @@
+{
+  "record_id": "freier-2005-chitosan-film-da-10-9-co-8ea26f",
+  "source": {
+    "doi": "10.1016/j.biomaterials.2005.02.033",
+    "title": "Controlling cell adhesion and degradation of chitosan films by N-acetylation",
+    "first_author": "Freier",
+    "year": 2005,
+    "url": "https://doi.org/10.1016/j.biomaterials.2005.02.033",
+    "file": "freier2005.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Chitosan film, DA 10.9% (commercial)",
+  "material_key": "chitosan",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "chitosan",
+      "amount": "3",
+      "unit": "% (w/w)",
+      "evidence": "Chitosan films with DAs of 0.5% and 10.9% were synthesized by pouring a 3% (w/w) solution of chitosan of the desired DA in 2% aqueous acetic acid into Petri dishes",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "primary chick dorsal root ganglion (DRG) neurons (E9)",
+    "cell_category": "primary_neuron",
+    "species": "chick",
+    "setting": "in_vitro_2d",
+    "tissue_site": "not_applicable",
+    "coating": "none",
+    "culture_days": {
+      "value": "2",
+      "unit": "days",
+      "value_si": 2.0,
+      "evidence": "Primary chick DRG neurons were cultured for 2 days on films of chitosan and N-acetylated chitosan",
+      "location": "p. 5",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [],
+    "survival": []
+  },
+  "notes": "Molar mass ~400,000 g/mol.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:00:12+00:00",
+  "schema_version": "0.1.0"
+}

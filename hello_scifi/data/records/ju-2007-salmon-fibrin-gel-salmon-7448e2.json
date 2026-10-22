@@ -1,0 +1,135 @@
+{
+  "record_id": "ju-2007-salmon-fibrin-gel-salmon-7448e2",
+  "source": {
+    "doi": "10.1016/j.biomaterials.2007.01.008",
+    "title": "Enhanced neurite growth from mammalian neurons in three-dimensional salmon fibrin gels",
+    "first_author": "Ju",
+    "year": 2007,
+    "url": "https://doi.org/10.1016/j.biomaterials.2007.01.008",
+    "file": "ju2007.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Salmon fibrin gel (salmon fibrinogen + thrombin)",
+  "material_key": "fibrin",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "salmon fibrinogen (FBG)",
+      "amount": "3",
+      "unit": "mg/ml",
+      "evidence": "FBG (final concentration 3 mg/ml) and cells (final concentration 50,000–300,000 cells/100 ml) were diluted in",
+      "evidence_verified": true
+    },
+    {
+      "component": "thrombin",
+      "amount": "1.5",
+      "unit": "U/ml",
+      "evidence": "Thrombin was added to a final concentration of 1.5 U/ml to stimulate polymerization.",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "polymerization",
+      "parameter": "time at room temperature",
+      "value": "20",
+      "unit": "min",
+      "evidence": "polymerized at room temperature for 20 min",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "45-125",
+      "unit": "Pa",
+      "value_si": 85.0,
+      "evidence": "Shear storage moduli (G0 ) of the fibrin gels and Matrigel are similar and all range from 45 to 125 Pascals (Pa)",
+      "location": "p. 7, Fig. 3",
+      "confidence": "medium",
+      "test_method": "shear_rheology",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": {
+      "description": {
+        "value": "gel remained intact",
+        "unit": null,
+        "value_si": null,
+        "evidence": "In contrast, salmon fibrin remained intact for up to 2 weeks, the longest time point measured",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "duration_days": {
+        "value": "2",
+        "unit": "weeks",
+        "value_si": 14.0,
+        "evidence": "In contrast, salmon fibrin remained intact for up to 2 weeks, the longest time point measured",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "conditions": "seeded with mouse spinal cord neurons in culture"
+    }
+  },
+  "biology": {
+    "cell_type": "Primary mouse spinal cord (E13.5), mouse cortical (E13.5) and rat cortical (E18) neurons",
+    "cell_category": "primary_neuron",
+    "species": "mouse, rat",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": "poly-D-lysine coated coverslip",
+    "culture_days": {
+      "value": "3",
+      "unit": "days",
+      "value_si": 3.0,
+      "evidence": "Unless otherwise stated, neurite length was measured after 3 days culture in the gels.",
+      "location": "p. 3",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "35",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "Removal of the adhesion molecule FN from salmon fibrin decreases total neurite length per cell by 35%",
+        "location": "p. 8",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "decrease in total neurite length per cell upon FN removal"
+      },
+      {
+        "value": "66",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "total neurite length per cell was reduced 35% with depletion of FN and 66% with echistatin treatment",
+        "location": "p. 9",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "decrease in total neurite length per cell with echistatin treatment"
+      }
+    ],
+    "survival": []
+  },
+  "notes": "Gels 8 mm diameter, 3 mm height. Modulus measured without cells at 2% strain, 10 rad/s; range given for all gels collectively. Salmon fibrin gave the longest neurites.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:04:02+00:00",
+  "schema_version": "0.1.0"
+}

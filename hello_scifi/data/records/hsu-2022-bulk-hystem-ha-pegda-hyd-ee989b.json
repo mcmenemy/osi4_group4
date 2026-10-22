@@ -1,0 +1,158 @@
+{
+  "record_id": "hsu-2022-bulk-hystem-ha-pegda-hyd-ee989b",
+  "source": {
+    "doi": "10.1016/j.bioactmat.2021.07.008",
+    "title": "Increased connectivity of hiPSC-derived neural networks in multiphase granular hydrogel scaffolds",
+    "first_author": "Hsu",
+    "year": 2022,
+    "url": "https://doi.org/10.1016/j.bioactmat.2021.07.008",
+    "file": "hsu2021.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Bulk HyStem HA / PEGDA hydrogel, cell-laden (~1 w/v % final)",
+  "material_key": "hyaluronic_acid",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "HyStem precursor (thiolated hyaluronan)",
+      "amount": "2",
+      "unit": "w/v %",
+      "evidence": "400 μl of 2 w/v % precursor HyStem® component was mixed with an equal volume of the cell suspension",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "gelation",
+      "parameter": "temperature/time",
+      "value": "37 °C for 30 min",
+      "unit": null,
+      "evidence": "The system was gelled in the syringe at 37 ◦C for 30 min after adding the crosslinker",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "hiPSC-derived neural progenitor cells (line 010S-1)",
+    "cell_category": "sc_neuron",
+    "species": "human",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": "laminin",
+    "culture_days": {
+      "value": "7",
+      "unit": "days",
+      "value_si": 7.0,
+      "evidence": "Cell viability was evaluated on Day 1, Day 3, and Day 7",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": {
+      "value": "36",
+      "unit": "%",
+      "value_si": 36.0,
+      "evidence": "after seven days in culture, cell viability in the granular hydrogel scaffolds remained significantly higher (Bulk: 36 ± 6%; Granular: 63 ± 7%)",
+      "location": "p. 8",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "neurite_length": {
+      "value": "16.69",
+      "unit": "μm",
+      "value_si": 0.00001669,
+      "evidence": "(Bulk average neurite length: 16.69 ± 2.63 μm; Granular average neurite length: 53.38 ± 8.72 μm)",
+      "location": "p. 9",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "other_outcomes": [
+      {
+        "value": "8.89",
+        "unit": null,
+        "value_si": null,
+        "evidence": "After three days in culture, both hydrogel scaffolds were seen to support similar numbers of neurite bearing cells (Bulk: 8.89 ± 0.61; Granular: 10.0 ± 0.00; p = 0.088)",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "number of neurite bearing cells (of up to 10) Day 3"
+      },
+      {
+        "value": "3.94",
+        "unit": null,
+        "value_si": null,
+        "evidence": "hydrogel (Bulk: 3.94 ± 1.17; Granular: 10.0 ± 0.00; p < 0.0001)",
+        "location": "p. 10",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "number of neurite bearing cells (of up to 10) Day 7"
+      }
+    ],
+    "survival": [
+      {
+        "value": "73",
+        "unit": "%",
+        "value_si": 73.0,
+        "evidence": "No significant difference in cell viability was observed on the first day of culture (bulk cell viability: 73 ± 6%; granular cell viability: 76 ± 3%)",
+        "location": "p. 8",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "Day 1",
+        "culture_days": 1.0,
+        "setting": "in_vitro_3d"
+      },
+      {
+        "value": "40",
+        "unit": "%",
+        "value_si": 40.0,
+        "evidence": "After three days in culture, cell viability in granular hydrogels was found to be significantly higher than for cells encapsulated in bulk hydrogel (bulk cell viability: 40 ± 5%; granular cell viability: 60 ± 6%)",
+        "location": "p. 8",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "Day 3",
+        "culture_days": 3.0,
+        "setting": "in_vitro_3d"
+      },
+      {
+        "value": "36",
+        "unit": "%",
+        "value_si": 36.0,
+        "evidence": "after seven days in culture, cell viability in the granular hydrogel scaffolds remained significantly higher (Bulk: 36 ± 6%; Granular: 63 ± 7%)",
+        "location": "p. 8",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "Day 7",
+        "culture_days": 7.0,
+        "setting": "in_vitro_3d"
+      }
+    ]
+  },
+  "notes": "Bulk control with same total Extralink-1 as granular composites; ~10^7 cells/ml; 500 μm discs; laminin incorporated.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:03:30+00:00",
+  "schema_version": "0.1.0"
+}

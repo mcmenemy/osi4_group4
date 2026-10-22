@@ -1,0 +1,84 @@
+{
+  "record_id": "ballios-2015-hamc-hyaluronan-and-meth-da93f6",
+  "source": {
+    "doi": "10.1016/j.stemcr.2015.04.008",
+    "title": "A Hyaluronan-Based Injectable Hydrogel Improves the Survival and Integration of Stem Cell Progeny following Transplantation",
+    "first_author": "Ballios",
+    "year": 2015,
+    "url": "https://doi.org/10.1016/j.stemcr.2015.04.008",
+    "file": "ballios2015.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "HAMC (hyaluronan and methylcellulose blend) hydrogel, retinal stem cell-derived rod delivery",
+  "material_key": "hyaluronic_acid",
+  "electrode_material": null,
+  "formulation": [],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "Retinal stem cell (RSC)-derived rod photoreceptors",
+    "cell_category": "sc_neuron",
+    "species": "mouse",
+    "setting": "in_vivo",
+    "tissue_site": "other",
+    "coating": null,
+    "culture_days": {
+      "value": "7",
+      "unit": "days",
+      "value_si": 7.0,
+      "evidence": "the cells were exposed either to HAMC reconstituted in serum free media (SFM) or to SFM alone for 7 days.",
+      "location": "p. 6",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "10",
+        "unit": "% constriction",
+        "value_si": null,
+        "evidence": "of approximately 10% constriction, demonstrating vision improvement (Figure 5I).",
+        "location": "p. 10",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "maximum pupillary constriction in TKO mice receiving RSC-derived rods in HAMC+AAA"
+      }
+    ],
+    "survival": [
+      {
+        "value": "2.4–4.3",
+        "unit": "% of cells injected",
+        "value_si": null,
+        "evidence": "The highest numbers of cells integrating into the neural retina were mature rods delivered in HAMC to mouse retinae pre-treated with AAA (380 ± 80, or 2.4%–4.3% of cells injected).",
+        "location": "p. 6",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "retention",
+        "timepoint": "3 weeks post-transplantation",
+        "culture_days": 21.0,
+        "setting": "in_vivo"
+      }
+    ]
+  },
+  "notes": "Subretinal transplantation into adult mouse retina (retina); AAA pre-treatment to disrupt outer limiting membrane. Also in vitro culture in HAMC reconstituted in SFM.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:59:20+00:00",
+  "schema_version": "0.1.0"
+}

@@ -54,3 +54,15 @@ by_record:
         unit: weeks
         evidence: the majority of hydrogels completely degraded by the fourth week
     note: "Degradation is with cells in culture (~4 weeks; the 24 h figure is in concentrated hyaluronidase). Cells are E13.5 neural progenitors, so sc_neuron."
+
+  # Ballios 2015: "86% of mice (6 of 7) had cells present" and "70% (7 of 10) of the animals had
+  # surviving cells" are shares of animals, not of cells, so they aren't survival rates.
+  ballios-2015-hamc-hyaluronan-and-meth-3a4380:
+    drop_survival: [1, 2]
+    note: "Removed two 'occupancy' values that were % of animals with any surviving cells, not % of cells."
+
+  # Adil 2017: neurons were differentiated in the PNIPAAm-PEG gel, then "harvested and dissociated"
+  # and implanted without it, so the 35.6% survival at 6 weeks isn't evidence for the gel in brain.
+  adil-2017-pnipaam-peg-thermorespon-f441d0:
+    drop_survival: [0]
+    note: "Removed the 35.6% in vivo survival: cells were made in the gel but implanted without it (methods, 'harvested and dissociated')."

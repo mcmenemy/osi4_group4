@@ -1,0 +1,78 @@
+{
+  "record_id": "godbe-2020-pa-1-1-wt-k6-gel-pll-sti-b4f2b1",
+  "source": {
+    "doi": "10.1021/acsbiomaterials.9b01585",
+    "title": "Gelator Length Precisely Tunes Supramolecular Hydrogel Stiffness and Neuronal Phenotype in 3D Culture",
+    "first_author": "Godbe",
+    "year": 2020,
+    "url": "https://doi.org/10.1021/acsbiomaterials.9b01585",
+    "file": "godbe2020.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "PA-1 (1 wt%)/K6 gel, PLL-stiffened and trypsin-softened",
+  "material_key": "peptide_sap",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "PLL",
+      "amount": "4",
+      "unit": "mg/mL",
+      "evidence": "we added PLL (4 mg/mL, PBS) to a 1 wt % PA-1 gel made with K6",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "trypsin softening",
+      "parameter": "time",
+      "value": "30",
+      "unit": "min",
+      "evidence": "400 μL of 0.05 wt % trypsin was added to each gel and allowed to sit for 30 min at 37 °C",
+      "evidence_verified": false
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "7600",
+      "unit": "Pa",
+      "value_si": 7600.0,
+      "evidence": "substantially (G′ = 7600 Pa, p < 0.001) after overnight exposure to PLL",
+      "location": "p. 6",
+      "confidence": "high",
+      "test_method": "shear_rheology",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": {
+      "description": {
+        "value": "gel integrity maintained",
+        "unit": null,
+        "value_si": null,
+        "evidence": "This process was repeatable over at least three cycles without loss of gel integrity",
+        "location": "p. 6",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "duration_days": null,
+      "conditions": "repeated PLL/trypsin cycles"
+    }
+  },
+  "biology": null,
+  "notes": "Ex situ rheology in PBS.",
+  "flags": [
+    "material_key:from_model_only",
+    "unverified_quote:processing[0]"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:00:57+00:00",
+  "schema_version": "0.1.0"
+}

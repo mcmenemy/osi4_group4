@@ -1,0 +1,147 @@
+{
+  "record_id": "guan-2022-cmcs-gel-hydrogel-contro-49243f",
+  "source": {
+    "doi": "10.3390/molecules27238326",
+    "title": "Carboxymethyl Chitosan and Gelatin Hydrogel Scaffolds Incorporated with Conductive PEDOT Nanoparticles for Improved Neural Stem Cell Proliferation and Neuronal Differentiation",
+    "first_author": "Guan",
+    "year": 2022,
+    "url": "https://doi.org/10.3390/molecules27238326",
+    "file": "guan2022.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "CMCS/Gel hydrogel (control, CMCS/Gel-0EDOT)",
+  "material_key": "chitosan",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "CMCS solution",
+      "amount": "2",
+      "unit": "%, w/v",
+      "evidence": "CMCS solution (2%, w/v) and Gel solution (2%, w/v) were firstly mixed with a ratio of 2:1 (v/v).",
+      "evidence_verified": true
+    },
+    {
+      "component": "Gel solution",
+      "amount": "2",
+      "unit": "%, w/v",
+      "evidence": "CMCS solution (2%, w/v) and Gel solution (2%, w/v) were firstly mixed with a ratio of 2:1 (v/v).",
+      "evidence_verified": true
+    },
+    {
+      "component": "EDC and NHS",
+      "amount": "50",
+      "unit": "mM",
+      "evidence": "the hydrogels were cross-linked in an ethanol/MES buffer (80%, v/v, pH 6.0) containing 50 mM of EDC and NHS.",
+      "evidence_verified": true
+    },
+    {
+      "component": "APS",
+      "amount": "0.1",
+      "unit": "M",
+      "evidence": "CMCS/Gel 0.1 0.1 0 2 (3.14 ± 0.36) × 10−6",
+      "evidence_verified": true
+    },
+    {
+      "component": "pTS-Na",
+      "amount": "0.1",
+      "unit": "M",
+      "evidence": "CMCS/Gel 0.1 0.1 0 2 (3.14 ± 0.36) × 10−6",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "freezing",
+      "parameter": "temperature",
+      "value": "−80",
+      "unit": "°C",
+      "evidence": "then frozen at −80 ◦C for 24 h",
+      "evidence_verified": true
+    },
+    {
+      "step": "lyophilization",
+      "parameter": "time",
+      "value": "48",
+      "unit": "h",
+      "evidence": "The frozen samples were further lyophilized for 48 h in a freeze-dryer",
+      "evidence_verified": true
+    },
+    {
+      "step": "crosslinking",
+      "parameter": "time",
+      "value": "24",
+      "unit": "h",
+      "evidence": "After incubation at room temperature (RT) for 24 h, the hydrogels were rinsed overnight",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": {
+      "value": "3.14 × 10−6",
+      "unit": "S·cm−1",
+      "value_si": 0.000314,
+      "evidence": "the conductivity of CMCS/Gel hydrogel is about (3.14 ± 0.36) × 10−6 S·cm−1",
+      "location": "p. 6",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "water_content": null,
+    "swelling_ratio": {
+      "value": "2900",
+      "unit": "%",
+      "value_si": 2900.0,
+      "evidence": "the CMCS/Gel hydrogel showed the highest swelling rate, which increased dramatically to (2900 ± 460)% in the first 24 h",
+      "location": "p. 6",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": {
+      "value": "6",
+      "unit": "weeks",
+      "value_si": 42.0,
+      "evidence": "The CMCS/Gel hydrogel lost approximately (45.27 ± 2.21)% in weight at week 6",
+      "location": "p. 8",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "neural stem cells from fetal Sprague Dawley rat hippocampus",
+    "cell_category": "sc_neuron",
+    "species": "rat",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": null,
+    "culture_days": {
+      "value": "14",
+      "unit": "days",
+      "value_si": 14.0,
+      "evidence": "although the cell viability of all samples decreased to some extent after 14 days",
+      "location": "p. 10",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [],
+    "survival": []
+  },
+  "notes": "Porosity (95.62%) reported but no field. Conductivity attributed to ionic conductivity. Compressive modulus only in figure. Degradation in PBS with 2 mg/mL lysozyme at 37 °C.",
+  "flags": [
+    "material_key:from_model_only"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:01:43+00:00",
+  "schema_version": "0.1.0"
+}

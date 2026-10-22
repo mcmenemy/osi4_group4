@@ -1,0 +1,78 @@
+{
+  "record_id": "xu-2022-col-ppy60-collagen-polyp-5d1212",
+  "source": {
+    "doi": "10.3389/fbioe.2022.912497",
+    "title": "Conductive Collagen-Based Hydrogel Combined With Electrical Stimulation to Promote Neural Stem Cell Proliferation and Differentiation",
+    "first_author": "Xu",
+    "year": 2022,
+    "url": "https://doi.org/10.3389/fbioe.2022.912497",
+    "file": "xu2022.pdf"
+  },
+  "material_class": "conductive_hydrogel",
+  "material": "Col/PPy60 (collagen/polypyrrole hydrogel, 60 mM pyrrole)",
+  "material_key": "conductive_composite_gel",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "collagen",
+      "amount": "10",
+      "unit": "mg/ml",
+      "evidence": "1 ml of a pyrrole aqueous solution (concentrations of 0 mM, 20 mM, 40 mM, or 60 mM) was mixed with 1 ml of a collagen solution (10 mg/ml)",
+      "evidence_verified": true
+    },
+    {
+      "component": "pyrrole",
+      "amount": "60",
+      "unit": "mM",
+      "evidence": "1 ml of a pyrrole aqueous solution (concentrations of 0 mM, 20 mM, 40 mM, or 60 mM) was mixed with 1 ml of a collagen solution (10 mg/ml)",
+      "evidence_verified": true
+    },
+    {
+      "component": "genipin",
+      "amount": "0.3",
+      "unit": "wt%",
+      "evidence": "the mixed solution was soaked in a genipin solution (0.3 wt%)",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "genipin crosslinking",
+      "parameter": "temperature/time",
+      "value": "37 / 24",
+      "unit": "°C / h",
+      "evidence": "The cross-linking treatment was carried out at 37°C for 24 h.",
+      "evidence_verified": false
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": {
+      "value": "0.1706",
+      "unit": "S/cm",
+      "value_si": 17.06,
+      "evidence": "The conductivity of Col/PPy60 (0.1706 ± 0.0037 S/ cm) and Col/PPy40 are almost the same.",
+      "location": "p. 7",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": null,
+  "notes": "Young's modulus reported only as ~20.3% lower than Col/PPy40.",
+  "flags": [
+    "unverified_quote:processing[0]"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:06:16+00:00",
+  "schema_version": "0.1.0"
+}

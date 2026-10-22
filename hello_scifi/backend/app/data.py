@@ -31,7 +31,8 @@ def load_overrides() -> dict:
 def apply_overrides(record: Record, overrides: dict) -> Record:
     """Team corrections from data/overrides.yaml, matched by source file or record_id.
 
-    `biology` merges into the record's biology; `values` corrects single values by path
+    `biology` merges into the record's biology; `drop_survival` removes survival values by index
+    (ones that aren't a survival rate); `values` corrects single values by path
     (e.g. biology.neurite_length: {value, unit, evidence?, location?}).
     """
     rules = [
@@ -42,6 +43,8 @@ def apply_overrides(record: Record, overrides: dict) -> Record:
         for field, value in rule.items():
             if field == "source":
                 record.source = record.source.model_copy(update=value)
+            elif field == "drop_survival" and record.biology:
+                record.biology.survival = [sv for i, sv in enumerate(record.biology.survival) if i not in value]
             elif field == "biology" and record.biology:
                 record.biology = record.biology.model_copy(update=value)
             elif field == "values":

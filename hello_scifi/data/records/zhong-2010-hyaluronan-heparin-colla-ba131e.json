@@ -1,0 +1,106 @@
+{
+  "record_id": "zhong-2010-hyaluronan-heparin-colla-ba131e",
+  "source": {
+    "doi": "10.1177/1545968310361958",
+    "title": "Hydrogel Matrix to Support Stem Cell Survival After Brain Transplantation in Stroke",
+    "first_author": "Zhong",
+    "year": 2010,
+    "url": "https://doi.org/10.1177/1545968310361958",
+    "file": "zhong2010.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Hyaluronan–heparin–collagen hydrogel (HyStem-HP) with ES cell-derived NPCs",
+  "material_key": "hyaluronic_acid",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "hyaluronan/heparin",
+      "amount": "4",
+      "unit": "mL",
+      "evidence": "100 000 NPCs in 1 mL saline were mixed with 4 mL hyaluronan/heparin, 1 mL gelatin, and 1 mL cross-linker.",
+      "evidence_verified": true
+    },
+    {
+      "component": "gelatin",
+      "amount": "1",
+      "unit": "mL",
+      "evidence": "100 000 NPCs in 1 mL saline were mixed with 4 mL hyaluronan/heparin, 1 mL gelatin, and 1 mL cross-linker.",
+      "evidence_verified": true
+    },
+    {
+      "component": "cross-linker",
+      "amount": "1",
+      "unit": "mL",
+      "evidence": "100 000 NPCs in 1 mL saline were mixed with 4 mL hyaluronan/heparin, 1 mL gelatin, and 1 mL cross-linker.",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "stereotaxic injection",
+      "parameter": "rate",
+      "value": "0.7",
+      "unit": "mL/min",
+      "evidence": "into the infarct cavity at a depth of 1 mm from the surface of the brain at a rate of 0.7 mL/min.",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "GFP mouse embryonic stem cell-derived neural progenitor cells (ES-NPCs)",
+    "cell_category": "sc_neuron",
+    "species": "mouse",
+    "setting": "in_vivo",
+    "tissue_site": "brain",
+    "coating": null,
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "19",
+        "unit": "/mm³",
+        "value_si": null,
+        "evidence": "there is also a significant decrease of Iba1-positive cell infiltration into the graft with the hydrogel (31 ± 7/mm³ without hydrogel vs 19 ± 4/mm³ with hydrogel; P = .003",
+        "location": "p. 6",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "Iba1-positive cell infiltration into graft"
+      }
+    ],
+    "survival": [
+      {
+        "value": "600",
+        "unit": "cells",
+        "value_si": null,
+        "evidence": "An average of 300 cells in the cells-only group survived, and an average of 600 cells in the hydrogel group survived, which is a statistically significant 2-fold expansion in cell survival (P = .002)",
+        "location": "p. 6, Figure 5",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "retention",
+        "timepoint": "14 days after transplantation",
+        "culture_days": 14.0,
+        "setting": "in_vivo"
+      }
+    ]
+  },
+  "notes": "Transplanted into stroke cavity 7 days after photothrombotic stroke. Main text states '0.3% and 0.6% of transplanted cells survive with or without hydrogel, respectively', which conflicts with figure caption (600 cells with hydrogel). ES-NPCs remained undifferentiated. In vitro hydrogel increased survival (LDH, tetrazolium) in culture; values only in figures.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:06:46+00:00",
+  "schema_version": "0.1.0"
+}

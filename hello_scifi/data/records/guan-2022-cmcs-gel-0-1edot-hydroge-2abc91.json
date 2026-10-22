@@ -1,0 +1,88 @@
+{
+  "record_id": "guan-2022-cmcs-gel-0-1edot-hydroge-2abc91",
+  "source": {
+    "doi": "10.3390/molecules27238326",
+    "title": "Carboxymethyl Chitosan and Gelatin Hydrogel Scaffolds Incorporated with Conductive PEDOT Nanoparticles for Improved Neural Stem Cell Proliferation and Neuronal Differentiation",
+    "first_author": "Guan",
+    "year": 2022,
+    "url": "https://doi.org/10.3390/molecules27238326",
+    "file": "guan2022.pdf"
+  },
+  "material_class": "conductive_hydrogel",
+  "material": "CMCS/Gel-0.1EDOT hydrogel",
+  "material_key": "conductive_composite_gel",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "EDOT",
+      "amount": "0.1",
+      "unit": "M",
+      "evidence": "CMCS/Gel-0.1EDOT 0.1 0.1 0.1 2 (8.67 ± 0.27) × 10−5",
+      "evidence_verified": true
+    },
+    {
+      "component": "APS",
+      "amount": "0.1",
+      "unit": "M",
+      "evidence": "CMCS/Gel-0.1EDOT 0.1 0.1 0.1 2 (8.67 ± 0.27) × 10−5",
+      "evidence_verified": true
+    },
+    {
+      "component": "pTS-Na",
+      "amount": "0.1",
+      "unit": "M",
+      "evidence": "CMCS/Gel-0.1EDOT 0.1 0.1 0.1 2 (8.67 ± 0.27) × 10−5",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "in situ interfacial polymerization",
+      "parameter": "time",
+      "value": "72",
+      "unit": "h",
+      "evidence": "The polymerization was carried out in a vibrator with a slight vibration at RT for 72 h",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": {
+      "value": "8.67 × 10−5",
+      "unit": "S·cm−1",
+      "value_si": 0.00867,
+      "evidence": "CMCS/Gel-0.1EDOT 0.1 0.1 0.1 2 (8.67 ± 0.27) × 10−5",
+      "location": "p. 4, Table 1",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "neural stem cells from fetal Sprague Dawley rat hippocampus",
+    "cell_category": "sc_neuron",
+    "species": "rat",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": null,
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [],
+    "survival": []
+  },
+  "notes": "Porosity 94.18% reported. PEDOT-pTS assembled on precross-linked CMCS/Gel scaffold.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:01:43+00:00",
+  "schema_version": "0.1.0"
+}

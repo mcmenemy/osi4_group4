@@ -1,0 +1,71 @@
+{
+  "record_id": "wang-2026-alginate-hydrogel-alg-2-39272a",
+  "source": {
+    "doi": "10.1039/d5tc02708j",
+    "title": "Electrically active hydrogels based on PEDOT:PSS for neural cultures",
+    "first_author": "Wang",
+    "year": 2026,
+    "url": "https://doi.org/10.1039/d5tc02708j",
+    "file": "wang2025.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Alginate hydrogel (Alg, 2% w/v, Ca2+ crosslinked)",
+  "material_key": "alginate",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "sodium alginate",
+      "amount": "2.5",
+      "unit": "% w/v",
+      "evidence": "Pure alginate hydrogels were prepared by mixing 2.5% w/v sodium alginate and 183 mM CaSO4 diluted in 1 Dulbecco's modified Eagle's medium (DMEM).",
+      "evidence_verified": true
+    },
+    {
+      "component": "CaSO4",
+      "amount": "183",
+      "unit": "mM",
+      "evidence": "0.8 mL of 2.5% w/v sodium alginate and 0.2 mL of 183 mM CaSO4 were loaded into two separate syringes",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "gelation in mold",
+      "parameter": "time",
+      "value": "one hour",
+      "unit": null,
+      "evidence": "the mixed solution was dropcast in 3D printed molds with controlled thickness and shape, and left for one hour to complete gelation",
+      "evidence_verified": false
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "4.59",
+      "unit": "kPa",
+      "value_si": 4590.0,
+      "evidence": "The alginate only hydrogel showed an average G0 value of 4.59 kPa at a fixed frequency of 1 Hz",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": "shear_rheology",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": null,
+  "notes": "Rheology at 37 °C, 0.5% strain. Yield strain 91.74%.",
+  "flags": [
+    "unverified_quote:processing[0]"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:05:30+00:00",
+  "schema_version": "0.1.0"
+}

@@ -1,0 +1,55 @@
+{
+  "record_id": "godbe-2020-pa-1-1-wt-gel-with-photo-ff648a",
+  "source": {
+    "doi": "10.1021/acsbiomaterials.9b01585",
+    "title": "Gelator Length Precisely Tunes Supramolecular Hydrogel Stiffness and Neuronal Phenotype in 3D Culture",
+    "first_author": "Godbe",
+    "year": 2020,
+    "url": "https://doi.org/10.1021/acsbiomaterials.9b01585",
+    "file": "godbe2020.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "PA-1 (1 wt%) gel with photocleavable K6F2NK6",
+  "material_key": "peptide_sap",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "PA-1",
+      "amount": "1",
+      "unit": "wt %",
+      "evidence": "Mixing K6F2NK6 and 1 wt % PA-1 produced strong gels with G′ = 4500 Pa.",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": {
+      "value": "4500",
+      "unit": "Pa",
+      "value_si": 4500.0,
+      "evidence": "Mixing K6F2NK6 and 1 wt % PA-1 produced strong gels with G′ = 4500 Pa.",
+      "location": "p. 5",
+      "confidence": "high",
+      "test_method": "shear_rheology",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": null,
+  "notes": "0.5 M HCl, pH 2.",
+  "flags": [
+    "material_key:from_model_only"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:00:57+00:00",
+  "schema_version": "0.1.0"
+}

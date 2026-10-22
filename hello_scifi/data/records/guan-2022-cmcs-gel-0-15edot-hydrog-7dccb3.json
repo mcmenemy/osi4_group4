@@ -1,0 +1,100 @@
+{
+  "record_id": "guan-2022-cmcs-gel-0-15edot-hydrog-7dccb3",
+  "source": {
+    "doi": "10.3390/molecules27238326",
+    "title": "Carboxymethyl Chitosan and Gelatin Hydrogel Scaffolds Incorporated with Conductive PEDOT Nanoparticles for Improved Neural Stem Cell Proliferation and Neuronal Differentiation",
+    "first_author": "Guan",
+    "year": 2022,
+    "url": "https://doi.org/10.3390/molecules27238326",
+    "file": "guan2022.pdf"
+  },
+  "material_class": "conductive_hydrogel",
+  "material": "CMCS/Gel-0.15EDOT hydrogel",
+  "material_key": "conductive_composite_gel",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "EDOT",
+      "amount": "0.15",
+      "unit": "M",
+      "evidence": "CMCS/Gel-0.15EDOT 0.1 0.1 0.15 2 (5.54 ± 0.73) × 10−4",
+      "evidence_verified": true
+    },
+    {
+      "component": "APS",
+      "amount": "0.1",
+      "unit": "M",
+      "evidence": "CMCS/Gel-0.15EDOT 0.1 0.1 0.15 2 (5.54 ± 0.73) × 10−4",
+      "evidence_verified": true
+    },
+    {
+      "component": "pTS-Na",
+      "amount": "0.1",
+      "unit": "M",
+      "evidence": "CMCS/Gel-0.15EDOT 0.1 0.1 0.15 2 (5.54 ± 0.73) × 10−4",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "in situ interfacial polymerization",
+      "parameter": "time",
+      "value": "72",
+      "unit": "h",
+      "evidence": "The polymerization was carried out in a vibrator with a slight vibration at RT for 72 h",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": {
+      "value": "5.54 × 10−4",
+      "unit": "S·cm−1",
+      "value_si": 0.055400000000000005,
+      "evidence": "CMCS/Gel-0.15EDOT 0.1 0.1 0.15 2 (5.54 ± 0.73) × 10−4",
+      "location": "p. 4, Table 1",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "neural stem cells from fetal Sprague Dawley rat hippocampus",
+    "cell_category": "sc_neuron",
+    "species": "rat",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": null,
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "236.41",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "after being cultured for 12 days, the CMCS/Gel-0.15EDOT and the CMCS/Gel-0.2EDOT scaffolds caused the highest ((236.41 ± 4.51)% and (261.02 ± 5.97)%, respectively) increase in cell viability",
+        "location": "p. 10",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "CCK-8 cell viability increase"
+      }
+    ],
+    "survival": []
+  },
+  "notes": "Porosity 93.2% reported.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:01:43+00:00",
+  "schema_version": "0.1.0"
+}

@@ -1,0 +1,62 @@
+{
+  "record_id": "alam-2020-agarose-2-w-v-164e70",
+  "source": {
+    "doi": "10.1088/1742-6596/1455/1/012012",
+    "title": "Measurements of Elastic Properties of Biological Hydrogels using Atomic Force Microscopy",
+    "first_author": "Alam",
+    "year": 2020,
+    "url": "https://doi.org/10.1088/1742-6596/1455/1/012012",
+    "file": "alam2020.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Agarose 2% (w/v)",
+  "material_key": "agarose",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "agarose",
+      "amount": "2",
+      "unit": "% (w/v)",
+      "evidence": "To prepare agarose gels with 1% (w/v) and 2% (w/v) concentrations, agarose powder weight 1 gram and 2 grams were dissolved in 100 ml de-ionized water",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "boiling",
+      "parameter": "time",
+      "value": "approximately two",
+      "unit": "minutes",
+      "evidence": "dissolved in 100 ml de-ionized water and boiled for approximately two minutes in the microwave",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "230",
+      "unit": "kPa",
+      "value_si": 230000.0,
+      "evidence": "The elastic modulus was found to increase from an average value of 168 kPa to 230 kPa (35% increase) when concentration of agarose was increased from 1% to 2%.",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": "indentation_afm",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": null,
+  "notes": "Measured at room temperature (25 °C) with DNP-10 AFM tip.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:58:32+00:00",
+  "schema_version": "0.1.0"
+}

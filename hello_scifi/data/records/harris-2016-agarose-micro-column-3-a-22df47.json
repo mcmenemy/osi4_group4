@@ -1,0 +1,136 @@
+{
+  "record_id": "harris-2016-agarose-micro-column-3-a-22df47",
+  "source": {
+    "doi": "10.1088/1741-2560/13/1/016019",
+    "title": "Advanced biomaterial strategies to transplant preformed micro-tissue engineered neural networks into the brain",
+    "first_author": "Harris",
+    "year": 2016,
+    "url": "https://doi.org/10.1088/1741-2560/13/1/016019",
+    "file": "harris2016.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Agarose micro-column (3% agarose shell) with collagen I-laminin ECM core (uncoated micro-TENN)",
+  "material_key": "agarose",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "agarose in DPBS",
+      "amount": "3",
+      "unit": "%",
+      "evidence": "The outer hydrogel structure consisted of 3% agarose in DPBS.",
+      "evidence_verified": true
+    },
+    {
+      "component": "rat tail type I collagen (ECM core)",
+      "amount": "1.0",
+      "unit": "mg ml−1",
+      "evidence": "rat tail type I collagen, 1.0 mg ml−1",
+      "evidence_verified": true
+    },
+    {
+      "component": "mouse laminin (ECM core)",
+      "amount": "1.0",
+      "unit": "mg ml−1",
+      "evidence": "mouse laminin, 1.0 mg ml−1",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "molding",
+      "parameter": "outer diameter",
+      "value": "500-990",
+      "unit": "μm",
+      "evidence": "The thin agarose shell was molded with an outer diameter ranging from 500 μm to 990 μm.",
+      "evidence_verified": true
+    },
+    {
+      "step": "agarose gelation",
+      "parameter": "time",
+      "value": "∼5",
+      "unit": "min",
+      "evidence": "Once the agarose in the capillary tube had gelled (∼5 min)",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV sterilization",
+      "parameter": "time",
+      "value": "15",
+      "unit": "min",
+      "evidence": "placed in DPBS for sterilization by UV light for 15 min.",
+      "evidence_verified": true
+    },
+    {
+      "step": "cell seeding",
+      "parameter": "cell density",
+      "value": "3.6, 5.6, 7.2, 10",
+      "unit": "million cells/ml",
+      "evidence": "10 μl of the cell culture solution (3.6, 5.6, 7.2, and 10 million cells/ml) was delivered to both ends of the micro-columns",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "primary cerebral cortical neurons (E18)",
+    "cell_category": "primary_neuron",
+    "species": "rat (Sprague-Dawley)",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": "collagen I + laminin ECM core",
+    "culture_days": {
+      "value": "22",
+      "unit": "days",
+      "value_si": 22.0,
+      "evidence": "The engineered architecture of cortical micro-TENNs facilitated robust neuronal viability and axonal cytoarchitecture to at least 22 days in vitro.",
+      "location": "p. 2",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": {
+      "value": "80.5",
+      "unit": "%",
+      "value_si": 80.5,
+      "evidence": "This revealed that the percentage of viable neurons was 80.5 ± 1.2% for uncoated micro-TENNs,",
+      "location": "p. 14",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "neurite_length": null,
+    "other_outcomes": [],
+    "survival": [
+      {
+        "value": "80.5",
+        "unit": "%",
+        "value_si": 80.5,
+        "evidence": "This revealed that the percentage of viable neurons was 80.5 ± 1.2% for uncoated micro-TENNs,",
+        "location": "p. 14",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "24 h after coating/media change",
+        "culture_days": 1.0,
+        "setting": "in_vitro_3d"
+      }
+    ]
+  },
+  "notes": "Micro-TENN: cortical neurons seeded at ends of agarose micro-column with collagen-laminin core; cultured in Neurobasal + B27.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:02:16+00:00",
+  "schema_version": "0.1.0"
+}

@@ -1,0 +1,79 @@
+{
+  "record_id": "ju-2007-fn-free-salmon-fibrin-ge-09c902",
+  "source": {
+    "doi": "10.1016/j.biomaterials.2007.01.008",
+    "title": "Enhanced neurite growth from mammalian neurons in three-dimensional salmon fibrin gels",
+    "first_author": "Ju",
+    "year": 2007,
+    "url": "https://doi.org/10.1016/j.biomaterials.2007.01.008",
+    "file": "ju2007.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "FN-free salmon fibrin gel",
+  "material_key": "fibrin",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "salmon fibrinogen (FBG)",
+      "amount": "3",
+      "unit": "mg/ml",
+      "evidence": "FBG (final concentration 3 mg/ml) and cells (final concentration 50,000–300,000 cells/100 ml) were diluted in",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "Primary mouse spinal cord and mouse/rat cortical neurons",
+    "cell_category": "primary_neuron",
+    "species": "mouse, rat",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": "poly-D-lysine coated coverslip",
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "54",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "neurite growth in FN-depleted salmon fibrin treated with echista￾tin (to block FBG/fibrin–integrin binding) was reduced 54%",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "neurite length reduction with echistatin"
+      },
+      {
+        "value": "2-fold greater",
+        "unit": null,
+        "value_si": null,
+        "evidence": "the total neurite length for neurons in FN-free salmon fibrin is 2-fold greater than that for neurons in bovine or human fibrin",
+        "location": "p. 8",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "total neurite length relative to bovine or human fibrin"
+      }
+    ],
+    "survival": []
+  },
+  "notes": "Fibronectin removed by gelatin chromatography.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:04:02+00:00",
+  "schema_version": "0.1.0"
+}

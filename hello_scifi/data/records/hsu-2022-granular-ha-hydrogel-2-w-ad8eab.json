@@ -1,0 +1,53 @@
+{
+  "record_id": "hsu-2022-granular-ha-hydrogel-2-w-ad8eab",
+  "source": {
+    "doi": "10.1016/j.bioactmat.2021.07.008",
+    "title": "Increased connectivity of hiPSC-derived neural networks in multiphase granular hydrogel scaffolds",
+    "first_author": "Hsu",
+    "year": 2022,
+    "url": "https://doi.org/10.1016/j.bioactmat.2021.07.008",
+    "file": "hsu2021.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Granular HA hydrogel, 2 w/v % granules + 30 v/v % secondary crosslinker",
+  "material_key": "hyaluronic_acid",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "secondary Extralink-1 (PEGDA) crosslinker, relative to primary",
+      "amount": "30",
+      "unit": "v/v %",
+      "evidence": "granular hydrogel mixed with solutions of secondary crosslinker at 10 v/v %, 20 v/v %, 30 v/v % and 50 v/v % (relative to the primary crosslinker concentration)",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": {
+      "value": "225",
+      "unit": "Pa",
+      "value_si": 225.0,
+      "evidence": "granular hydrogel mixed with solutions of secondary crosslinker at 10 v/v %, 20 v/v %, 30 v/v % and 50 v/v % (relative to the primary crosslinker concentration) acquired G′ values of 99 ± 43 Pa, 121 ± 25 Pa, 225 ± 60 Pa and 188 ± 28 Pa, respectively.",
+      "location": "p. 8",
+      "confidence": "high",
+      "test_method": "shear_rheology",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": null,
+  "notes": "Cells in this stiffer composite formed tight clusters (Figure S4). DWS microrheology at 37 °C.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:03:30+00:00",
+  "schema_version": "0.1.0"
+}

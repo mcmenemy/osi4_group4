@@ -1,0 +1,154 @@
+{
+  "record_id": "zhong-2010-hyaluronan-heparin-colla-129f7b",
+  "source": {
+    "doi": "10.1177/1545968310361958",
+    "title": "Hydrogel Matrix to Support Stem Cell Survival After Brain Transplantation in Stroke",
+    "first_author": "Zhong",
+    "year": 2010,
+    "url": "https://doi.org/10.1177/1545968310361958",
+    "file": "zhong2010.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Hyaluronan–heparin–collagen hydrogel (HyStem-HP) with embryonic cortex-derived NPCs",
+  "material_key": "hyaluronic_acid",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "hyaluronan/heparin sulfate",
+      "amount": "4",
+      "unit": "mL",
+      "evidence": "100 000 neuronal stem cells in 1 mL were mixed with 4 mL hyaluronan/heparin sulfate, 1 mL gelatin, and 1 mL cross-linker to form a stem-cell–hydrogel complex.",
+      "evidence_verified": true
+    },
+    {
+      "component": "gelatin",
+      "amount": "1",
+      "unit": "mL",
+      "evidence": "100 000 neuronal stem cells in 1 mL were mixed with 4 mL hyaluronan/heparin sulfate, 1 mL gelatin, and 1 mL cross-linker to form a stem-cell–hydrogel complex.",
+      "evidence_verified": true
+    },
+    {
+      "component": "cross-linker (polyethylene glycol diacrylate)",
+      "amount": "1",
+      "unit": "mL",
+      "evidence": "100 000 neuronal stem cells in 1 mL were mixed with 4 mL hyaluronan/heparin sulfate, 1 mL gelatin, and 1 mL cross-linker to form a stem-cell–hydrogel complex.",
+      "evidence_verified": true
+    },
+    {
+      "component": "neuronal stem cells",
+      "amount": "100 000 in 1",
+      "unit": "mL",
+      "evidence": "100 000 neuronal stem cells in 1 mL were mixed with 4 mL hyaluronan/heparin sulfate, 1 mL gelatin, and 1 mL cross-linker to form a stem-cell–hydrogel complex.",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "gelation",
+      "parameter": "time",
+      "value": "30",
+      "unit": "minutes",
+      "evidence": "Solutions of this hydrogel form a transparent gel when mixed with a cross-linker over a period of 30 minutes.",
+      "evidence_verified": false
+    },
+    {
+      "step": "stereotaxic injection",
+      "parameter": "rate",
+      "value": "0.7",
+      "unit": "mL/min",
+      "evidence": "into the infarct cavity at a depth of 1 mm from the surface of the brain at a rate of 0.7 mL/min.",
+      "evidence_verified": true
+    },
+    {
+      "step": "stereotaxic injection",
+      "parameter": "needle gauge",
+      "value": "30",
+      "unit": "gauge",
+      "evidence": "The 7 mL complex was then injected while in liquid form stereotaxically with a 30-gauge needle",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "GFP mouse neural progenitor cells derived from E12.5 embryonic cortex",
+    "cell_category": "primary_neuron",
+    "species": "mouse",
+    "setting": "in_vivo",
+    "tissue_site": "brain",
+    "coating": null,
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "1.56",
+        "unit": "mm",
+        "value_si": null,
+        "evidence": "1.20 ± 0.15 mm without hydrogel vs 1.56 ± 0.35 mm with hydrogel; P = .22",
+        "location": "p. 5",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "peri-infarct PECAM-positive vessel length"
+      },
+      {
+        "value": "5.82",
+        "unit": null,
+        "value_si": null,
+        "evidence": "ratio of optical density [OD] between peri-infarct and contralateral area was 5.63 ± 1.34 without hydrogel vs 5.82 ± 0.68 with hydrogel; P = .92",
+        "location": "p. 5",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "GFAP OD ratio peri-infarct/contralateral"
+      },
+      {
+        "value": "1.18",
+        "unit": "mm³",
+        "value_si": null,
+        "evidence": "1.25 ± 0.18 mm³ without hydrogel vs 1.18 ± 0.35 mm³ with hydrogel; P = .77",
+        "location": "p. 4",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "infarct size with hydrogel"
+      }
+    ],
+    "survival": [
+      {
+        "value": "8000",
+        "unit": "cells",
+        "value_si": null,
+        "evidence": "Cells transplanted with hydrogel had an average of 8000 cells—a statistically significant 2-fold expansion in cell survival (P = .035).",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "retention",
+        "timepoint": "2 weeks after transplantation",
+        "culture_days": 14.0,
+        "setting": "in_vivo"
+      }
+    ]
+  },
+  "notes": "Commercial HyStem-HP: thiol-modified sodium hyaluronate, heparin sulfate, gelatin, cross-linked with PEG diacrylate. Injected into photothrombotic stroke cavity 7 days post-stroke in C57BL/6 mice; cells-only control had 4000 surviving cells. In vitro, hydrogel increased survival (LDH, CCK-8) under B27/bFGF deprivation at 24 h; values only in figures. Iba1+ microglia infiltration significantly decreased (P = .004).",
+  "flags": [
+    "cell_category:check_sc_neuron",
+    "unverified_quote:processing[0]"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:06:46+00:00",
+  "schema_version": "0.1.0"
+}

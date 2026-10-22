@@ -1,0 +1,204 @@
+{
+  "record_id": "xu-2022-col-ppy40-collagen-polyp-d141f6",
+  "source": {
+    "doi": "10.3389/fbioe.2022.912497",
+    "title": "Conductive Collagen-Based Hydrogel Combined With Electrical Stimulation to Promote Neural Stem Cell Proliferation and Differentiation",
+    "first_author": "Xu",
+    "year": 2022,
+    "url": "https://doi.org/10.3389/fbioe.2022.912497",
+    "file": "xu2022.pdf"
+  },
+  "material_class": "conductive_hydrogel",
+  "material": "Col/PPy40 (collagen/polypyrrole hydrogel, 40 mM pyrrole)",
+  "material_key": "conductive_composite_gel",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "collagen",
+      "amount": "10",
+      "unit": "mg/ml",
+      "evidence": "1 ml of a pyrrole aqueous solution (concentrations of 0 mM, 20 mM, 40 mM, or 60 mM) was mixed with 1 ml of a collagen solution (10 mg/ml)",
+      "evidence_verified": true
+    },
+    {
+      "component": "pyrrole",
+      "amount": "40",
+      "unit": "mM",
+      "evidence": "1 ml of a pyrrole aqueous solution (concentrations of 0 mM, 20 mM, 40 mM, or 60 mM) was mixed with 1 ml of a collagen solution (10 mg/ml)",
+      "evidence_verified": true
+    },
+    {
+      "component": "ferric chloride (pyrrole:FeCl3 molar ratio)",
+      "amount": "1:4",
+      "unit": null,
+      "evidence": "Ferric chloride oxidant (molar ratio of pyrrole to ferric chloride 1:4)",
+      "evidence_verified": true
+    },
+    {
+      "component": "genipin",
+      "amount": "0.3",
+      "unit": "wt%",
+      "evidence": "the mixed solution was soaked in a genipin solution (0.3 wt%)",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "genipin crosslinking",
+      "parameter": "temperature/time",
+      "value": "37 / 24",
+      "unit": "°C / h",
+      "evidence": "The cross-linking treatment was carried out at 37°C for 24 h.",
+      "evidence_verified": false
+    },
+    {
+      "step": "electrical stimulation",
+      "parameter": "voltage",
+      "value": "200",
+      "unit": "mV",
+      "evidence": "the electrical stimulation (200 mV) was performed for 30 min every day",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "2,684.5",
+      "unit": "Pa",
+      "value_si": 2684.5,
+      "evidence": "The Young’s moduli of Col/PPy0, Col/PPy20, and Col/PPy40 hydrogels were 654.5 ± 10.32 Pa, 1241.3 ± 20.4 Pa, and 2,684.5 ± 30.2 Pa, respectively",
+      "location": "p. 7",
+      "confidence": "high",
+      "test_method": "compression",
+      "evidence_verified": true
+    },
+    "conductivity": {
+      "value": "0.176",
+      "unit": "S/cm",
+      "value_si": 17.599999999999998,
+      "evidence": "The conductivity of Col/PPy40 hydrogel is the highest (0.176 ± 0.07 S/cm)",
+      "location": "p. 7",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "neural stem cells from embryonic (E15-16) rat neocortex",
+    "cell_category": "sc_neuron",
+    "species": "rat",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": null,
+    "culture_days": {
+      "value": "7",
+      "unit": "days",
+      "value_si": 7.0,
+      "evidence": "The NSCs were cultured on hydrogels with and without ES for 3 d and 7 days in a differentiation medium.",
+      "location": "p. 5",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": {
+      "value": "91.2",
+      "unit": "%",
+      "value_si": 91.2,
+      "evidence": "The highest percentage of viable NSCs was the Col/PPy40 + ES group (91.2 ± 4.8%)",
+      "location": "p. 9",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "neurite_length": {
+      "value": "170.8",
+      "unit": "μm",
+      "value_si": 0.0001708,
+      "evidence": "The longest neurite length (170.8 ± 37.2 μm) was observed in the Col/PPy40 + ES hydrogel group",
+      "location": "p. 10",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "other_outcomes": [
+      {
+        "value": "51.33",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "On the 28th day, the degradation residual weights of Col/PPy20, Col/PPy40, and Col/PPy60 were 45.11 ± 3.25%, 51.33 ± 2.78, and 55.24 ± 4.11%, respectively.",
+        "location": "p. 8",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "remaining weight after 28 days in collagenase"
+      },
+      {
+        "value": "4.7",
+        "unit": null,
+        "value_si": null,
+        "evidence": "ES group (4.7 ± 1.2) were significantly higher than those in the Col/PPy40 (3.1 ± 1.0) and Col/PPy0 (2.2 ± 0.9) groups",
+        "location": "p. 11",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "number of branch points, Col/PPy40 + ES"
+      },
+      {
+        "value": "3.1",
+        "unit": null,
+        "value_si": null,
+        "evidence": "were significantly higher than those in the Col/PPy40 (3.1 ± 1.0) and Col/PPy0 (2.2 ± 0.9) groups",
+        "location": "p. 11",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "number of branch points, Col/PPy40 without ES"
+      }
+    ],
+    "survival": [
+      {
+        "value": "91.2",
+        "unit": "%",
+        "value_si": 91.2,
+        "evidence": "The highest percentage of viable NSCs was the Col/PPy40 + ES group (91.2 ± 4.8%)",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "day 3",
+        "culture_days": 3.0,
+        "setting": "in_vitro_3d"
+      },
+      {
+        "value": "80.5",
+        "unit": "%",
+        "value_si": 80.5,
+        "evidence": "followed by Col/PPy40 (80.5 ± 4.7%), and Col/PPy0 (73.5 ± 4.8%) groups",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "day 3",
+        "culture_days": 3.0,
+        "setting": "in_vitro_3d"
+      }
+    ]
+  },
+  "notes": "ES: 200 mV square-wave DC pulses via Pt electrodes, 30 min daily. Degradation in collagenase 1 U/ml at 37°C.",
+  "flags": [
+    "unverified_quote:processing[0]"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:06:16+00:00",
+  "schema_version": "0.1.0"
+}

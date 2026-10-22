@@ -1,0 +1,153 @@
+{
+  "record_id": "godbe-2020-pa-1-peptide-amphiphile-e7025d",
+  "source": {
+    "doi": "10.1021/acsbiomaterials.9b01585",
+    "title": "Gelator Length Precisely Tunes Supramolecular Hydrogel Stiffness and Neuronal Phenotype in 3D Culture",
+    "first_author": "Godbe",
+    "year": 2020,
+    "url": "https://doi.org/10.1021/acsbiomaterials.9b01585",
+    "file": "godbe2020.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "PA-1 peptide amphiphile gel with K4 (oligo-L-lysine, n=4)",
+  "material_key": "peptide_sap",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "PA-1",
+      "amount": "0.5",
+      "unit": "wt %",
+      "evidence": "DA neurons cultured in 3D PA-1/K4 gels (14 DIV, 40,000 cells/μL, 0.5 wt % PA-1)",
+      "evidence_verified": true
+    },
+    {
+      "component": "K4 chloride",
+      "amount": "10",
+      "unit": "mM",
+      "evidence": "gelled the resulting solution with the chloride salts of K4 (10 mM), K10 (4 mM), or Ca2+ (20 mM) to create 3D gels",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "anneal",
+      "parameter": "temperature",
+      "value": "90",
+      "unit": "°C",
+      "evidence": "annealed at 90 °C for 30 min, followed by a controlled temperature gradient of 0.5° C/min down to 25 °C to create long fibers",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "human iPSC-derived dopaminergic neurons",
+    "cell_category": "sc_neuron",
+    "species": "human",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": null,
+    "culture_days": {
+      "value": "14",
+      "unit": "days",
+      "value_si": 14.0,
+      "evidence": "DA neurons cultured in 3D PA-1/K4 gels (14 DIV, 40,000 cells/μL, 0.5 wt % PA-1)",
+      "location": "p. 8, Figure 5",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": {
+      "value": "38",
+      "unit": "%",
+      "value_si": 38.0,
+      "evidence": "At 14 DIV, this difference in viability between K4 and K10 was even more pronounced (K10 = 25%, K4 = 38%, p < 0.0001)",
+      "location": "p. 7",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "neurite_length": {
+      "value": "95.0",
+      "unit": "μm",
+      "value_si": 0.00009499999999999999,
+      "evidence": "The average length of the longest neurite in PA-1/K4 gels was 95.0 ± 8.1 μm",
+      "location": "p. 7",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "other_outcomes": [
+      {
+        "value": "110",
+        "unit": "s",
+        "value_si": null,
+        "evidence": "Stress relaxation is also independent of n (Figure 1G, T1/2:K4 = 110 s, K10 = 89 s, K15 = 124 s, p = 0.76)",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "stress relaxation half-time"
+      },
+      {
+        "value": "75",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "PA-1/K4 gels proved better for cells as the percentage of TH+ neurons increased (Figure 5G−I,M75%)",
+        "location": "p. 7",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "TH+ neurons percentage"
+      }
+    ],
+    "survival": [
+      {
+        "value": "50",
+        "unit": "%",
+        "value_si": 50.0,
+        "evidence": "At 1 DIV, both Kn samples demonstrated increased survival compared to Ca2+ (30% for Ca2+, 43% for K10, and 50% for K4, p < 0.0001)",
+        "location": "p. 7",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "1 DIV",
+        "culture_days": 1.0,
+        "setting": "in_vitro_3d"
+      },
+      {
+        "value": "38",
+        "unit": "%",
+        "value_si": 38.0,
+        "evidence": "At 14 DIV, this difference in viability between K4 and K10 was even more pronounced (K10 = 25%, K4 = 38%, p < 0.0001)",
+        "location": "p. 7",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "14 DIV",
+        "culture_days": 14.0,
+        "setting": "in_vitro_3d"
+      }
+    ]
+  },
+  "notes": "Softer gel (~70 Pa lower G′ than PA-1/K10).",
+  "flags": [
+    "material_key:from_model_only"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:00:57+00:00",
+  "schema_version": "0.1.0"
+}

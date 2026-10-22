@@ -1,0 +1,120 @@
+{
+  "record_id": "harris-2016-cmc-coated-agarose-micro-77e079",
+  "source": {
+    "doi": "10.1088/1741-2560/13/1/016019",
+    "title": "Advanced biomaterial strategies to transplant preformed micro-tissue engineered neural networks into the brain",
+    "first_author": "Harris",
+    "year": 2016,
+    "url": "https://doi.org/10.1088/1741-2560/13/1/016019",
+    "file": "harris2016.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "CMC-coated agarose micro-column (micro-TENN with dehydrated carboxymethylcellulose shell)",
+  "material_key": "agarose",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "agarose in DPBS",
+      "amount": "3",
+      "unit": "%",
+      "evidence": "The outer hydrogel structure consisted of 3% agarose in DPBS.",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "CMC coating hydration",
+      "parameter": "time in 1x PBS",
+      "value": "approximately 3",
+      "unit": "s",
+      "evidence": "submerged into sterile 1x PBS for approximately 3 s to hydrate the CMC coating.",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV sterilization of CMC",
+      "parameter": "time",
+      "value": "15",
+      "unit": "min",
+      "evidence": "The CMC and all instruments utilized throughout this procedure were then illuminated with UV light for 15 min.",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "primary cerebral cortical neurons (E18)",
+    "cell_category": "primary_neuron",
+    "species": "rat (Sprague-Dawley)",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": "collagen I + laminin ECM core",
+    "culture_days": null,
+    "viability_percent": {
+      "value": "79.6",
+      "unit": "%",
+      "value_si": 79.6,
+      "evidence": "79.6 ± 2.2% for CMC-coated micro-TENNs",
+      "location": "p. 14",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "893",
+        "unit": "mN",
+        "value_si": null,
+        "evidence": "CMC-coated micro-TENNs were able to withstand 893 ± 457 mN before buckling",
+        "location": "p. 12, Figure 7",
+        "confidence": "high",
+        "test_method": "compression",
+        "evidence_verified": true,
+        "name": "buckling force"
+      },
+      {
+        "value": "511.40",
+        "unit": "μm",
+        "value_si": null,
+        "evidence": "Of note, microscopic measurements revealed that CMC-coated micro-columns had a cross-section of 511.40 ± 29.24 μm.",
+        "location": "p. 10",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "cross-section"
+      }
+    ],
+    "survival": [
+      {
+        "value": "79.6",
+        "unit": "%",
+        "value_si": 79.6,
+        "evidence": "79.6 ± 2.2% for CMC-coated micro-TENNs",
+        "location": "p. 14",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "24 h after CMC coating",
+        "culture_days": 1.0,
+        "setting": "in_vitro_3d"
+      }
+    ]
+  },
+  "notes": "Low viscosity CMC powder coating, briefly hydrated then dehydrated at 37 °C; buckling tested on mildly dehydrated coated micro-columns against steel plate. Acellular coated micro-columns also implanted needle-lessly into rat cortex (n=3, 24 h).",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T19:02:16+00:00",
+  "schema_version": "0.1.0"
+}
