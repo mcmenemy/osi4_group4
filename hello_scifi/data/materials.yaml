@@ -129,6 +129,19 @@ materials:
       (2012); mammals lack enzymes that cleave alginate, though ionically crosslinked gels can dissolve.'
     status: to verify
   literature_typical_stiffness_kpa: null
+- key: chitosan
+  label: Chitosan gels (incl. methacrylamide chitosan)
+  class: nonconductive_hydrogel
+  patterns:
+  - chitosan
+  note: Photocrosslinkable chitosan used for neural stem cell stiffness studies (Leipzig & Shoichet 2009).
+  transparency:
+    value: unknown
+    citation: null
+  degradable:
+    value: unknown
+    citation: null
+  literature_typical_stiffness_kpa: null
 - key: fibrin
   label: Fibrin
   class: nonconductive_hydrogel

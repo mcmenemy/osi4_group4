@@ -1,0 +1,123 @@
+{
+  "record_id": "leipzig-2009-photocrosslinked-methacr-ce76cd",
+  "source": {
+    "doi": "10.1016/j.biomaterials.2009.09.002",
+    "title": "The effect of substrate stiffness on adult neural stem cell behavior",
+    "first_author": "Leipzig",
+    "year": 2009,
+    "url": "https://doi.org/10.1016/j.biomaterials.2009.09.002",
+    "file": "leipzig2009.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Photocrosslinked methacrylamide chitosan (MAC) hydrogel, 7 kPa (6.0 mL DMAP/NVP per g MAC)",
+  "material_key": "chitosan",
+  "formulation": [
+    {
+      "component": "methacrylamide chitosan",
+      "amount": "2",
+      "unit": "wt%",
+      "evidence": "USA) at 2 wt%",
+      "evidence_verified": true
+    },
+    {
+      "component": "DMAP/NVP (300 mg/mL)",
+      "amount": "6.0",
+      "unit": "mL per g MAC",
+      "evidence": "synthesized using 1.5, 3.0 and 6.0 mL of 300 mg/",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "UV crosslinking",
+      "parameter": "time",
+      "value": "2",
+      "unit": "min",
+      "evidence": "crosslinked with 2 min UV",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "6.72",
+      "unit": "kPa",
+      "value_si": 6720.0,
+      "evidence": "0.51 and 6.72",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": "compression",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "adult SVZ-derived neural stem/progenitor cells",
+    "cell_category": "sc_neuron",
+    "species": "rat",
+    "setting": "in_vitro_2d",
+    "in_brain": null,
+    "coating": "laminin",
+    "culture_days": {
+      "value": "8",
+      "unit": "d",
+      "value_si": 8.0,
+      "evidence": "after 0, 4 and 8 d of culture",
+      "location": "p. 2",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "185.67",
+        "unit": "h",
+        "value_si": null,
+        "evidence": "111.4 and 185.67 h, respectively",
+        "location": "p. 5",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "cell doubling time"
+      },
+      {
+        "value": "71.8",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "dendrocytes (71.8",
+        "location": "p. 5",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "RIP-positive oligodendrocytes"
+      },
+      {
+        "value": "11.6",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "the 7 kPa in 11.6",
+        "location": "p. 5",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "bIII-tubulin positive neurons"
+      }
+    ],
+    "survival": []
+  },
+  "notes": "No GFAP-positive astrocytes observed on 7 kPa surfaces.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T12:46:34+00:00",
+  "schema_version": "0.1.0"
+}
