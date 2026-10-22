@@ -8,18 +8,23 @@ from pathlib import Path
 from typing import Literal
 
 import anthropic
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.concurrency import run_in_threadpool
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from app import llm, phi, sim
+from app import data, llm, phi, sim
+from app.extraction import extract, pdf_text
+from app.schemas import Record
 
 logger = logging.getLogger(__name__)
 
 MAX_CHARS = 2000
 MAX_DESCRIPTION_CHARS = 1500
+MAX_UPLOAD_BYTES = 20 * 1024 * 1024
+# Live extraction on the public site is capped; longer papers go through scripts/extract_batch.py.
+MAX_EXTRACT_CHARS = 200_000
 RATE_LIMIT = int(os.environ.get("RATE_LIMIT_PER_MINUTE", "10"))
 # Set by the Dockerfile; unset in local dev, where Vite serves the frontend.
 FRONTEND_DIST = os.environ.get("FRONTEND_DIST")
@@ -127,6 +132,71 @@ async def score(body: ScoreRequest, request: Request) -> dict:
         "carry_over": sum(s["score"] for s in scores.values()),
         "maintainability": criterion(result.maintainability),
     }
+
+
+@app.get("/api/records")
+async def records() -> list[Record]:
+    return data.load_records()
+
+
+@app.get("/api/references")
+async def references() -> object:
+    return data.load_json("references.json")
+
+
+@app.get("/api/target-window")
+async def target_window() -> object:
+    return data.load_json("target_window.json")
+
+
+@app.get("/api/proposal", response_class=PlainTextResponse)
+async def proposal() -> str:
+    return data.read_doc("proposal.md")
+
+
+@app.post("/api/extract")
+async def extract_endpoint(
+    request: Request,
+    file: UploadFile | None = File(None),
+    text: str | None = Form(None),
+) -> dict:
+    """Run extraction live on an uploaded PDF or pasted text. Results are not saved."""
+    if file is not None:
+        content = await file.read(MAX_UPLOAD_BYTES + 1)
+        if len(content) > MAX_UPLOAD_BYTES:
+            raise HTTPException(413, "PDF is larger than 20 MB.")
+        try:
+            pages = await run_in_threadpool(pdf_text.pdf_pages, content)
+        except Exception:
+            raise HTTPException(422, "Couldn't read that PDF.")
+        source_text = pdf_text.with_page_markers(pages)
+    elif text and text.strip():
+        pages = [text]
+        source_text = text
+    elif extract.mock_enabled():
+        pages = [extract.MOCK_TEXT]
+        source_text = extract.MOCK_TEXT
+    else:
+        raise HTTPException(422, "Upload a PDF or paste some text.")
+    if not source_text.strip():
+        raise HTTPException(422, "No text found. Scanned PDFs without a text layer aren't supported.")
+    if len(source_text) > MAX_EXTRACT_CHARS:
+        raise HTTPException(
+            413, "That paper is too long for the live demo. Use scripts/extract_batch.py instead."
+        )
+    check_rate_limit(request.client.host if request.client else "unknown")
+    if not extract.mock_enabled() and not os.environ.get("ANTHROPIC_API_KEY"):
+        raise HTTPException(503, "The server isn't configured with an Anthropic API key.")
+    try:
+        results = await extract.extract_records(source_text)
+    except extract.ExtractionError:
+        raise HTTPException(422, "Claude couldn't extract records from that text.")
+    except anthropic.RateLimitError:
+        raise HTTPException(503, "Claude is busy right now. Try again shortly.")
+    except anthropic.APIError:
+        logger.exception("Claude API call failed")
+        raise HTTPException(502, "Couldn't reach Claude. Try again later.")
+    return {"records": results, "pages": pages, "mock": extract.mock_enabled()}
 
 
 @app.post("/api/sim/hello")

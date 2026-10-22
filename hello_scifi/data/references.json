@@ -1,0 +1,58 @@
+{
+  "stiffness": [
+    {
+      "id": "brain",
+      "label": "Brain tissue",
+      "modulus_pa": [100, 10000],
+      "conductivity_s_m": [0.1, 1],
+      "status": "approximate literature value, to verify",
+      "citation": "Stiffness: Budday S. et al., Mechanical properties of gray and white matter brain tissue by indentation, J. Mech. Behav. Biomed. Mater. 46, 318-330 (2015). Conductivity: Gabriel S., Lau R.W. & Gabriel C., The dielectric properties of biological tissues, Phys. Med. Biol. 41, 2251 (1996)."
+    },
+    {
+      "id": "su8",
+      "label": "SU-8",
+      "modulus_pa": [2e9, 4e9],
+      "conductivity_s_m": null,
+      "status": "approximate literature value, to verify",
+      "citation": "SU-8 2000 series data sheet (MicroChem / Kayaku), Young's modulus about 2 GPa; used for the microwells in Brown et al., bioRxiv 2024."
+    },
+    {
+      "id": "pedot_dry",
+      "label": "Dry PEDOT:PSS film",
+      "modulus_pa": [1e9, 2e9],
+      "conductivity_s_m": null,
+      "status": "approximate literature value, to verify",
+      "citation": "Lang U. et al., Mechanical characterization of PEDOT:PSS thin films, Synth. Met. 159, 473-479 (2009)."
+    },
+    {
+      "id": "polyimide",
+      "label": "Polyimide",
+      "modulus_pa": [2e9, 3e9],
+      "conductivity_s_m": null,
+      "status": "approximate literature value, to verify",
+      "citation": "DuPont Kapton HN polyimide film data sheet (tensile modulus about 2.5 GPa)."
+    },
+    {
+      "id": "silicon",
+      "label": "Silicon",
+      "modulus_pa": [1.3e11, 1.7e11],
+      "conductivity_s_m": null,
+      "status": "approximate literature value, to verify",
+      "citation": "Hopcroft M.A., Nix W.D. & Kenny T.W., What is the Young's modulus of silicon?, J. Microelectromech. Syst. 19, 229-238 (2010)."
+    }
+  ],
+  "science_corp": {
+    "label": "Science Corp SU-8 microwells",
+    "material": "SU-8 microwells coated with poly-D-lysine and laminin",
+    "neurons": "about 90,000",
+    "occupancy_at_loading_percent": 77,
+    "occupancy_at_3_weeks_percent": 52,
+    "days": 21,
+    "measure": "Wells with labeled neurons (well occupancy), not cell viability",
+    "outcome": "Neurites mostly stayed in superficial cortex",
+    "modulus_ref": "su8",
+    "status": "from the preprint as summarized by the team; check against the figure before citing",
+    "citation": "Brown et al., Optogenetic stimulation of a cortical biohybrid implant guides goal directed behavior, bioRxiv (2024)",
+    "url": "https://www.biorxiv.org/content/10.1101/2024.11.22.624907v1"
+  }
+}

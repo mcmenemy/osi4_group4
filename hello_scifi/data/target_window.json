@@ -1,0 +1,6 @@
+{
+  "label": "Target window: soft and conductive",
+  "modulus_pa": [100, 100000],
+  "conductivity_s_m": [1, 100000],
+  "note": "Team-chosen bounds for discussion, not a literature value: roughly brain-like stiffness (0.1-100 kPa) with electronic conductivity of at least 1 S/m. Edit this file to change the shaded region."
+}

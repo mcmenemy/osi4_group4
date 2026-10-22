@@ -31,3 +31,6 @@ dist/
 .env.*
 !.env.example
 .claude/settings.local.json
+
+# Paper PDFs stay local: the repo is public and many papers aren't open access
+hello_scifi/data/papers/*.pdf
