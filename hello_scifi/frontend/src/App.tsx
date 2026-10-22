@@ -13,6 +13,8 @@ import { getJson, type MaterialRecord, type References, type TargetWindow } from
 
 const PROJECT_NAME = 'Neuron Nursery'
 
+const REPO_URL = 'https://github.com/mcmenemy/osi4_group4'
+
 // Tabs after the divider (`secondary`) show how the data is made, not the story.
 const TABS = [
   { id: 'overview', label: 'Overview' },
@@ -120,6 +122,14 @@ export default function App() {
         {route === 'fun' && <FunTab />}
         {route === 'scifi' && <ScifiPage />}
       </main>
+
+      <footer className="site-footer">
+        <div className="container">
+          <a href={REPO_URL} target="_blank" rel="noreferrer">
+            Source code on GitHub
+          </a>
+        </div>
+      </footer>
     </ModeContext.Provider>
   )
 }

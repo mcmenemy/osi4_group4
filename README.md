@@ -1,5 +1,7 @@
 # Better wells for living implants
 
+**Live site: [osi4-group4.onrender.com](https://osi4-group4.onrender.com/)**
+
 Our [OSI Hackathon @ NC State](https://ncsu-osi-hackathon-materials-2026.github.io/) project (Oct 21–22, 2026). Audiences: Science Corporation and the Seifrid lab (NC State MSE: organic mixed ionic-electronic conductors and self-driving labs).
 
 ## The problem

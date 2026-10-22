@@ -180,6 +180,22 @@ a {
   color: var(--fg);
 }
 
+.site-footer {
+  margin-top: 4rem;
+  padding: 1.5rem 0 2rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+.site-footer a {
+  color: var(--muted);
+}
+
+.site-footer a:hover {
+  color: var(--fg);
+}
+
 .tabs-sep {
   flex: none;
   align-self: stretch;
