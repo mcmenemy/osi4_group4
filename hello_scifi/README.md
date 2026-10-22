@@ -8,6 +8,7 @@ The app builds the evidence base for a gel-filled vs. bare microwell experiment 
 - **Extract:** run the extraction live on an uploaded PDF or pasted text.
 - **Review:** a demo of expert review. Nothing is saved there (see [Reviewing records](#reviewing-records)).
 - **Gaps & next steps:** data gaps computed from the scorecard, suggested experiments, and where the dataset goes. The destination text and URL live in `frontend/src/dataDestination.ts`.
+- **For fun:** the team's earlier "What can carry a mind?" benchmark, with "Score your own substrate" (uses `/api/score`).
 
 The Brian2 and PyPhi **package checks** are no longer in the UI; their API routes (`/api/sim/hello`, `/api/phi/hello`) still exist (see [Package checks](#package-checks)). The original 10x Sci-Fi stack test still works at `#/scifi`; it's just not in the nav.
 

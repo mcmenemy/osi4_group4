@@ -84,7 +84,8 @@ export default function Overview({ records }: { records: MaterialRecord[] }) {
       </p>
 
       <p className="footnote">
-        Earlier framing: a benchmark scoring substrates against theories of mind; see the repo docs.
+        Earlier framing: a benchmark scoring substrates against theories of mind; see{' '}
+        <a href="#/fun">For fun</a>.
       </p>
     </section>
   )

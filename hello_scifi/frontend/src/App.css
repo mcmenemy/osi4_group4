@@ -237,6 +237,321 @@ a {
   color: var(--muted);
 }
 
+/* For fun: What can carry a mind? */
+.mind {
+  padding: 4rem 0;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.explorer {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.explorer fieldset {
+  margin: 0 0 1rem;
+  padding: 0;
+  border: none;
+}
+
+.explorer legend {
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.explainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.explainer h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.explainer p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.verdict {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+}
+
+.verdict p {
+  color: var(--fg);
+}
+
+@media (max-width: 640px) {
+  .explainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.score {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.9rem;
+  height: 1.9rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.score.s0 {
+  color: var(--muted);
+  background: var(--s0);
+}
+
+.score.s1 {
+  background: var(--s1);
+}
+
+.score.s2 {
+  background: var(--s2);
+}
+
+.score.s3 {
+  background: var(--s3);
+}
+
+@media (prefers-color-scheme: light) {
+  .score.s3 {
+    color: #fff;
+  }
+}
+
+.score.big {
+  flex: none;
+  min-width: 3rem;
+  height: 3rem;
+  font-size: 1.4rem;
+}
+
+table.benchmark {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+table.benchmark caption {
+  caption-side: top;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+table.benchmark th,
+table.benchmark td {
+  padding: 0.35rem 0.6rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+table.benchmark thead th {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--blue);
+  background: var(--blue-soft);
+  vertical-align: bottom;
+}
+
+table.benchmark .num {
+  text-align: center;
+}
+
+table.benchmark thead th.active {
+  color: #fff;
+  background: var(--blue);
+}
+
+table.benchmark td.active {
+  background: var(--blue-soft);
+}
+
+table.benchmark tbody tr.active th,
+table.benchmark tbody tr.active td {
+  box-shadow: inset 0 1px 0 var(--accent), inset 0 -1px 0 var(--accent);
+}
+
+table.benchmark tbody tr.active th {
+  box-shadow: inset 4px 0 0 var(--accent), inset 0 1px 0 var(--accent), inset 0 -1px 0 var(--accent);
+}
+
+table.benchmark tbody tr.custom th .cell-btn {
+  color: var(--accent);
+}
+
+table.benchmark tbody th {
+  font-weight: 500;
+  min-width: 12rem;
+}
+
+table.benchmark .total {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.cell-btn {
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.cell-btn.score:hover,
+th .cell-btn:hover {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.custom-score {
+  margin-top: 3rem;
+  max-width: 44rem;
+}
+
+.custom-score h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.score-result {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.score-result header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
+.score-result h4 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.totals {
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.totals strong {
+  color: var(--fg);
+  font-size: 1.1rem;
+}
+
+.reasons {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.reasons dt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.reasons .score {
+  min-width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.reasons dd {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+}
+
+/* Bridge from the benchmark to the microwell work */
+.bridge-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.92rem;
+  background: var(--accent-soft);
+  border-radius: 6px;
+}
+
+.bridge-tag {
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+table.benchmark tbody tr.bridge th {
+  background: var(--accent-soft);
+}
+
+.bridge-callout {
+  margin: 2rem 0 0;
+  padding: 1.1rem 1.25rem;
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.bridge-callout h3 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+}
+
+.bridge-callout p {
+  margin: 0 0 0.6rem;
+}
+
+.bridge-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-weight: 600;
+}
+
 /* Scorecard */
 .scorecard-section {
   margin: 1.5rem 0 3rem;

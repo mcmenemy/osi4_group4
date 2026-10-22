@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import ExtractTab from './ExtractTab'
+import FunTab from './FunTab'
 import GapsTab from './GapsTab'
 import MapsTab from './MapsTab'
 import Overview from './Overview'
@@ -19,6 +20,7 @@ const TABS = [
   { id: 'extract', label: 'Extract' },
   { id: 'review', label: 'Review' },
   { id: 'gaps', label: 'Gaps & next steps' },
+  { id: 'fun', label: 'For fun' },
 ] as const
 
 const HIDDEN_ROUTES = ['scifi'] as const
@@ -26,8 +28,8 @@ const HIDDEN_ROUTES = ['scifi'] as const
 type Route = (typeof TABS)[number]['id'] | (typeof HIDDEN_ROUTES)[number]
 
 const ROUTES: readonly string[] = [...TABS.map((t) => t.id), ...HIDDEN_ROUTES]
-// Old links keep working: the benchmark tab is gone and the proposal became Gaps & next steps.
-const REDIRECTS: Record<string, Route> = { context: 'overview', proposal: 'gaps' }
+// Old links keep working: the benchmark moved to For fun and the proposal became Gaps & next steps.
+const REDIRECTS: Record<string, Route> = { context: 'fun', 'big-picture': 'fun', proposal: 'gaps' }
 
 // Tabs use "#/name" (optionally "#/name?id=..."). Other hashes are in-page anchors and keep
 // the current tab.
@@ -109,6 +111,7 @@ export default function App() {
         {route === 'extract' && <ExtractTab />}
         {route === 'review' && <ReviewTab records={records} />}
         {route === 'gaps' && <GapsTab />}
+        {route === 'fun' && <FunTab />}
         {route === 'scifi' && <ScifiPage />}
       </main>
     </>
