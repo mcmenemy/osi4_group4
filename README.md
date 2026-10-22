@@ -2,13 +2,13 @@
 
 **Live site: [osi4-group4.onrender.com](https://osi4-group4.onrender.com/)**
 
-Our [OSI Hackathon @ NC State](https://ncsu-osi-hackathon-materials-2026.github.io/) project (Oct 21–22, 2026). Audiences: Science Corporation and the Seifrid lab (NC State MSE: organic mixed ionic-electronic conductors and self-driving labs).
+Our [OSI Hackathon @ NC State](https://ncsu-osi-hackathon-materials-2026.github.io/) project (Oct 21–22, 2026).
 
 ## The problem
 
-Science Corporation's cortical biohybrid implant is an SU-8 microwell array: 10 µm wells, 15 µm deep, on a 15 µm pitch, about 118,000 wells per 5×5 mm die. Each well is loaded by centrifugation with one embryonic mouse cortical neuron, and the graft is stimulated optogenetically with an external light source; the chip has no electrodes. In their preprint, 77% of wells held cells at loading (DAPI, 24 h, in vitro, n=23) and about 52% showed fluorescent neurons roughly three weeks after implantation (n=13). Those are well occupancy counts, not viability ([Brown et al., bioRxiv 2024](https://www.biorxiv.org/content/10.1101/2024.11.22.624907v1)).
+Science Corporation's cortical biohybrid implant is an SU-8 microwell array: 10 µm wells, 15 µm deep, on a 15 µm pitch, about 118,000 wells per 5×5 mm die. Each well is loaded by centrifugation with one embryonic mouse cortical neuron, and the graft is stimulated optogenetically with an external light source; the chip has no electrodes. In their preprint, 77% of wells held cells at loading (DAPI, 24 h, in vitro, n=23) and about 52% showed fluorescent neurons roughly three weeks after implantation (n=13; [Brown et al., bioRxiv 2024](https://www.biorxiv.org/content/10.1101/2024.11.22.624907v1)).
 
-The wells are bare, rigid epoxy coated with poly-D-lysine and laminin. Soft, degradable hydrogels are the usual way to help grafted cells survive and integrate, but we haven't found a published comparison of neurons in bare vs. gel-filled or gel-coated microwells. The authors also note that embryonic mouse cells aren't a translational option; a human-compatible cell source is a separate problem we don't address.
+The wells are bare, rigid epoxy coated with poly-D-lysine and laminin. Soft, degradable hydrogels are the usual way to help grafted cells survive and integrate, but we haven't found a published comparison of neurons in bare vs. gel-filled or gel-coated microwells.
 
 ## What we built
 
@@ -16,7 +16,7 @@ A web app plus a literature pipeline that turns papers into a source-linked mate
 
 - **Extraction:** Claude reads papers on soft and conductive hydrogels, OECT/OMIEC materials, and neurons on soft substrates, and returns structured records. Every value carries a verbatim quote and page, and the quote is checked against the PDF text.
 - **Survival chart:** neuron survival on each material against its stiffness, conductivity or degradation time, with Science Corp's chip as an estimated reference and brain tissue's stiffness shaded.
-- **Next steps:** the team's proposed design directions for the wells (a gel layer, larger gel-filled wells, gel links between wells), clearly marked as proposals rather than results.
+- **Next steps:** the team's proposed design directions for the wells (a gel layer, larger gel-filled wells, gel links between wells).
 
 Tabs: **Overview**, **Maps** (survival chart, with more charts under "Advanced metrics"), **Records**, **Gaps & next steps**, **For fun** (our earlier theory-of-mind benchmark), and, after a divider, **Extract** (live demo) and **Review** (demo).
 
@@ -68,13 +68,3 @@ Roles are from the planning phase; update them as the work shifts.
 ## Background
 
 [Science Corporation](https://science.xyz) builds brain-computer interfaces, including the biohybrid implant above and the PRIMA retinal implant, with which most patients in a 38-patient trial regained enough central vision to read letters and words (*New England Journal of Medicine*, October 2025; [press release](https://www.businesswire.com/news/home/20251020014793/en/Science-Corp.s-PRIMA-BCI-Implant-Restores-Functional-Central-Vision)). It runs a device fab in Research Triangle Park ([Axios Raleigh](https://www.axios.com/local/raleigh/2024/07/11/medical-device-company-science-corp-chip-making-triangle)).
-
-## Git Test: Add your name below
-
-Matthew Huang
-
-Rahin Islam
-
-Joshua McMenemy
-
-Fisher White
