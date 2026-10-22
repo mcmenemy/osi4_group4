@@ -7,7 +7,7 @@ The app behind [the project](../README.md): it builds a source-linked dataset of
 - **Records:** searchable table of every record (`#/records?id=<record_id>` opens one).
 - **Extract:** run the extraction live on an uploaded PDF or pasted text.
 - **Review:** a demo of expert review. Nothing is saved there (see [Reviewing records](#reviewing-records)).
-- **Gaps & next steps:** data gaps computed from the scorecard, suggested experiments, and where the dataset goes. The destination text and URL live in `frontend/src/dataDestination.ts`.
+- **Gaps & next steps:** the team's proposed design directions, how to help, and where the dataset goes. The destination text and URL live in `frontend/src/dataDestination.ts`.
 - **For fun:** the team's earlier "What can carry a mind?" benchmark, with "Score your own substrate" (uses `/api/score`).
 
 The Brian2 and PyPhi **package checks** are no longer in the UI; their API routes (`/api/sim/hello`, `/api/phi/hello`) still exist (see [Package checks](#package-checks-legacy)). The original 10x Sci-Fi stack test still works at `#/scifi`; it's just not in the nav.
@@ -142,7 +142,7 @@ How extraction works (`backend/app/extraction/`):
 
 ### Scorecard
 
-`/api/scorecard` (`backend/app/scorecard.py`) groups records by material family (`data/materials.yaml`) and scores each family against five requirements: neuron survival at ≥3 weeks, stiffness ≤100 kPa, in vivo in brain, clear and degradable, and conductive (low weight; only for future electrode layers). Each requirement is met, partial, unknown or fails. The score multiplies each requirement's weight by its state and by the strength of the cell evidence (in vivo neurons count more than a neuron-like cell line). Weights, thresholds and multipliers are team judgment and live in `data/scorecard.yaml`. Only families with neuron records are ranked; the SU-8 baseline is returned separately. The app no longer displays the ranking; the Gaps tab turns its unknowns into gap bullets.
+`/api/scorecard` (`backend/app/scorecard.py`) groups records by material family (`data/materials.yaml`) and scores each family against five requirements: neuron survival at ≥3 weeks, stiffness ≤100 kPa, in vivo in brain, clear and degradable, and conductive (low weight; only for future electrode layers). Each requirement is met, partial, unknown or fails. The score multiplies each requirement's weight by its state and by the strength of the cell evidence (in vivo neurons count more than a neuron-like cell line). Weights, thresholds and multipliers are team judgment and live in `data/scorecard.yaml`. Only families with neuron records are ranked; the SU-8 baseline is returned separately. The app no longer displays the ranking; its family rows feed the stiffness-by-family chart.
 
 ### Reviewing records
 
