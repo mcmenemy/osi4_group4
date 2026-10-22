@@ -1,7 +1,4 @@
 import MindSection from './MindSection'
-import OrganicNeuron from './OrganicNeuron'
-import PhiCheck from './PhiCheck'
-import SimCheck from './SimCheck'
 
 export default function ContextTab() {
   return (
@@ -14,17 +11,6 @@ export default function ContextTab() {
         </p>
       </div>
       <MindSection />
-      <OrganicNeuron />
-      <section className="checks">
-        <div className="container narrow">
-          <p className="kicker">Stack tests</p>
-          <p className="muted">
-            Hello-world runs of the simulation libraries, to confirm they work in the deployed stack. Not project results.
-          </p>
-          <SimCheck />
-          <PhiCheck />
-        </div>
-      </section>
     </>
   )
 }

@@ -8,7 +8,9 @@ The app builds the evidence base for a gel-filled vs. bare microwell experiment 
 - **Extract:** run the extraction live on an uploaded PDF or pasted text.
 - **Review:** accept, reject, or correct records one at a time (see [Reviewing records](#reviewing-records)).
 - **Proposal:** renders `docs/proposal.md`.
-- **Context:** the earlier theory-of-mind benchmark, the organic neuron model, and the stack-test **package checks** ([Brian2](https://brian2.readthedocs.io/) and [PyPhi](https://pyphi.readthedocs.io/); see [Package checks](#package-checks)).
+- **Context:** the earlier theory-of-mind benchmark ("What can carry a mind?").
+
+The Brian2 and PyPhi **package checks** are no longer in the UI; their API routes (`/api/sim/hello`, `/api/phi/hello`) still exist (see [Package checks](#package-checks)).
 
 The original 10x Sci-Fi stack test still works at `#/scifi`; it's just not in the nav.
 
