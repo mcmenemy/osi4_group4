@@ -14,7 +14,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from app import data, llm, phi, scorecard, sim
+from app import data, llm, phi, scorecard, sim, survival_map
 from app.extraction import extract, pdf_text
 from app.schemas import Record
 
@@ -159,6 +159,12 @@ async def scorecard_endpoint(
         if value is not None and not 0 <= value <= 10:
             raise HTTPException(422, f"Weight {name} must be between 0 and 10.")
     return scorecard.build_scorecard(data.reviewed_records(), overrides)
+
+
+@app.get("/api/survival-map")
+async def survival_map_endpoint() -> dict:
+    """One scored point per neuron survival result, with the properties it can be plotted against."""
+    return survival_map.build_survival_map(data.reviewed_records())
 
 
 @app.get("/api/references")

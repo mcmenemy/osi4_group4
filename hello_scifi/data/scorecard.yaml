@@ -33,6 +33,17 @@ curated_multiplier: 0.5
 paper_bonus_per_extra_paper: 0.25
 paper_bonus_cap: 1.0
 
+# Survival map (Maps tab): one point per survival result.
+# score (0-100) = reported % x min(days / full_credit_days, 1) x measure weight
+survival_score:
+  full_credit_days: 21     # a result at 3 weeks or later gets full time credit
+  unknown_days: 1          # timepoint not stated: treated as day 1
+  measure_weights:
+    viability: 1.0
+    retention: 1.0
+    occupancy: 0.7         # cells present in wells, not shown to be healthy
+    neurite_outgrowth: 0.5 # % of cells with neurites: alive and growing, but indirect
+
 thresholds:
   survival_days: 21            # "3 weeks"
   survival_min_percent: 50     # viability or retention at or above this counts as met

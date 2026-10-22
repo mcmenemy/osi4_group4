@@ -1012,6 +1012,29 @@ table.breakdown {
   color: var(--muted);
 }
 
+/* Survival map (Maps tab) */
+.survival-controls {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.survival-controls .pills {
+  align-items: center;
+}
+
+.control-label {
+  min-width: 7.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pill-count {
+  margin-left: 0.15rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
 /* Overview */
 .overview-top {
   display: flex;

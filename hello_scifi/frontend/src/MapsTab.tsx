@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import ScorecardTable from './ScorecardTable'
+import SurvivalMap from './SurvivalMap'
 import { useModeText } from './mode'
 import { PLAIN_LABELS, SHORT_LABELS, type RequirementKey, type Scorecard } from './scorecard'
 import { baseLayout, logAxis, useTheme, type Theme } from './chartTheme'
@@ -74,6 +75,7 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
       )}
 
       <ScorecardSection records={records} onOpenRecords={openIds} />
+      <SurvivalMap onOpenRecord={(id) => openIds([id])} />
 
       <h2 className="details-heading">{t('The underlying numbers', 'Details for materials scientists')}</h2>
       <p className="muted">
