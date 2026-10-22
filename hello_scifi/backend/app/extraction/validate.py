@@ -207,6 +207,31 @@ def normalize_value(prop: str, value: str | float | None, unit: str | None) -> f
     return None
 
 
+_NUMBER_WORDS = {
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7,
+    "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12, "fourteen": 14,
+}
+
+
+def timepoint_days(text: str | None) -> float | None:
+    """ "3 weeks after implantation" → 21, "Three weeks" → 21, "24 h" → 1, "40 DIV" / "DIV 14" → days."""
+    if not text:
+        return None
+    t = unicodedata.normalize("NFKC", text).translate(_DASHES).lower()
+    t = re.sub(r"\b(" + "|".join(_NUMBER_WORDS) + r")\b", lambda m: str(_NUMBER_WORDS[m.group(1)]), t)
+    m = re.search(r"\b(?:div|dpi)\s*(\d+(?:\.\d+)?)|(\d+(?:\.\d+)?)\s*(?:div|dpi)\b", t)
+    if m:
+        return float(m.group(1) or m.group(2))
+    m = re.search(rf"({_NUMBER})\s*-?\s*(min(?:ute)?s?|h(?:ours?|rs?)?|d(?:ays?)?|w(?:ee)?ks?|weeks?|months?)\b", t)
+    if not m:
+        return None
+    unit = m.group(2)
+    if unit.startswith("month"):
+        return float(m.group(1)) * 30
+    seconds = to_seconds(float(m.group(1)), "week" if unit.startswith("w") else unit)
+    return None if seconds is None else seconds / 86400
+
+
 # --- Sanity ranges ------------------------------------------------------------------------
 
 SANITY_RANGES = {
@@ -257,12 +282,17 @@ def _fields(record: Record) -> Iterator[tuple[str, FieldValue]]:
                 yield name, f
         for outcome in bio.other_outcomes:
             yield f"other_outcome:{outcome.name}", outcome
+        for i, s in enumerate(bio.survival):
+            yield f"survival[{i}]:{s.measure}", s
 
 
 def renormalize_record(record: Record) -> Record:
     """Recompute value_si from each field's reported value and unit (after unit-table fixes)."""
     for name, f in _fields(record):
-        if not name.startswith("other_outcome"):
+        if name.startswith("survival"):
+            f.value_si = normalize_value("viability_percent", f.value, f.unit or "%")
+            f.timepoint_days = timepoint_days(f.timepoint)
+        elif not name.startswith("other_outcome"):
             f.value_si = normalize_value(name, f.value, f.unit)
     return record
 
@@ -274,7 +304,7 @@ def validate_record(record: Record, source: SourceText) -> Record:
         f.evidence_verified = bool(f.evidence) and source.contains(f.evidence)
         if not f.evidence_verified:
             flags.append(f"unverified_quote:{name}")
-        bounds = SANITY_RANGES.get(name)
+        bounds = SANITY_RANGES.get("viability_percent" if name.startswith("survival") else name)
         if bounds and f.value_si is not None and not bounds[0] <= f.value_si <= bounds[1]:
             flags.append(f"out_of_range:{name}")
     for i, item in enumerate(record.formulation):

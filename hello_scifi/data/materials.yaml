@@ -1,0 +1,167 @@
+# Material families for the scorecard (the controlled vocabulary for material_key).
+#
+# Records are matched to a family by the regex `patterns` below, in file order, so put
+# specific families (e.g. PEDOT:PSS hydrogel) before general ones (PEDOT:PSS film).
+# Anything that matches no family keeps an "other:<name>" key and is flagged for review.
+#
+# Curated facts (transparency, degradable, typical stiffness) are hand-entered, not extracted.
+# Each needs a citation; a value without one counts as "unknown" in the scorecard. Citations
+# here were entered from memory and are marked "to verify" until someone checks them: a good
+# first contribution, since each one is a lookup plus a citation.
+#
+# transparency: clear | translucent | opaque
+# degradable:   "yes" | "no" | tunable          (quoted so YAML keeps them as strings)
+
+materials:
+  - key: su8
+    label: SU-8 microwells (PDL + laminin)
+    class: other
+    baseline: true
+    patterns: ['su-?8']
+    note: Rigid epoxy photoresist used for the Science Corp microwells (Brown et al. 2024).
+    transparency:
+      value: clear
+      citation: SU-8 2000 series data sheet (Kayaku Advanced Materials), optical transmission in the visible.
+      status: to verify
+    degradable:
+      value: "no"
+      citation: SU-8 2000 series data sheet (Kayaku Advanced Materials); fully crosslinked epoxy.
+      status: to verify
+    typical_modulus_pa:
+      range: [2.0e9, 4.0e9]
+      citation: SU-8 2000 series data sheet (Kayaku Advanced Materials), Young's modulus about 2 GPa.
+      status: to verify
+
+  - key: gelma
+    label: GelMA (gelatin methacryloyl)
+    class: nonconductive_hydrogel
+    patterns: ['gelma', 'gelatin[ -]?methacryl', 'methacryl\w* gelatin']
+    note: Photocrosslinked gelatin; stiffness set by concentration and light dose.
+    transparency:
+      value: clear
+      citation: Yue K. et al., Synthesis, properties, and biomedical applications of gelatin methacryloyl (GelMA) hydrogels, Biomaterials 73, 254-271 (2015).
+      status: to verify
+    degradable:
+      value: "yes"
+      citation: Yue K. et al., Biomaterials 73, 254-271 (2015); gelatin backbone is MMP-cleavable.
+      status: to verify
+    typical_modulus_pa:
+      range: [3.08e3, 1.845e5]
+      method: tension
+      citation: Wu Y. et al., Biosci. Rep. 39, BSR20181748 (2019); 5-30% GelMA.
+      status: checked against the paper text on PMC
+
+  - key: hyaluronic_acid
+    label: Hyaluronic acid gels (HAMA, thiolated HA)
+    class: nonconductive_hydrogel
+    patterns: ['hyalur', '\bhama\b', '\bha[- ]', 'hystem', 'glycosil']
+    note: Main glycosaminoglycan of brain extracellular matrix; enzymatically degradable.
+    transparency:
+      value: clear
+      citation: Burdick J.A. & Prestwich G.D., Hyaluronic acid hydrogels for biomedical applications, Adv. Mater. 23, H41-H56 (2011).
+      status: to verify
+    degradable:
+      value: "yes"
+      citation: Burdick J.A. & Prestwich G.D., Adv. Mater. 23, H41-H56 (2011); degraded by hyaluronidases.
+      status: to verify
+    typical_modulus_pa:
+      range: [23, 3500]
+      method: shear_rheology
+      citation: Advanced BioMatrix, HyStem hydrogel stiffness (G', thiolated HA kits).
+      status: vendor-reported G', to verify
+
+  - key: agarose
+    label: Agarose
+    class: nonconductive_hydrogel
+    patterns: ['agarose']
+    note: Used for the Penn micro-tissue engineered neural networks (Adewole et al.). Often described as non-degradable in mammals; needs a citation.
+    transparency: null
+    degradable: null
+    typical_modulus_pa: null
+
+  - key: fibrin
+    label: Fibrin
+    class: nonconductive_hydrogel
+    patterns: ['fibrin']
+    note: Blood-clot protein gel; degraded by plasmin, often within days.
+    transparency: null
+    degradable:
+      value: "yes"
+      citation: Janmey P.A., Winer J.P. & Weisel J.W., Fibrin gels and their clinical and bioengineering applications, J. R. Soc. Interface 6, 1-10 (2009).
+      status: to verify
+    typical_modulus_pa: null
+
+  - key: peptide_sap
+    label: Self-assembling peptide gels
+    class: nonconductive_hydrogel
+    patterns: ['self[- ]assembl\w* peptide', '\bsap\b', 'fmoc', 'ikvav', 'rada', 'puramatrix', 'peptide (hydro)?gel']
+    note: Short peptides that assemble into nanofiber gels (e.g. Fmoc-DDIKVAV in Somaa et al. 2017).
+    transparency: null
+    degradable: null
+    typical_modulus_pa: null
+
+  - key: polyacrylamide
+    label: Polyacrylamide (PAAm)
+    class: nonconductive_hydrogel
+    patterns: ['polyacrylamide', '\bpaam\b', '\bpa gel']
+    note: Standard tunable 2D substrate for stiffness studies; not used for implants (toxic monomer).
+    transparency:
+      value: clear
+      citation: Tse J.R. & Engler A.J., Preparation of hydrogel substrates with tunable mechanical properties, Curr. Protoc. Cell Biol. 47, 10.16.1-10.16.16 (2010).
+      status: to verify
+    degradable:
+      value: "no"
+      citation: Tse J.R. & Engler A.J., Curr. Protoc. Cell Biol. (2010).
+      status: to verify
+    typical_modulus_pa: null
+
+  - key: peg
+    label: PEG hydrogels
+    class: nonconductive_hydrogel
+    patterns: ['\bpeg', 'poly\(ethylene glycol\)', 'polyethylene glycol']
+    note: Synthetic, bio-inert backbone; degradability is set by the crosslinker (hydrolytic or protease-cleavable).
+    transparency:
+      value: clear
+      citation: Lutolf M.P. & Hubbell J.A., Synthetic biomaterials as instructive extracellular microenvironments for morphogenesis in tissue engineering, Nat. Biotechnol. 23, 47-55 (2005).
+      status: to verify
+    degradable:
+      value: tunable
+      citation: Lutolf M.P. & Hubbell J.A., Nat. Biotechnol. 23, 47-55 (2005).
+      status: to verify
+    typical_modulus_pa: null
+
+  - key: pva_pedot
+    label: PVA / PEDOT conductive hydrogels
+    class: conductive_hydrogel
+    patterns: ['pva.{0,20}pedot', 'pedot.{0,20}pva']
+    note: Conductive hydrogel coatings from the Green lab (Boulingre et al. 2025).
+    transparency: null
+    degradable: null
+    typical_modulus_pa: null
+
+  - key: pedot_pss_hydrogel
+    label: PEDOT:PSS hydrogels
+    class: conductive_hydrogel
+    patterns: ['pedot.{0,20}(hydro)?gel', 'conductive hydrogel', '\bech\b']
+    note: Conductive gels (Lu et al. 2019; Liu et al. 2019). A candidate for future electrode wells, not the first clear-gel experiment.
+    transparency: null
+    degradable: null
+    typical_modulus_pa: null
+
+  - key: pedot_film
+    label: PEDOT films (PEDOT:PSS and related)
+    class: omiec_film
+    patterns: ['pedot']
+    note: Thin mixed-conductor films for electrodes and OECTs.
+    transparency: null
+    degradable: null
+    typical_modulus_pa: null
+
+  - key: glycolated_polythiophene
+    label: Glycolated polythiophenes (p(g2T-TT) and related)
+    class: omiec_film
+    patterns: ['p\(g', 'glycol\w* polythiophene']
+    note: High-capacitance OMIEC films (Inal et al. 2017).
+    transparency: null
+    degradable: null
+    typical_modulus_pa: null

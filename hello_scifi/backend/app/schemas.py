@@ -9,6 +9,8 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from app.materials import material_keys
+
 SCHEMA_VERSION = "0.1.0"
 
 Confidence = Literal["low", "medium", "high"]
@@ -16,6 +18,10 @@ MaterialClass = Literal[
     "conductive_hydrogel", "nonconductive_hydrogel", "omiec_film", "oect_device", "other"
 ]
 Setting = Literal["in_vitro_2d", "in_vitro_3d", "in_vivo"]
+CellCategory = Literal["primary_neuron", "sc_neuron", "neuron_like_line", "glia", "non_neural", "tissue", "other"]
+SurvivalMeasure = Literal["viability", "occupancy", "retention", "neurite_outgrowth"]
+# Families from data/materials.yaml, plus "other" for anything outside the vocabulary.
+MaterialKey = Literal[tuple(material_keys() + ["other"])]  # type: ignore[valid-type]
 
 
 class FieldValue(BaseModel):
@@ -81,15 +87,26 @@ class OtherOutcome(FieldValue):
     name: str = ""
 
 
+class SurvivalValue(FieldValue):
+    """A cell survival result. Different measures are never compared with each other."""
+
+    measure: SurvivalMeasure
+    timepoint: str | None = None  # as reported, e.g. "3 weeks after implantation"
+    timepoint_days: float | None = None
+
+
 class Biology(BaseModel):
     cell_type: str | None = None
+    cell_category: CellCategory | None = None
     species: str | None = None
     setting: Setting | None = None
+    in_brain: bool | None = None  # in vivo, implanted in brain / CNS
     coating: str | None = None
     culture_days: FieldValue | None = None  # SI: days
     viability_percent: FieldValue | None = None
     neurite_length: FieldValue | None = None  # SI: m
     other_outcomes: list[OtherOutcome] = Field(default_factory=list)
+    survival: list[SurvivalValue] = Field(default_factory=list)
 
 
 class Record(BaseModel):
@@ -97,6 +114,8 @@ class Record(BaseModel):
     source: Source
     material_class: MaterialClass
     material: str
+    # Family from data/materials.yaml, or "other:<name>" when nothing matches.
+    material_key: str | None = None
     formulation: list[FormulationItem] = Field(default_factory=list)
     processing: list[ProcessingStep] = Field(default_factory=list)
     properties: Properties = Field(default_factory=Properties)
@@ -129,6 +148,7 @@ PropertyName = Literal[
     "culture_days",
     "viability_percent",
     "neurite_length",
+    "survival",
     "other_outcome",
 ]
 
@@ -145,6 +165,8 @@ class LLMValue(BaseModel):
     location: str  # "p. 3", "Fig. 2b", "Table 1", or ""
     confidence: Confidence
     method: TestMethod  # how the value was measured; "" if not stated or not applicable
+    survival_measure: Literal["", "viability", "occupancy", "retention", "neurite_outgrowth"]  # for "survival"
+    timepoint: str  # for "survival": when it was measured, e.g. "21 days in vitro"; "" otherwise
 
 
 class LLMFormulation(BaseModel):
@@ -164,14 +186,17 @@ class LLMProcessing(BaseModel):
 
 class LLMBiology(BaseModel):
     cell_type: str
+    cell_category: CellCategory
     species: str
     setting: Literal["in_vitro_2d", "in_vitro_3d", "in_vivo", "none"]
+    in_brain: bool
     coating: str
 
 
 class LLMRecord(BaseModel):
     material_class: MaterialClass
     material: str
+    material_key: MaterialKey
     formulation: list[LLMFormulation]
     processing: list[LLMProcessing]
     values: list[LLMValue]

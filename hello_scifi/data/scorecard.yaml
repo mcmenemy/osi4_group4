@@ -1,0 +1,43 @@
+# Scorecard settings. Every number here is team judgment, not a measurement; change them freely.
+#
+# score = sum over requirements of weight * state_value * multiplier
+#         + paper_bonus_per_extra_paper * (independent papers - 1), capped at paper_bonus_cap
+#
+# For the two biology requirements (survival, in vivo brain) the multiplier is the evidence
+# multiplier of the best supporting record (by cell category and setting). For property
+# requirements it is 1.0 when the value was extracted from a paper and curated_multiplier when
+# it comes from data/materials.yaml.
+
+weights:
+  survival: 3        # neuron survival at >= 3 weeks
+  soft: 2            # stiffness <= 100 kPa
+  in_vivo_brain: 2   # tested in vivo in the brain
+  clear_degradable: 2
+  conductive: 0.5    # only matters for future recording layers
+
+state_values:
+  met: 1.0
+  partial: 0.5
+  unknown: 0.0
+  fails: -0.5
+
+evidence_multipliers:
+  neuron_in_vivo: 1.0        # primary or stem-cell-derived neurons, in vivo
+  neuron_in_vitro_3d: 0.8
+  neuron_in_vitro_2d: 0.6
+  neuron_like_line: 0.3      # PC12, SH-SY5Y and similar
+  other_cells: 0.1           # glia, non-neural cells, tissue constructs
+  no_cells: 0.0
+
+curated_multiplier: 0.5
+paper_bonus_per_extra_paper: 0.25
+paper_bonus_cap: 1.0
+
+thresholds:
+  survival_days: 21            # "3 weeks"
+  survival_min_percent: 50     # viability or retention at or above this counts as met
+  survival_fail_percent: 30    # below this counts as fails
+  soft_max_pa: 100000          # met at or below 100 kPa
+  soft_partial_max_pa: 1000000 # partial up to 1 MPa; stiffer fails
+  conductive_min_s_m: 10       # met at or above 10 S/m (future recording-layer window)
+  conductive_partial_min_s_m: 0.1

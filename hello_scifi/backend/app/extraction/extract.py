@@ -13,7 +13,8 @@ from functools import lru_cache
 import anthropic
 
 from app.extraction import prompts
-from app.extraction.validate import SourceText, normalize_value, validate_record
+from app.extraction.validate import SourceText, normalize_value, timepoint_days, validate_record
+from app.extraction.vocab import assign_material_key, check_cell_category
 from app.schemas import (
     Biology,
     FieldValue,
@@ -23,6 +24,7 @@ from app.schemas import (
     LLMValue,
     OtherOutcome,
     ProcessingStep,
+    SurvivalValue,
     Properties,
     Record,
     Source,
@@ -161,15 +163,35 @@ def to_record(rec: LLMRecord, source: Source, model: str, index: int) -> Record:
                 setattr(bio, v.name, _field(v))
         elif v.name == "other_outcome":
             bio.other_outcomes.append(OtherOutcome(name=v.label, **_field(v).model_dump()))
+        elif v.name == "survival" and v.survival_measure:
+            field = _field(v).model_dump()
+            # Survival values are percentages unless the measure says otherwise.
+            field["value_si"] = normalize_value("viability_percent", v.value, v.unit or "%")
+            bio.survival.append(
+                SurvivalValue(
+                    measure=v.survival_measure,
+                    timepoint=v.timepoint or None,
+                    timepoint_days=timepoint_days(v.timepoint),
+                    **field,
+                )
+            )
     if stability.description or stability.duration_days:
         props.stability = stability
+    # Keep the viability field (used by the maps) in sync with the survival list.
+    if bio.viability_percent is None:
+        viability = [s for s in bio.survival if s.measure == "viability"]
+        if viability:
+            best = max(viability, key=lambda s: s.timepoint_days or 0)
+            bio.viability_percent = FieldValue(**best.model_dump(exclude={"measure", "timepoint", "timepoint_days"}))
 
     biology = None
     if rec.has_biology:
         b = rec.biology
         bio.cell_type = b.cell_type or None
+        bio.cell_category = b.cell_category
         bio.species = b.species or None
         bio.setting = None if b.setting == "none" else b.setting
+        bio.in_brain = b.in_brain if bio.setting == "in_vivo" else None
         bio.coating = b.coating or None
         biology = bio
 
@@ -178,7 +200,7 @@ def to_record(rec: LLMRecord, source: Source, model: str, index: int) -> Record:
     record_id = "-".join(
         p for p in (_slug(source.first_author or "unknown", 16), str(source.year or ""), _slug(rec.material), digest) if p
     )
-    return Record(
+    record = Record(
         record_id=record_id,
         source=source,
         material_class=rec.material_class,
@@ -203,6 +225,8 @@ def to_record(rec: LLMRecord, source: Source, model: str, index: int) -> Record:
         extraction_model=model,
         extracted_at=datetime.now(UTC).isoformat(timespec="seconds"),
     )
+    record.flags = assign_material_key(record, rec.material_key)
+    return record
 
 
 def _source(meta: LLMExtraction, hint: Source | None) -> Source:
@@ -228,7 +252,14 @@ async def extract_records(text: str, hint: Source | None = None) -> list[Record]
         parsed, model = merge_extractions(parts), MODEL
     source = _source(parsed, hint)
     checker = SourceText(text)
-    return [validate_record(to_record(r, source, model, i), checker) for i, r in enumerate(parsed.records)]
+    out = []
+    for i, r in enumerate(parsed.records):
+        record = to_record(r, source, model, i)
+        vocab_flags = record.flags + check_cell_category(record)
+        validate_record(record, checker)  # resets flags to the quote/range checks
+        record.flags = vocab_flags + record.flags
+        out.append(record)
+    return out
 
 
 # --- MOCK_LLM -----------------------------------------------------------------------------
@@ -247,7 +278,8 @@ def mock_extraction() -> LLMExtraction:
 
     def value(name: str, val: str, unit: str, evidence: str) -> LLMValue:
         return LLMValue(
-            name=name, label="", value=val, unit=unit, evidence=evidence, location="p. 1", confidence="high", method=""
+            name=name, label="", value=val, unit=unit, evidence=evidence, location="p. 1", confidence="high",
+            method="", survival_measure="viability" if name == "survival" else "", timepoint="7 days" if name == "survival" else "",
         )
 
     return LLMExtraction(
@@ -256,6 +288,7 @@ def mock_extraction() -> LLMExtraction:
             LLMRecord(
                 material_class="conductive_hydrogel",
                 material="MOCK PEDOT:PSS hydrogel",
+                material_key="pedot_pss_hydrogel",
                 formulation=[
                     LLMFormulation(
                         component="DMSO",
@@ -269,11 +302,16 @@ def mock_extraction() -> LLMExtraction:
                     value("youngs_modulus", "2", "MPa", "had a Young's modulus of 2 MPa"),
                     value("conductivity", "20", "S/m", "a conductivity of 20 S/m in PBS"),
                     value("culture_days", "7", "days", "cultured on the gel for 7 days"),
-                    value("viability_percent", "85", "%", "showed 85% viability"),
+                    value("survival", "85", "%", "showed 85% viability"),
                 ],
                 has_biology=True,
                 biology=LLMBiology(
-                    cell_type="primary cortical neurons", species="rat", setting="in_vitro_2d", coating=""
+                    cell_type="primary cortical neurons",
+                    cell_category="primary_neuron",
+                    species="rat",
+                    setting="in_vitro_2d",
+                    in_brain=False,
+                    coating="",
                 ),
                 notes="MOCK_LLM=1: canned example record, not extracted from your input.",
             )

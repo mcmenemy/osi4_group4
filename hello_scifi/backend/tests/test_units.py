@@ -4,6 +4,7 @@ import pytest
 
 from app.extraction.validate import (
     normalize_value,
+    timepoint_days,
     parse_number,
     to_ohms,
     to_pascal,
@@ -84,3 +85,21 @@ def test_normalize_value_by_property():
     assert normalize_value("youngs_modulus", "2", "") is None
     assert normalize_value("degradation_time", "2", "weeks") == pytest.approx(14)
     assert normalize_value("degradation_time", "36", "h") == pytest.approx(1.5)
+
+
+@pytest.mark.parametrize(
+    "text, expected",
+    [
+        ("21 days after implantation", 21),
+        ("Three weeks after surgery", 21),
+        ("3 wk", 21),
+        ("24 hours after loading", 1),
+        ("40 DIV", 40),
+        ("DIV 14", 14),
+        ("2 months", 60),
+        ("at the end of the study", None),
+        ("", None),
+    ],
+)
+def test_timepoint_days(text, expected):
+    assert timepoint_days(text) == (pytest.approx(expected) if expected is not None else None)

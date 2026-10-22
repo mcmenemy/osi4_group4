@@ -50,14 +50,30 @@ or near 1 kHz; put the electrode area in a separate electrode_area value if stat
 volumetric_capacitance (C*), mu_c_star (μC*), ionic_time_constant (OECT or ionic response time).
 - stability: value = short description of what stayed stable; label = conditions. If a duration \
 is stated, also add stability_duration with that duration and its unit.
-- Biology, only when cells or tissue were studied with this material: culture_days, \
-viability_percent, neurite_length; anything else measured on cells goes in other_outcome with \
-label = the outcome's name (e.g. "neurite density", "GFAP coverage", "cell spreading area").
+- Biology, only when cells or tissue were studied with this material: culture_days and \
+neurite_length; anything else measured on cells goes in other_outcome with label = the outcome's \
+name (e.g. "neurite density", "GFAP coverage", "cell spreading area").
+- survival: every reported measure of cells surviving, one value each, with survival_measure and \
+timepoint. survival_measure is viability (fraction of cells alive, e.g. live/dead), occupancy \
+(fraction of wells, sites or devices that still contain cells), retention (fraction of the \
+originally seeded or grafted cells still present), or neurite_outgrowth (fraction of cells \
+extending neurites). Never relabel one measure as another. timepoint as reported, including \
+units and the reference event ("21 days after implantation", "24 h after loading").
 - For ranges write value as reported ("10-20"); for mean ± sd write only the mean.
 
-biology: when has_biology is false, fill biology with "" strings and setting "none". \
-setting is in_vitro_2d (cells on a surface), in_vitro_3d (cells inside a gel/scaffold), or \
-in_vivo (implanted in an animal).
+biology: when has_biology is false, fill biology with "" strings, setting "none", cell_category \
+"other", and in_brain false. setting is in_vitro_2d (cells on a surface), in_vitro_3d (cells \
+inside a gel/scaffold), or in_vivo (implanted in an animal); in_brain is true only for in vivo \
+work in the brain or spinal cord. cell_category: primary_neuron (neurons isolated from animals, \
+including DRG), sc_neuron (neurons or neural progenitors derived from stem cells or iPSCs), \
+neuron_like_line (PC12, SH-SY5Y and similar lines), glia (astrocytes, microglia, Schwann cells), \
+non_neural (fibroblasts, epithelial and other non-neural cells), tissue (engineered tissue \
+constructs, organoids, explants), other.
+
+material_key: the family this material belongs to, from the allowed list (e.g. gelma, \
+hyaluronic_acid, agarose, fibrin, peptide_sap, polyacrylamide, peg, pva_pedot, \
+pedot_pss_hydrogel, pedot_film, glycolated_polythiophene, su8). Use "other" when none fits; \
+don't force a match.
 
 source: title, first author's surname, year, and DOI as printed in the text; "" or 0 if absent."""
 

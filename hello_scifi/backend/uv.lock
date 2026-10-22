@@ -207,6 +207,7 @@ dependencies = [
     { name = "pypdfium2" },
     { name = "pyphi" },
     { name = "python-multipart" },
+    { name = "pyyaml" },
     { name = "rapidfuzz" },
     { name = "uvicorn", extra = ["standard"] },
 ]
@@ -225,6 +226,7 @@ requires-dist = [
     { name = "pypdfium2", specifier = ">=5.14.0" },
     { name = "pyphi", specifier = "==2.0.0rc4" },
     { name = "python-multipart", specifier = ">=0.0.32" },
+    { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "rapidfuzz", specifier = ">=3.14.6" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.54.0" },
 ]
