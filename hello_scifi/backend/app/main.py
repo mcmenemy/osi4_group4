@@ -19,11 +19,12 @@ from app import llm, phi, sim
 logger = logging.getLogger(__name__)
 
 MAX_CHARS = 2000
+MAX_DESCRIPTION_CHARS = 1500
 RATE_LIMIT = int(os.environ.get("RATE_LIMIT_PER_MINUTE", "10"))
 # Set by the Dockerfile; unset in local dev, where Vite serves the frontend.
 FRONTEND_DIST = os.environ.get("FRONTEND_DIST")
 
-app = FastAPI(title="10x Sci-Fi")
+app = FastAPI(title="OSI4 Group4")
 
 
 class ScifiRequest(BaseModel):
@@ -32,6 +33,10 @@ class ScifiRequest(BaseModel):
 
 class ScifiResponse(BaseModel):
     scifi: str
+
+
+class ScoreRequest(BaseModel):
+    description: str = Field(min_length=1, max_length=MAX_DESCRIPTION_CHARS)
 
 
 class SimRequest(BaseModel):
@@ -86,6 +91,42 @@ async def scifi(body: ScifiRequest, request: Request) -> ScifiResponse:
     except anthropic.APIError:
         logger.exception("Claude API call failed")
         raise HTTPException(502, "Couldn't reach Claude. Try again later.")
+
+
+@app.post("/api/score")
+async def score(body: ScoreRequest, request: Request) -> dict:
+    """Score a user-described substrate against the benchmark rubric."""
+    if not body.description.strip():
+        raise HTTPException(422, "Description can't be empty.")
+    check_rate_limit(request.client.host if request.client else "unknown")
+    try:
+        result = await llm.score_substrate(body.description)
+    except llm.MissingKeyError:
+        logger.error("ANTHROPIC_API_KEY is not set")
+        raise HTTPException(503, "The server isn't configured with an Anthropic API key.")
+    except (llm.RefusalError, llm.IncompleteError):
+        raise HTTPException(422, "Claude couldn't score that description. Try rewording it.")
+    except anthropic.RateLimitError:
+        raise HTTPException(503, "Claude is busy right now. Try again shortly.")
+    except anthropic.APIError:
+        logger.exception("Claude API call failed")
+        raise HTTPException(502, "Couldn't reach Claude. Try again later.")
+    if not result.is_substrate:
+        raise HTTPException(
+            422, "That doesn't read like a substrate. Describe a material, device, or architecture."
+        )
+
+    def criterion(c: llm.Criterion) -> dict:
+        return {"score": min(max(c.score, 0), 3), "reason": c.reason}
+
+    scores = {key: criterion(getattr(result, key)) for key in llm.FRAMEWORKS}
+    return {
+        "name": result.name,
+        "summary": result.summary,
+        "scores": scores,
+        "carry_over": sum(s["score"] for s in scores.values()),
+        "maintainability": criterion(result.maintainability),
+    }
 
 
 @app.post("/api/sim/hello")

@@ -1,67 +1,51 @@
-import { useState, type FormEvent } from 'react'
 import './App.css'
-import SimCheck from './SimCheck'
+import MindSection from './MindSection'
+import OrganicNeuron from './OrganicNeuron'
+import Overview from './Overview'
 import PhiCheck from './PhiCheck'
+import SimCheck from './SimCheck'
 
-const MAX_CHARS = 2000
+// Placeholder until the team picks a project name.
+const PROJECT_NAME = 'OSI4 Group4'
 
 export default function App() {
-  const [text, setText] = useState('')
-  const [result, setResult] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  async function handleSubmit(event: FormEvent) {
-    event.preventDefault()
-    setLoading(true)
-    setError('')
-    setResult('')
-    try {
-      const response = await fetch('/api/scifi', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
-      })
-      const data = await response.json()
-      if (!response.ok) {
-        throw new Error(typeof data.detail === 'string' ? data.detail : 'Request failed.')
-      }
-      setResult(data.scifi)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
   return (
-    <main>
-      <h1>10x Sci-Fi</h1>
-      <p className="tagline">Type anything. Get it back ten times more science fiction.</p>
-
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="I walked my dog to the coffee shop this morning."
-          maxLength={MAX_CHARS}
-          rows={5}
-        />
-        <div className="row">
-          <span className="count">
-            {text.length} / {MAX_CHARS}
-          </span>
-          <button type="submit" disabled={loading || !text.trim()}>
-            {loading ? 'Warping…' : 'Make it sci-fi'}
-          </button>
+    <>
+      <header className="site-header">
+        <div className="container header-inner">
+          <a className="brand" href="#overview">
+            {PROJECT_NAME}
+          </a>
+          <nav aria-label="Sections">
+            <a href="#overview">Overview</a>
+            <a href="#mind">What carries a mind?</a>
+            <a href="#neuron">Organic neuron</a>
+            <a href="#checks" className="nav-secondary">
+              Package checks
+            </a>
+            <a href="#score" className="nav-cta">
+              Score yours
+            </a>
+          </nav>
         </div>
-      </form>
+      </header>
 
-      {error && <p className="error">{error}</p>}
-      {result && <article className="result">{result}</article>}
-
-      <SimCheck />
-      <PhiCheck />
-    </main>
+      <main>
+        <Overview />
+        <MindSection />
+        <OrganicNeuron />
+        <section id="checks" className="checks">
+          <div className="container narrow">
+            <p className="kicker">Stack tests</p>
+            <p className="muted">
+              Hello-world runs of the simulation libraries, to confirm they work in the deployed
+              stack. Not project results.
+            </p>
+            <SimCheck />
+            <PhiCheck />
+          </div>
+        </section>
+      </main>
+    </>
   )
 }
