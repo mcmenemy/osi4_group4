@@ -1,0 +1,72 @@
+{
+  "record_id": "flanagan-2002-polyacrylamide-gel-3-acr-74fcc4",
+  "source": {
+    "doi": null,
+    "title": "Neurite branching on deformable substrates",
+    "first_author": "Flanagan",
+    "year": 2002,
+    "url": null,
+    "file": "flanagan2002.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Polyacrylamide gel, 3% acrylamide, 0.2% bisacrylamide, poly-D-lysine/matrigel coated",
+  "material_key": "polyacrylamide",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "acrylamide",
+      "amount": "3",
+      "unit": "%",
+      "evidence": "Gels were prepared with 3% acrylamide and bisacrylamide (bis) ranging from 0.04 to 0.2%.",
+      "evidence_verified": true
+    },
+    {
+      "component": "bisacrylamide",
+      "amount": "0.2",
+      "unit": "%",
+      "evidence": "Neurons also grow well and extend processes on stiffer gels (0.2% bisacrylamide, ~5500 dyne/",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": {
+      "value": "5500",
+      "unit": "dyne/cm2",
+      "value_si": 550.0,
+      "evidence": "Neurons also grow well and extend processes on stiffer gels (0.2% bisacrylamide, ~5500 dyne/",
+      "location": "p. 4",
+      "confidence": "medium",
+      "test_method": "shear_rheology",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "primary spinal cord neurons (E13.5 embryos, C57BL/6J)",
+    "cell_category": "primary_neuron",
+    "species": "mouse",
+    "setting": "in_vitro_2d",
+    "tissue_site": "not_applicable",
+    "coating": "poly-D-lysine + matrigel",
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [],
+    "survival": []
+  },
+  "notes": "Branching frequency on stiffest gel similar to glass.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:03:40+00:00",
+  "schema_version": "0.1.0"
+}

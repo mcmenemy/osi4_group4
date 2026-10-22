@@ -15,7 +15,15 @@ from app.extraction.validate import (
 
 @pytest.mark.parametrize(
     "value, unit, expected",
-    [(5, "Pa", 5), (2, "kPa", 2e3), (1.5, "MPa", 1.5e6), (3, "GPa", 3e9), (2, " kPa ", 2e3)],
+    [
+        (5, "Pa", 5),
+        (2, "kPa", 2e3),
+        (1.5, "MPa", 1.5e6),
+        (3, "GPa", 3e9),
+        (2, " kPa ", 2e3),
+        (2300, "dyne/cm2", 230),
+        (2300, "dyn/cm²", 230),
+    ],
 )
 def test_modulus(value, unit, expected):
     assert to_pascal(value, unit) == pytest.approx(expected)
@@ -85,6 +93,7 @@ def test_normalize_value_by_property():
     assert normalize_value("youngs_modulus", "2", "") is None
     assert normalize_value("degradation_time", "2", "weeks") == pytest.approx(14)
     assert normalize_value("degradation_time", "36", "h") == pytest.approx(1.5)
+    assert normalize_value("swelling_ratio", "16.3", None) == pytest.approx(16.3)
 
 
 @pytest.mark.parametrize(
@@ -97,6 +106,10 @@ def test_normalize_value_by_property():
         ("40 DIV", 40),
         ("DIV 14", 14),
         ("2 months", 60),
+        ("24–120 h", 5),
+        ("day 7", 7),
+        ("Day 1", 1),
+        ("14 days after encapsulation", 14),
         ("at the end of the study", None),
         ("", None),
     ],

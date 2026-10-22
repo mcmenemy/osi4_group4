@@ -29,7 +29,11 @@ def load_overrides() -> dict:
 
 
 def apply_overrides(record: Record, overrides: dict) -> Record:
-    """Team corrections from data/overrides.yaml, matched by source file or record_id."""
+    """Team corrections from data/overrides.yaml, matched by source file or record_id.
+
+    `biology` merges into the record's biology; `values` corrects single values by path
+    (e.g. biology.neurite_length: {value, unit, evidence?, location?}).
+    """
     rules = [
         (overrides.get("by_file") or {}).get(record.source.file or ""),
         (overrides.get("by_record") or {}).get(record.record_id),
@@ -38,6 +42,12 @@ def apply_overrides(record: Record, overrides: dict) -> Record:
         for field, value in rule.items():
             if field == "source":
                 record.source = record.source.model_copy(update=value)
+            elif field == "biology" and record.biology:
+                record.biology = record.biology.model_copy(update=value)
+            elif field == "values":
+                for path, edit in value.items():
+                    _apply_edit(record, path, str(edit.get("value", "")), edit.get("unit", ""),
+                                evidence=edit.get("evidence"), location=edit.get("location"))
             elif field == "note":
                 record.notes = f"{record.notes} Team correction: {value}".strip() if record.notes else f"Team correction: {value}"
             else:
@@ -75,8 +85,10 @@ def load_reviews() -> dict[str, dict]:
     return merged
 
 
-def _apply_edit(record: Record, path: str, value: str, unit: str) -> None:
-    """Apply a reviewer's corrected value/unit at a path like "properties.youngs_modulus"."""
+def _apply_edit(
+    record: Record, path: str, value: str, unit: str, evidence: str | None = None, location: str | None = None
+) -> None:
+    """Apply a corrected value/unit (and optionally a new quote) at a path like "properties.youngs_modulus"."""
     from app.extraction.validate import normalize_value
 
     target: object = record
@@ -86,6 +98,10 @@ def _apply_edit(record: Record, path: str, value: str, unit: str) -> None:
         if target is None:
             return
     target.value, target.unit = value, unit or None
+    if evidence:
+        target.evidence = evidence
+    if location:
+        target.location = location
     prop = parts[1] if parts[0] in ("properties", "biology") else parts[-1]
     if prop in ("survival", "other_outcomes"):
         prop = "viability_percent" if prop == "survival" else ""

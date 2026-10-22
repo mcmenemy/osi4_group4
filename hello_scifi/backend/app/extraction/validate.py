@@ -66,7 +66,8 @@ NORMALIZED_UNITS = {
     "neurite_length": "m",
 }
 
-_PRESSURE = {"pa": 1.0, "kpa": 1e3, "mpa": 1e6, "gpa": 1e9}
+# Older papers give moduli in dyne/cm² (1 dyn/cm² = 0.1 Pa).
+_PRESSURE = {"pa": 1.0, "kpa": 1e3, "mpa": 1e6, "gpa": 1e9, "dyne/cm2": 0.1, "dyn/cm2": 0.1}
 _CONDUCTIVITY = {
     "s/m": 1.0,
     "ms/m": 1e-3,
@@ -204,6 +205,9 @@ def normalize_value(prop: str, value: str | float | None, unit: str | None) -> f
             return number if _unit_key(unit).lower() in ("f/cm3", "fcm-3") else None
         case "mu_c_star":
             return number
+        case "swelling_ratio":
+            # Dimensionless (swollen / dry mass or volume); a "%" or "x" unit means the same number.
+            return number if unit.strip().lower() in ("", "x", "×", "%", "ratio") else None
     return None
 
 
@@ -214,15 +218,19 @@ _NUMBER_WORDS = {
 
 
 def timepoint_days(text: str | None) -> float | None:
-    """ "3 weeks after implantation" → 21, "Three weeks" → 21, "24 h" → 1, "40 DIV" / "DIV 14" → days."""
+    """ "3 weeks after implantation" → 21, "Three weeks" → 21, "24 h" → 1, "40 DIV" / "DIV 14" / "day 7" → days.
+
+    A range ("24–120 h") gives its upper end.
+    """
     if not text:
         return None
     t = unicodedata.normalize("NFKC", text).translate(_DASHES).lower()
     t = re.sub(r"\b(" + "|".join(_NUMBER_WORDS) + r")\b", lambda m: str(_NUMBER_WORDS[m.group(1)]), t)
-    m = re.search(r"\b(?:div|dpi)\s*(\d+(?:\.\d+)?)|(\d+(?:\.\d+)?)\s*(?:div|dpi)\b", t)
+    m = re.search(r"\b(?:div|dpi|day)\s*(\d+(?:\.\d+)?)\b|(\d+(?:\.\d+)?)\s*(?:div|dpi)\b", t)
     if m:
         return float(m.group(1) or m.group(2))
-    m = re.search(rf"({_NUMBER})\s*-?\s*(min(?:ute)?s?|h(?:ours?|rs?)?|d(?:ays?)?|w(?:ee)?ks?|weeks?|months?)\b", t)
+    # Unsigned, so the dash in a range isn't read as a minus sign.
+    m = re.search(r"(\d+(?:\.\d+)?)\s*-?\s*(min(?:ute)?s?|h(?:ours?|rs?)?|d(?:ays?)?|w(?:ee)?ks?|weeks?|months?)\b", t)
     if not m:
         return None
     unit = m.group(2)

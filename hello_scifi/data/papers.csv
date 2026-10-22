@@ -1,10 +1,10 @@
 key,title,first_author,year,doi,pmc_id,direct_pdf_url,status,pdf_path,source
-flanagan2002,Neurite branching on deformable substrates,Flanagan,2002,10.1097/01.wnr.0000048003.96487.97,PMC2408859,,failed,,
-georges2006,Matrices with compliance comparable to that of brain tissue select neuronal over glial growth in mixed cortical cultures,Georges,2006,10.1529/biophysj.105.073114,PMC1414567,,failed,,
-saha2008,Substrate modulus directs neural stem cell behavior,Saha,2008,10.1529/biophysj.108.132217,PMC2567955,,failed,,
+flanagan2002,Neurite branching on deformable substrates,Flanagan,2002,10.1097/01.wnr.0000048003.96487.97,PMC2408859,,ok,papers/flanagan2002.pdf,manual
+georges2006,Matrices with compliance comparable to that of brain tissue select neuronal over glial growth in mixed cortical cultures,Georges,2006,10.1529/biophysj.105.073114,PMC1414567,,ok,papers/georges2006.pdf,manual
+saha2008,Substrate modulus directs neural stem cell behavior,Saha,2008,10.1529/biophysj.108.132217,PMC2567955,,ok,papers/saha2008.pdf,manual
 banerjee2009,The influence of hydrogel modulus on the proliferation and differentiation of encapsulated neural stem cells,Banerjee,2009,10.1016/j.biomaterials.2009.05.050,PMC2743317,https://schafferlab.berkeley.edu/wp-content/uploads/2022/12/Banerjee_NSCmodulusAlginate_Biomats_09.pdf,ok,papers/banerjee2009.pdf,direct
 leipzig2009,The effect of substrate stiffness on adult neural stem cell behavior,Leipzig,2009,10.1016/j.biomaterials.2009.09.002,,https://shoichetlab.utoronto.ca/wp-content/uploads/2018/07/the-effect-of-substrate-stiffness...stem-cell-behavior.pdf,ok,papers/leipzig2009.pdf,direct
-seidlits2010,The effects of hyaluronic acid hydrogels with tunable mechanical properties on neural progenitor cell differentiation,Seidlits,2010,10.1016/j.biomaterials.2010.01.125,,,failed,,
-wu2019,The influence of the stiffness of GelMA substrate on the outgrowth of PC12 cells,Wu,2019,10.1042/BSR20181748,PMC6340955,,failed,,
-lampe2013,Design of three-dimensional engineered protein hydrogels for tailored control of neurite growth,Lampe,2013,10.1016/j.actbio.2012.10.033,PMC3926440,,failed,,
-chapla2024,Neurogenic Cell Behavior in 3D Culture Enhanced Within a Highly Compliant Synthetic Hydrogel Platform Formed via Competitive Crosslinking,Chapla,2024,10.1007/s12195-024-00794-2,PMC10901766,,failed,,
+seidlits2010,The effects of hyaluronic acid hydrogels with tunable mechanical properties on neural progenitor cell differentiation,Seidlits,2010,10.1016/j.biomaterials.2010.01.125,,,ok,papers/seidlits2010.pdf,manual
+wu2019,The influence of the stiffness of GelMA substrate on the outgrowth of PC12 cells,Wu,2019,10.1042/BSR20181748,PMC6340955,,ok,papers/wu2019.pdf,manual
+lampe2013,Design of three-dimensional engineered protein hydrogels for tailored control of neurite growth,Lampe,2013,10.1016/j.actbio.2012.10.033,PMC3926440,,ok,papers/lampe2013.pdf,manual
+chapla2024,Neurogenic Cell Behavior in 3D Culture Enhanced Within a Highly Compliant Synthetic Hydrogel Platform Formed via Competitive Crosslinking,Chapla,2024,10.1007/s12195-024-00794-2,PMC10901766,,ok,papers/chapla2024.pdf,manual

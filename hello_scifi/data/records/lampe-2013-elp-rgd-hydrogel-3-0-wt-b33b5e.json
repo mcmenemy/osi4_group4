@@ -1,0 +1,110 @@
+{
+  "record_id": "lampe-2013-elp-rgd-hydrogel-3-0-wt-b33b5e",
+  "source": {
+    "doi": "10.1016/j.actbio.2012.10.033",
+    "title": "Design of 3D engineered protein hydrogels for tailored control of neurite growth",
+    "first_author": "Lampe",
+    "year": 2013,
+    "url": "https://doi.org/10.1016/j.actbio.2012.10.033",
+    "file": "lampe2013.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "ELP-RGD hydrogel, 3.0 wt%, THPC 2:1 reactive site ratio (E = 2.1 kPa)",
+  "material_key": "elastin_like_protein",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "ELP (RGD)",
+      "amount": "3.0",
+      "unit": "wt%",
+      "evidence": "resulting in a final amorphous scaffold of 3.0 wt% (Figure 1C)",
+      "evidence_verified": true
+    },
+    {
+      "component": "THPC crosslinker solution",
+      "amount": "5.28",
+      "unit": "mg/mL",
+      "evidence": "the concentration of THPC was adjusted to achieve reactive site ratios of 0.5:1, 1:1, and 2:1, using THPC solutions of 1.32, 2.64, and 5.28 mg/mL, respectively.",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": {
+      "value": "2.1",
+      "unit": "kPa",
+      "value_si": 2100.0,
+      "evidence": "from 0.5:1 to 1:1 to 2:1 increased the initial elastic modulus of the resulting amorphous hydrogel (E = 0.5, 1.5, and 2.1 kPa, respectively, Figure 2A)",
+      "location": "p. 5",
+      "confidence": "high",
+      "test_method": "compression",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "E9 chick dorsal root ganglion explants",
+    "cell_category": "primary_neuron",
+    "species": "chick",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": null,
+    "culture_days": null,
+    "viability_percent": {
+      "value": ">79",
+      "unit": "%",
+      "value_si": 79.0,
+      "evidence": "In all cases, viability of stained cells was greater than 79% (Figure 2D)",
+      "location": "p. 6",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "67,000",
+        "unit": "μm",
+        "value_si": null,
+        "evidence": "After 7 days, total neurite outgrowth was limited to 67,000 μm in the stiffest hydrogel",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "total neurite outgrowth"
+      }
+    ],
+    "survival": [
+      {
+        "value": ">79",
+        "unit": "%",
+        "value_si": 79.0,
+        "evidence": "In all cases, viability of stained cells was greater than 79% (Figure 2D)",
+        "location": "p. 6",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "day 1",
+        "culture_days": 1.0,
+        "setting": "in_vitro_3d"
+      }
+    ]
+  },
+  "notes": "RGD density 1.9 × 10^7 ligands/μm3. Modulus by unconfined compression in PBS at 37 °C.",
+  "flags": [
+    "cell_category:check_tissue"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:04:53+00:00",
+  "schema_version": "0.1.0"
+}

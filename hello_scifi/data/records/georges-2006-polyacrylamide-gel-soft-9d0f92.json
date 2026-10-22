@@ -1,0 +1,130 @@
+{
+  "record_id": "georges-2006-polyacrylamide-gel-soft-9d0f92",
+  "source": {
+    "doi": "10.1529/biophysj.105.073114",
+    "title": "Matrices with Compliance Comparable to that of Brain Tissue Select Neuronal over Glial Growth in Mixed Cortical Cultures",
+    "first_author": "Georges",
+    "year": 2006,
+    "url": "https://doi.org/10.1529/biophysj.105.073114",
+    "file": "georges2006.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Polyacrylamide gel, soft (7.5% acrylamide, 0.01% bis-acrylamide), laminin-coated",
+  "material_key": "polyacrylamide",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "acrylamide/bis-acrylamide polymer mass",
+      "amount": "7.5",
+      "unit": "%",
+      "evidence": "solutions are prepared to contain a constant polymer mass of 7.5% and bis-acrylamide concentrations of 0.01%, 0.03% or 0.3% to alter stiffness",
+      "evidence_verified": true
+    },
+    {
+      "component": "bis-acrylamide",
+      "amount": "0.01",
+      "unit": "%",
+      "evidence": "0.01% bis-acrylamide 7.5% acrylamide (soft) gel",
+      "evidence_verified": true
+    },
+    {
+      "component": "acrylic acid N-hydroxy succinimide ester in toluene",
+      "amount": "0.5",
+      "unit": "%",
+      "evidence": "toluene containing 0.5% acrylic acid N-hydroxy succinimide ester",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "laminin coupling",
+      "parameter": "laminin concentration",
+      "value": "0.2",
+      "unit": "mg/ml",
+      "evidence": "The N-succinimidyl acrylate incorporated at the surface of the gel was reacted with 0.2 mg/ml laminin",
+      "evidence_verified": true
+    },
+    {
+      "step": "rheology",
+      "parameter": "oscillatory shear strain",
+      "value": "2",
+      "unit": "%",
+      "evidence": "calculated from the shear stress in phase with a 2% oscillatory (1 rad/s) shear strain",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "200",
+      "unit": "Pa",
+      "value_si": 200.0,
+      "evidence": "0.01% bis-acrylamide 7.5% acrylamide (soft) gel, G9(v) 200 6 50",
+      "location": "p. 3, Table 1",
+      "confidence": "high",
+      "test_method": "shear_rheology",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "embryonic (E17-E19) rat cortical neurons and astrocytes, mixed culture",
+    "cell_category": "primary_neuron",
+    "species": "rat",
+    "setting": "in_vitro_2d",
+    "tissue_site": "not_applicable",
+    "coating": "laminin",
+    "culture_days": {
+      "value": "7",
+      "unit": "days",
+      "value_si": 7.0,
+      "evidence": "Mixed cultures of cortical neurons and astrocytes were imaged 7 days after plating on laminin-coated PA gels.",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "80",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "Results show that ;80% of cells on soft gels were bIII-tubulin positive",
+        "location": "p. 4",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "fraction of cells bIII-tubulin positive (neurons)"
+      },
+      {
+        "value": "30% more",
+        "unit": null,
+        "value_si": null,
+        "evidence": "neurons on soft gels have 30% more F-actin structures extending off the length of the neurite",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "F-actin structures along neurite vs hard gels"
+      }
+    ],
+    "survival": []
+  },
+  "notes": "Shear modulus by oscillatory rheology, 2% strain, 1 rad/s. Soft PA gel.",
+  "flags": [
+    "cell_category:check_glia"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:04:13+00:00",
+  "schema_version": "0.1.0"
+}

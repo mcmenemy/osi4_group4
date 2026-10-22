@@ -33,6 +33,11 @@ def load_config() -> dict:
     return yaml.safe_load((_DATA_DIR / "scorecard.yaml").read_text())
 
 
+def family_key(r: Record) -> str:
+    # Older records may predate material_key; match them by name the same way extraction does.
+    return r.material_key or match_material(r.material) or fallback_key(r.material)
+
+
 def multiplier_for(cell_category: str | None, setting: str | None, cfg: dict) -> float:
     m = cfg["evidence_multipliers"]
     if not cell_category:
@@ -95,8 +100,8 @@ def _survival_state(s, th: dict) -> str | None:
 def _survival(recs: list[Record], cfg: dict) -> tuple[dict, dict | None]:
     th = cfg["thresholds"]
     sv = cfg["state_values"]
-    # Best = highest (points, state, evidence multiplier, latest timepoint); later timepoints win ties
-    # because a 3-week result says more about survival than a day-1 one.
+    # Best = highest (points, state, evidence multiplier, latest timepoint, value); later timepoints win
+    # ties because a 3-week result says more about survival than a day-1 one.
     best: tuple | None = None
     ids, members_met = [], 0
     for r in recs:
@@ -126,7 +131,7 @@ def _survival(recs: list[Record], cfg: dict) -> tuple[dict, dict | None]:
                 "location": s.location,
                 "label": detail,
             }
-            key = (sv[state] * mult, _STATE_ORDER[state], mult, days or 0)
+            key = (sv[state] * mult, _STATE_ORDER[state], mult, days or 0, s.value_si or 0)
             if best is None or key > best[0]:
                 best = (key, _requirement(state, "extracted", [], detail, mult), info)
         members_met += record_met
@@ -314,8 +319,7 @@ def build_scorecard(records: list[Record], weight_overrides: dict[str, float] | 
     weights = {**cfg["weights"], **{k: v for k, v in (weight_overrides or {}).items() if v is not None}}
     groups: dict[str, list[Record]] = defaultdict(list)
     for r in records:
-        # Older records may predate material_key; match them by name the same way extraction does.
-        groups[r.material_key or match_material(r.material) or fallback_key(r.material)].append(r)
+        groups[family_key(r)].append(r)
 
     # Candidate families stay on the card with no records yet; their unknowns are the to-do list.
     for fam in load_materials():

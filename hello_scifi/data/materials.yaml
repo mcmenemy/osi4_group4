@@ -175,6 +175,20 @@ materials:
     verified: false
   literature_typical_stiffness_kpa: null
   candidate: true
+- key: elastin_like_protein
+  label: Elastin-like protein (ELP) gels
+  class: nonconductive_hydrogel
+  patterns:
+  - \belp\b
+  - elastin[- ]like
+  note: Recombinant elastin-like proteins with cell-adhesive (RGD) sites, crosslinked into gels (e.g. Lampe et al. 2013).
+  transparency:
+    value: unknown
+    citation: null
+  degradable:
+    value: unknown
+    citation: null
+  literature_typical_stiffness_kpa: null
 - key: peptide_sap
   label: IKVAV / self-assembling peptide gels
   class: nonconductive_hydrogel

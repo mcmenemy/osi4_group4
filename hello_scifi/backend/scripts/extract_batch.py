@@ -1,12 +1,12 @@
 """Extract records from every PDF in data/papers and write them to data/records.
 
 Usage (from hello_scifi/backend):
-    uv run python scripts/extract_batch.py            # skip papers already extracted
-    uv run python scripts/extract_batch.py --force    # re-extract everything
-    uv run python scripts/extract_batch.py --only lu2019.pdf
+    uv run --env-file .env python scripts/extract_batch.py            # skip papers already extracted
+    uv run --env-file .env python scripts/extract_batch.py --force    # re-extract everything
+    uv run --env-file .env python scripts/extract_batch.py --only lu2019.pdf
     uv run python scripts/extract_batch.py --revalidate   # recompute SI values and quote checks, no API calls
 
-Needs ANTHROPIC_API_KEY (or MOCK_LLM=1 for a dry run). EXTRACTION_MODEL picks the model.
+Needs ANTHROPIC_API_KEY (loaded from .env by --env-file; or MOCK_LLM=1 for a dry run). EXTRACTION_MODEL picks the model.
 """
 
 import argparse

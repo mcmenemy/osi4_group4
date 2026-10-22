@@ -1,0 +1,125 @@
+{
+  "record_id": "seidlits-2010-10x-maha-hydrogel-methac-362262",
+  "source": {
+    "doi": "10.1016/j.biomaterials.2010.01.125",
+    "title": "The effects of hyaluronic acid hydrogels with tunable mechanical properties on neural progenitor cell differentiation",
+    "first_author": "Seidlits",
+    "year": 2010,
+    "url": "https://doi.org/10.1016/j.biomaterials.2010.01.125",
+    "file": "seidlits2010.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "10x MAHA hydrogel (methacrylated hyaluronic acid, 10:1 MA:HA)",
+  "material_key": "hyaluronic_acid",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "MAHA",
+      "amount": "1.5",
+      "unit": "% (w/v)",
+      "evidence": "hydrogels were crosslinked from precursor solutions containing 0.30% I2959 (w/v) and 1.5% (w/v) MAHA",
+      "evidence_verified": true
+    },
+    {
+      "component": "Irgacure 2959",
+      "amount": "0.30",
+      "unit": "% (w/v)",
+      "evidence": "hydrogels were crosslinked from precursor solutions containing 0.30% I2959 (w/v) and 1.5% (w/v) MAHA",
+      "evidence_verified": true
+    },
+    {
+      "component": "HA disaccharides modified with MA",
+      "amount": "88",
+      "unit": "%",
+      "evidence": "10:1 (10) 88  21% 4.2  0.4 2.6  0.02",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "methacrylation",
+      "parameter": "MA:HA molar ratio",
+      "value": "10:1",
+      "unit": null,
+      "evidence": "10:1 (10) 88  21% 4.2  0.4 2.6  0.02",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV photocrosslinking",
+      "parameter": "total irradiation time",
+      "value": "120",
+      "unit": "s",
+      "evidence": "UV￾irradiated for either 120 s (5 and 10 MAHA) or 105 s (20 MAHA) to crosslink.",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "4.2",
+      "unit": "kPa",
+      "value_si": 4200.0,
+      "evidence": "compared to 10 (4.2  0.4 kPa) and 5 (3.0  0.4 kPa) MAHA hydrogels",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": "compression",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": {
+      "value": "12",
+      "unit": "h",
+      "value_si": 0.5,
+      "evidence": "To fully degrade, 10 and 20x MAHA hydrogels required 12 h and 24 h, respectively.",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "ventral midbrain neural progenitor cells (E13.5 mouse); also P0 rat spinal cord astrocytes",
+    "cell_category": "primary_neuron",
+    "species": "mouse; rat",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": "poly-L-lysine added to precursor",
+    "culture_days": {
+      "value": "21",
+      "unit": "days",
+      "value_si": 21.0,
+      "evidence": "At 21 days in vitro, several NPC aggregates were still present in both the 5 and 10 MAHA hydrogels",
+      "location": "p. 6",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": {
+      "value": "up to 200",
+      "unit": "mm",
+      "value_si": 0.2,
+      "evidence": "In 10 MAHA gels, shorter ß-III tubulin-posi￾tive processes (ranging up to 200 mm) were seen extending from the aggregates",
+      "location": "p. 6",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "other_outcomes": [],
+    "survival": []
+  },
+  "notes": "Bulk modulus on PBS-swollen gels; degradation in 50 U/mL hyaluronidase at 37 C. Length unit 'mm' likely OCR artifact for µm.",
+  "flags": [
+    "cell_category:check_glia"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:06:08+00:00",
+  "schema_version": "0.1.0"
+}

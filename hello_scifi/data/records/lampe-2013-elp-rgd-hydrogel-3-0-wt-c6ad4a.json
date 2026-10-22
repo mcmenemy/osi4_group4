@@ -1,0 +1,146 @@
+{
+  "record_id": "lampe-2013-elp-rgd-hydrogel-3-0-wt-c6ad4a",
+  "source": {
+    "doi": "10.1016/j.actbio.2012.10.033",
+    "title": "Design of 3D engineered protein hydrogels for tailored control of neurite growth",
+    "first_author": "Lampe",
+    "year": 2013,
+    "url": "https://doi.org/10.1016/j.actbio.2012.10.033",
+    "file": "lampe2013.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "ELP-RGD hydrogel, 3.0 wt%, THPC 1:1 reactive site ratio (E = 1.5 kPa, RGD 1.9 × 10^7 ligands/μm3)",
+  "material_key": "elastin_like_protein",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "ELP (RGD)",
+      "amount": "3.0",
+      "unit": "wt%",
+      "evidence": "resulting in a final amorphous scaffold of 3.0 wt% (Figure 1C)",
+      "evidence_verified": true
+    },
+    {
+      "component": "THPC crosslinker stock solution",
+      "amount": "2.64",
+      "unit": "mg/mL",
+      "evidence": "was kept constant at 1:1 using a THPC crosslinker stock solution of 2.64 mg/mL",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "polymerization",
+      "parameter": "time at room temperature",
+      "value": "10",
+      "unit": "minutes",
+      "evidence": "Hydrogels were allowed to polymerize at room temperature for 10 minutes, followed by 10 minutes at 37°C",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "1.5",
+      "unit": "kPa",
+      "value_si": 1500.0,
+      "evidence": "from 0.5:1 to 1:1 to 2:1 increased the initial elastic modulus of the resulting amorphous hydrogel (E = 0.5, 1.5, and 2.1 kPa, respectively, Figure 2A)",
+      "location": "p. 5",
+      "confidence": "high",
+      "test_method": "compression",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": {
+      "value": "16.3",
+      "unit": null,
+      "value_si": 16.3,
+      "evidence": "the resulting mass swelling ratios were found to be statistically identical (16.3, 15.8, and 16.3, respectively, Figure 2B)",
+      "location": "p. 6",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "E9 chick dorsal root ganglion explants",
+    "cell_category": "primary_neuron",
+    "species": "chick",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": null,
+    "culture_days": {
+      "value": "7",
+      "unit": "days",
+      "value_si": 7.0,
+      "evidence": "resulted in a roughly two-fold increase in total DRG neurite outgrowth over 7 days in 3D culture",
+      "location": "p. 3",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": {
+      "value": ">79",
+      "unit": "%",
+      "value_si": 79.0,
+      "evidence": "In all cases, viability of stained cells was greater than 79% (Figure 2D)",
+      "location": "p. 6",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "neurite_length": {
+      "value": ">1400",
+      "unit": "μm",
+      "value_si": 0.0014,
+      "evidence": "Over the course of 7 days, the 1.9 × 107 ligands/μm3 samples were able to promote neurite lengths of over 1400 μm (Figure 4C).",
+      "location": "p. 8",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "other_outcomes": [
+      {
+        "value": "170,000",
+        "unit": "μm",
+        "value_si": null,
+        "evidence": "After 7 days, total neurite outgrowth was limited to 67,000 μm in the stiffest hydrogel, while growth was promoted to 170,000 and 332,000 μm in the 1.5 and 0.5 kPa hydrogels, respectively.",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "total neurite outgrowth"
+      }
+    ],
+    "survival": [
+      {
+        "value": ">79",
+        "unit": "%",
+        "value_si": 79.0,
+        "evidence": "In all cases, viability of stained cells was greater than 79% (Figure 2D)",
+        "location": "p. 6",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "day 1",
+        "culture_days": 1.0,
+        "setting": "in_vitro_3d"
+      }
+    ]
+  },
+  "notes": "Modulus by unconfined compression in PBS at 37 °C; swelling ratio = wet mass / lyophilized dry mass.",
+  "flags": [
+    "cell_category:check_tissue"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:04:53+00:00",
+  "schema_version": "0.1.0"
+}

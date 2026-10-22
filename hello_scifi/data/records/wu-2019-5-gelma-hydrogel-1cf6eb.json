@@ -1,0 +1,143 @@
+{
+  "record_id": "wu-2019-5-gelma-hydrogel-1cf6eb",
+  "source": {
+    "doi": "10.1042/BSR20181748",
+    "title": "The influence of the stiffness of GelMA substrate on the outgrowth of PC12 cells",
+    "first_author": "Wu",
+    "year": 2019,
+    "url": "https://doi.org/10.1042/BSR20181748",
+    "file": "wu2019.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "5% GelMA hydrogel",
+  "material_key": "gelma",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "GelMA",
+      "amount": "5",
+      "unit": "%",
+      "evidence": "To form GelMA hydrogels with different concentrations (5, 10, 20, and 30%)",
+      "evidence_verified": true
+    },
+    {
+      "component": "Irgacure 2959",
+      "amount": "0.5",
+      "unit": "% (w/v)",
+      "evidence": "The photoinitiator (Irgacure 2959) was then added to the precursor solutions at a concentration of 0.5% (w/v).",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "UV photocrosslinking",
+      "parameter": "intensity",
+      "value": "1.5",
+      "unit": "mW/cm2",
+      "evidence": "the solutions were exposed to a UV light with 1.5 mW/cm2 intensity and 365 nm wavelength for photocrosslinking of 30 s",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV photocrosslinking",
+      "parameter": "time",
+      "value": "30",
+      "unit": "s",
+      "evidence": "the solutions were exposed to a UV light with 1.5 mW/cm2 intensity and 365 nm wavelength for photocrosslinking of 30 s",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "3.08",
+      "unit": "KPa",
+      "value_si": 3080.0,
+      "evidence": "The 5% GelMA hydrogels were very soft with the Young's modulus of only 3.08 KPa",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": "tension",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "PC12",
+    "cell_category": "neuron_like_line",
+    "species": "rat",
+    "setting": "in_vitro_2d",
+    "tissue_site": "not_applicable",
+    "coating": null,
+    "culture_days": {
+      "value": "120",
+      "unit": "h",
+      "value_si": 5.0,
+      "evidence": "After incubation for 24, 72, and 120 h, the cell-seeded hydrogel disks were rinsed with PBS",
+      "location": "p. 3",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": {
+      "value": "95",
+      "unit": "%",
+      "value_si": 95.0,
+      "evidence": "cell viability of all groups at 24–120 h was approximately 95%, showing no significant difference",
+      "location": "p. 5",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "neurite_length": {
+      "value": "48.3",
+      "unit": "μm",
+      "value_si": 0.000048299999999999995,
+      "evidence": "not obviously different from neurite length on 5% (48.3 μm) and 20% (49.2 μm) GelMA substrates",
+      "location": "p. 5",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "other_outcomes": [
+      {
+        "value": "2035",
+        "unit": "cells/cm2",
+        "value_si": null,
+        "evidence": "PC12 cells on the 5% GelMA substrates show the biggest adhesion rate of 2035 cells/cm2",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "cell adhesion rate at 24 h"
+      }
+    ],
+    "survival": [
+      {
+        "value": "95",
+        "unit": "%",
+        "value_si": 95.0,
+        "evidence": "cell viability of all groups at 24–120 h was approximately 95%, showing no significant difference",
+        "location": "p. 5",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "24–120 h",
+        "culture_days": 5.0,
+        "setting": "in_vitro_2d"
+      }
+    ]
+  },
+  "notes": "Uniaxial tensile test via DMA instrument at room temperature. GelMA DS ~96%.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:06:35+00:00",
+  "schema_version": "0.1.0"
+}

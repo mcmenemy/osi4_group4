@@ -1,0 +1,136 @@
+{
+  "record_id": "seidlits-2010-20x-maha-hydrogel-methac-7e5e0a",
+  "source": {
+    "doi": "10.1016/j.biomaterials.2010.01.125",
+    "title": "The effects of hyaluronic acid hydrogels with tunable mechanical properties on neural progenitor cell differentiation",
+    "first_author": "Seidlits",
+    "year": 2010,
+    "url": "https://doi.org/10.1016/j.biomaterials.2010.01.125",
+    "file": "seidlits2010.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "20x MAHA hydrogel (methacrylated hyaluronic acid, 20:1 MA:HA)",
+  "material_key": "hyaluronic_acid",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "MAHA",
+      "amount": "1.5",
+      "unit": "% (w/v)",
+      "evidence": "hydrogels were crosslinked from precursor solutions containing 0.30% I2959 (w/v) and 1.5% (w/v) MAHA",
+      "evidence_verified": true
+    },
+    {
+      "component": "Irgacure 2959",
+      "amount": "0.30",
+      "unit": "% (w/v)",
+      "evidence": "hydrogels were crosslinked from precursor solutions containing 0.30% I2959 (w/v) and 1.5% (w/v) MAHA",
+      "evidence_verified": true
+    },
+    {
+      "component": "HA disaccharides modified with MA",
+      "amount": "160",
+      "unit": "%",
+      "evidence": "20:1 (20) 160  30% 5.1  0.4 7.2  0.03",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "methacrylation",
+      "parameter": "MA:HA molar ratio",
+      "value": "20:1",
+      "unit": null,
+      "evidence": "20:1 (20) 160  30% 5.1  0.4 7.2  0.03",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV photocrosslinking",
+      "parameter": "total irradiation time",
+      "value": "105",
+      "unit": "s",
+      "evidence": "UV￾irradiated for either 120 s (5 and 10 MAHA) or 105 s (20 MAHA) to crosslink.",
+      "evidence_verified": true
+    },
+    {
+      "step": "cell photoencapsulation",
+      "parameter": "UV time (initial + final)",
+      "value": "15 + 90",
+      "unit": "s",
+      "evidence": "exposed to UV for 30 s (5 and 10 MAHA) or 15 s (20 MAHA)",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "5.1",
+      "unit": "kPa",
+      "value_si": 5100.0,
+      "evidence": "Significantly higher compressive moduli were measured for 20 (5.1 0.4 kPa, mean  S.E.M.)",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": "compression",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": {
+      "value": "24",
+      "unit": "h",
+      "value_si": 1.0,
+      "evidence": "To fully degrade, 10 and 20x MAHA hydrogels required 12 h and 24 h, respectively.",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "ventral midbrain neural progenitor cells (E13.5 mouse); also P0 rat spinal cord astrocytes",
+    "cell_category": "primary_neuron",
+    "species": "mouse; rat",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": "poly-L-lysine added to precursor",
+    "culture_days": {
+      "value": "14",
+      "unit": "days",
+      "value_si": 14.0,
+      "evidence": "At day 14 in vitro, aggregates appeared stable in all hydrogel types, even the 20 MAHA hydrogels",
+      "location": "p. 6",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "Very few NPCs found at 21 days",
+        "unit": null,
+        "value_si": null,
+        "evidence": "Very few NPCs could be found in the stiffest hydrogels (20 MAHA) by 21 days in culture",
+        "location": "p. 6",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "NPC persistence"
+      }
+    ],
+    "survival": []
+  },
+  "notes": "Bulk modulus on PBS-swollen gels; degradation in 50 U/mL hyaluronidase at 37 C. Astrocytes showed spread morphology only in this stiffest gel.",
+  "flags": [
+    "cell_category:check_glia"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:06:08+00:00",
+  "schema_version": "0.1.0"
+}

@@ -124,6 +124,17 @@ def test_each_survival_value_keeps_its_own_setting():
     assert best["setting"] == "in_vivo"
 
 
+def test_best_survival_prefers_the_higher_value_on_a_tie():
+    card = build_scorecard(
+        [
+            rec("a", "peg", cells="neuron_like_line", setting="in_vitro_3d", survival=[("neurite_outgrowth", 23, 14)]),
+            rec("b", "peg", cells="neuron_like_line", setting="in_vitro_3d", survival=[("neurite_outgrowth", 65, 14)]),
+        ]
+    )
+    row = next(r for r in card["ranked"] if r["material_key"] == "peg")
+    assert row["best_survival"]["value"] == 65
+
+
 def test_in_vivo_brain_needs_brain_tissue_site():
     def state(site):
         card = build_scorecard(

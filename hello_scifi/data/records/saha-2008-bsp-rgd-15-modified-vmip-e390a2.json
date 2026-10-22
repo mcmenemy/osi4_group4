@@ -1,0 +1,99 @@
+{
+  "record_id": "saha-2008-bsp-rgd-15-modified-vmip-e390a2",
+  "source": {
+    "doi": "10.1529/biophysj.108.132217",
+    "title": "Substrate Modulus Directs Neural Stem Cell Behavior",
+    "first_author": "Saha",
+    "year": 2008,
+    "url": "https://doi.org/10.1529/biophysj.108.132217",
+    "file": "saha2008.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "bsp-RGD(15)-modified vmIPN (pAAm/p(EG-co-AAc)), 10 wt% AAm, 0.300 wt% BIS (~10,000 Pa)",
+  "material_key": "polyacrylamide",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "acrylamide",
+      "amount": "10.0",
+      "unit": "wt%",
+      "evidence": "10.0 0.300 1.11 9580 6 767",
+      "evidence_verified": true
+    },
+    {
+      "component": "BIS",
+      "amount": "0.300",
+      "unit": "wt%",
+      "evidence": "10.0 0.300 1.11 9580 6 767",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "second IPN polymerization (UV)",
+      "parameter": "time",
+      "value": "1",
+      "unit": "h",
+      "evidence": "initiated with 0.005 g/mL QTX in a degassed solution of 97:3 (v/v) water/isopropanol (IPA, Fisher Scientific) for 1 h, using an ultraviolet light transilluminator table",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "9580",
+      "unit": "Pa",
+      "value_si": 9580.0,
+      "evidence": "10.0 0.300 1.11 9580 6 767",
+      "location": "p. 5, Table 1",
+      "confidence": "high",
+      "test_method": "shear_rheology",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": {
+      "value": "1.11",
+      "unit": null,
+      "value_si": 1.11,
+      "evidence": "10.0 0.300 1.11 9580 6 767",
+      "location": "p. 5, Table 1",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "adult rat hippocampal neural stem cells (aNSCs)",
+    "cell_category": "sc_neuron",
+    "species": "rat",
+    "setting": "in_vitro_2d",
+    "tissue_site": "not_applicable",
+    "coating": "bsp-RGD(15) peptide",
+    "culture_days": {
+      "value": "6",
+      "unit": "days",
+      "value_si": 6.0,
+      "evidence": "All images were taken after 6 days of culture.",
+      "location": "p. 10, Figure 6",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [],
+    "survival": []
+  },
+  "notes": "Modulus measured by oscillatory shear rheology on bulk pAAm gels swollen in water; E' = 2G'(1+v), v=0.5.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:05:24+00:00",
+  "schema_version": "0.1.0"
+}

@@ -39,10 +39,12 @@ Scanned PDFs without a text layer won't work; the extraction needs selectable te
 ## 2. Extract records
 
 ```bash
-uv run python scripts/extract_batch.py                    # every PDF not yet extracted
-uv run python scripts/extract_batch.py --only georges2006.pdf
-uv run python scripts/extract_batch.py --force --only georges2006.pdf   # redo one paper
+uv run --env-file .env python scripts/extract_batch.py                    # every PDF not yet extracted
+uv run --env-file .env python scripts/extract_batch.py --only georges2006.pdf
+uv run --env-file .env python scripts/extract_batch.py --force --only georges2006.pdf   # redo one paper
 ```
+
+`--env-file .env` loads your API key; without it every paper fails with "Could not resolve authentication method". Check that filenames have no stray spaces (e.g. `" wu2019.pdf"`): the script treats each file as a separate paper.
 
 Records are written to `data/records/<record_id>.json`, one per material or formulation. The summary prints records, fields filled, and flags per paper.
 

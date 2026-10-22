@@ -2,6 +2,8 @@
 # Kept separate from the records so re-extraction can't undo them and every change is visible.
 # Match records by their source PDF (file) or by record_id; set any top-level record fields
 # (material_class, material_key, electrode_material) or source fields, and say why in `note`.
+# `biology` sets biology fields (e.g. cell_category); `values` corrects one value by path, with a
+# new verbatim quote if the old one doesn't support the corrected value.
 
 by_file:
   Adewole2024.pdf:
@@ -18,3 +20,37 @@ by_file:
     material_key: fibrin
     electrode_material: PEDOT:PSS
     note: Biohybrid device (PEDOT:PSS electrode array + fibrin cell layer). Grouped with fibrin as the cell carrier; the PEDOT:PSS array's electrical values describe the electrode and don't set fibrin's properties.
+
+by_record:
+  # Seidlits 2010: the PDF's text layer renders "µm" as "mm"; Fig. 5 shows micrometer-scale processes.
+  # The 6-24 h degradation times are in 1000 U/mL hyaluronidase (an accelerated assay); with cells in
+  # culture the paper says most gels degraded by the fourth week, which is the relevant timescale.
+  seidlits-2010-5x-maha-hydrogel-methacr-dd5baa:
+    biology:
+      cell_category: sc_neuron
+    values:
+      biology.neurite_length: {value: "up to 600", unit: "µm"}
+      properties.degradation_time:
+        value: "4"
+        unit: weeks
+        evidence: the majority of hydrogels completely degraded by the fourth week
+    note: "Neurite length is µm (PDF renders µ as m). Degradation is with cells in culture (~4 weeks; the 6 h figure is in concentrated hyaluronidase). Cells are E13.5 neural progenitors, so sc_neuron."
+  seidlits-2010-10x-maha-hydrogel-methac-362262:
+    biology:
+      cell_category: sc_neuron
+    values:
+      biology.neurite_length: {value: "up to 200", unit: "µm"}
+      properties.degradation_time:
+        value: "4"
+        unit: weeks
+        evidence: the majority of hydrogels completely degraded by the fourth week
+    note: "Neurite length is µm (PDF renders µ as m). Degradation is with cells in culture (~4 weeks; the 12 h figure is in concentrated hyaluronidase). Cells are E13.5 neural progenitors, so sc_neuron."
+  seidlits-2010-20x-maha-hydrogel-methac-7e5e0a:
+    biology:
+      cell_category: sc_neuron
+    values:
+      properties.degradation_time:
+        value: "4"
+        unit: weeks
+        evidence: the majority of hydrogels completely degraded by the fourth week
+    note: "Degradation is with cells in culture (~4 weeks; the 24 h figure is in concentrated hyaluronidase). Cells are E13.5 neural progenitors, so sc_neuron."

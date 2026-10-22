@@ -1,0 +1,135 @@
+{
+  "record_id": "flanagan-2002-polyacrylamide-gel-3-acr-028680",
+  "source": {
+    "doi": null,
+    "title": "Neurite branching on deformable substrates",
+    "first_author": "Flanagan",
+    "year": 2002,
+    "url": null,
+    "file": "flanagan2002.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "Polyacrylamide gel, 3% acrylamide, 0.08% bisacrylamide, poly-D-lysine/matrigel coated",
+  "material_key": "polyacrylamide",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "acrylamide",
+      "amount": "3",
+      "unit": "%",
+      "evidence": "Gels were prepared with 3% acrylamide and bisacrylamide (bis) ranging from 0.04 to 0.2%.",
+      "evidence_verified": true
+    },
+    {
+      "component": "bisacrylamide",
+      "amount": "0.08",
+      "unit": "%",
+      "evidence": "Figure 2 shows neurons cultured for 7 days on a soft gel (0.08% bisacrylamide, ~2300 dyne/cm2",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "polymerization",
+      "parameter": "gel thickness",
+      "value": "~100",
+      "unit": "μm",
+      "evidence": "Final gel thickness after polymerization was ~100 μm.",
+      "evidence_verified": true
+    },
+    {
+      "step": "poly-D-lysine cross-linking",
+      "parameter": "time/temperature",
+      "value": "1–2 h at 37",
+      "unit": "°C",
+      "evidence": "left on gels for 1–2 h at 37°C for cross-linking",
+      "evidence_verified": true
+    },
+    {
+      "step": "sulfo-SANPAH activation",
+      "parameter": "concentration",
+      "value": "50",
+      "unit": "μM",
+      "evidence": "A bifunctional cross-linker (50 μM sulfo-SANPAH (Pierce, Rockford, IL) in 200 mM HEPES,",
+      "evidence_verified": true
+    },
+    {
+      "step": "matrigel coating",
+      "parameter": "surface density",
+      "value": "8.67",
+      "unit": "μg/cm2",
+      "evidence": "167 μg/ml matrigel (Becton Dickinson, Franklin Lakes, NJ) in EMEM was applied at 8.67 μg/cm2",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "2300",
+      "unit": "dyne/cm2",
+      "value_si": 230.0,
+      "evidence": "Figure 2 shows neurons cultured for 7 days on a soft gel (0.08% bisacrylamide, ~2300 dyne/cm2",
+      "location": "p. 4",
+      "confidence": "medium",
+      "test_method": "shear_rheology",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "primary spinal cord neurons (E13.5 embryos, C57BL/6J)",
+    "cell_category": "primary_neuron",
+    "species": "mouse",
+    "setting": "in_vitro_2d",
+    "tissue_site": "not_applicable",
+    "coating": "poly-D-lysine (sulfo-SANPAH cross-linked) + matrigel",
+    "culture_days": {
+      "value": "7",
+      "unit": "days",
+      "value_si": 7.0,
+      "evidence": "Figure 2 shows neurons cultured for 7 days on a soft gel (0.08% bisacrylamide, ~2300 dyne/cm2",
+      "location": "p. 4",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": {
+      "value": "0.8",
+      "unit": "mm",
+      "value_si": 0.0008,
+      "evidence": "Neurites extend quite far on the gels, on average 0.8 mm from the cell body, and form multiple branches along their length.",
+      "location": "p. 4",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "other_outcomes": [
+      {
+        "value": "no glia observed",
+        "unit": null,
+        "value_si": null,
+        "evidence": "No glia were observed on any of the gels even after several weeks in culture",
+        "location": "p. 4",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "glial presence"
+      }
+    ],
+    "survival": []
+  },
+  "notes": "Shear modulus measured by cone-and-plate rheometry at room temperature, 5% strain, 10 rad/s. Discussion also cites ~2500 dyne/cm2 for 0.08% bis gels. Softer gels showed more neurite branching.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:03:40+00:00",
+  "schema_version": "0.1.0"
+}

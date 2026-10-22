@@ -1,0 +1,83 @@
+{
+  "record_id": "saha-2008-bsp-rgd-15-modified-vmip-ff281e",
+  "source": {
+    "doi": "10.1529/biophysj.108.132217",
+    "title": "Substrate Modulus Directs Neural Stem Cell Behavior",
+    "first_author": "Saha",
+    "year": 2008,
+    "url": "https://doi.org/10.1529/biophysj.108.132217",
+    "file": "saha2008.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "bsp-RGD(15)-modified vmIPN, 5 wt% AAm, 0.200 wt% BIS",
+  "material_key": "polyacrylamide",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "acrylamide",
+      "amount": "5.00",
+      "unit": "wt%",
+      "evidence": "5.00 0.200 1.10 902 6 71",
+      "evidence_verified": true
+    },
+    {
+      "component": "BIS",
+      "amount": "0.200",
+      "unit": "wt%",
+      "evidence": "5.00 0.200 1.10 902 6 71",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": {
+      "value": "902",
+      "unit": "Pa",
+      "value_si": 902.0,
+      "evidence": "5.00 0.200 1.10 902 6 71",
+      "location": "p. 5, Table 1",
+      "confidence": "high",
+      "test_method": "shear_rheology",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": {
+      "value": "1.10",
+      "unit": null,
+      "value_si": 1.1,
+      "evidence": "5.00 0.200 1.10 902 6 71",
+      "location": "p. 5, Table 1",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "adult rat hippocampal neural stem cells (aNSCs)",
+    "cell_category": "sc_neuron",
+    "species": "rat",
+    "setting": "in_vitro_2d",
+    "tissue_site": "not_applicable",
+    "coating": "bsp-RGD(15) peptide",
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [],
+    "survival": []
+  },
+  "notes": "Rheology on bulk swollen pAAm gels.",
+  "flags": [
+    "material_key:from_model_only"
+  ],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:05:24+00:00",
+  "schema_version": "0.1.0"
+}

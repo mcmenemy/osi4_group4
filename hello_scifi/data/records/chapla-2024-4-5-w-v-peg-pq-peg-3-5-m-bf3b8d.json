@@ -1,0 +1,193 @@
+{
+  "record_id": "chapla-2024-4-5-w-v-peg-pq-peg-3-5-m-bf3b8d",
+  "source": {
+    "doi": "10.1007/s12195-024-00794-2",
+    "title": "Neurogenic Cell Behavior in 3D Culture Enhanced Within a Highly Compliant Synthetic Hydrogel Platform Formed via Competitive Crosslinking",
+    "first_author": "Chapla",
+    "year": 2024,
+    "url": "https://doi.org/10.1007/s12195-024-00794-2",
+    "file": "chapla2024.pdf"
+  },
+  "material_class": "nonconductive_hydrogel",
+  "material": "4.5% w/v PEG-PQ-PEG + 3.5 mM PEG-RGDS hydrogel with 4:1 alloc:acrylate (H-Lys(alloc)-OH)",
+  "material_key": "peg",
+  "electrode_material": null,
+  "formulation": [
+    {
+      "component": "H-Lys(alloc)-OH",
+      "amount": "10.99",
+      "unit": "mg/mL",
+      "evidence": "0.26±0.06 kPa was achieved at 4:1 alloc:acrylate (10.99 mg/mL H-Lys(alloc)-OH)",
+      "evidence_verified": true
+    },
+    {
+      "component": "PEG-RGDS",
+      "amount": "3.5",
+      "unit": "mM",
+      "evidence": "3T3 fibroblasts were encapsulated at 2000 cells/µL in 4.5% w/v PEG-PQ-PEG+3.5 mM PEG-RGDS hydrogels",
+      "evidence_verified": true
+    },
+    {
+      "component": "Eosin Y",
+      "amount": "10",
+      "unit": "μM",
+      "evidence": "PEG-PQ-PEG was dissolved at the desired concentration in 20 mM HEPES",
+      "evidence_verified": true
+    },
+    {
+      "component": "triethanolamine",
+      "amount": "1.5",
+      "unit": "% v/v",
+      "evidence": "1.5% v/v triethanolamine (TEOA, Sigma) (pH 8.3)",
+      "evidence_verified": true
+    },
+    {
+      "component": "n-vinyl-2-pyrrolidone",
+      "amount": "0.35",
+      "unit": "% v/v",
+      "evidence": "monomer 0.35% v/v n-vinyl-2-pyrrolidone (NVP, Sigma)",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "photocrosslinking",
+      "parameter": "light intensity",
+      "value": "275-280",
+      "unit": "mW/cm2",
+      "evidence": "Fiber-Lite High Intensity Illuminator Series 180 lamp (Dolan-Jenner Industries; 275-280 mW/cm2",
+      "evidence_verified": true
+    },
+    {
+      "step": "photocrosslinking",
+      "parameter": "exposure time",
+      "value": "50",
+      "unit": "s",
+      "evidence": "50 s to form a crosslinked gel",
+      "evidence_verified": true
+    },
+    {
+      "step": "swelling",
+      "parameter": "temperature",
+      "value": "37",
+      "unit": "°C",
+      "evidence": "Gels were made 1 mm in height and were swollen overnight in phosphate buffered saline (1×PBS, pH 7) at 37 °C",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": {
+      "value": "0.26",
+      "unit": "kPa",
+      "value_si": 260.0,
+      "evidence": "0.26±0.06 kPa was achieved at 4:1 alloc:acrylate (10.99 mg/mL H-Lys(alloc)-OH)",
+      "location": "p. 6",
+      "confidence": "high",
+      "test_method": "compression",
+      "evidence_verified": true
+    },
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "PC12 cells (also NIH 3T3 fibroblasts and rat fetal NSCs)",
+    "cell_category": "neuron_like_line",
+    "species": "rat",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": "RGDS",
+    "culture_days": {
+      "value": "14",
+      "unit": "days",
+      "value_si": 14.0,
+      "evidence": "Neurite outgrowth was evaluated at different timepoints (4 days, 7 days, 14 days)",
+      "location": "p. 5",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": {
+      "value": "94.81",
+      "unit": "%",
+      "value_si": 94.81,
+      "evidence": "cell viability was 94.81±3.03% in 0.26 kPa gels",
+      "location": "p. 7",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "neurite_length": null,
+    "other_outcomes": [],
+    "survival": [
+      {
+        "value": "94.81",
+        "unit": "%",
+        "value_si": 94.81,
+        "evidence": "cell viability was 94.81±3.03% in 0.26 kPa gels",
+        "location": "p. 7",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "viability",
+        "timepoint": "24 h after encapsulation",
+        "culture_days": 1.0,
+        "setting": "in_vitro_3d"
+      },
+      {
+        "value": "25.99",
+        "unit": "%",
+        "value_si": 25.99,
+        "evidence": "25.99 ± 6.65% of cells in 0.26 kPa gels and 19.45±10.47% of cells in 1.2 kPa extended",
+        "location": "p. 7",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "neurite_outgrowth",
+        "timepoint": "4 days after encapsulation",
+        "culture_days": 4.0,
+        "setting": "in_vitro_3d"
+      },
+      {
+        "value": "44.38",
+        "unit": "%",
+        "value_si": 44.38,
+        "evidence": "Percentages of neurite (+) cells were 44.38±2.56 % in 0.26 kPa hydrogels",
+        "location": "p. 7",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "neurite_outgrowth",
+        "timepoint": "day 7",
+        "culture_days": 7.0,
+        "setting": "in_vitro_3d"
+      },
+      {
+        "value": "64.99",
+        "unit": "%",
+        "value_si": 64.99,
+        "evidence": "PC12s in 0.26 kPa hydrogels showed striking neurite outgrowth of 64.99% ±5.64% of neurite (+) cells",
+        "location": "p. 7",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "measure": "neurite_outgrowth",
+        "timepoint": "14 days after encapsulation",
+        "culture_days": 14.0,
+        "setting": "in_vitro_3d"
+      }
+    ]
+  },
+  "notes": "Compression tested after overnight swelling in PBS at 37 °C, tested at room temperature. NSCs encapsulated in this gel showed more spreading and Tuj1 expression in differentiation media; viability measured with 3T3 fibroblasts.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T18:03:12+00:00",
+  "schema_version": "0.1.0"
+}

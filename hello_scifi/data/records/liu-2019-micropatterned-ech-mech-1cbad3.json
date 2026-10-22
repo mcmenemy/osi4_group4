@@ -30,7 +30,7 @@
     "swelling_ratio": {
       "value": "2.1",
       "unit": null,
-      "value_si": null,
+      "value_si": 2.1,
       "evidence": "with a swelling ratio of 2.1 when sandwiched by the elastic PFPE-DMA",
       "location": "p. 2",
       "confidence": "high",
