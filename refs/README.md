@@ -1,6 +1,6 @@
 # References
 
-Research papers for the OSI Hackathon.
+Reference papers for the project's earlier "What can carry a mind?" plan ([`docs/earlier-plan.md`](../docs/earlier-plan.md)), one per theory-of-mind framework. Papers for the current materials dataset go in `hello_scifi/data/papers/` instead; see [`hello_scifi/data/ADDING_DATA.md`](../hello_scifi/data/ADDING_DATA.md).
 
 ## Adding a paper
 

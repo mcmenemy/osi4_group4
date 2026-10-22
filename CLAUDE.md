@@ -2,49 +2,39 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Current direction (Oct 21, 2026 pivot)
-
-The app now builds an evidence base for a gel-filled vs. bare microwell neuron study (audiences: Science Corp and the Seifrid lab). Key pieces, all under `hello_scifi/`:
-- Record schema: `backend/app/schemas.py`, mirrored in `frontend/src/records.ts`; keep them in sync. Every value is a FieldValue with a verbatim evidence quote.
-- Extraction: `backend/app/extraction/` (prompt in `prompts.py`), batch run via `backend/scripts/extract_batch.py`. `MOCK_LLM=1` returns a canned record; `EXTRACTION_MODEL` picks the model.
-- Data: `data/records/*.json` are committed and loaded at startup (no database). `data/papers/*.pdf` are gitignored (public repo). Hand-entered values in `data/references.json` must carry a citation or be labeled "approximate, to verify". Don't invent data.
-- Render builds from `hello_scifi/` (Root Directory), so anything the app reads must live under it; the Dockerfile copies `data/` and sets `DATA_DIR`.
-- Tabs: Overview, Maps (scorecard first), Records, Extract, Review (demo, nothing saved), Gaps & next steps, For fun. The theory-of-mind benchmark described below lives on For fun; keep the other tabs focused on the microwell work.
-
 ## Project
 
-`osi4_group4` is the public project repo for the OSI 4 hackathon (Oct 21–22, 2026), seeded from the private `osi4_prep` planning repo. The project ("What can carry a mind?") is a scoring tool: given a text description of a candidate substrate that could take on brain function for a patient losing tissue to neurodegeneration (digital computers, quantum computers, neuromorphic chips, OECT networks, ionic hydrogels, engineered neural tissue, gel–neuron hybrids, user submissions), score it 0–3 against each theory-of-mind framework with criterion-level reasoning, plus a combined support score and a maintainability score (how hard the substrate is to keep running). The v1 frameworks are functionalism, global workspace, IIT, active inference, EM field theory and Orch-OR, and the MVP may cut these to 2–3. It is a structured way to compare and debate architectures, not a predictor. App plan (see README "App Plan"):
-- **Main view:** architecture dropdowns (presets scored ahead of time and cached) plus a custom-text box scored live by the LLM.
-- **Advanced tab (reach goal):** takes a hybrid circuit spec (host, graft and device populations, connectivity, dropout schedule, readout task), simulates host-neuron loss, and plots degradation curves. The graft is the device neurons that connect to the host; the rest of the device is more neurons or another substrate, depending on the architecture. Build order, each step demoable on its own:
-  1. Brian2 simulation plus the degradation curve (use the `numpy` codegen target in deployed containers). Function preserved = accuracy of a linear decoder retrained on surviving neurons after each dropout step; task input enters through the host.
-  2. Information shift (transfer entropy, host to device and back): gcmi first (Gaussian copula, numpy-only, fast enough to run live). IDTxl's pure-Python `PythonKraskovCMI` estimator (no Java) is an optional, slower offline check.
-  3. PyPhi: Φ and the main complex on a coarse-grained, rolled-up model of the Brian2 network (each node = one population, binarized by activity; φ_s up to ~6–7 nodes, full Φ up to ~5). Compare architectures under the same grouping, not absolute values. Riskiest step, so it goes last.
-  - Sweep each architecture across reciprocity and timescale settings and check that the ranking holds.
-  - Example specs for judges are computed ahead of time. Outputs are labeled as integration proxies and retained task information, not consciousness.
-  - Orch-OR, EM field theory and the quantum computer substrate aren't simulated.
-- Prep feasibility tests for these libraries are package checks in `hello_scifi/` (see below); the README's prep task checklist tracks which are done.
+`osi4_group4` is the public repo for our OSI Hackathon @ NC State project (Oct 21–22, 2026). It builds a source-linked materials dataset and scorecard for improving neuron retention in Science Corporation's SU-8 microwell biohybrid implant (Brown et al., bioRxiv 2024): which soft, degradable (and later conductive) materials could fill or coat the wells. Audiences: Science Corp and the Seifrid lab (NC State MSE). `README.md` holds the framing; keep this file consistent with it. The earlier "What can carry a mind?" plan is in `docs/earlier-plan.md` and survives as the app's For fun tab.
 
-`README.md` is the source of truth for project framing, team roles and open questions; keep this file consistent with it.
+Everything the app uses lives under `hello_scifi/` (named after the original stack test). Render builds from `hello_scifi/` as its root, so anything the app reads at runtime must be under it; the Dockerfile copies `data/` and sets `DATA_DIR`.
 
-## Current state
+## Architecture
 
-This is the project repo, so project code belongs here. `hello_scifi/` is still the stack test, not the project itself. The project question may also narrow as research goes on, so treat the README summary as a starting point, not a spec.
+- **Schema:** `backend/app/schemas.py` (Pydantic), mirrored in `frontend/src/records.ts`; keep them in sync. Every value is a `FieldValue` with a verbatim evidence quote, location, confidence, `value_si` and `evidence_verified`. Survival values carry their own measure (viability / occupancy / retention / neurite_outgrowth), setting and `culture_days`; never compare across measures.
+- **Extraction:** `backend/app/extraction/`: `pdf_text.py` (pypdfium2), `prompts.py` (editable prompt), `extract.py` (chunked structured output; `MOCK_LLM=1` returns a canned record), `validate.py` (quote checks, SI units, sanity ranges), `vocab.py` (material_key and cell_category checks), `revalidate.py` (re-checks stored records; never deletes flags it didn't compute).
+- **Data (no database):** `data/records/*.json` are committed and loaded at startup. `data/materials.yaml` is the material-family vocabulary plus curated facts, each with a citation and `verified: true/false`. `data/overrides.yaml` holds team corrections applied at load. `data/reviews/*.json` drop rejected records and apply edits before scoring. `data/papers/*.pdf` are gitignored (public repo). `data/references.json` holds the map reference bands.
+- **Scorecard:** `backend/app/scorecard.py`, settings in `data/scorecard.yaml`; served by `/api/scorecard`, computed server-side. Rank on requirement states, not raw numbers. Only primary_neuron / sc_neuron / neuron_like_line records count as neuron evidence. `control: true` families are never ranked; `candidate: true` families always appear.
+- **Frontend tabs:** Overview, Maps (scorecard first, then Plotly charts), Records (`#/records?id=<record_id>` opens one), Extract, Review (demo only; nothing saved), Gaps & next steps (gap bullets computed from `/api/scorecard`; dataset destination in `frontend/src/dataDestination.ts`), For fun (theory-of-mind benchmark, `/api/score`).
 
-- `GIT_START.md`: SSH key, clone and Claude Code setup for macOS and Windows.
-- `refs/`: one reference paper per framework, committed directly to git (no LFS; `.gitattributes` marks `*.pdf` binary). Files are named `YYYY_Short_Title.pdf`, and each needs a row in the `refs/README.md` table. The repo is public, so only openly licensed PDFs (e.g. CC BY) are committed; other papers get a web link in the table instead.
-- `hello_scifi/`: hello-world stack test (FastAPI backend, React/Vite/TS frontend, Claude via the Anthropic Python SDK, one Docker image deployed on Render). Full setup and deploy steps are in `hello_scifi/README.md`. It also hosts **package checks**: generic hello-world runs of the project's libraries, exposed through the API and plotted in the UI, to prove they work in the full stack. Done so far:
-  - Brian2 (`backend/app/sim.py`, `POST /api/sim/hello`, `frontend/src/SimCheck.tsx`): `numpy` code generation, one simulation at a time behind a lock.
-  - PyPhi (`backend/app/phi.py`, `POST /api/phi/hello`, `frontend/src/PhiCheck.tsx`): PyPhi 2.0.0rc4 (IIT 4.0), which needs Python 3.13, so the backend is on 3.13. Report φ_s (`.phi`, system integrated information) and Φ (`.big_phi`, structure integrated information) as distinct quantities. Run with `progress=False, parallel=False`. The full structure is capped at 5 nodes because run time explodes at 6.
-  New checks (gcmi next) should follow the same pattern and stay generic, not project code.
+## Rules
 
-## hello_scifi commands
+- Don't invent data. Hand-entered values need a citation; mark them `verified: false` until someone has read the source. Check numbers against the PDFs before putting them in copy.
+- Fix extraction mistakes with `data/overrides.yaml` or the prompt, not by tweaking the scorer.
+- Never commit PDFs. Check `git status` for `.pdf` before committing.
+- Extraction is non-deterministic; re-run important papers and compare.
+
+## Commands
 
 ```bash
-cd hello_scifi/backend && uv run pytest                                  # all backend tests (Claude mocked)
-cd hello_scifi/backend && uv run pytest tests/test_api.py::test_rate_limit
-cd hello_scifi/backend && uv run uvicorn app.main:app --reload --env-file .env   # :8000
-cd hello_scifi/frontend && npm run dev                                   # :5173, proxies /api to :8000
+cd hello_scifi/backend && uv run pytest                                     # backend tests (Claude mocked)
+cd hello_scifi/backend && uv run pytest tests/test_scorecard.py::test_in_vivo_brain_needs_brain_tissue_site
+cd hello_scifi/backend && uv run uvicorn app.main:app --reload --env-file .env   # API on :8000
+cd hello_scifi/frontend && npm run dev                                      # :5173, proxies /api to :8000
 cd hello_scifi/frontend && npm run lint && npm run build
+
+cd hello_scifi/backend && uv run python scripts/fetch_papers.py [--rescan]   # open-access PDFs from data/papers.csv
+cd hello_scifi/backend && uv run python scripts/extract_batch.py [--force] [--only x.pdf] [--revalidate]
+cd hello_scifi/backend && uv run python scripts/list_unverified.py           # curated facts still to check
 ```
 
-In production, the `Dockerfile` builds the frontend and sets `FRONTEND_DIST`, and FastAPI serves the static files next to `/api`. Without `FRONTEND_DIST`, the backend serves only `/api`. The Claude call and prompt live in `backend/app/llm.py`; the model comes from `CLAUDE_MODEL` (default `claude-haiku-5-5`).
+The full data workflow for teammates is in `hello_scifi/data/ADDING_DATA.md`. The backend dev server reloads only on `.py` changes; touch a `.py` file after changing records or YAML. In production the Dockerfile builds the frontend and FastAPI serves it next to `/api`. The Brian2/PyPhi package-check routes (`/api/sim/hello`, `/api/phi/hello`) and the `#/scifi` page are leftovers from the stack test and aren't in the nav.

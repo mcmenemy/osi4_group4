@@ -1,6 +1,6 @@
 # Hackathon app
 
-The app builds the evidence base for a gel-filled vs. bare microwell experiment on biohybrid neural implants. An LLM pipeline extracts structured, source-linked records from papers on conductive hydrogels, OECT/OMIEC materials, and neurons on soft substrates, and the site shows them as materials maps whose empty regions are untested formulations. Tabs:
+The app behind [the project](../README.md): it builds a source-linked dataset of materials that could fill or coat Science Corp's SU-8 microwells to keep more neurons alive, and scores each material family against what a well fill needs. An LLM pipeline extracts structured records from papers on soft and conductive hydrogels, OECT/OMIEC materials, and neurons on soft substrates; every value keeps its verbatim quote. Tabs:
 
 - **Overview:** the Science Corp microwell device, why it matters, the two well-occupancy numbers, what the app does, and a preview of the scorecard.
 - **Maps:** the candidate well-fill scorecard, then property maps for materials scientists. Click any row, point or cell for values, evidence quotes and sources.
@@ -10,7 +10,7 @@ The app builds the evidence base for a gel-filled vs. bare microwell experiment 
 - **Gaps & next steps:** data gaps computed from the scorecard, suggested experiments, and where the dataset goes. The destination text and URL live in `frontend/src/dataDestination.ts`.
 - **For fun:** the team's earlier "What can carry a mind?" benchmark, with "Score your own substrate" (uses `/api/score`).
 
-The Brian2 and PyPhi **package checks** are no longer in the UI; their API routes (`/api/sim/hello`, `/api/phi/hello`) still exist (see [Package checks](#package-checks)). The original 10x Sci-Fi stack test still works at `#/scifi`; it's just not in the nav.
+The Brian2 and PyPhi **package checks** are no longer in the UI; their API routes (`/api/sim/hello`, `/api/phi/hello`) still exist (see [Package checks](#package-checks-legacy)). The original 10x Sci-Fi stack test still works at `#/scifi`; it's just not in the nav.
 
 - **Backend:** Python 3.13 + FastAPI (`backend/`). It calls Claude with the Anthropic Python SDK.
 - **Frontend:** React + TypeScript, built with Vite (`frontend/`).
@@ -85,7 +85,7 @@ npm run lint
 npm run build
 ```
 
-## Package checks
+## Package checks (legacy)
 
 These are hello-world tests of the libraries the real project depends on. They're generic examples, not project code. Each check runs on the backend and shows its result in the browser, so it proves the library installs and runs locally *and* in the deployed container.
 
@@ -124,28 +124,25 @@ Notes:
 
 ## Literature pipeline
 
-Records are JSON files in `data/records/`, committed to the repo and loaded when the server starts. There's no database.
+Records are JSON files in `data/records/`, committed to the repo and loaded when the server starts. There's no database. **To add papers, fix records, or curate material facts, follow [`data/ADDING_DATA.md`](data/ADDING_DATA.md)**; it also lists the papers we still want and which gaps they fill. In short:
 
-### Adding papers and running extraction
+```bash
+cd hello_scifi/backend
+uv run python scripts/fetch_papers.py                          # open-access PDFs from data/papers.csv
+uv run --env-file .env python scripts/extract_batch.py          # extract new PDFs in data/papers/
+uv run python scripts/extract_batch.py --revalidate             # re-check records after editing materials.yaml
+uv run python scripts/list_unverified.py                        # curated facts nobody has checked yet
+```
 
-1. Download the PDFs yourself and put them in `data/papers/` with short names like `lu2019.pdf`. The seed list is in [`data/papers/README.md`](data/papers/README.md). PDFs are gitignored because the repo is public; only the records get committed.
-2. Run the batch extraction:
+How extraction works (`backend/app/extraction/`):
 
-   ```bash
-   cd hello_scifi/backend
-   uv run --env-file .env python scripts/extract_batch.py            # skips papers already extracted
-   uv run --env-file .env python scripts/extract_batch.py --force    # re-extract everything
-   uv run --env-file .env python scripts/extract_batch.py --only lu2019.pdf
-   ```
+- `pdf_text.py` pulls text per page with pypdfium2 and adds `[page N]` markers so the model can cite locations.
+- `extract.py` splits long papers into chunks, asks Claude for structured output matching `app/schemas.py`, and merges chunk results per material and formulation. The prompt is in `prompts.py`.
+- `validate.py` checks every evidence quote against the source text (whitespace, hyphenation and symbol differences are normalized, with a fuzzy fallback), converts units to SI, and range-checks values. `vocab.py` checks the model's material family and cell category against fixed lists. Problems become `flags`; nothing is dropped.
 
-   It prints a summary (papers, records, fields filled, flags) and writes one file per record to `data/records/`. Use `MOCK_LLM=1` for a dry run without an API key.
-3. Restart the backend (or redeploy) to load the new records, then commit `data/records/`.
+### Scorecard
 
-How it works (`backend/app/extraction/`):
-
-- `pdf_text.py` pulls text per page and adds `[page N]` markers so the model can cite locations.
-- `extract.py` splits long papers into chunks, asks Claude for structured output matching the schema in `app/schemas.py`, and merges chunk results per material and formulation. The prompt is in `prompts.py`; edit it there.
-- `validate.py` checks that every evidence quote appears in the source text (whitespace, hyphenation, and symbol differences are normalized, with a fuzzy fallback), converts units to SI (`value_si`), and range-checks values. Problems become `flags` on the record; nothing is dropped.
+`/api/scorecard` (`backend/app/scorecard.py`) groups records by material family (`data/materials.yaml`) and scores each family against five requirements: neuron survival at ≥3 weeks, stiffness ≤100 kPa, in vivo in brain, clear and degradable, and conductive (low weight; only for future electrode layers). Each requirement is met, partial, unknown or fails. The score multiplies each requirement's weight by its state and by the strength of the cell evidence (in vivo neurons count more than a neuron-like cell line). Weights, thresholds and multipliers are team judgment and live in `data/scorecard.yaml`. Only families with neuron records are ranked; the SU-8 baseline is returned separately.
 
 ### Reviewing records
 
