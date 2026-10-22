@@ -1,28 +1,22 @@
-"""Survival map: one point per reported neuron survival result, scored 0-100, with the material
-properties it can be plotted against.
+"""Survival map: one point per reported neuron survival result (as reported, in %), with the
+material properties it can be plotted against.
 
-score = reported % x time factor x measure weight
-  time factor    = min(days / full_credit_days, 1); days not stated count as unknown_days
-  measure weight = how directly the measure shows healthy neurons (viability 1, neurite outgrowth less)
-
-Settings live under survival_score in data/scorecard.yaml. A point's x value comes from its own
-record when the paper reports that property ("record"); otherwise, optionally, from the family's
-median across other records ("family") or, for stiffness, the curated literature range ("curated").
+A point's x value comes from its own record when the paper reports that property ("record");
+otherwise from the family's median across other records ("family") or, for stiffness, the curated
+literature range ("curated"). The frontend shows those as hollow and can hide them.
 """
 
 from collections import defaultdict
 from statistics import median
 
 from app.materials import material
-from app.scorecard import NEURON_CATEGORIES, _property_members, family_key, load_config
+from app.scorecard import NEURON_CATEGORIES, _property_members, family_key
 from app.schemas import Record
 
 PROPERTIES = [
     {"key": "youngs_modulus", "label": "Stiffness", "unit": "Pa", "log": True},
     {"key": "conductivity", "label": "Conductivity", "unit": "S/m", "log": True},
     {"key": "degradation_time", "label": "Degradation time", "unit": "days", "log": True},
-    {"key": "water_content", "label": "Water content", "unit": "%", "log": False},
-    {"key": "swelling_ratio", "label": "Swelling ratio", "unit": "", "log": False},
 ]
 
 TIERS = [
@@ -38,19 +32,6 @@ def tier_for(cell_category: str | None, setting: str | None) -> str | None:
     if setting == "in_vivo":
         return "in_vivo"
     return "cell_lines" if cell_category == "neuron_like_line" else "neurons_in_dish"
-
-
-def survival_score(percent: float, days: float | None, measure: str, cfg: dict) -> dict:
-    sc = cfg["survival_score"]
-    used_days = days if days is not None else sc["unknown_days"]
-    time_factor = min(used_days / sc["full_credit_days"], 1.0)
-    weight = sc["measure_weights"].get(measure, 0.0)
-    return {
-        "score": round(percent * time_factor * weight, 2),
-        "time_factor": round(time_factor, 3),
-        "measure_weight": weight,
-        "days_stated": days is not None,
-    }
 
 
 def _value(record: Record, prop: str) -> float | None:
@@ -77,7 +58,6 @@ def _family_values(recs: list[Record], key: str) -> dict[str, dict]:
 
 
 def build_survival_map(records: list[Record]) -> dict:
-    cfg = load_config()
     groups: dict[str, list[Record]] = defaultdict(list)
     for r in records:
         groups[family_key(r)].append(r)
@@ -120,8 +100,7 @@ def build_survival_map(records: list[Record]) -> dict:
                         "tier": tier,
                         "evidence": s.evidence,
                         "location": s.location,
-                        **survival_score(s.value_si, s.culture_days, s.measure, cfg),
                         "x": x,
                     }
                 )
-    return {"properties": PROPERTIES, "tiers": TIERS, "config": cfg["survival_score"], "points": points}
+    return {"properties": PROPERTIES, "tiers": TIERS, "points": points}

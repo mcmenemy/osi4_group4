@@ -1,19 +1,5 @@
-import pytest
-
-from app.survival_map import build_survival_map, survival_score, tier_for
-from app.scorecard import load_config
+from app.survival_map import build_survival_map, tier_for
 from tests.test_scorecard import rec
-
-
-def test_score_combines_percent_time_and_measure():
-    cfg = load_config()
-    assert survival_score(80, 21, "viability", cfg)["score"] == pytest.approx(80)
-    assert survival_score(80, 42, "viability", cfg)["score"] == pytest.approx(80)  # capped at 3 weeks
-    assert survival_score(80, 7, "viability", cfg)["score"] == pytest.approx(80 / 3, abs=0.01)
-    w = cfg["survival_score"]["measure_weights"]["neurite_outgrowth"]
-    assert survival_score(60, 21, "neurite_outgrowth", cfg)["score"] == pytest.approx(60 * w)
-    unknown = survival_score(90, None, "viability", cfg)
-    assert unknown["days_stated"] is False and unknown["score"] < 10
 
 
 def test_tiers():
