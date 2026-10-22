@@ -20,7 +20,7 @@ def test_records_references_and_window_load():
     assert {r["id"] for r in refs["stiffness"]} >= {"brain", "su8", "silicon"}
     assert all(r["citation"] and r["status"] for r in refs["stiffness"])
     assert client.get("/api/target-window").json()["modulus_pa"]
-    assert client.get("/api/proposal").status_code in (404, 200)  # retired route; SPA fallback may serve index
+    assert client.get("/api/proposal").status_code == 404  # retired with the Proposal tab
 
 
 def test_extract_without_input_returns_verified_mock_record():

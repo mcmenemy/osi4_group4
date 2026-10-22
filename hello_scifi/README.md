@@ -165,7 +165,7 @@ These are environment variables. Locally they live in `backend/.env`; on Render,
 | `RATE_LIMIT_PER_MINUTE` | `10` | Requests allowed per visitor IP per minute |
 | `EXTRACTION_MODEL` | `claude-opus-5-5` | Model for literature extraction (batch script and the Extract tab) |
 | `MOCK_LLM` | unset | Set to `1` to return a canned example record from extraction, so the UI works without a key |
-| `DATA_DIR`, `DOCS_DIR` | `hello_scifi/data`, `hello_scifi/docs` | Where records and docs live; the Dockerfile sets them to `/app/data` and `/app/docs` |
+| `DATA_DIR` | `hello_scifi/data` | Where records and curated tables live; the Dockerfile sets it to `/app/data` |
 
 Because the site is public, the backend guards against runaway spend: input is capped at 2,000 characters, output tokens are capped, and each IP is rate-limited. The rate limiter keeps its counts in memory, so they reset whenever the server restarts. That's fine for a single small instance.
 

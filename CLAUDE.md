@@ -8,7 +8,7 @@ The app now builds an evidence base for a gel-filled vs. bare microwell neuron s
 - Record schema: `backend/app/schemas.py`, mirrored in `frontend/src/records.ts`; keep them in sync. Every value is a FieldValue with a verbatim evidence quote.
 - Extraction: `backend/app/extraction/` (prompt in `prompts.py`), batch run via `backend/scripts/extract_batch.py`. `MOCK_LLM=1` returns a canned record; `EXTRACTION_MODEL` picks the model.
 - Data: `data/records/*.json` are committed and loaded at startup (no database). `data/papers/*.pdf` are gitignored (public repo). Hand-entered values in `data/references.json` must carry a citation or be labeled "approximate, to verify". Don't invent data.
-- Render builds from `hello_scifi/` (Root Directory), so anything the app reads must live under it; the Dockerfile copies `data/` and `docs/` and sets `DATA_DIR`/`DOCS_DIR`.
+- Render builds from `hello_scifi/` (Root Directory), so anything the app reads must live under it; the Dockerfile copies `data/` and sets `DATA_DIR`.
 - Tabs: Overview, Maps (scorecard first), Records, Extract, Review (demo, nothing saved), Gaps & next steps. The theory-of-mind benchmark described below was removed from the app (it's in git history); don't link to it.
 
 ## Project
