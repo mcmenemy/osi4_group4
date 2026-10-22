@@ -1,4 +1,4 @@
-"""Committed data files: extracted records, map references, and docs. No database."""
+"""Committed data files: extracted records, map references, reviews and overrides. No database."""
 
 import json
 import logging
@@ -17,7 +17,6 @@ logger = logging.getLogger(__name__)
 _HERE = Path(__file__).resolve()
 # Locally the data lives at hello_scifi/data; the Docker image sets DATA_DIR=/app/data.
 DATA_DIR = Path(os.environ.get("DATA_DIR", _HERE.parents[2] / "data"))
-DOCS_DIR = Path(os.environ.get("DOCS_DIR", _HERE.parents[2] / "docs"))
 RECORDS_DIR = DATA_DIR / "records"
 REVIEWS_DIR = DATA_DIR / "reviews"
 PAPERS_DIR = DATA_DIR / "papers"
@@ -62,9 +61,6 @@ def load_records() -> list[Record]:
 def load_json(name: str) -> object:
     return json.loads((DATA_DIR / name).read_text())
 
-
-def read_doc(name: str) -> str:
-    return (DOCS_DIR / name).read_text()
 
 
 @lru_cache

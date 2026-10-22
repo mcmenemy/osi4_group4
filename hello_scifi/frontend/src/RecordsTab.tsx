@@ -1,15 +1,17 @@
 import { useMemo, useState } from 'react'
 import RecordDetail, { SidePanel } from './RecordDetail'
 import { MATERIAL_CLASSES, classLabel, sourceLabel, withPrefix, type MaterialRecord } from './records'
-import { useReviews } from './reviews'
 
-export default function RecordsTab({ records }: { records: MaterialRecord[] }) {
+export default function RecordsTab({ records, openId }: { records: MaterialRecord[]; openId?: string | null }) {
   const [query, setQuery] = useState('')
   const [cls, setCls] = useState('')
   const [cellsOnly, setCellsOnly] = useState(false)
   const [flaggedOnly, setFlaggedOnly] = useState(false)
   const [open, setOpen] = useState<MaterialRecord | null>(null)
-  const { reviews } = useReviews()
+  // Links like #/records?id=<record_id> (e.g. from the Overview) open that record until closed.
+  const [dismissedId, setDismissedId] = useState<string | null>(null)
+  const linked = openId && openId !== dismissedId ? (records.find((r) => r.record_id === openId) ?? null) : null
+  const shown = open ?? linked
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -62,7 +64,6 @@ export default function RecordsTab({ records }: { records: MaterialRecord[] }) {
               <th>Cells</th>
               <th className="num">Viability</th>
               <th>Flags</th>
-              <th>Review</th>
             </tr>
           </thead>
           <tbody>
@@ -70,7 +71,6 @@ export default function RecordsTab({ records }: { records: MaterialRecord[] }) {
               const e = r.properties.youngs_modulus?.value_si
               const s = r.properties.conductivity?.value_si
               const v = r.biology?.viability_percent?.value_si
-              const status = reviews[r.record_id]?.status ?? 'pending'
               return (
                 <tr key={r.record_id} onClick={() => setOpen(r)} tabIndex={0}
                   onKeyDown={(ev) => ev.key === 'Enter' && setOpen(r)}>
@@ -82,7 +82,6 @@ export default function RecordsTab({ records }: { records: MaterialRecord[] }) {
                   <td>{r.biology?.cell_type ?? (r.biology ? 'yes' : '—')}</td>
                   <td className="num">{v != null ? `${v}%` : '—'}</td>
                   <td>{r.flags.length ? <span className="badge warn">⚠ {r.flags.length}</span> : ''}</td>
-                  <td><span className={`badge ${status}`}>{status}</span></td>
                 </tr>
               )
             })}
@@ -91,9 +90,15 @@ export default function RecordsTab({ records }: { records: MaterialRecord[] }) {
       </div>
       {records.length === 0 && <p className="notice">No records yet. See the Extract tab or data/papers/README.md.</p>}
 
-      {open && (
-        <SidePanel label="Record details" onClose={() => setOpen(null)}>
-          <RecordDetail record={open} />
+      {shown && (
+        <SidePanel
+          label="Record details"
+          onClose={() => {
+            setOpen(null)
+            setDismissedId(openId ?? null)
+          }}
+        >
+          <RecordDetail record={shown} />
         </SidePanel>
       )}
     </div>

@@ -1,116 +1,150 @@
-import BiohybridArt from './BiohybridArt'
-import type { MaterialRecord, References } from './records'
+import { useEffect, useState } from 'react'
+import type { MaterialRecord } from './records'
+import type { ScoreRow, Scorecard, State } from './scorecard'
 
-const TAB_LINKS = [
-  { href: '#/maps', title: 'Maps', text: 'Stiffness, conductivity and cell outcomes from the literature, with the untested gaps marked.' },
-  { href: '#/proposal', title: 'Proposal', text: 'Draft study: neurons in gel-filled vs. bare microwells.' },
-  { href: '#/context', title: 'Big picture', text: 'What can carry a mind? Score substrates across theories of mind, including your own.' },
-  { href: '#/records', title: 'Records', text: 'Every extracted value with the exact quote and source it came from.' },
-  { href: '#/extract', title: 'Extract', text: 'Upload a paper and watch the pipeline pull out source-linked records.' },
-  { href: '#/review', title: 'Review', text: 'Accept, reject, or correct records one at a time.' },
+// Drop real images in public/ and set src; until then a labeled placeholder shows.
+const FIGURES: { src: string | null; alt: string; caption: string }[] = [
+  {
+    src: null,
+    alt: 'Microwells packed with neurons',
+    caption: 'Microwells packed with neurons (image to come).',
+  },
+  {
+    src: null,
+    alt: 'Grafted neurons growing into host brain tissue',
+    caption: 'Grafted neurons growing into the host brain (image to come).',
+  },
 ]
 
-export default function Overview({ records, references }: { records: MaterialRecord[]; references: References | null }) {
-  const sci = references?.science_corp
-  const papers = new Set(records.map((r) => r.source.doi ?? r.source.title ?? r.source.file)).size
+const PREVIEW_ROWS = 5
+const STATE_ICON: Record<State, string> = { met: '✓', partial: '◐', unknown: '?', fails: '✕' }
+
+export default function Overview({ records }: { records: MaterialRecord[] }) {
+  const brown = records.find((r) => r.source.file === 'brown2024.pdf')
+  const brownLink = brown ? `#/records?id=${encodeURIComponent(brown.record_id)}` : '#/records'
+
   return (
-    <section className="overview">
-      <div className="hero">
-        <BiohybridArt />
-        <div className="container hero-text">
-          <p className="kicker">OSI Hackathon @ NC State · Oct 21–22, 2026</p>
-          <h1>Soft wells for living implants</h1>
-          <p className="lede">
-            Building the evidence base for the next experiment on biohybrid neural interfaces: gel-filled vs. bare
-            microwells.
+    <section className="overview container tab">
+      <p className="kicker">OSI Hackathon @ NC State · Oct 21–22, 2026</p>
+      <h1 className="section-title">Better wells for living implants</h1>
+
+      <div className="overview-layout">
+        <div className="overview-text">
+          <h2>The device</h2>
+          <p>
+            Science Corporation's cortical biohybrid implant is an SU-8 microwell array: 10 µm wells, 15 µm deep, on a
+            15 µm pitch, about 118,000 wells per 5×5 mm die. Each well is loaded by centrifugation with one embryonic
+            mouse cortical neuron, and the graft is driven optogenetically with an external light source; there are no
+            electrodes on the chip. Each neuron nearly fills its well.
+          </p>
+
+          <h2>Why it matters</h2>
+          <p>
+            Neurons that grow from a device into the brain could be a platform for treating neurodegeneration and for
+            brain-computer interfaces. The authors note that embryonic mouse cells are not a translational option, so a
+            human-compatible cell source (for example, stem-cell-derived neurons) is a prerequisite this app does not
+            address.
+          </p>
+
+          <h2>The two numbers</h2>
+          <p>
+            <a href={brownLink}>77% of wells held cells at loading</a> (DAPI, 24 h, in vitro, n=23);{' '}
+            <a href={brownLink}>about 52% of wells showed fluorescent neurons roughly three weeks later</a> (n=13).
+            These are well occupancy counts, not viability (Brown et al., bioRxiv 2024).
+          </p>
+
+          <h2>What this app does</h2>
+          <p>
+            It extracts materials data on soft and conductive hydrogels, OECT/OMIEC materials, and neurons on soft
+            substrates from papers into a source-linked dataset, every value with its quote, to find materials that could
+            improve how many wells keep healthy neurons.
           </p>
         </div>
-      </div>
 
-      <div className="container">
-        <div className="overview-grid">
-          <div className="overview-text">
-            <p>
-              Science Corporation's cortical biohybrid implant holds ~90,000 neurons in microwells made of SU-8 (a rigid
-              epoxy, gigapascal stiffness) coated with poly-D-lysine and laminin. In their preprint, 77% of wells held a cell at loading, and 52% held labeled neurons
-              at ~3 weeks; and neurites mostly stayed in superficial cortex, with only sparse axons detected deeper
-              (Brown et al., bioRxiv 2024).
-            </p>
-            <p>
-              Soft hydrogels, including conductive PEDOT:PSS gels, are the leading approach for keeping grafted cells
-              alive and integrated, but we haven't found a published comparison of neurons in bare microwells vs.
-              gel-filled microwells.
-            </p>
-            <p>
-              This app builds the evidence base for that experiment: an LLM pipeline extracts structured, source-linked
-              records from papers on conductive hydrogels, OECT/OMIEC materials and neurons on soft substrates, and
-              visualizes them as materials maps whose empty regions are untested candidate formulations.
-            </p>
-            <p>
-              Longer term, a gel-filled well is a first step toward a gel–neuron hybrid, one of the two most promising rows in our{' '}
-              <a href="#/context">“What can carry a mind?” benchmark</a> of what could sit behind a biohybrid implant.
-            </p>
-            <p className="muted">
-              Built for Science Corporation and the Seifrid lab (NC State MSE: organic mixed ionic-electronic conductors
-              and self-driving labs).
-            </p>
-            {records.length > 0 && (
-              <p className="stat-line">
-                <strong>{records.length}</strong> records from <strong>{papers}</strong> papers so far
-              </p>
-            )}
-          </div>
-
-          {sci && (
-            <aside className="reference-card">
-              <p className="kicker">Science Corp reference</p>
-              <h2>SU-8 microwells</h2>
-              <dl>
-                <div>
-                  <dt>Occupied microwells</dt>
-                  <dd>
-                    <span className="big-num">{sci.occupancy_at_loading_percent}%</span> at loading →{' '}
-                    <span className="big-num">{sci.occupancy_at_3_weeks_percent}%</span> at ~3 weeks
-                  </dd>
+        <div className="overview-figures">
+          {FIGURES.map((f) => (
+            <figure key={f.alt} className="figure">
+              {f.src ? (
+                <img src={f.src} alt={f.alt} />
+              ) : (
+                <div className="figure-placeholder" role="img" aria-label={`${f.alt} (placeholder)`}>
+                  Image placeholder
                 </div>
-                <div>
-                  <dt>Neurons per implant</dt>
-                  <dd>{sci.neurons}</dd>
-                </div>
-                {sci.cells && (
-                  <div>
-                    <dt>Cells</dt>
-                    <dd>{sci.cells}</dd>
-                  </div>
-                )}
-                <div>
-                  <dt>Well material</dt>
-                  <dd>{sci.material}</dd>
-                </div>
-                <div>
-                  <dt>Outgrowth</dt>
-                  <dd>{sci.outcome}</dd>
-                </div>
-              </dl>
-              <p className="small muted">
-                {sci.measure}. {sci.citation}.{' '}
-                <a href={sci.url} target="_blank" rel="noreferrer">
-                  Preprint
-                </a>
-              </p>
-            </aside>
-          )}
-        </div>
-
-        <nav className="tab-cards" aria-label="Sections">
-          {TAB_LINKS.map((t) => (
-            <a key={t.href} href={t.href} className="tab-card">
-              <h3>{t.title} →</h3>
-              <p>{t.text}</p>
-            </a>
+              )}
+              <figcaption>{f.caption}</figcaption>
+            </figure>
           ))}
-        </nav>
+        </div>
       </div>
+
+      <ScorecardPreview />
+
+      <p className="next-pointer">
+        What's missing and what we'd test next: <a href="#/gaps">Gaps &amp; next steps →</a>
+      </p>
+
+      <p className="footnote">
+        Earlier framing: a benchmark scoring substrates against theories of mind; see the repo docs.
+      </p>
     </section>
+  )
+}
+
+function ScorecardPreview() {
+  const [card, setCard] = useState<Scorecard | null>(null)
+  useEffect(() => {
+    fetch('/api/scorecard')
+      .then((r) => (r.ok ? r.json() : null))
+      .then(setCard)
+      .catch(() => setCard(null))
+  }, [])
+  if (!card) return null
+
+  // Same default as the Maps tab: most neuron evidence first, not a headline ranking.
+  const rows: ScoreRow[] = [...card.ranked]
+    .sort((a, b) => b.neuron_record_count - a.neuron_record_count || b.record_count - a.record_count)
+    .slice(0, PREVIEW_ROWS)
+  const reqs = ['survival', 'soft', 'in_vivo_brain', 'clear_degradable'] as const
+  const heads = ['Survival ≥3 wk', '≤100 kPa', 'In vivo brain', 'Clear & degradable']
+
+  return (
+    <aside className="scorecard-preview">
+      <div className="preview-head">
+        <h2>Candidate well fills, so far</h2>
+        <a href="#/maps">Full scorecard on Maps →</a>
+      </div>
+      <p className="muted small">
+        {card.summary.ranked_materials} materials with neuron evidence from {card.summary.neuron_records} neuron records;{' '}
+        {card.summary.unknown_cells} requirement cells still unknown. Sorted by amount of evidence.
+      </p>
+      <div className="table-scroll">
+        <table className="preview-table">
+          <thead>
+            <tr>
+              <th>Material</th>
+              {heads.map((h) => (
+                <th key={h} className="state-col">{h}</th>
+              ))}
+              <th>Best survival</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.material_key}>
+                <th scope="row">{r.label}</th>
+                {reqs.map((k) => (
+                  <td key={k} className="state-col">
+                    <span className={`state ${r.requirements[k].state}`} role="img" aria-label={r.requirements[k].state}>
+                      {STATE_ICON[r.requirements[k].state]}
+                    </span>
+                  </td>
+                ))}
+                <td className="small">{r.best_survival?.label ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </aside>
   )
 }

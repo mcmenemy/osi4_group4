@@ -1,10 +1,9 @@
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import ContextTab from './ContextTab'
 import ExtractTab from './ExtractTab'
+import GapsTab from './GapsTab'
 import MapsTab from './MapsTab'
 import Overview from './Overview'
-import ProposalTab from './ProposalTab'
 import RecordsTab from './RecordsTab'
 import ReviewTab from './ReviewTab'
 import ScifiPage from './ScifiPage'
@@ -13,15 +12,13 @@ import { getJson, type MaterialRecord, type References, type TargetWindow } from
 // Placeholder until the team picks a project name.
 const PROJECT_NAME = 'OSI4 Group4'
 
-// The story pages first, then the working tools for the data behind them.
 const TABS = [
-  { id: 'overview', label: 'Overview', tool: false },
-  { id: 'maps', label: 'Maps', tool: false },
-  { id: 'proposal', label: 'Proposal', tool: false },
-  { id: 'context', label: 'Big picture', tool: false },
-  { id: 'records', label: 'Records', tool: true },
-  { id: 'extract', label: 'Extract', tool: true },
-  { id: 'review', label: 'Review', tool: true },
+  { id: 'overview', label: 'Overview' },
+  { id: 'maps', label: 'Maps' },
+  { id: 'records', label: 'Records' },
+  { id: 'extract', label: 'Extract' },
+  { id: 'review', label: 'Review' },
+  { id: 'gaps', label: 'Gaps & next steps' },
 ] as const
 
 const HIDDEN_ROUTES = ['scifi'] as const
@@ -29,18 +26,28 @@ const HIDDEN_ROUTES = ['scifi'] as const
 type Route = (typeof TABS)[number]['id'] | (typeof HIDDEN_ROUTES)[number]
 
 const ROUTES: readonly string[] = [...TABS.map((t) => t.id), ...HIDDEN_ROUTES]
+// Old links keep working: the benchmark tab is gone and the proposal became Gaps & next steps.
+const REDIRECTS: Record<string, Route> = { context: 'overview', proposal: 'gaps' }
 
-// Tabs use "#/name". Other hashes (like "#score") are in-page anchors and keep the current tab.
+// Tabs use "#/name" (optionally "#/name?id=..."). Other hashes are in-page anchors and keep
+// the current tab.
 function routeFromHash(current: Route): Route {
   const hash = window.location.hash
   if (!hash || hash === '#' || hash === '#/') return 'overview'
   if (!hash.startsWith('#/')) return current
-  const id = hash.slice(2)
+  const id = hash.slice(2).split('?')[0]
+  if (REDIRECTS[id]) return REDIRECTS[id]
   return ROUTES.includes(id) ? (id as Route) : 'overview'
+}
+
+function hashParam(name: string): string | null {
+  const query = window.location.hash.split('?')[1]
+  return query ? new URLSearchParams(query).get(name) : null
 }
 
 export default function App() {
   const [route, setRoute] = useState<Route>(() => routeFromHash('overview'))
+  const [recordId, setRecordId] = useState<string | null>(() => hashParam('id'))
   const [records, setRecords] = useState<MaterialRecord[]>([])
   const [references, setReferences] = useState<References | null>(null)
   const [targetWindow, setTargetWindow] = useState<TargetWindow | null>(null)
@@ -48,6 +55,7 @@ export default function App() {
 
   useEffect(() => {
     const onHash = () => {
+      setRecordId(hashParam('id'))
       setRoute((current) => {
         const next = routeFromHash(current)
         if (next !== current) window.scrollTo(0, 0)
@@ -80,15 +88,10 @@ export default function App() {
             {PROJECT_NAME}
           </a>
           <nav aria-label="Tabs" className="tabs-nav">
-            {TABS.map((t, i) => (
-              <Fragment key={t.id}>
-                {t.tool && !TABS[i - 1].tool && (
-                  <span className="nav-divider" role="separator" aria-label="Data tools" />
-                )}
-                <a href={`#/${t.id}`} aria-current={route === t.id ? 'page' : undefined} className={t.tool ? 'tool' : undefined}>
-                  {t.label}
-                </a>
-              </Fragment>
+            {TABS.map((t) => (
+              <a key={t.id} href={`#/${t.id}`} aria-current={route === t.id ? 'page' : undefined}>
+                {t.label}
+              </a>
             ))}
           </nav>
         </div>
@@ -100,13 +103,12 @@ export default function App() {
             <p className="error">{loadError}</p>
           </div>
         )}
-        {route === 'overview' && <Overview records={records} references={references} />}
+        {route === 'overview' && <Overview records={records} />}
         {route === 'maps' && <MapsTab records={records} references={references} targetWindow={targetWindow} />}
-        {route === 'records' && <RecordsTab records={records} />}
+        {route === 'records' && <RecordsTab records={records} openId={recordId} />}
         {route === 'extract' && <ExtractTab />}
         {route === 'review' && <ReviewTab records={records} />}
-        {route === 'proposal' && <ProposalTab />}
-        {route === 'context' && <ContextTab />}
+        {route === 'gaps' && <GapsTab />}
         {route === 'scifi' && <ScifiPage />}
       </main>
     </>

@@ -10,7 +10,7 @@ from typing import Literal
 import anthropic
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.concurrency import run_in_threadpool
-from fastapi.responses import FileResponse, PlainTextResponse
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
@@ -169,11 +169,6 @@ async def references() -> object:
 @app.get("/api/target-window")
 async def target_window() -> object:
     return data.load_json("target_window.json")
-
-
-@app.get("/api/proposal", response_class=PlainTextResponse)
-async def proposal() -> str:
-    return data.read_doc("proposal.md")
 
 
 @app.post("/api/extract")

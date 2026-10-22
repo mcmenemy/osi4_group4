@@ -2,17 +2,14 @@
 
 The app builds the evidence base for a gel-filled vs. bare microwell experiment on biohybrid neural implants. An LLM pipeline extracts structured, source-linked records from papers on conductive hydrogels, OECT/OMIEC materials, and neurons on soft substrates, and the site shows them as materials maps whose empty regions are untested formulations. Tabs:
 
-- **Overview:** the framing and the Science Corp reference numbers (Brown et al., bioRxiv 2024).
-- **Maps:** stiffness vs. conductivity, cell outcome vs. stiffness, and a coverage heatmap of untested gaps. Click any point or cell to see the record's values, evidence quotes, and source.
-- **Records:** searchable table of every record.
+- **Overview:** the Science Corp microwell device, why it matters, the two well-occupancy numbers, what the app does, and a preview of the scorecard.
+- **Maps:** the candidate well-fill scorecard, then property maps for materials scientists. Click any row, point or cell for values, evidence quotes and sources.
+- **Records:** searchable table of every record (`#/records?id=<record_id>` opens one).
 - **Extract:** run the extraction live on an uploaded PDF or pasted text.
-- **Review:** accept, reject, or correct records one at a time (see [Reviewing records](#reviewing-records)).
-- **Proposal:** renders `docs/proposal.md`.
-- **Big picture:** the "What can carry a mind?" benchmark, linked to the microwell work through its gel–neuron hybrid row.
+- **Review:** a demo of expert review. Nothing is saved there (see [Reviewing records](#reviewing-records)).
+- **Gaps & next steps:** data gaps computed from the scorecard, suggested experiments, and where the dataset goes. The destination text and URL live in `frontend/src/dataDestination.ts`.
 
-The Brian2 and PyPhi **package checks** are no longer in the UI; their API routes (`/api/sim/hello`, `/api/phi/hello`) still exist (see [Package checks](#package-checks)).
-
-The original 10x Sci-Fi stack test still works at `#/scifi`; it's just not in the nav.
+The Brian2 and PyPhi **package checks** are no longer in the UI; their API routes (`/api/sim/hello`, `/api/phi/hello`) still exist (see [Package checks](#package-checks)). The original 10x Sci-Fi stack test still works at `#/scifi`; it's just not in the nav.
 
 - **Backend:** Python 3.13 + FastAPI (`backend/`). It calls Claude with the Anthropic Python SDK.
 - **Frontend:** React + TypeScript, built with Vite (`frontend/`).
@@ -151,7 +148,7 @@ How it works (`backend/app/extraction/`):
 
 ### Reviewing records
 
-Open the **Review** tab, enter your name, and go through the records: compare each value with its quote, then **Accept** or **Reject**, use **Edit field** to correct a value or unit, and add a note. Reviews are saved in your browser's localStorage, so they survive reloads but not a different browser. When you're done, click **Export reviews as JSON** and commit the file under `data/reviews/`.
+The Review tab is a demo: its controls are disabled and nothing is saved. Until there's a login, corrections go through the repo: put fixes in `data/overrides.yaml` (team corrections applied when records load), or commit a review file to `data/reviews/` (same format the old export used: `{"reviews": {"<record_id>": {"status": "accepted" | "rejected", "edits": {...}}}}`). The scorecard drops rejected records and applies edits.
 
 ### Reference markers
 
@@ -216,7 +213,6 @@ hello_scifi/
 │   ├── app/phi.py        # PyPhi package check
 │   └── tests/            # API, schema, units, quote checks (Claude mocked); sim/phi real runs
 ├── data/                 # papers/ (local PDFs, gitignored), records/, references.json, target_window.json
-├── docs/proposal.md      # rendered on the Proposal tab
 └── frontend/
     ├── vite.config.ts    # dev proxy /api → :8000
     ├── src/App.tsx       # tabs and data loading

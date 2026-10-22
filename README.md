@@ -8,12 +8,12 @@ Science Corporation's cortical biohybrid implant holds ~90,000 neurons in SU-8 m
 
 The app builds the evidence base for that experiment. An LLM pipeline extracts structured, source-linked records from papers on conductive hydrogels, OECT/OMIEC materials and neurons on soft substrates, and the site shows them as materials maps whose empty regions are untested candidate formulations. Audiences: Science Corp and the Seifrid lab (NC State MSE).
 
-- **Use it:** the app lives in [`hello_scifi/`](hello_scifi/README.md) (Overview, Maps, Records, Extract, Review, Proposal, Context tabs).
+- **Use it:** the app lives in [`hello_scifi/`](hello_scifi/README.md) (Overview, Maps, Records, Extract, Review, Gaps & next steps tabs).
 - **Add papers and run extraction:** drop PDFs in `hello_scifi/data/papers/` and run `scripts/extract_batch.py` ([steps](hello_scifi/README.md#adding-papers-and-running-extraction)).
 - **Review records:** use the Review tab and export your reviews as JSON ([steps](hello_scifi/README.md#reviewing-records)).
-- **Proposal draft:** [`hello_scifi/docs/proposal.md`](hello_scifi/docs/proposal.md).
+- **Gaps and next experiments:** on the app's Gaps & next steps tab, computed from the scorecard.
 
-The sections below are the earlier theory-of-mind plan; that benchmark now lives on the Context tab.
+The sections below are the earlier theory-of-mind plan. That benchmark is no longer in the app; the code is in git history.
 
 ## Background
 [Science Corporation](https://science.xyz) is building brain–computer interfaces that connect to the brain through living neurons instead of wires.

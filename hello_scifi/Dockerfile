@@ -14,14 +14,12 @@ COPY backend/pyproject.toml backend/uv.lock ./
 RUN UV_PYTHON_DOWNLOADS=never uv sync --frozen --no-dev
 COPY backend/app ./app
 COPY backend/scripts ./scripts
-# Extracted records, map references, and docs (paper PDFs are excluded by .dockerignore).
+# Extracted records, map references, and curated tables (paper PDFs are excluded by .dockerignore).
 COPY data ./data
-COPY docs ./docs
 COPY --from=frontend /frontend/dist ./frontend_dist
 
 ENV FRONTEND_DIST=/app/frontend_dist \
     DATA_DIR=/app/data \
-    DOCS_DIR=/app/docs \
     PATH="/app/.venv/bin:$PATH"
 EXPOSE 8000
 # Render sets $PORT. --proxy-headers makes request.client the real visitor IP (for rate limiting).
