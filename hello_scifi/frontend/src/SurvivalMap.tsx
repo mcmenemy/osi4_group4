@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { baseLayout, logAxis, useTheme } from './chartTheme'
+import { chipEstimate as estimateFor, chipNote } from './chipEstimate'
 import { useModeText } from './mode'
 import Plot, { type PlotPoint } from './Plot'
 import { withPrefix } from './records'
@@ -115,7 +116,7 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
   // Their ratio estimates the share of loaded neurons still detected: a rough, conservative stand-in.
   const baselinePts = (data?.points ?? []).filter((p) => p.baseline && p.measure === 'occupancy').sort((a, b) => (a.days ?? 0) - (b.days ?? 0))
   const [chipLoad, chipLater] = [baselinePts[0], baselinePts[baselinePts.length - 1]]
-  const chipEstimate = chipLoad && chipLater && chipLoad !== chipLater ? (chipLater.percent / chipLoad.percent) * 100 : null
+  const chipEstimate = chipLoad && chipLater && chipLoad !== chipLater ? estimateFor(chipLoad.percent, chipLater.percent) : null
   const showChip = yMode === 'percent' && measure === 'viability' && chipEstimate != null
   // The chip's stiffness (curated SU-8 data-sheet range), drawn as a vertical line on the stiffness axis.
   const chipStiffness = baselinePts.map((p) => p.x.youngs_modulus).find(Boolean)
@@ -317,10 +318,7 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
       )}
       {plot && showChip && chipLoad && chipLater && (
         <p className="small muted chip-note">
-          {t(
-            `* An estimate, not a direct measurement. Science Corp counted wells holding neurons: ${chipLoad.percent}% when the chip was loaded and ${chipLater.percent}% about three weeks after implantation in mice, so roughly ${chipEstimate!.toFixed(0)}% of the loaded neurons were still there (${chipLater.percent} ÷ ${chipLoad.percent}). Neurons that moved out of their wells or stopped glowing count as lost, so the real number may be higher. Their result comes from living brains over 3 weeks; most dots here come from a few days in a dish, which is an easier test.`,
-            `* Estimated, not a viability measurement: ${chipLater.percent}% of wells with fluorescent neurons at ~${chipLater.days} d in vivo (n=13) ÷ ${chipLoad.percent}% of wells with DAPI+ cells at 24 h in vitro (n=23) ≈ ${chipEstimate!.toFixed(0)}% of loaded neurons still detected (Brown et al., bioRxiv 2024). The two counts come from different chips, so this is approximate. It is conservative: cells that migrated out of wells or lost reporter fluorescence count as lost, and it doesn't separate death from loss. It is an in vivo 3-week figure, while most points here are in vitro over days, so the comparison favors the gels.`,
-          )}
+          {(({ plain, hardcore }) => t(plain, hardcore))(chipNote(chipLoad.percent, chipLater.percent, chipLater.days ?? 21))}
         </p>
       )}
       {data && property && shown.length === 0 && (

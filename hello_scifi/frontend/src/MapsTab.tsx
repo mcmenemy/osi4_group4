@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import ScorecardTable from './ScorecardTable'
 import SurvivalMap from './SurvivalMap'
+import { chipEstimate, chipNote } from './chipEstimate'
 import { useModeText } from './mode'
 import { PLAIN_LABELS, SHORT_LABELS, type RequirementKey, type Scorecard } from './scorecard'
 import { baseLayout, logAxis, useTheme, type Theme } from './chartTheme'
@@ -39,6 +40,10 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
   const [index, setIndex] = useState(0)
   const byId = useMemo(() => new Map(records.map((r) => [r.record_id, r])), [records])
   const t = useModeText()
+  const paperCount = useMemo(
+    () => new Set(records.map((r) => r.source.doi || r.source.title || r.source.file)).size,
+    [records],
+  )
 
   const openIds = useCallback(
     (ids: string[]) => {
@@ -61,10 +66,14 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
     <div className="container tab">
       <p className="kicker">Maps</p>
       <h1 className="section-title">{t('Which materials could help the neurons?', "Where the evidence is, and where it isn't")}</h1>
+      <p className="stat-line">
+        <strong>{records.length}</strong> {t('results', 'records')} <span>{t('pulled from', 'extracted from')}</span>{' '}
+        <strong>{paperCount}</strong> {t('published papers', 'published papers')}
+      </p>
       <p className="lede">
         {t(
-          `Each row is a family of materials, scored on what a well fill needs. ✓ means published research shows it does; ? means nobody we found has measured it. The chip's current material, SU-8 (a hard, epoxy-based plastic), is pinned at the top for comparison. Built from ${records.length} results in research papers.`,
-          `${records.length} record${records.length === 1 ? '' : 's'} from the literature. Click any point to see its values, the exact quotes they came from, and the source.`,
+          "First, how neurons fare on each material. Then a scorecard of every material family against what a well fill needs: ✓ means published research shows it does, ? means nobody we found has measured it, and the chip's current material, SU-8 (a hard, epoxy-based plastic), is pinned at the top. Click any point or row to see where it came from.",
+          'Survival against material properties first, then the well-fill scorecard. Click any point to see its values, the exact quotes they came from, and the source.',
         )}
       </p>
       {records.length === 0 && (
@@ -74,8 +83,8 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
         </p>
       )}
 
-      <ScorecardSection records={records} onOpenRecords={openIds} />
       <SurvivalMap onOpenRecord={(id) => openIds([id])} />
+      <ScorecardSection records={records} onOpenRecords={openIds} />
 
       <h2 className="details-heading">{t('The underlying numbers', 'Details for materials scientists')}</h2>
       <p className="muted">
@@ -476,6 +485,7 @@ function CellOutcomes({
     () => records.filter((r) => r.properties.youngs_modulus?.value_si != null && value(r) != null),
     [records, value],
   )
+  const brownId = records.find((r) => r.source.file === 'brown2024.pdf')?.record_id
 
   const { data, layout } = useMemo(() => {
     const counts = new Map<string, number>()
@@ -525,31 +535,28 @@ function CellOutcomes({
     const annotations: object[] = []
     const sci = references?.science_corp
     const su8 = references?.stiffness.find((r) => r.id === sci?.modulus_ref)
+    const shapes: object[] = []
     if (outcome === 'viability' && sci && su8) {
+      // Same estimate and caveat as the survival map (chipEstimate.ts), not the two raw occupancy counts.
       const x = Math.sqrt(su8.modulus_pa[0] * su8.modulus_pa[1])
+      const est = chipEstimate(sci.occupancy_at_loading_percent, sci.occupancy_at_3_weeks_percent)
       traces.push({
         type: 'scatter',
-        mode: 'lines+markers',
-        name: 'Science Corp SU-8 wells (well occupancy)',
-        x: [x, x],
-        y: [sci.occupancy_at_loading_percent, sci.occupancy_at_3_weeks_percent],
-        marker: { symbol: ['star-open', 'star'], size: 16, color: t.accent },
-        line: { color: t.accent, width: 2, dash: 'dot' },
-        hovertemplate: [
-          `<b>${sci.label}</b><br>${sci.occupancy_at_loading_percent}% of wells occupied at loading<br>${sci.measure}<br>${sci.citation}<extra></extra>`,
-          `<b>${sci.label}</b><br>${sci.occupancy_at_3_weeks_percent}% at ~${Math.round(sci.days / 7)} weeks<br>${sci.measure}<br>${sci.citation}<extra></extra>`,
-        ],
+        mode: 'markers',
+        name: m("Science Corp's chip (estimate*)", 'Science Corp SU-8 chip (est.*)'),
+        x: [x],
+        y: [est],
+        customdata: brownId ? [brownId] : undefined,
+        hovertemplate:
+          `<b>${sci.label}</b><br>~${est.toFixed(0)}% of loaded neurons still detected at ~${sci.days} d in vivo*<br>` +
+          `(${sci.occupancy_at_3_weeks_percent}% ÷ ${sci.occupancy_at_loading_percent}% of wells)<br>${sci.citation}<extra></extra>`,
+        marker: { symbol: 'star', size: 20, color: t.accent, line: { width: 1.5, color: t.panel } },
       })
+      shapes.push({ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: est, y1: est, line: { color: t.accent, width: 1.5, dash: 'dash' } })
       annotations.push({
-        x: Math.log10(x),
-        y: sci.occupancy_at_3_weeks_percent,
-        text: `Science Corp SU-8: ${sci.occupancy_at_loading_percent}% → ${sci.occupancy_at_3_weeks_percent}% of wells<br>occupied at ~3 weeks (well occupancy, not viability)`,
-        showarrow: true,
-        arrowcolor: t.accent,
-        ax: -150,
-        ay: 30,
-        font: { size: 11, color: t.fg },
-        align: 'right',
+        xref: 'paper', x: 0, xanchor: 'left', y: est, yanchor: 'bottom', showarrow: false,
+        text: m(`Science Corp's chip, in mice at 3 weeks: about ${est.toFixed(0)}%*`, `Science Corp SU-8 chip, in vivo ~${sci.days} d: est. ${est.toFixed(0)}%*`),
+        font: { size: 11, color: t.accent },
       })
     }
     return {
@@ -564,10 +571,11 @@ function CellOutcomes({
           zeroline: false,
           ...(outcome === 'viability' ? { range: [0, 105] } : { rangemode: 'tozero' }),
         },
+        shapes,
         annotations,
       },
     }
-  }, [points, references, outcome, value, t])
+  }, [points, references, outcome, value, t, m, brownId])
 
   return (
     <figure className="map-card">
@@ -575,8 +583,8 @@ function CellOutcomes({
         <h2>{m('Do neurons do better on softer materials?', 'Cell outcome vs. stiffness')}</h2>
         <p>
           {cap(
-            `Each dot is a cell result on a material of known softness, colored by cell type; the shape shows whether it was in a dish or in an animal.${outcome === 'viability' ? " The two stars are Science Corp's chip: the share of wells holding neurons at loading and about 3 weeks later." : ''}`,
-            `Each point is a reported cell outcome on a material of known stiffness, colored by cell type, shaped by setting.${outcome === 'viability' ? ' The star pair is the Science Corp microwell reference, which measures well occupancy rather than viability.' : ''}`,
+            `Each dot is a cell result on a material of known softness, colored by cell type; the shape shows whether it was in a dish or in an animal.${outcome === 'viability' ? " The star and dashed line are our estimate for Science Corp's chip (see the note under the chart)." : ''}`,
+            `Each point is a reported cell outcome on a material of known stiffness, colored by cell type, shaped by setting.${outcome === 'viability' ? ' The star and dashed line are the estimated Science Corp chip reference (note under the chart).' : ''}`,
           )}
         </p>
       </figcaption>
@@ -589,6 +597,13 @@ function CellOutcomes({
         </button>
       </div>
       <Plot data={data} layout={layout} height={480} label="Scatter of cell outcome against Young's modulus" onClick={onPoint} />
+      {outcome === 'viability' && references?.science_corp && (
+        <p className="small muted chip-note">
+          {(({ plain, hardcore }) => m(plain, hardcore))(
+            chipNote(references.science_corp.occupancy_at_loading_percent, references.science_corp.occupancy_at_3_weeks_percent, references.science_corp.days),
+          )}
+        </p>
+      )}
       <p className="muted small">{points.length} records have both a modulus and this outcome.</p>
     </figure>
   )
