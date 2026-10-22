@@ -167,6 +167,18 @@ a {
   color: var(--fg);
 }
 
+.nav-divider {
+  flex: none;
+  width: 1px;
+  height: 1.2rem;
+  margin: 0 0.4rem;
+  background: var(--border);
+}
+
+.tabs-nav a.tool {
+  font-size: 0.86rem;
+}
+
 .tabs-nav a[aria-current='page'] {
   color: var(--fg);
   font-weight: 600;

@@ -3,11 +3,11 @@ import type { MaterialRecord, References } from './records'
 
 const TAB_LINKS = [
   { href: '#/maps', title: 'Maps', text: 'Stiffness, conductivity and cell outcomes from the literature, with the untested gaps marked.' },
+  { href: '#/proposal', title: 'Proposal', text: 'Draft study: neurons in gel-filled vs. bare microwells.' },
+  { href: '#/context', title: 'Big picture', text: 'What can carry a mind? Score substrates across theories of mind, including your own.' },
   { href: '#/records', title: 'Records', text: 'Every extracted value with the exact quote and source it came from.' },
   { href: '#/extract', title: 'Extract', text: 'Upload a paper and watch the pipeline pull out source-linked records.' },
   { href: '#/review', title: 'Review', text: 'Accept, reject, or correct records one at a time.' },
-  { href: '#/proposal', title: 'Proposal', text: 'Draft study: neurons in gel-filled vs. bare microwells.' },
-  { href: '#/context', title: 'Big picture', text: 'What can carry a mind? Score substrates across theories of mind, including your own.' },
 ]
 
 export default function Overview({ records, references }: { records: MaterialRecord[]; references: References | null }) {

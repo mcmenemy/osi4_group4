@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import './App.css'
 import ContextTab from './ContextTab'
 import ExtractTab from './ExtractTab'
@@ -13,14 +13,15 @@ import { getJson, type MaterialRecord, type References, type TargetWindow } from
 // Placeholder until the team picks a project name.
 const PROJECT_NAME = 'OSI4 Group4'
 
+// The story pages first, then the working tools for the data behind them.
 const TABS = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'maps', label: 'Maps' },
-  { id: 'records', label: 'Records' },
-  { id: 'extract', label: 'Extract' },
-  { id: 'review', label: 'Review' },
-  { id: 'proposal', label: 'Proposal' },
-  { id: 'context', label: 'Big picture' },
+  { id: 'overview', label: 'Overview', tool: false },
+  { id: 'maps', label: 'Maps', tool: false },
+  { id: 'proposal', label: 'Proposal', tool: false },
+  { id: 'context', label: 'Big picture', tool: false },
+  { id: 'records', label: 'Records', tool: true },
+  { id: 'extract', label: 'Extract', tool: true },
+  { id: 'review', label: 'Review', tool: true },
 ] as const
 
 const HIDDEN_ROUTES = ['scifi'] as const
@@ -79,10 +80,15 @@ export default function App() {
             {PROJECT_NAME}
           </a>
           <nav aria-label="Tabs" className="tabs-nav">
-            {TABS.map((t) => (
-              <a key={t.id} href={`#/${t.id}`} aria-current={route === t.id ? 'page' : undefined}>
-                {t.label}
-              </a>
+            {TABS.map((t, i) => (
+              <Fragment key={t.id}>
+                {t.tool && !TABS[i - 1].tool && (
+                  <span className="nav-divider" role="separator" aria-label="Data tools" />
+                )}
+                <a href={`#/${t.id}`} aria-current={route === t.id ? 'page' : undefined} className={t.tool ? 'tool' : undefined}>
+                  {t.label}
+                </a>
+              </Fragment>
             ))}
           </nav>
         </div>
