@@ -3,7 +3,7 @@ import { baseLayout, logAxis, useTheme } from './chartTheme'
 import { chipEstimate as estimateFor, chipNote } from './chipEstimate'
 import { useModeText } from './mode'
 import Plot, { type PlotPoint } from './Plot'
-import { withPrefix } from './records'
+import { withPrefix, type References } from './records'
 
 // Mirrors backend/app/survival_map.py.
 type TierKey = 'in_vivo' | 'neurons_in_dish' | 'cell_lines'
@@ -62,7 +62,7 @@ function formatX(v: number, unit: string): string {
 // Duration is shown as marker size (how much a point says about lasting survival), not folded into y.
 const sizeFor = (days: number | null) => 10 + 12 * Math.min((days ?? 0) / FULL_SIZE_DAYS, 1)
 
-export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: string) => void }) {
+export default function SurvivalMap({ onOpenRecord, references }: { onOpenRecord: (id: string) => void; references: References | null }) {
   const theme = useTheme()
   const t = useModeText()
   const [data, setData] = useState<SurvivalMapData | null>(null)
@@ -164,6 +164,21 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
     const ref = (y: number, text: string) => {
       shapes.push({ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: y, y1: y, line: { color: theme.accent, width: 1.5, dash: 'dash' } })
       annotations.push({ xref: 'paper', x: 0, xanchor: 'left', y, yanchor: 'bottom', showarrow: false, text, font: { size: 11, color: theme.accent } })
+    }
+    // Brain tissue's stiffness range (references.json), as a light band behind the points.
+    const brain = prop === 'youngs_modulus' ? references?.stiffness.find((r) => r.id === 'brain') : undefined
+    if (brain) {
+      const [lo, hi] = brain.modulus_pa
+      shapes.push({
+        type: 'rect', yref: 'paper', y0: 0, y1: 1, x0: lo, x1: hi, layer: 'below',
+        fillcolor: theme.tissue, opacity: 0.45, line: { width: 0 },
+      })
+      annotations.push({
+        x: Math.log10(Math.sqrt(lo * hi)), y: 0, yref: 'paper', yanchor: 'bottom', showarrow: false,
+        text: t(`Brain tissue: ${withPrefix(lo, 'Pa')}–${withPrefix(hi, 'Pa')}`, `Brain tissue ${withPrefix(lo, 'Pa')}–${withPrefix(hi, 'Pa')} (approx.)`),
+        hovertext: `${brain.citation} (${brain.status})`,
+        font: { size: 11, color: theme.tissueLine },
+      })
     }
     if (showChipStiffness) {
       const cs = chipStiffness!

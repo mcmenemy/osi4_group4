@@ -83,7 +83,7 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
         </p>
       )}
 
-      <SurvivalMap onOpenRecord={(id) => openIds([id])} />
+      <SurvivalMap onOpenRecord={(id) => openIds([id])} references={references} />
       <ScorecardSection records={records} onOpenRecords={openIds} />
 
       <h2 className="details-heading">{t('The underlying numbers', 'Details for materials scientists')}</h2>

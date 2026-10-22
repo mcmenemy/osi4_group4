@@ -14,6 +14,8 @@ export interface Theme {
   other: string
   seqLow: string
   seqHigh: string
+  tissue: string
+  tissueLine: string
   font: string
 }
 
@@ -32,6 +34,8 @@ function readTheme(): Theme {
     other: v('--cat-other'),
     seqLow: v('--seq-low'),
     seqHigh: v('--seq-high'),
+    tissue: v('--tissue'),
+    tissueLine: v('--tissue-line'),
     font: getComputedStyle(document.body).fontFamily,
   }
 }
