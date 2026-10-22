@@ -2,17 +2,23 @@ import { useEffect, useState } from 'react'
 import type { MaterialRecord } from './records'
 import type { ScoreRow, Scorecard, State } from './scorecard'
 
-// Drop real images in public/ and set src; until then a labeled placeholder shows.
-const FIGURES: { src: string | null; alt: string; caption: string }[] = [
+// Our own schematics of the device and findings in Brown et al., bioRxiv 2024
+// (doi:10.1101/2024.11.22.624907); not reproductions of their figures. If an image fails to load,
+// a labeled placeholder shows instead.
+const FIGURES: { src: string; alt: string; caption: string; credit: string }[] = [
   {
-    src: null,
-    alt: 'Microwells packed with neurons',
-    caption: 'Microwells packed with neurons (image to come).',
+    src: '/figures/microwell_schematic.png',
+    alt: 'Schematic of an SU-8 microwell array: top view with most wells holding one neuron and some empty, and a side view of wells about 10 µm wide and 15 µm deep',
+    caption:
+      'One neuron per well: top view and cross-section of a loaded SU-8 microwell array (not to scale; occupancy illustrative).',
+    credit: 'Original schematic based on Brown et al., bioRxiv 2024',
   },
   {
-    src: null,
-    alt: 'Grafted neurons growing into host brain tissue',
-    caption: 'Grafted neurons growing into the host brain (image to come).',
+    src: '/figures/graft_schematic.png',
+    alt: 'Schematic cross-section of cortex under the implant: grafted neurites are dense near the surface and only a few thin axons reach deeper',
+    caption:
+      'Where grafted neurites go: most processes stay in superficial cortex, with sparse axons deeper (conceptual, not to scale).',
+    credit: 'Original schematic based on findings in Brown et al., bioRxiv 2024',
   },
 ]
 
@@ -63,16 +69,7 @@ export default function Overview({ records }: { records: MaterialRecord[] }) {
 
         <div className="overview-figures">
           {FIGURES.map((f) => (
-            <figure key={f.alt} className="figure">
-              {f.src ? (
-                <img src={f.src} alt={f.alt} />
-              ) : (
-                <div className="figure-placeholder" role="img" aria-label={`${f.alt} (placeholder)`}>
-                  Image placeholder
-                </div>
-              )}
-              <figcaption>{f.caption}</figcaption>
-            </figure>
+            <Figure key={f.src} figure={f} />
           ))}
         </div>
       </div>
@@ -88,6 +85,24 @@ export default function Overview({ records }: { records: MaterialRecord[] }) {
         <a href="#/fun">For fun</a>.
       </p>
     </section>
+  )
+}
+
+function Figure({ figure: f }: { figure: (typeof FIGURES)[number] }) {
+  const [failed, setFailed] = useState(false)
+  return (
+    <figure className="figure">
+      {failed ? (
+        <div className="figure-placeholder" role="img" aria-label={`${f.alt} (image unavailable)`}>
+          Image unavailable
+        </div>
+      ) : (
+        <img src={f.src} alt={f.alt} loading="lazy" onError={() => setFailed(true)} />
+      )}
+      <figcaption>
+        {f.caption} <span className="figure-credit">{f.credit}.</span>
+      </figcaption>
+    </figure>
   )
 }
 
