@@ -9,6 +9,17 @@ uv run python scripts/extract_batch.py
 
 **PDFs are not committed.** This repo is public and many papers aren't open access, so `*.pdf` here is gitignored and left out of the Docker image. Only the extracted records in `data/records/` (short evidence quotes plus values) are committed. Download each paper yourself; nothing here downloads papers automatically.
 
+## Fetching open-access PDFs
+
+`data/papers.csv` lists papers to fetch. From `hello_scifi/backend`:
+
+```bash
+UNPAYWALL_EMAIL=you@ncsu.edu uv run python scripts/fetch_papers.py   # email only used for the Unpaywall API
+uv run python scripts/fetch_papers.py --rescan                         # after adding PDFs by hand
+```
+
+It tries the CSV's direct link, then Europe PMC / the PMC open-access service, then Unpaywall, and never logs in or scrapes paywalled sites. Anything it can't get is listed with an NC State proxy link in `NEEDS_MANUAL.txt`: download those with Zotero, save as `<key>.pdf` here, and run `--rescan`. Note: Europe PMC's PDF links sit behind a bot check and PMC's OA service endpoint currently returns 404, so free-to-read PMC papers usually need the manual route.
+
 Use short lowercase filenames like `lu2019.pdf`. The filename is stored in each record's `source.file`, which is how the script knows a paper has already been extracted.
 
 ## Seed papers
