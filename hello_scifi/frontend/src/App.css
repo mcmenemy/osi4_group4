@@ -138,12 +138,25 @@ a {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.15rem;
   color: var(--fg);
   text-decoration: none;
   white-space: nowrap;
+}
+
+/* The logo is used as a mask so it takes the text colour in both light and dark mode. */
+.brand-logo {
+  flex: none;
+  width: 3.2rem;
+  height: 2.4rem;
+  background-color: currentColor;
+  -webkit-mask: url('/logo.svg') center / contain no-repeat;
+  mask: url('/logo.svg') center / contain no-repeat;
 }
 
 .tabs-nav {

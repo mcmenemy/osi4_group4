@@ -89,6 +89,7 @@ export default function App() {
       <header className="site-header">
         <div className="container header-inner">
           <a className="brand" href="#/">
+            <span className="brand-logo" aria-hidden="true" />
             {PROJECT_NAME}
           </a>
           <nav aria-label="Tabs" className="tabs-nav">
