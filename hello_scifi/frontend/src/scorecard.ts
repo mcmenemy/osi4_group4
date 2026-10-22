@@ -79,24 +79,3 @@ export interface Scorecard {
   controls?: ScoreRow[]
   summary: { materials: number; ranked_materials: number; neuron_records: number; unknown_cells: number }
 }
-
-export const STATE_ORDER: Record<State, number> = { met: 3, partial: 2, unknown: 1, fails: 0 }
-
-export const SHORT_LABELS: Record<RequirementKey, string> = {
-  survival: 'Survival ≥3 wk',
-  soft: '≤100 kPa',
-  in_vivo_brain: 'In vivo brain',
-  clear_degradable: 'Clear & degradable',
-  conductive: 'Conductive',
-}
-
-// Normal-mode column names.
-export const PLAIN_LABELS: Record<RequirementKey, string> = {
-  survival: 'Neurons last 3+ weeks',
-  soft: 'Soft enough',
-  in_vivo_brain: 'Tested in a brain',
-  clear_degradable: 'See-through & dissolves',
-  conductive: 'Conducts electricity',
-}
-
-export const PLAIN_STATES: Record<State, string> = { met: 'yes', partial: 'partly', unknown: 'not known yet', fails: 'no' }

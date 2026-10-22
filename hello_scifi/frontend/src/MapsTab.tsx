@@ -1,16 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import ScorecardTable from './ScorecardTable'
 import SurvivalMap from './SurvivalMap'
-import { chipEstimate, chipNote } from './chipEstimate'
 import { useModeText } from './mode'
-import { PLAIN_LABELS, SHORT_LABELS, type RequirementKey, type Scorecard } from './scorecard'
+import type { Scorecard } from './scorecard'
 import { baseLayout, logAxis, useTheme, type Theme } from './chartTheme'
 import Plot, { type PlotPoint } from './Plot'
 import RecordDetail, { SidePanel } from './RecordDetail'
 import {
   COVERAGE_COLUMNS,
   MATERIAL_CLASSES,
-  SETTING_LABELS,
   classLabel,
   methodLabel,
   sourceLabel,
@@ -40,6 +37,7 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
   const [index, setIndex] = useState(0)
   const byId = useMemo(() => new Map(records.map((r) => [r.record_id, r])), [records])
   const t = useModeText()
+  const [advancedOpen, setAdvancedOpen] = useState(false)
   const paperCount = useMemo(
     () => new Set(records.map((r) => r.source.doi || r.source.title || r.source.file)).size,
     [records],
@@ -72,8 +70,8 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
       </p>
       <p className="lede">
         {t(
-          "First, how neurons fare on each material. Then a scorecard of every material family against what a well fill needs: ✓ means published research shows it does, ? means nobody we found has measured it, and the chip's current material, SU-8 (a hard, epoxy-based plastic), is pinned at the top. Click any point or row to see where it came from.",
-          'Survival against material properties first, then the well-fill scorecard. Click any point to see its values, the exact quotes they came from, and the source.',
+          'How neurons fare on each material, compared with Science Corp\'s chip today. Click any point to see the paper and the exact sentence it came from.',
+          'Neuron survival against material properties, with the Science Corp chip as a reference. Click any point to see its values, the exact quotes they came from, and the source.',
         )}
       </p>
       {records.length === 0 && (
@@ -84,21 +82,25 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
       )}
 
       <SurvivalMap onOpenRecord={(id) => openIds([id])} references={references} />
-      <ScorecardSection records={records} onOpenRecords={openIds} />
 
-      <h2 className="details-heading">{t('The underlying numbers', 'Details for materials scientists')}</h2>
-      <p className="muted">
-        {t(
-          'Charts of the measurements behind the table, mostly for materials scientists. Click any point to see where it came from.',
-          'The underlying property maps. Click any point for its values, quotes, and source.',
+      <details className="advanced" onToggle={(e) => setAdvancedOpen(e.currentTarget.open)}>
+        <summary>{t('Advanced metrics', 'Advanced metrics')}</summary>
+        <p className="muted">
+          {t(
+            'The measurements behind the chart, mostly for materials scientists. Click any point to see where it came from.',
+            'The underlying property maps. Click any point for its values, quotes, and source.',
+          )}
+        </p>
+        {/* Plotly can't size a chart inside a closed <details>, so the charts mount once it's opened. */}
+        {advancedOpen && (
+          <>
+            <StiffnessByFamily records={records} onPoint={onPoint} />
+            <StiffnessConductivity records={records} references={references} targetWindow={targetWindow} onPoint={onPoint} />
+            <Degradation records={records} onPoint={onPoint} />
+            <Coverage records={records} onCell={openIds} />
+          </>
         )}
-      </p>
-      <StiffnessByFamily records={records} onPoint={onPoint} />
-      <StiffnessConductivity records={records} references={references} targetWindow={targetWindow} onPoint={onPoint} />
-      <CellOutcomes records={records} references={references} onPoint={onPoint} />
-      <Degradation records={records} onPoint={onPoint} />
-      <MixedConductors records={records} onPoint={onPoint} />
-      <Coverage records={records} onCell={openIds} />
+      </details>
 
       {selected && (
         <SidePanel label="Record details" onClose={() => setSelected(null)}>
@@ -119,76 +121,6 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
         </SidePanel>
       )}
     </div>
-  )
-}
-
-const WEIGHT_KEYS: RequirementKey[] = ['survival', 'soft', 'in_vivo_brain', 'clear_degradable', 'conductive']
-
-function ScorecardSection({ records, onOpenRecords }: { records: MaterialRecord[]; onOpenRecords: (ids: string[]) => void }) {
-  const [card, setCard] = useState<Scorecard | null>(null)
-  const [weights, setWeights] = useState<Record<RequirementKey, number> | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-
-  // Scoring happens on the server; refetch (debounced) when the weights change.
-  useEffect(() => {
-    const controller = new AbortController()
-    const timer = window.setTimeout(() => {
-      const params = new URLSearchParams()
-      if (weights) for (const [k, v] of Object.entries(weights)) params.set(k, String(v))
-      setLoading(true)
-      fetch(`/api/scorecard?${params}`, { signal: controller.signal })
-        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-        .then((data: Scorecard) => {
-          setCard(data)
-          setError('')
-        })
-        .catch((e) => e.name !== 'AbortError' && setError("Couldn't load the scorecard."))
-        .finally(() => setLoading(false))
-    }, weights ? 200 : 0)
-    return () => {
-      controller.abort()
-      window.clearTimeout(timer)
-    }
-  }, [weights])
-
-  const current = weights ?? card?.weights
-  const t = useModeText()
-  return (
-    <section className="scorecard-section">
-      {error && <p className="error">{error}</p>}
-      {card && <ScorecardTable card={card} records={records} loading={loading} onOpenRecords={onOpenRecords} />}
-      {card && current && (
-        <details className="weights-panel">
-          <summary>{t('Change what matters most', 'Adjust weights')}</summary>
-          {t(
-            <p className="muted small">
-              How much each need counts is our team's judgment call, not a measurement. Move the sliders, then pick Most
-              promising to see the ranking change.
-            </p>,
-            <p className="muted small">
-              Weights are team judgment, not measurements. The table re-sorts as you move them (switch the view to Most
-              promising to see the ranking change). Defaults live in <code>data/scorecard.yaml</code>.
-            </p>,
-          )}
-          <div className="weights-grid">
-            {WEIGHT_KEYS.map((k) => (
-              <label key={k} className="slider">
-                <span className="slider-head">
-                  <span>{t(PLAIN_LABELS, SHORT_LABELS)[k]}</span>
-                  <output>{current[k]}</output>
-                </span>
-                <input type="range" min={0} max={5} step={0.5} value={current[k]}
-                  onChange={(e) => setWeights({ ...current, [k]: Number(e.target.value) })} />
-              </label>
-            ))}
-          </div>
-          <button type="button" className="link-btn" onClick={() => setWeights({ ...card.default_weights })}>
-            {t('Reset', 'Reset to defaults')}
-          </button>
-        </details>
-      )}
-    </section>
   )
 }
 
@@ -302,7 +234,7 @@ function StiffnessByFamily({ records, onPoint }: { records: MaterialRecord[]; on
   )
 }
 
-/* 1. Stiffness vs conductivity */
+/* Stiffness vs conductivity */
 
 function StiffnessConductivity({
   records,
@@ -458,158 +390,7 @@ function StiffnessConductivity({
   )
 }
 
-/* 2. Cell outcome vs stiffness */
-
-const SETTING_SYMBOLS: Record<string, string> = { in_vitro_2d: 'circle', in_vitro_3d: 'square', in_vivo: 'diamond' }
-const MAX_CELL_TYPES = 5
-
-function CellOutcomes({
-  records,
-  references,
-  onPoint,
-}: {
-  records: MaterialRecord[]
-  references: References | null
-  onPoint: (p: PlotPoint) => void
-}) {
-  const t = useTheme()
-  const cap = useCaption()
-  const m = useModeText()
-  const [outcome, setOutcome] = useState<'viability' | 'neurite'>('viability')
-  const value = useCallback(
-    (r: MaterialRecord) =>
-      outcome === 'viability' ? r.biology?.viability_percent?.value_si : r.biology?.neurite_length?.value_si,
-    [outcome],
-  )
-  const points = useMemo(
-    () => records.filter((r) => r.properties.youngs_modulus?.value_si != null && value(r) != null),
-    [records, value],
-  )
-  const brownId = records.find((r) => r.source.file === 'brown2024.pdf')?.record_id
-
-  const { data, layout } = useMemo(() => {
-    const counts = new Map<string, number>()
-    for (const r of points) {
-      const k = r.biology?.cell_type ?? 'Unspecified'
-      counts.set(k, (counts.get(k) ?? 0) + 1)
-    }
-    const top = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, MAX_CELL_TYPES).map(([k]) => k)
-    const group = (r: MaterialRecord) => {
-      const k = r.biology?.cell_type ?? 'Unspecified'
-      return top.includes(k) ? k : 'Other cell types'
-    }
-    const groups = [...top, ...(points.some((r) => group(r) === 'Other cell types') ? ['Other cell types'] : [])]
-    const toY = (v: number) => (outcome === 'viability' ? v : v * 1e6)
-    const traces: object[] = groups.map((g, i) => {
-      const rs = points.filter((r) => group(r) === g)
-      return {
-        type: 'scatter',
-        mode: 'markers',
-        name: g,
-        x: rs.map((r) => r.properties.youngs_modulus!.value_si),
-        y: rs.map((r) => toY(value(r)!)),
-        customdata: rs.map((r) => r.record_id),
-        hovertemplate: rs.map((r) =>
-          hoverFor(r, [
-            stiffnessLine(r),
-            outcome === 'viability' ? `Viability ${value(r)}%` : `Neurite length ${Number(toY(value(r)!).toPrecision(3))} µm`,
-            `${r.biology?.cell_type ?? 'cells'} · ${r.biology?.setting ? SETTING_LABELS[r.biology.setting] : 'setting not stated'}`,
-          ]),
-        ),
-        marker: {
-          size: 12,
-          color: g === 'Other cell types' ? t.other : t.categorical[i],
-          symbol: rs.map((r) => SETTING_SYMBOLS[r.biology?.setting ?? ''] ?? 'x'),
-          line: { width: 2, color: t.panel },
-        },
-      }
-    })
-    for (const [setting, symbol] of Object.entries(SETTING_SYMBOLS)) {
-      traces.push({
-        type: 'scatter', mode: 'markers', x: [null], y: [null],
-        name: SETTING_LABELS[setting as keyof typeof SETTING_LABELS],
-        marker: { symbol, size: 10, color: t.muted }, hoverinfo: 'skip',
-      })
-    }
-
-    const annotations: object[] = []
-    const sci = references?.science_corp
-    const su8 = references?.stiffness.find((r) => r.id === sci?.modulus_ref)
-    const shapes: object[] = []
-    if (outcome === 'viability' && sci && su8) {
-      // Same estimate and caveat as the survival map (chipEstimate.ts), not the two raw occupancy counts.
-      const x = Math.sqrt(su8.modulus_pa[0] * su8.modulus_pa[1])
-      const est = chipEstimate(sci.occupancy_at_loading_percent, sci.occupancy_at_3_weeks_percent)
-      traces.push({
-        type: 'scatter',
-        mode: 'markers',
-        name: m("Science Corp's chip (estimate*)", 'Science Corp SU-8 chip (est.*)'),
-        x: [x],
-        y: [est],
-        customdata: brownId ? [brownId] : undefined,
-        hovertemplate:
-          `<b>${sci.label}</b><br>~${est.toFixed(0)}% of loaded neurons still detected at ~${sci.days} d in vivo*<br>` +
-          `(${sci.occupancy_at_3_weeks_percent}% ÷ ${sci.occupancy_at_loading_percent}% of wells)<br>${sci.citation}<extra></extra>`,
-        marker: { symbol: 'star', size: 20, color: t.accent, line: { width: 1.5, color: t.panel } },
-      })
-      shapes.push({ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: est, y1: est, line: { color: t.accent, width: 1.5, dash: 'dash' } })
-      annotations.push({
-        xref: 'paper', x: 0, xanchor: 'left', y: est, yanchor: 'bottom', showarrow: false,
-        text: m(`Science Corp's chip, in mice at 3 weeks: about ${est.toFixed(0)}%*`, `Science Corp SU-8 chip, in vivo ~${sci.days} d: est. ${est.toFixed(0)}%*`),
-        font: { size: 11, color: t.accent },
-      })
-    }
-    return {
-      data: traces,
-      layout: {
-        ...baseLayout(t),
-        xaxis: logAxis(t, STIFFNESS_AXIS, [10, 1e12]),
-        yaxis: {
-          title: { text: outcome === 'viability' ? 'Viability (%)' : 'Neurite length (µm)', font: { color: t.muted } },
-          gridcolor: t.border,
-          linecolor: t.muted,
-          zeroline: false,
-          ...(outcome === 'viability' ? { range: [0, 105] } : { rangemode: 'tozero' }),
-        },
-        shapes,
-        annotations,
-      },
-    }
-  }, [points, references, outcome, value, t, m, brownId])
-
-  return (
-    <figure className="map-card">
-      <figcaption>
-        <h2>{m('Do neurons do better on softer materials?', 'Cell outcome vs. stiffness')}</h2>
-        <p>
-          {cap(
-            `Each dot is a cell result on a material of known softness, colored by cell type; the shape shows whether it was in a dish or in an animal.${outcome === 'viability' ? " The star and dashed line are our estimate for Science Corp's chip (see the note under the chart)." : ''}`,
-            `Each point is a reported cell outcome on a material of known stiffness, colored by cell type, shaped by setting.${outcome === 'viability' ? ' The star and dashed line are the estimated Science Corp chip reference (note under the chart).' : ''}`,
-          )}
-        </p>
-      </figcaption>
-      <div className="pills" role="group" aria-label="Outcome">
-        <button type="button" className="pill" aria-pressed={outcome === 'viability'} onClick={() => setOutcome('viability')}>
-          {m('Survival', 'Viability')}
-        </button>
-        <button type="button" className="pill" aria-pressed={outcome === 'neurite'} onClick={() => setOutcome('neurite')}>
-          {m('Fiber growth', 'Neurite length')}
-        </button>
-      </div>
-      <Plot data={data} layout={layout} height={480} label="Scatter of cell outcome against Young's modulus" onClick={onPoint} />
-      {outcome === 'viability' && references?.science_corp && (
-        <p className="small muted chip-note">
-          {(({ plain, hardcore }) => m(plain, hardcore))(
-            chipNote(references.science_corp.occupancy_at_loading_percent, references.science_corp.occupancy_at_3_weeks_percent, references.science_corp.days),
-          )}
-        </p>
-      )}
-      <p className="muted small">{points.length} records have both a modulus and this outcome.</p>
-    </figure>
-  )
-}
-
-/* 3. Stiffness vs degradation time */
+/* Stiffness vs degradation time */
 
 function Degradation({ records, onPoint }: { records: MaterialRecord[]; onPoint: (p: PlotPoint) => void }) {
   const t = useTheme()
@@ -682,92 +463,7 @@ function Degradation({ records, onPoint }: { records: MaterialRecord[]; onPoint:
   )
 }
 
-/* 4. Mixed conductors: μC* vs C* */
-
-const MOBILITIES = [0.001, 0.01, 0.1, 1, 10] // cm² V⁻¹ s⁻¹; μC* = μ · C*, so each is a straight line in log-log
-
-function MixedConductors({ records, onPoint }: { records: MaterialRecord[]; onPoint: (p: PlotPoint) => void }) {
-  const t = useTheme()
-  const cap = useCaption()
-  const m = useModeText()
-  const points = useMemo(
-    () =>
-      records.filter(
-        (r) => r.properties.volumetric_capacitance?.value_si != null && r.properties.mu_c_star?.value_si != null,
-      ),
-    [records],
-  )
-  const { data, layout } = useMemo(() => {
-    const X: [number, number] = [10, 1000]
-    const traces: object[] = MOBILITIES.map((mu) => ({
-      type: 'scatter',
-      mode: 'lines',
-      x: X,
-      y: X.map((c) => mu * c),
-      line: { color: t.border, width: 1, dash: 'dot' },
-      hoverinfo: 'skip',
-      showlegend: false,
-    }))
-    traces.push(
-      ...MATERIAL_CLASSES.map((c) => {
-        const rs = points.filter((r) => r.material_class === c.key)
-        return {
-          type: 'scatter',
-          mode: 'markers+text',
-          name: c.label,
-          x: rs.map((r) => r.properties.volumetric_capacitance!.value_si),
-          y: rs.map((r) => r.properties.mu_c_star!.value_si),
-          text: rs.map((r) => r.material),
-          textposition: 'top center',
-          textfont: { size: 10, color: t.muted },
-          customdata: rs.map((r) => r.record_id),
-          hovertemplate: rs.map((r) => {
-            const cs = r.properties.volumetric_capacitance!.value_si!
-            const mc = r.properties.mu_c_star!.value_si!
-            return hoverFor(r, [`C* = ${cs} F cm⁻³`, `μC* = ${mc} F cm⁻¹ V⁻¹ s⁻¹`, `implied μ ≈ ${Number((mc / cs).toPrecision(2))} cm² V⁻¹ s⁻¹`])
-          }),
-          marker: { size: 11, color: classColor(t, c.key), line: { width: 2, color: t.panel } },
-          showlegend: rs.length > 0,
-        }
-      }),
-    )
-    return {
-      data: traces,
-      layout: {
-        ...baseLayout(t),
-        xaxis: logAxis(t, 'Volumetric capacitance C* (F cm⁻³)', X),
-        yaxis: logAxis(t, 'μC* (F cm⁻¹ V⁻¹ s⁻¹)', [0.05, 2000]),
-        annotations: MOBILITIES.filter((mu) => mu * 1000 <= 2000 && mu * 1000 >= 0.05).map((mu) => ({
-          x: Math.log10(1000),
-          y: Math.log10(mu * 1000),
-          xanchor: 'right',
-          yanchor: 'bottom',
-          showarrow: false,
-          text: `μ = ${mu} cm²/Vs`,
-          font: { size: 10, color: t.muted },
-        })),
-      },
-    }
-  }, [points, t])
-
-  return (
-    <figure className="map-card">
-      <figcaption>
-        <h2>{m('Materials for future electronics', 'Mixed conductors: μC* vs. C*')}</h2>
-        <p>
-          {cap(
-            'For specialists: the standard comparison for conductive plastics used in bioelectronics (organic mixed ionic-electronic conductors). Higher is better for the tiny transistors that could one day sense neural signals. These are the kinds of materials the Seifrid lab at NC State optimizes with automated, robot-run experiments.',
-            "The standard figure of merit for organic mixed ionic-electronic conductors: μC* (higher is better for transistors) against volumetric capacitance C*; dotted lines are constant electronic mobility μ = μC*/C*. These are the film materials a self-driving lab like the Seifrid lab's would optimize.",
-          )}
-        </p>
-      </figcaption>
-      <Plot data={data} layout={layout} height={480} label="Log-log scatter of μC* against volumetric capacitance" onClick={onPoint} />
-      <p className="muted small">{points.length} records report both C* and μC*.</p>
-    </figure>
-  )
-}
-
-/* 5. Coverage heatmap */
+/* Coverage heatmap */
 
 function Coverage({ records, onCell }: { records: MaterialRecord[]; onCell: (ids: string[]) => void }) {
   const t = useTheme()

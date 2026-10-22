@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { MaterialRecord } from './records'
 import ModeToggle from './ModeToggle'
 import { useModeText } from './mode'
-import { PLAIN_LABELS, PLAIN_STATES, SHORT_LABELS, type ScoreRow, type Scorecard, type State } from './scorecard'
 
-const STATE_NAMES: Record<State, string> = { met: 'met', partial: 'partial', unknown: 'unknown', fails: 'fails' }
 
 // Our own schematics of the device and findings in Brown et al., bioRxiv 2024
 // (doi:10.1101/2024.11.22.624907); not reproductions of their figures. If an image fails to load,
@@ -39,8 +37,6 @@ const FIGURES: {
   },
 ]
 
-const PREVIEW_ROWS = 5
-const STATE_ICON: Record<State, string> = { met: '✓', partial: '◐', unknown: '?', fails: '✕' }
 
 export default function Overview({ records }: { records: MaterialRecord[] }) {
   const t = useModeText()
@@ -90,7 +86,7 @@ export default function Overview({ records }: { records: MaterialRecord[] }) {
               Soft, gel-like materials often help transplanted cells survive, but we found no published test of them in wells like these. We
               used AI to read research papers on such materials and pull out the numbers that matter: how soft they are,
               how long they last in the body, and how well neurons do on them. Every number links to the sentence it came
-              from. Then we score each material on whether it could make the wells a better home for neurons.
+              from. Then we compare how neurons do on each material with Science Corp's chip today.
             </p>
           </div>,
           <div className="overview-text">
@@ -133,8 +129,6 @@ export default function Overview({ records }: { records: MaterialRecord[] }) {
         </div>
       </div>
 
-      <ScorecardPreview />
-
       <p className="next-pointer">
         {t("What we still don't know, and what we'd test next:", "What's missing and what we'd test next:")}{' '}
         <a href="#/gaps">Gaps &amp; next steps →</a>
@@ -167,67 +161,5 @@ function Figure({ figure: f }: { figure: (typeof FIGURES)[number] }) {
         <strong>{f.title}.</strong> {t(f.plainCaption, f.caption)} <span className="figure-credit">{f.credit}.</span>
       </figcaption>
     </figure>
-  )
-}
-
-function ScorecardPreview() {
-  const t = useModeText()
-  const [card, setCard] = useState<Scorecard | null>(null)
-  useEffect(() => {
-    fetch('/api/scorecard')
-      .then((r) => (r.ok ? r.json() : null))
-      .then(setCard)
-      .catch(() => setCard(null))
-  }, [])
-  if (!card) return null
-
-  // Same default as the Maps tab: most neuron evidence first, not a headline ranking.
-  const rows: ScoreRow[] = [...card.ranked]
-    .sort((a, b) => b.neuron_record_count - a.neuron_record_count || b.record_count - a.record_count)
-    .slice(0, PREVIEW_ROWS)
-  const reqs = ['survival', 'soft', 'in_vivo_brain', 'clear_degradable'] as const
-  const heads = reqs.map((k) => t(PLAIN_LABELS, SHORT_LABELS)[k])
-
-  return (
-    <aside className="scorecard-preview">
-      <div className="preview-head">
-        <h2>{t('Which materials look promising so far', 'Candidate well fills, so far')}</h2>
-        <a href="#/maps">{t('See all materials →', 'Full scorecard on Maps →')}</a>
-      </div>
-      <p className="muted small">
-        {t(
-          `${card.summary.ranked_materials} materials have been tested with neurons, across ${card.summary.neuron_records} results. ✓ means yes, ✕ no, ◐ partly, and ? means nobody has measured it yet (${card.summary.unknown_cells} boxes so far). Best-studied first.`,
-          `${card.summary.ranked_materials} materials with neuron evidence from ${card.summary.neuron_records} neuron records; ${card.summary.unknown_cells} requirement cells still unknown. Sorted by amount of evidence.`,
-        )}
-      </p>
-      <div className="table-scroll">
-        <table className="preview-table">
-          <thead>
-            <tr>
-              <th>Material</th>
-              {heads.map((h) => (
-                <th key={h} className="state-col">{h}</th>
-              ))}
-              <th>{t('Best neuron result', 'Best survival')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r) => (
-              <tr key={r.material_key}>
-                <th scope="row">{r.label}</th>
-                {reqs.map((k) => (
-                  <td key={k} className="state-col">
-                    <span className={`state ${r.requirements[k].state}`} role="img" aria-label={t(PLAIN_STATES, STATE_NAMES)[r.requirements[k].state]}>
-                      {STATE_ICON[r.requirements[k].state]}
-                    </span>
-                  </td>
-                ))}
-                <td className="small">{r.best_survival?.label ?? '—'}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </aside>
   )
 }

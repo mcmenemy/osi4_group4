@@ -1,9 +1,9 @@
 # Hackathon app
 
-The app behind [the project](../README.md): it builds a source-linked dataset of materials that could fill or coat Science Corp's SU-8 microwells to keep more neurons alive, and scores each material family against what a well fill needs. An LLM pipeline extracts structured records from papers on soft and conductive hydrogels, OECT/OMIEC materials, and neurons on soft substrates; every value keeps its verbatim quote. Tabs:
+The app behind [the project](../README.md): it builds a source-linked dataset of materials that could fill or coat Science Corp's SU-8 microwells to keep more neurons alive, and charts how neurons survive on each material against Science Corp's chip. An LLM pipeline extracts structured records from papers on soft and conductive hydrogels, OECT/OMIEC materials, and neurons on soft substrates; every value keeps its verbatim quote. Tabs:
 
-- **Overview:** the Science Corp microwell device, why it matters, the two well-occupancy numbers, what the app does, and a preview of the scorecard.
-- **Maps:** the candidate well-fill scorecard, then property maps for materials scientists. Click any row, point or cell for values, evidence quotes and sources.
+- **Overview:** the Science Corp microwell device, why it matters, the two well-occupancy numbers, and what the app does.
+- **Maps:** neuron survival against a chosen material property, with Science Corp's chip and brain tissue as references; more property maps under "Advanced metrics". Click any point or cell for values, evidence quotes and sources.
 - **Records:** searchable table of every record (`#/records?id=<record_id>` opens one).
 - **Extract:** run the extraction live on an uploaded PDF or pasted text.
 - **Review:** a demo of expert review. Nothing is saved there (see [Reviewing records](#reviewing-records)).
@@ -142,7 +142,7 @@ How extraction works (`backend/app/extraction/`):
 
 ### Scorecard
 
-`/api/scorecard` (`backend/app/scorecard.py`) groups records by material family (`data/materials.yaml`) and scores each family against five requirements: neuron survival at ≥3 weeks, stiffness ≤100 kPa, in vivo in brain, clear and degradable, and conductive (low weight; only for future electrode layers). Each requirement is met, partial, unknown or fails. The score multiplies each requirement's weight by its state and by the strength of the cell evidence (in vivo neurons count more than a neuron-like cell line). Weights, thresholds and multipliers are team judgment and live in `data/scorecard.yaml`. Only families with neuron records are ranked; the SU-8 baseline is returned separately.
+`/api/scorecard` (`backend/app/scorecard.py`) groups records by material family (`data/materials.yaml`) and scores each family against five requirements: neuron survival at ≥3 weeks, stiffness ≤100 kPa, in vivo in brain, clear and degradable, and conductive (low weight; only for future electrode layers). Each requirement is met, partial, unknown or fails. The score multiplies each requirement's weight by its state and by the strength of the cell evidence (in vivo neurons count more than a neuron-like cell line). Weights, thresholds and multipliers are team judgment and live in `data/scorecard.yaml`. Only families with neuron records are ranked; the SU-8 baseline is returned separately. The app no longer displays the ranking; the Gaps tab turns its unknowns into gap bullets.
 
 ### Reviewing records
 

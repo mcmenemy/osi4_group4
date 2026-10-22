@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import './App.css'
 import ExtractTab from './ExtractTab'
 import FunTab from './FunTab'
@@ -14,14 +14,15 @@ import { getJson, type MaterialRecord, type References, type TargetWindow } from
 // Placeholder until the team picks a project name.
 const PROJECT_NAME = 'OSI4 Group4'
 
+// Tabs after the divider (`secondary`) show how the data is made, not the story.
 const TABS = [
   { id: 'overview', label: 'Overview' },
   { id: 'maps', label: 'Maps' },
   { id: 'records', label: 'Records' },
-  { id: 'extract', label: 'Extract' },
-  { id: 'review', label: 'Review' },
   { id: 'gaps', label: 'Gaps & next steps' },
   { id: 'fun', label: 'For fun' },
+  { id: 'extract', label: 'Extract', secondary: true },
+  { id: 'review', label: 'Review', secondary: true },
 ] as const
 
 const HIDDEN_ROUTES = ['scifi'] as const
@@ -92,10 +93,13 @@ export default function App() {
             {PROJECT_NAME}
           </a>
           <nav aria-label="Tabs" className="tabs-nav">
-            {TABS.map((t) => (
-              <a key={t.id} href={`#/${t.id}`} aria-current={route === t.id ? 'page' : undefined}>
-                {t.label}
-              </a>
+            {TABS.map((t, i) => (
+              <Fragment key={t.id}>
+                {'secondary' in t && !('secondary' in TABS[i - 1]) && <span className="tabs-sep" aria-hidden="true" />}
+                <a href={`#/${t.id}`} aria-current={route === t.id ? 'page' : undefined}>
+                  {t.label}
+                </a>
+              </Fragment>
             ))}
           </nav>
         </div>

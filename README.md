@@ -13,10 +13,11 @@ The wells are bare, rigid epoxy coated with poly-D-lysine and laminin. Soft, deg
 A web app plus a literature pipeline that turns papers into a source-linked materials dataset:
 
 - **Extraction:** Claude reads papers on soft and conductive hydrogels, OECT/OMIEC materials, and neurons on soft substrates, and returns structured records. Every value carries a verbatim quote and page, and the quote is checked against the PDF text.
-- **Scorecard:** each material family is scored against what a well fill needs (neuron survival at ≥3 weeks, stiffness ≤100 kPa, tested in brain, clear and degradable, and optionally conductive for future electrode layers), with the SU-8 baseline pinned. Unknowns are shown, not hidden.
+- **Survival chart:** neuron survival on each material against its stiffness, conductivity or degradation time, with Science Corp's chip as an estimated reference and brain tissue's stiffness shaded.
+- **Gap analysis:** behind the scenes each material family is checked against what a well fill needs (neuron survival at ≥3 weeks, stiffness ≤100 kPa, tested in brain, clear and degradable, optionally conductive). The unknowns become the Gaps & next steps tab; we don't publish a ranking.
 - **Gaps:** the app turns the unknown cells into a to-do list and suggests the next experiments.
 
-Tabs: **Overview**, **Maps** (scorecard, then property charts), **Records**, **Extract** (live demo), **Review** (demo), **Gaps & next steps**, and **For fun** (our earlier theory-of-mind benchmark).
+Tabs: **Overview**, **Maps** (survival chart, with more charts under "Advanced metrics"), **Records**, **Gaps & next steps**, **For fun** (our earlier theory-of-mind benchmark), and, after a divider, **Extract** (live demo) and **Review** (demo).
 
 ## Where things are
 
