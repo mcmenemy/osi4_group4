@@ -1,50 +1,107 @@
+import { useEffect, useState } from 'react'
 import './App.css'
-import MindSection from './MindSection'
-import OrganicNeuron from './OrganicNeuron'
+import ContextTab from './ContextTab'
+import ExtractTab from './ExtractTab'
+import MapsTab from './MapsTab'
 import Overview from './Overview'
-import PhiCheck from './PhiCheck'
-import SimCheck from './SimCheck'
+import ProposalTab from './ProposalTab'
+import RecordsTab from './RecordsTab'
+import ReviewTab from './ReviewTab'
+import ScifiPage from './ScifiPage'
+import { getJson, type MaterialRecord, type References, type TargetWindow } from './records'
 
 // Placeholder until the team picks a project name.
 const PROJECT_NAME = 'OSI4 Group4'
 
+const TABS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'maps', label: 'Maps' },
+  { id: 'records', label: 'Records' },
+  { id: 'extract', label: 'Extract' },
+  { id: 'review', label: 'Review' },
+  { id: 'proposal', label: 'Proposal' },
+  { id: 'context', label: 'Context' },
+] as const
+
+const HIDDEN_ROUTES = ['scifi'] as const
+
+type Route = (typeof TABS)[number]['id'] | (typeof HIDDEN_ROUTES)[number]
+
+const ROUTES: readonly string[] = [...TABS.map((t) => t.id), ...HIDDEN_ROUTES]
+
+// Tabs use "#/name". Other hashes (like "#score") are in-page anchors and keep the current tab.
+function routeFromHash(current: Route): Route {
+  const hash = window.location.hash
+  if (!hash || hash === '#' || hash === '#/') return 'overview'
+  if (!hash.startsWith('#/')) return current
+  const id = hash.slice(2)
+  return ROUTES.includes(id) ? (id as Route) : 'overview'
+}
+
 export default function App() {
+  const [route, setRoute] = useState<Route>(() => routeFromHash('overview'))
+  const [records, setRecords] = useState<MaterialRecord[]>([])
+  const [references, setReferences] = useState<References | null>(null)
+  const [targetWindow, setTargetWindow] = useState<TargetWindow | null>(null)
+  const [loadError, setLoadError] = useState('')
+
+  useEffect(() => {
+    const onHash = () => {
+      setRoute((current) => {
+        const next = routeFromHash(current)
+        if (next !== current) window.scrollTo(0, 0)
+        return next
+      })
+    }
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+
+  useEffect(() => {
+    Promise.all([
+      getJson<MaterialRecord[]>('/api/records'),
+      getJson<References>('/api/references'),
+      getJson<TargetWindow>('/api/target-window'),
+    ])
+      .then(([r, ref, w]) => {
+        setRecords(r)
+        setReferences(ref)
+        setTargetWindow(w)
+      })
+      .catch(() => setLoadError("Couldn't load the records. Is the backend running?"))
+  }, [])
+
   return (
     <>
       <header className="site-header">
         <div className="container header-inner">
-          <a className="brand" href="#overview">
+          <a className="brand" href="#/">
             {PROJECT_NAME}
           </a>
-          <nav aria-label="Sections">
-            <a href="#overview">Overview</a>
-            <a href="#mind">What carries a mind?</a>
-            <a href="#neuron">Organic neuron</a>
-            <a href="#checks" className="nav-secondary">
-              Package checks
-            </a>
-            <a href="#score" className="nav-cta">
-              Score yours
-            </a>
+          <nav aria-label="Tabs" className="tabs-nav">
+            {TABS.map((t) => (
+              <a key={t.id} href={`#/${t.id}`} aria-current={route === t.id ? 'page' : undefined}>
+                {t.label}
+              </a>
+            ))}
           </nav>
         </div>
       </header>
 
       <main>
-        <Overview />
-        <MindSection />
-        <OrganicNeuron />
-        <section id="checks" className="checks">
-          <div className="container narrow">
-            <p className="kicker">Stack tests</p>
-            <p className="muted">
-              Hello-world runs of the simulation libraries, to confirm they work in the deployed
-              stack. Not project results.
-            </p>
-            <SimCheck />
-            <PhiCheck />
+        {loadError && (
+          <div className="container">
+            <p className="error">{loadError}</p>
           </div>
-        </section>
+        )}
+        {route === 'overview' && <Overview records={records} references={references} />}
+        {route === 'maps' && <MapsTab records={records} references={references} targetWindow={targetWindow} />}
+        {route === 'records' && <RecordsTab records={records} />}
+        {route === 'extract' && <ExtractTab />}
+        {route === 'review' && <ReviewTab records={records} />}
+        {route === 'proposal' && <ProposalTab />}
+        {route === 'context' && <ContextTab />}
+        {route === 'scifi' && <ScifiPage />}
       </main>
     </>
   )

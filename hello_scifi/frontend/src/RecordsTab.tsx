@@ -1,0 +1,101 @@
+import { useMemo, useState } from 'react'
+import RecordDetail, { SidePanel } from './RecordDetail'
+import { MATERIAL_CLASSES, classLabel, sourceLabel, withPrefix, type MaterialRecord } from './records'
+import { useReviews } from './reviews'
+
+export default function RecordsTab({ records }: { records: MaterialRecord[] }) {
+  const [query, setQuery] = useState('')
+  const [cls, setCls] = useState('')
+  const [cellsOnly, setCellsOnly] = useState(false)
+  const [flaggedOnly, setFlaggedOnly] = useState(false)
+  const [open, setOpen] = useState<MaterialRecord | null>(null)
+  const { reviews } = useReviews()
+
+  const rows = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    return records.filter((r) => {
+      if (cls && r.material_class !== cls) return false
+      if (cellsOnly && !r.biology) return false
+      if (flaggedOnly && r.flags.length === 0) return false
+      if (!q) return true
+      const hay = [r.material, r.source.title, r.source.first_author, r.biology?.cell_type, r.notes, ...r.formulation.map((f) => f.component)]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase()
+      return hay.includes(q)
+    })
+  }, [records, query, cls, cellsOnly, flaggedOnly])
+
+  return (
+    <div className="container tab">
+      <p className="kicker">Records</p>
+      <h1 className="section-title">Every extracted record</h1>
+      <p className="lede">Search and filter, then select a row to see each value with its evidence quote and source.</p>
+
+      <div className="filters">
+        <input type="search" placeholder="Search material, paper, cell type…" value={query}
+          onChange={(e) => setQuery(e.target.value)} aria-label="Search records" />
+        <select value={cls} onChange={(e) => setCls(e.target.value)} aria-label="Material class">
+          <option value="">All classes</option>
+          {MATERIAL_CLASSES.map((c) => (
+            <option key={c.key} value={c.key}>{c.label}</option>
+          ))}
+        </select>
+        <label className="check">
+          <input type="checkbox" checked={cellsOnly} onChange={(e) => setCellsOnly(e.target.checked)} /> Has cell data
+        </label>
+        <label className="check">
+          <input type="checkbox" checked={flaggedOnly} onChange={(e) => setFlaggedOnly(e.target.checked)} /> Flagged only
+        </label>
+        <span className="muted small">{rows.length} of {records.length}</span>
+      </div>
+
+      <div className="table-scroll">
+        <table className="records-table">
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Class</th>
+              <th>Source</th>
+              <th className="num">Modulus</th>
+              <th className="num">Conductivity</th>
+              <th>Cells</th>
+              <th className="num">Viability</th>
+              <th>Flags</th>
+              <th>Review</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => {
+              const e = r.properties.youngs_modulus?.value_si
+              const s = r.properties.conductivity?.value_si
+              const v = r.biology?.viability_percent?.value_si
+              const status = reviews[r.record_id]?.status ?? 'pending'
+              return (
+                <tr key={r.record_id} onClick={() => setOpen(r)} tabIndex={0}
+                  onKeyDown={(ev) => ev.key === 'Enter' && setOpen(r)}>
+                  <td><strong>{r.material}</strong></td>
+                  <td>{classLabel(r.material_class)}</td>
+                  <td>{sourceLabel(r.source)}</td>
+                  <td className="num">{e != null ? withPrefix(e, 'Pa') : '—'}</td>
+                  <td className="num">{s != null ? withPrefix(s, 'S/m') : '—'}</td>
+                  <td>{r.biology?.cell_type ?? (r.biology ? 'yes' : '—')}</td>
+                  <td className="num">{v != null ? `${v}%` : '—'}</td>
+                  <td>{r.flags.length ? <span className="badge warn">⚠ {r.flags.length}</span> : ''}</td>
+                  <td><span className={`badge ${status}`}>{status}</span></td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+      {records.length === 0 && <p className="notice">No records yet. See the Extract tab or data/papers/README.md.</p>}
+
+      {open && (
+        <SidePanel label="Record details" onClose={() => setOpen(null)}>
+          <RecordDetail record={open} />
+        </SidePanel>
+      )}
+    </div>
+  )
+}
