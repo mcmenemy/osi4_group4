@@ -1,6 +1,6 @@
 {
-  "label": "Target window: soft and conductive",
+  "label": "Target window: soft and electronically conductive",
   "modulus_pa": [100, 100000],
-  "conductivity_s_m": [1, 100000],
-  "note": "Team-chosen bounds for discussion, not a literature value: roughly brain-like stiffness (0.1-100 kPa) with electronic conductivity of at least 1 S/m. Edit this file to change the shaded region."
+  "conductivity_s_m": [10, 100000],
+  "note": "Team-chosen bounds for discussion, not a literature value: roughly brain-like stiffness (0.1-100 kPa) with conductivity of at least 10 S/m. The lower bound sits above what saline (~1.5 S/m) and brain tissue (~0.1-1 S/m) conduct through ions alone, so a plain hydrogel soaked in buffer doesn't count as conductive. Edit this file to change the shaded region."
 }

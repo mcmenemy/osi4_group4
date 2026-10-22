@@ -1,0 +1,61 @@
+{
+  "record_id": "adewole-2020-planar-cortical-neuron-c-ac8334",
+  "source": {
+    "doi": "10.1101/333526",
+    "title": "Development of Optically-Controlled “Living Electrodes” with Long-Projecting Axon Tracts for a Synaptic Brain-Machine Interface",
+    "first_author": "Adewole",
+    "year": 2020,
+    "url": "https://doi.org/10.1101/333526",
+    "file": "Adewole2024.pdf"
+  },
+  "material_class": "other",
+  "material": "Planar cortical neuron culture on polystyrene (control)",
+  "formulation": [],
+  "processing": [],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "stability": null
+  },
+  "biology": {
+    "cell_type": "primary cortical neurons",
+    "species": "rat",
+    "setting": "in_vitro_2d",
+    "coating": "polystyrene",
+    "culture_days": null,
+    "viability_percent": {
+      "value": "97.7",
+      "unit": "%",
+      "value_si": 97.7,
+      "evidence": "(80.3%) (p < 0.05), LEBI (84.8%) (p < 0.001), and planar cultures (97.7%) (p < 0.0001) at 10 DIV.",
+      "location": "p. 9",
+      "confidence": "high",
+      "evidence_verified": true
+    },
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "38.6",
+        "unit": "microns/day",
+        "value_si": null,
+        "evidence": "yielding a cumulative average growth rate of 38.6±20.0 microns/day.",
+        "location": "p. 8",
+        "confidence": "high",
+        "evidence_verified": true,
+        "name": "average axonal growth rate"
+      }
+    ]
+  },
+  "notes": "Age-matched planar control.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T02:40:05+00:00",
+  "schema_version": "0.1.0"
+}

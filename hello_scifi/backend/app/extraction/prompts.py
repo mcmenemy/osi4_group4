@@ -24,6 +24,10 @@ approximate ("~", "about") or the material it applies to is slightly ambiguous; 
 Records:
 - Make one record per distinct material or formulation the paper characterizes (e.g. one per \
 crosslinker concentration). Values measured on that formulation go in its record.
+- A value belongs in a record only if it was measured on that material in that state. Values \
+for a different state (e.g. a dry film vs. the swollen hydrogel), a precursor, or another paper's \
+material go in their own record (e.g. "PEDOT:PSS, dry film") or are left out. Put the measurement \
+conditions (in PBS, in water, dry, at 37 °C) in the record's notes.
 - material_class: conductive_hydrogel (a hydrogel that conducts electronically, e.g. PEDOT:PSS \
 hydrogel), nonconductive_hydrogel (PAAm, GelMA, hyaluronic acid, peptide gels...), omiec_film \
 (a thin film of a mixed conductor, e.g. spin-coated PEDOT:PSS, p(g2T-TT)), oect_device (values \

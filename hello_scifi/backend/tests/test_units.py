@@ -36,6 +36,8 @@ def test_modulus_rejects_millipascal_and_unknown():
         (10, "mS/cm", 1),
         (10, "mS cm^-1", 1),
         (100, "µS/cm", 0.01),
+        (0.26, "S m1", 0.26),  # superscript minus lost in PDF text
+        (2, "S cm1", 200),
     ],
 )
 def test_conductivity(value, unit, expected):

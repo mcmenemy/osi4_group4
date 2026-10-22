@@ -101,6 +101,8 @@ def _unit_key(unit: str) -> str:
     # "S cm^-1" / "S cm-1" → "S/cm"
     u = re.sub(r"\s+([a-zA-Z]+)\^-1", r"/\1", u)
     u = u.replace("²", "2").replace(" ", "")
+    # PDFs often drop the superscript minus: "S m1" / "S cm1" mean S m^-1 / S cm^-1.
+    u = re.sub(r"^([mu]?S)(c?m)1$", r"\1/\2", u)
     return u
 
 
@@ -252,6 +254,14 @@ def _fields(record: Record) -> Iterator[tuple[str, FieldValue]]:
                 yield name, f
         for outcome in bio.other_outcomes:
             yield f"other_outcome:{outcome.name}", outcome
+
+
+def renormalize_record(record: Record) -> Record:
+    """Recompute value_si from each field's reported value and unit (after unit-table fixes)."""
+    for name, f in _fields(record):
+        if not name.startswith("other_outcome"):
+            f.value_si = normalize_value(name, f.value, f.unit)
+    return record
 
 
 def validate_record(record: Record, source: SourceText) -> Record:

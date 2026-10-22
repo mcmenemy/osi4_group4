@@ -4,6 +4,7 @@ Usage (from hello_scifi/backend):
     uv run python scripts/extract_batch.py            # skip papers already extracted
     uv run python scripts/extract_batch.py --force    # re-extract everything
     uv run python scripts/extract_batch.py --only lu2019.pdf
+    uv run python scripts/extract_batch.py --revalidate   # recompute SI values and quote checks, no API calls
 
 Needs ANTHROPIC_API_KEY (or MOCK_LLM=1 for a dry run). EXTRACTION_MODEL picks the model.
 """
@@ -18,6 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.data import PAPERS_DIR, RECORDS_DIR  # noqa: E402
 from app.extraction import extract, pdf_text  # noqa: E402
+from app.extraction.validate import SourceText, renormalize_record, validate_record  # noqa: E402
 from app.schemas import Record, Source  # noqa: E402
 
 FIELD_GROUPS = ("properties", "biology")
@@ -42,6 +44,27 @@ def already_extracted() -> set[str]:
         if file:
             done.add(file)
     return done
+
+
+def revalidate() -> int:
+    """Re-run unit normalization and evidence checks on existing records against their PDFs."""
+    sources: dict[str, SourceText] = {}
+    changed = 0
+    for path in sorted(RECORDS_DIR.glob("*.json")):
+        record = Record.model_validate_json(path.read_text())
+        file = record.source.file
+        if not file or not (PAPERS_DIR / file).exists():
+            print(f"skip {path.name}: source PDF {file!r} not in {PAPERS_DIR}")
+            continue
+        if file not in sources:
+            sources[file] = SourceText(pdf_text.with_page_markers(pdf_text.pdf_pages(PAPERS_DIR / file)))
+        before = path.read_text()
+        after = validate_record(renormalize_record(record), sources[file]).model_dump_json(indent=2) + "\n"
+        if after != before:
+            path.write_text(after)
+            changed += 1
+    print(f"Revalidated records; {changed} file(s) changed.")
+    return 0
 
 
 async def run(force: bool, only: str | None) -> int:
@@ -98,8 +121,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--force", action="store_true", help="re-extract papers that already have records")
     parser.add_argument("--only", help="extract a single PDF by filename")
+    parser.add_argument("--revalidate", action="store_true", help="recompute SI values and quote checks only")
     args = parser.parse_args()
-    sys.exit(asyncio.run(run(args.force, args.only)))
+    sys.exit(revalidate() if args.revalidate else asyncio.run(run(args.force, args.only)))
 
 
 if __name__ == "__main__":

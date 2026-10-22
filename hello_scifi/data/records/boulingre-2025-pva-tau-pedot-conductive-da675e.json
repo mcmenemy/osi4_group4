@@ -1,0 +1,126 @@
+{
+  "record_id": "boulingre-2025-pva-tau-pedot-conductive-da675e",
+  "source": {
+    "doi": "10.1039/d4tb02651a",
+    "title": "Multi-layered electrode constructs for neural tissue engineering",
+    "first_author": "Boulingre",
+    "year": 2025,
+    "url": "https://doi.org/10.1039/d4tb02651a",
+    "file": "boulingre2025.pdf"
+  },
+  "material_class": "conductive_hydrogel",
+  "material": "PVA–Tau/PEDOT conductive hydrogel (CH) coating on Pt electrode",
+  "formulation": [
+    {
+      "component": "EDOT (pre-layer)",
+      "amount": "0.1",
+      "unit": "M",
+      "evidence": "composed of 0.1 M 3,4-ethylenedioxythiophene (EDOT) mono￾mer",
+      "evidence_verified": true
+    },
+    {
+      "component": "pTS (pre-layer)",
+      "amount": "0.05",
+      "unit": "M",
+      "evidence": "0.05 M pTS",
+      "evidence_verified": true
+    },
+    {
+      "component": "PVA–MA–Tau",
+      "amount": "10",
+      "unit": "wt%",
+      "evidence": "PVA–MA–Tau was dissolved in deionised water\nat 10 wt%",
+      "evidence_verified": true
+    },
+    {
+      "component": "Irgacure",
+      "amount": "0.1",
+      "unit": "wt%",
+      "evidence": "1 mM Irgacure solution was added to reach a final\nconcentration of 0.1 wt%",
+      "evidence_verified": true
+    },
+    {
+      "component": "EDOT (in PBS, hydrogel electrodeposition)",
+      "amount": "0.03",
+      "unit": "mM",
+      "evidence": "from an aqueous solution of 0.03 mM EDOT in PBS",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "pre-layer galvanostatic electrodeposition",
+      "parameter": "time",
+      "value": "1",
+      "unit": "min",
+      "evidence": "density of 1 mA cm2 for 1 min",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV photocrosslinking",
+      "parameter": "intensity",
+      "value": "30",
+      "unit": "mW cm2",
+      "evidence": "photocrosslinking via UV light at an intensity of 30\nmW cm2 for 3 min",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV photocrosslinking",
+      "parameter": "time",
+      "value": "3",
+      "unit": "min",
+      "evidence": "photocrosslinking via UV light at an intensity of 30\nmW cm2 for 3 min",
+      "evidence_verified": true
+    },
+    {
+      "step": "PEDOT galvanostatic electrodeposition in hydrogel",
+      "parameter": "time",
+      "value": "10",
+      "unit": "min",
+      "evidence": "a current density of 1 mA cm2 for 10 min",
+      "evidence_verified": true
+    },
+    {
+      "step": "autoclave sterilisation",
+      "parameter": "time",
+      "value": "15",
+      "unit": "minutes",
+      "evidence": "sterilized in\nan autoclave at 121 1C for 15 minutes",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": {
+      "value": "0.234",
+      "unit": "S m1",
+      "value_si": 0.234,
+      "evidence": "0.234 S m1 and 0.261 S m1\n, respectively",
+      "location": "p. 7",
+      "confidence": "medium",
+      "evidence_verified": true
+    },
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": {
+      "value": "43.78",
+      "unit": "O cm1",
+      "value_si": null,
+      "evidence": "5.40 O cm1 for CH-coated electrodes",
+      "location": "p. 6",
+      "confidence": "medium",
+      "evidence_verified": true
+    },
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "stability": null
+  },
+  "biology": null,
+  "notes": "Measured in PBS, three-electrode setup; 8 mm Pt disk.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T02:40:37+00:00",
+  "schema_version": "0.1.0"
+}

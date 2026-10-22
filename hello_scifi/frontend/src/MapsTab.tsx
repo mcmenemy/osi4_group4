@@ -213,8 +213,9 @@ function StiffnessConductivity({
       <figcaption>
         <h2>Stiffness vs. conductivity</h2>
         <p>
-          Each point is one material with both values reported; gray bands are reference materials and the dashed box is
-          the soft-and-conductive target window. {CAVEAT}
+          Each point is one material with both values reported, using the conductivity the paper states (electronic for
+          conductive gels and films); gray bands are reference materials and the dashed box is the soft,
+          electronically conductive target window. {CAVEAT}
         </p>
       </figcaption>
       <Plot data={data} layout={layout} height={520} label="Log-log scatter of Young's modulus against conductivity" onClick={onPoint} />

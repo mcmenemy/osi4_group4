@@ -1,0 +1,174 @@
+{
+  "record_id": "keene-2020-pedot-pss-ph1000-neuromo-4f0a58",
+  "source": {
+    "doi": "10.1038/s41563-020-0703-y",
+    "title": "A biohybrid synapse with neurotransmitter-mediated plasticity",
+    "first_author": "Keene",
+    "year": 2020,
+    "url": "https://doi.org/10.1038/s41563-020-0703-y",
+    "file": "keene2020.pdf"
+  },
+  "material_class": "oect_device",
+  "material": "PEDOT:PSS (PH1000) neuromorphic device with ethylene glycol, DBSA and GOPS",
+  "formulation": [
+    {
+      "component": "ethylene glycol",
+      "amount": "6",
+      "unit": "vol.%",
+      "evidence": "adding 6 vol.% ethylene glycol (Sigma-Aldrich) to increase the PEDOT:PSS conductivity",
+      "evidence_verified": true
+    },
+    {
+      "component": "dodecylbenzene sulfonic acid",
+      "amount": "0.1",
+      "unit": "vol.%",
+      "evidence": "0.1 vol.% dodecylbenzene sulfonic acid (Sigma-Aldrich) as a surfactant",
+      "evidence_verified": true
+    },
+    {
+      "component": "(3-glycidyloxypropyl)trimethoxysilane",
+      "amount": "1",
+      "unit": "vol.%",
+      "evidence": "1 vol.% (3-glycidyloxypropyl)trimethoxysilane (Sigma-Aldrich) as a crosslinking agent",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "spin coating",
+      "parameter": "speed",
+      "value": "1,000",
+      "unit": "r.p.m.",
+      "evidence": "PEDOT:PSS solution was spun on the wafer die at 1,000 r.p.m. for 2min",
+      "evidence_verified": true
+    },
+    {
+      "step": "spin coating",
+      "parameter": "time",
+      "value": "2",
+      "unit": "min",
+      "evidence": "PEDOT:PSS solution was spun on the wafer die at 1,000 r.p.m. for 2min",
+      "evidence_verified": true
+    },
+    {
+      "step": "bake",
+      "parameter": "temperature",
+      "value": "120",
+      "unit": "°C",
+      "evidence": "baked at 120 °C for 20min",
+      "evidence_verified": true
+    },
+    {
+      "step": "bake",
+      "parameter": "time",
+      "value": "20",
+      "unit": "min",
+      "evidence": "baked at 120 °C for 20min",
+      "evidence_verified": true
+    },
+    {
+      "step": "drying after rinse",
+      "parameter": "temperature",
+      "value": "120",
+      "unit": "°C",
+      "evidence": "were subsequently dried at 120 °C for 5min",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "stability": {
+      "description": {
+        "value": "cell viability and synaptic plasticity behaviour retained",
+        "unit": null,
+        "value_si": null,
+        "evidence": "We found that the long-term viability of cells extends to at least 24h (Extended Data Fig. 6), confirming the stability of the biohybrid synapse.",
+        "location": "p. 2",
+        "confidence": "medium",
+        "evidence_verified": true
+      },
+      "duration_days": {
+        "value": "24",
+        "unit": "h",
+        "value_si": 1.0,
+        "evidence": "We found that the long-term viability of cells extends to at least 24h",
+        "location": "p. 2",
+        "confidence": "medium",
+        "evidence_verified": true
+      },
+      "conditions": "in cell culture media with PC-12 cells"
+    }
+  },
+  "biology": {
+    "cell_type": "PC-12 (pheochromocytoma, dopaminergic)",
+    "species": "rat",
+    "setting": "in_vitro_2d",
+    "coating": "collagen IV",
+    "culture_days": {
+      "value": "24",
+      "unit": "h",
+      "value_si": 1.0,
+      "evidence": "left in the incubator at 37 °C for 24h",
+      "location": "p. 6",
+      "confidence": "medium",
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "8.4",
+        "unit": "μS",
+        "value_si": null,
+        "evidence": "8.4±2.8μS per pulse",
+        "location": "p. 3",
+        "confidence": "high",
+        "evidence_verified": true,
+        "name": "long-term conductance change per pulse (2 h incubation)"
+      },
+      {
+        "value": "11.8",
+        "unit": "μS",
+        "value_si": null,
+        "evidence": "(11.8±4μS, CDA of ~15–20μM)",
+        "location": "p. 3",
+        "confidence": "high",
+        "evidence_verified": true,
+        "name": "long-term conductance change ΔGpost (4 h incubation)"
+      },
+      {
+        "value": "5.4",
+        "unit": "μS",
+        "value_si": null,
+        "evidence": "long-term conditioning of the device of ΔGpost of 5.4±0.8μS per",
+        "location": "p. 4",
+        "confidence": "high",
+        "evidence_verified": true,
+        "name": "conductance change per pulse with 120 mM KCl stimulation"
+      },
+      {
+        "value": "100",
+        "unit": "nm",
+        "value_si": null,
+        "evidence": "with an aver­age spacing of 100nm and minimum distance points of 5–10nm",
+        "location": "p. 2",
+        "confidence": "medium",
+        "evidence_verified": true,
+        "name": "cell–PEDOT:PSS cleft average spacing"
+      }
+    ]
+  },
+  "notes": "Channel L=750 μm, W=270 μm (KCl experiments L=30 μm, W=10 μm). Operated in DMEM cell culture media in PDMS microfluidic channel at 37 °C; Vpost=+0.3 V pulses, 2 s; Vread=-0.1 V. Values in μS here are expressed in μS units as stated.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T02:41:45+00:00",
+  "schema_version": "0.1.0"
+}
