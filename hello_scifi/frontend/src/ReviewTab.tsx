@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import RecordDetail from './RecordDetail'
+import { useModeText } from './mode'
 import { sourceLabel, type FieldEntry, type MaterialRecord } from './records'
 
 // Demo only: nothing here is saved. In the full app, expert reviewers would log in to curate.
@@ -7,6 +8,7 @@ const INERT = 'Disabled in the demo'
 
 export default function ReviewTab({ records }: { records: MaterialRecord[] }) {
   const [index, setIndex] = useState(0)
+  const t = useModeText()
   const flagged = records.filter((r) => r.flags.length > 0).length
 
   const banner = (
@@ -48,15 +50,25 @@ export default function ReviewTab({ records }: { records: MaterialRecord[] }) {
     <div className="container tab">
       {banner}
       <p className="kicker">Review</p>
-      <h1 className="section-title">Review extracted records</h1>
+      <h1 className="section-title">{t("Checking the AI's work", 'Review extracted records')}</h1>
       <p className="lede">
-        A reviewer checks each value against its quote, then accepts, rejects, or corrects it. This is what that would
-        look like.
+        {t(
+          'AI makes mistakes, so a person compares each number with the sentence it came from, then accepts, rejects or fixes it. This is what that would look like.',
+          'A reviewer checks each value against its quote, then accepts, rejects, or corrects it. This is what that would look like.',
+        )}
       </p>
 
       <p className="pending-count">
-        <strong>{records.length}</strong> records pending review, <strong>{flagged}</strong> of them flagged by the
-        validators.
+        {t(
+          <>
+            <strong>{records.length}</strong> results waiting for a person to check them; our automatic checks flagged{' '}
+            <strong>{flagged}</strong> as likely problems.
+          </>,
+          <>
+            <strong>{records.length}</strong> records pending review, <strong>{flagged}</strong> of them flagged by the
+            validators.
+          </>,
+        )}
       </p>
 
       <div className="review-nav">

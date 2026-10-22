@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import CustomScore from './CustomScore'
+import { useModeText } from './mode'
 import { FRAMEWORKS, SUBSTRATES, carryOver, type FrameworkKey, type Substrate } from './benchmark'
 
 export default function MindSection() {
   const [substrateKey, setSubstrateKey] = useState('gel_neuron')
   const [frameworkKey, setFrameworkKey] = useState<FrameworkKey>('iit')
   const [custom, setCustom] = useState<Substrate | null>(null)
+  const t = useModeText()
 
   const all = custom ? [...SUBSTRATES, custom] : SUBSTRATES
   const ranked = [...all].sort((a, b) => carryOver(b.scores) - carryOver(a.scores))
@@ -29,10 +31,10 @@ export default function MindSection() {
         <p className="kicker">For fun · our earlier framing</p>
         <h2 className="section-title">What can carry a mind?</h2>
         <p className="lede">
-          For a patient losing cortex, could anything on the device side take over some of the lost
-          function? We score candidate substrates 0–3 under six theories of mind (carry-over, 0–18) and
-          on how hard each is to keep running in a patient (maintainability, 0–3). The scores are
-          provisional judgment calls, made to be argued with.
+          {t(
+            "If someone is losing parts of their brain, could a device take over some of what was lost? Just for fun, we scored possible materials and devices from 0 to 3 under six theories of what a mind needs (18 points at most), and on how hard each would be to keep working inside a person. The scores are our opinions, meant to start arguments.",
+            'For a patient losing cortex, could anything on the device side take over some of the lost function? We score candidate substrates 0–3 under six theories of mind (carry-over, 0–18) and on how hard each is to keep running in a patient (maintainability, 0–3). The scores are provisional judgment calls, made to be argued with.',
+          )}
         </p>
 
         <div className="explorer">
@@ -162,13 +164,22 @@ export default function MindSection() {
 
         <aside className="bridge-callout">
           <h3>From this table to the microwell experiment</h3>
-          <p>
-            Pure neural tissue tops every framework but is the hardest to keep alive; silicon is easy to maintain but
-            carries little. The <strong>gel–neuron hybrid</strong> sits between them, and it's the least grounded row:
-            our draft found no published system that couples a computing gel bidirectionally to living neurons. Filling Science Corp's microwells with a soft
-            gel is the first measurable step toward it, which is why the rest of this app maps soft, conductive, and
-            degradable materials and their effects on neurons.
-          </p>
+          {t(
+            <p>
+              Living brain tissue scores best under every theory but is the hardest to keep alive; computer chips are easy
+              to keep running but score low. A <strong>gel–neuron hybrid</strong> sits in between, and it's the most
+              speculative row: we found no published example of a computing gel wired two ways with living neurons.
+              Filling Science Corp's wells with a soft gel is a first, measurable step toward it, which is why the rest
+              of this app is about soft, dissolving and conductive materials and how neurons do on them.
+            </p>,
+            <p>
+              Pure neural tissue tops every framework but is the hardest to keep alive; silicon is easy to maintain but
+              carries little. The <strong>gel–neuron hybrid</strong> sits between them, and it's the least grounded row:
+              our draft found no published system that couples a computing gel bidirectionally to living neurons. Filling Science Corp's microwells with a soft
+              gel is the first measurable step toward it, which is why the rest of this app maps soft, conductive, and
+              degradable materials and their effects on neurons.
+            </p>,
+          )}
           <p className="bridge-links">
             <a href="#/maps">See the materials maps →</a> <a href="#/gaps">Gaps &amp; next steps →</a>
           </p>

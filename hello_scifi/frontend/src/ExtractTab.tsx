@@ -1,5 +1,6 @@
 import { useMemo, useState, type FormEvent } from 'react'
 import RecordDetail from './RecordDetail'
+import { useModeText } from './mode'
 import { fieldEntries, type MaterialRecord } from './records'
 
 interface ExtractResponse {
@@ -14,6 +15,7 @@ export default function ExtractTab() {
   const [result, setResult] = useState<ExtractResponse | null>(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const t = useModeText()
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -38,10 +40,12 @@ export default function ExtractTab() {
   return (
     <div className="container tab">
       <p className="kicker">Extract</p>
-      <h1 className="section-title">Run the extraction live</h1>
+      <h1 className="section-title">{t('Watch the AI read a paper', 'Run the extraction live')}</h1>
       <p className="lede">
-        Upload a paper or paste a passage. Claude pulls out materials values, each with a verbatim quote, and the server
-        checks every quote against the text. Results here aren't saved; the committed records come from the batch script.
+        {t(
+          "Upload a research paper (PDF) or paste a paragraph. Claude, Anthropic's AI model, finds the material measurements and quotes the sentence each one came from, and our server checks every quote against the original text. Nothing you try here is saved.",
+          "Upload a paper or paste a passage. Claude pulls out materials values, each with a verbatim quote, and the server checks every quote against the text. Results here aren't saved; the committed records come from the batch script.",
+        )}
       </p>
 
       <form className="extract-form" onSubmit={handleSubmit}>

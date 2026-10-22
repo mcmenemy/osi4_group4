@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import ScorecardTable from './ScorecardTable'
-import { SHORT_LABELS, type RequirementKey, type Scorecard } from './scorecard'
+import { useModeText } from './mode'
+import { PLAIN_LABELS, SHORT_LABELS, type RequirementKey, type Scorecard } from './scorecard'
 import { baseLayout, logAxis, useTheme, type Theme } from './chartTheme'
 import Plot, { type PlotPoint } from './Plot'
 import RecordDetail, { SidePanel } from './RecordDetail'
@@ -24,11 +25,19 @@ interface Props {
 }
 
 const CAVEAT = 'Values are extracted from papers by an LLM and are partly unreviewed.'
+const PLAIN_CAVEAT = 'Numbers were pulled from papers by AI, and not all have been checked by a person yet.'
+
+// Chart caption in the current mode, with the matching caveat.
+function useCaption() {
+  const t = useModeText()
+  return (normal: string, hardcore: string) => `${t(normal, hardcore)} ${t(PLAIN_CAVEAT, CAVEAT)}`
+}
 
 export default function MapsTab({ records, references, targetWindow }: Props) {
   const [selected, setSelected] = useState<MaterialRecord[] | null>(null)
   const [index, setIndex] = useState(0)
   const byId = useMemo(() => new Map(records.map((r) => [r.record_id, r])), [records])
+  const t = useModeText()
 
   const openIds = useCallback(
     (ids: string[]) => {
@@ -50,10 +59,12 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
   return (
     <div className="container tab">
       <p className="kicker">Maps</p>
-      <h1 className="section-title">Where the evidence is, and where it isn't</h1>
+      <h1 className="section-title">{t('Which materials could help the neurons?', "Where the evidence is, and where it isn't")}</h1>
       <p className="lede">
-        {records.length} record{records.length === 1 ? '' : 's'} from the literature. Click any point to see its values, the exact quotes
-        they came from, and the source.
+        {t(
+          `Each row is a family of materials, scored on what a well fill needs. ✓ means published research shows it does; ? means nobody we found has measured it. The chip's current material, SU-8 (a hard, epoxy-based plastic), is pinned at the top for comparison. Built from ${records.length} results in research papers.`,
+          `${records.length} record${records.length === 1 ? '' : 's'} from the literature. Click any point to see its values, the exact quotes they came from, and the source.`,
+        )}
       </p>
       {records.length === 0 && (
         <p className="notice">
@@ -64,8 +75,13 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
 
       <ScorecardSection records={records} onOpenRecords={openIds} />
 
-      <h2 className="details-heading">Details for materials scientists</h2>
-      <p className="muted">The underlying property maps. Click any point for its values, quotes, and source.</p>
+      <h2 className="details-heading">{t('The underlying numbers', 'Details for materials scientists')}</h2>
+      <p className="muted">
+        {t(
+          'Charts of the measurements behind the table, mostly for materials scientists. Click any point to see where it came from.',
+          'The underlying property maps. Click any point for its values, quotes, and source.',
+        )}
+      </p>
       <StiffnessByFamily records={records} onPoint={onPoint} />
       <StiffnessConductivity records={records} references={references} targetWindow={targetWindow} onPoint={onPoint} />
       <CellOutcomes records={records} references={references} onPoint={onPoint} />
@@ -126,22 +142,29 @@ function ScorecardSection({ records, onOpenRecords }: { records: MaterialRecord[
   }, [weights])
 
   const current = weights ?? card?.weights
+  const t = useModeText()
   return (
     <section className="scorecard-section">
       {error && <p className="error">{error}</p>}
       {card && <ScorecardTable card={card} records={records} loading={loading} onOpenRecords={onOpenRecords} />}
       {card && current && (
         <details className="weights-panel">
-          <summary>Adjust weights</summary>
-          <p className="muted small">
-            Weights are team judgment, not measurements. The table re-sorts as you move them (switch the view to Most
-            promising to see the ranking change). Defaults live in <code>data/scorecard.yaml</code>.
-          </p>
+          <summary>{t('Change what matters most', 'Adjust weights')}</summary>
+          {t(
+            <p className="muted small">
+              How much each need counts is our team's judgment call, not a measurement. Move the sliders, then pick Most
+              promising to see the ranking change.
+            </p>,
+            <p className="muted small">
+              Weights are team judgment, not measurements. The table re-sorts as you move them (switch the view to Most
+              promising to see the ranking change). Defaults live in <code>data/scorecard.yaml</code>.
+            </p>,
+          )}
           <div className="weights-grid">
             {WEIGHT_KEYS.map((k) => (
               <label key={k} className="slider">
                 <span className="slider-head">
-                  <span>{SHORT_LABELS[k]}</span>
+                  <span>{t(PLAIN_LABELS, SHORT_LABELS)[k]}</span>
                   <output>{current[k]}</output>
                 </span>
                 <input type="range" min={0} max={5} step={0.5} value={current[k]}
@@ -150,7 +173,7 @@ function ScorecardSection({ records, onOpenRecords }: { records: MaterialRecord[
             ))}
           </div>
           <button type="button" className="link-btn" onClick={() => setWeights({ ...card.default_weights })}>
-            Reset to defaults
+            {t('Reset', 'Reset to defaults')}
           </button>
         </details>
       )}
@@ -180,6 +203,8 @@ function stiffnessLine(r: MaterialRecord): string {
 
 function StiffnessByFamily({ records, onPoint }: { records: MaterialRecord[]; onPoint: (p: PlotPoint) => void }) {
   const t = useTheme()
+  const cap = useCaption()
+  const m = useModeText()
   const [card, setCard] = useState<Scorecard | null>(null)
   useEffect(() => {
     fetch('/api/scorecard')
@@ -253,11 +278,12 @@ function StiffnessByFamily({ records, onPoint }: { records: MaterialRecord[]; on
   return (
     <figure className="map-card">
       <figcaption>
-        <h2>Stiffness by material family</h2>
+        <h2>{m('How soft is each material?', 'Stiffness by material family')}</h2>
         <p>
-          Filled points are moduli extracted from papers; hollow markers joined by a line are literature-typical ranges
-          from data/materials.yaml for families without an extracted value. The dashed line is the 100 kPa
-          requirement. {CAVEAT}
+          {cap(
+            'Filled dots are measurements from papers; hollow markers joined by a line are typical ranges from the wider literature. Brain tissue is very soft, so further left is better: the dashed line is our “soft enough” cutoff of 100 kilopascals (kPa).',
+            'Filled points are moduli extracted from papers; hollow markers joined by a line are literature-typical ranges from data/materials.yaml for families without an extracted value. The dashed line is the 100 kPa requirement.',
+          )}
         </p>
       </figcaption>
       <Plot data={data} layout={layout} height={Math.max(300, 120 + rowCount * 34)} label="Stiffness of each material family" onClick={onPoint} />
@@ -274,6 +300,8 @@ function StiffnessConductivity({
   onPoint,
 }: Props & { onPoint: (p: PlotPoint) => void }) {
   const t = useTheme()
+  const cap = useCaption()
+  const m = useModeText()
   const points = useMemo(
     () =>
       records.filter(
@@ -381,11 +409,12 @@ function StiffnessConductivity({
   return (
     <figure className="map-card">
       <figcaption>
-        <h2>Stiffness vs. conductivity</h2>
+        <h2>{m('Soft and electrically conductive?', 'Stiffness vs. conductivity')}</h2>
         <p>
-          Each point is one material with both values reported, using the conductivity the paper states (electronic for
-          conductive gels and films); gray bands are rigid and tissue references, dotted bands are common cell-culture
-          hydrogels, and the dashed box is the future recording-layer window (soft and ≥10 S/m), which only matters once wells carry electrodes. {CAVEAT}
+          {cap(
+            'This only matters for a future chip with electrodes that record from the neurons. Each dot is a material with both values reported. Shaded bands show familiar materials and tissues for reference; the dashed box is the goal: soft and conductive.',
+            'Each point is one material with both values reported, using the conductivity the paper states (electronic for conductive gels and films); gray bands are rigid and tissue references, dotted bands are common cell-culture hydrogels, and the dashed box is the future recording-layer window (soft and ≥10 S/m), which only matters once wells carry electrodes.',
+          )}
         </p>
       </figcaption>
       <Plot data={data} layout={layout} height={520} label="Log-log scatter of Young's modulus against conductivity" onClick={onPoint} />
@@ -433,6 +462,8 @@ function CellOutcomes({
   onPoint: (p: PlotPoint) => void
 }) {
   const t = useTheme()
+  const cap = useCaption()
+  const m = useModeText()
   const [outcome, setOutcome] = useState<'viability' | 'neurite'>('viability')
   const value = useCallback(
     (r: MaterialRecord) =>
@@ -539,19 +570,20 @@ function CellOutcomes({
   return (
     <figure className="map-card">
       <figcaption>
-        <h2>Cell outcome vs. stiffness</h2>
+        <h2>{m('Do neurons do better on softer materials?', 'Cell outcome vs. stiffness')}</h2>
         <p>
-          Each point is a reported cell outcome on a material of known stiffness, colored by cell type, shaped by setting.
-          {outcome === 'viability' && ' The star pair is the Science Corp microwell reference, which measures well occupancy rather than viability.'}{' '}
-          {CAVEAT}
+          {cap(
+            `Each dot is a cell result on a material of known softness, colored by cell type; the shape shows whether it was in a dish or in an animal.${outcome === 'viability' ? " The two stars are Science Corp's chip: the share of wells holding neurons at loading and about 3 weeks later." : ''}`,
+            `Each point is a reported cell outcome on a material of known stiffness, colored by cell type, shaped by setting.${outcome === 'viability' ? ' The star pair is the Science Corp microwell reference, which measures well occupancy rather than viability.' : ''}`,
+          )}
         </p>
       </figcaption>
       <div className="pills" role="group" aria-label="Outcome">
         <button type="button" className="pill" aria-pressed={outcome === 'viability'} onClick={() => setOutcome('viability')}>
-          Viability
+          {m('Survival', 'Viability')}
         </button>
         <button type="button" className="pill" aria-pressed={outcome === 'neurite'} onClick={() => setOutcome('neurite')}>
-          Neurite length
+          {m('Fiber growth', 'Neurite length')}
         </button>
       </div>
       <Plot data={data} layout={layout} height={480} label="Scatter of cell outcome against Young's modulus" onClick={onPoint} />
@@ -564,6 +596,8 @@ function CellOutcomes({
 
 function Degradation({ records, onPoint }: { records: MaterialRecord[]; onPoint: (p: PlotPoint) => void }) {
   const t = useTheme()
+  const cap = useCaption()
+  const m = useModeText()
   const points = useMemo(
     () =>
       records.filter(
@@ -615,10 +649,12 @@ function Degradation({ records, onPoint }: { records: MaterialRecord[]; onPoint:
   return (
     <figure className="map-card">
       <figcaption>
-        <h2>Stiffness vs. degradation time</h2>
+        <h2>{m('How long does each material last?', 'Stiffness vs. degradation time')}</h2>
         <p>
-          For a temporary gel fill, how soft it is and how long it lasts; the dashed line marks the ~3-week point where
-          Brown et al. assess the graft. {CAVEAT}
+          {cap(
+            'A temporary gel should help neurons settle in, then dissolve. This plots how soft each material is against how long it lasts; the dashed line marks 3 weeks, when Science Corp checked its implants.',
+            'For a temporary gel fill, how soft it is and how long it lasts; the dashed line marks the ~3-week point where Brown et al. assess the graft.',
+          )}
         </p>
       </figcaption>
       <Plot data={data} layout={layout} height={440} label="Scatter of stiffness against degradation time" onClick={onPoint} />
@@ -635,6 +671,8 @@ const MOBILITIES = [0.001, 0.01, 0.1, 1, 10] // cm² V⁻¹ s⁻¹; μC* = μ ·
 
 function MixedConductors({ records, onPoint }: { records: MaterialRecord[]; onPoint: (p: PlotPoint) => void }) {
   const t = useTheme()
+  const cap = useCaption()
+  const m = useModeText()
   const points = useMemo(
     () =>
       records.filter(
@@ -698,11 +736,12 @@ function MixedConductors({ records, onPoint }: { records: MaterialRecord[]; onPo
   return (
     <figure className="map-card">
       <figcaption>
-        <h2>Mixed conductors: μC* vs. C*</h2>
+        <h2>{m('Materials for future electronics', 'Mixed conductors: μC* vs. C*')}</h2>
         <p>
-          The standard figure of merit for organic mixed ionic-electronic conductors: μC* (higher is better for
-          transistors) against volumetric capacitance C*; dotted lines are constant electronic mobility μ = μC*/C*. These
-          are the film materials a self-driving lab like the Seifrid lab's would optimize. {CAVEAT}
+          {cap(
+            'For specialists: the standard comparison for conductive plastics used in bioelectronics (organic mixed ionic-electronic conductors). Higher is better for the tiny transistors that could one day sense neural signals. These are the kinds of materials the Seifrid lab at NC State optimizes with automated, robot-run experiments.',
+            "The standard figure of merit for organic mixed ionic-electronic conductors: μC* (higher is better for transistors) against volumetric capacitance C*; dotted lines are constant electronic mobility μ = μC*/C*. These are the film materials a self-driving lab like the Seifrid lab's would optimize.",
+          )}
         </p>
       </figcaption>
       <Plot data={data} layout={layout} height={480} label="Log-log scatter of μC* against volumetric capacitance" onClick={onPoint} />
@@ -715,6 +754,8 @@ function MixedConductors({ records, onPoint }: { records: MaterialRecord[]; onPo
 
 function Coverage({ records, onCell }: { records: MaterialRecord[]; onCell: (ids: string[]) => void }) {
   const t = useTheme()
+  const cap = useCaption()
+  const m = useModeText()
   const [rowsBy, setRowsBy] = useState<'class' | 'material'>('class')
 
   const { data, layout, ids } = useMemo(() => {
@@ -775,10 +816,12 @@ function Coverage({ records, onCell }: { records: MaterialRecord[]; onCell: (ids
   return (
     <figure className="map-card">
       <figcaption>
-        <h2>Coverage: what's been measured, and the untested gaps</h2>
+        <h2>{m("What's been measured, and what hasn't", "Coverage: what's been measured, and the untested gaps")}</h2>
         <p>
-          Each cell counts the records that report that property for that group; “untested” cells are combinations no
-          extracted paper reports. Click a cell to list its records. {CAVEAT}
+          {cap(
+            'Darker boxes mean more results. “Untested” means we found no paper that measured it. Click a box to see the results.',
+            'Each cell counts the records that report that property for that group; “untested” cells are combinations no extracted paper reports. Click a cell to list its records.',
+          )}
         </p>
       </figcaption>
       <div className="pills" role="group" aria-label="Rows">

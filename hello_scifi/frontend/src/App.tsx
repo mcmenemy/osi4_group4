@@ -8,6 +8,7 @@ import Overview from './Overview'
 import RecordsTab from './RecordsTab'
 import ReviewTab from './ReviewTab'
 import ScifiPage from './ScifiPage'
+import { ModeContext, useModeState } from './mode'
 import { getJson, type MaterialRecord, type References, type TargetWindow } from './records'
 
 // Placeholder until the team picks a project name.
@@ -54,6 +55,7 @@ export default function App() {
   const [references, setReferences] = useState<References | null>(null)
   const [targetWindow, setTargetWindow] = useState<TargetWindow | null>(null)
   const [loadError, setLoadError] = useState('')
+  const modeState = useModeState()
 
   useEffect(() => {
     const onHash = () => {
@@ -83,7 +85,7 @@ export default function App() {
   }, [])
 
   return (
-    <>
+    <ModeContext.Provider value={modeState}>
       <header className="site-header">
         <div className="container header-inner">
           <a className="brand" href="#/">
@@ -114,6 +116,6 @@ export default function App() {
         {route === 'fun' && <FunTab />}
         {route === 'scifi' && <ScifiPage />}
       </main>
-    </>
+    </ModeContext.Provider>
   )
 }

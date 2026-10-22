@@ -150,16 +150,20 @@ export interface TargetWindow {
   note: string
 }
 
-export const MATERIAL_CLASSES: { key: MaterialClass; label: string }[] = [
-  { key: 'conductive_hydrogel', label: 'Conductive hydrogel' },
-  { key: 'nonconductive_hydrogel', label: 'Non-conductive hydrogel' },
-  { key: 'omiec_film', label: 'OMIEC film' },
-  { key: 'oect_device', label: 'OECT device' },
-  { key: 'biohybrid_device', label: 'Biohybrid device' },
-  { key: 'other', label: 'Other' },
+// `plain` is the Normal-mode name (see mode.ts).
+export const MATERIAL_CLASSES: { key: MaterialClass; label: string; plain: string }[] = [
+  { key: 'conductive_hydrogel', label: 'Conductive hydrogel', plain: 'Conductive gel' },
+  { key: 'nonconductive_hydrogel', label: 'Non-conductive hydrogel', plain: 'Gel' },
+  { key: 'omiec_film', label: 'OMIEC film', plain: 'Conductive plastic film' },
+  { key: 'oect_device', label: 'OECT device', plain: 'Transistor device' },
+  { key: 'biohybrid_device', label: 'Biohybrid device', plain: 'Living-cell device' },
+  { key: 'other', label: 'Other', plain: 'Other' },
 ]
 
-export const classLabel = (c: MaterialClass) => MATERIAL_CLASSES.find((m) => m.key === c)?.label ?? c
+export const classLabel = (c: MaterialClass, plain = false) => {
+  const m = MATERIAL_CLASSES.find((x) => x.key === c)
+  return m ? (plain ? m.plain : m.label) : c
+}
 
 export const SETTING_LABELS: Record<Setting, string> = {
   in_vitro_2d: 'In vitro 2D',

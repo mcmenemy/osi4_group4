@@ -1,6 +1,9 @@
 import { Fragment, useMemo, useState, type KeyboardEvent } from 'react'
+import { useModeText } from './mode'
 import { MATERIAL_CLASSES, classLabel, sourceLabel, type MaterialRecord } from './records'
 import {
+  PLAIN_LABELS,
+  PLAIN_STATES,
   SHORT_LABELS,
   STATE_ORDER,
   type BestSurvival,
@@ -25,10 +28,10 @@ interface Sort {
   dir: 1 | -1
 }
 
-const VIEWS: { key: Exclude<View, 'custom'>; label: string; sort: Sort }[] = [
-  { key: 'evidence', label: 'Most evidence', sort: { key: 'papers', dir: -1 } },
-  { key: 'promising', label: 'Most promising', sort: { key: 'score', dir: -1 } },
-  { key: 'gaps', label: 'Biggest gaps', sort: { key: 'gaps', dir: -1 } },
+const VIEWS: { key: Exclude<View, 'custom'>; label: string; plain: string; sort: Sort }[] = [
+  { key: 'evidence', label: 'Most evidence', plain: 'Best studied', sort: { key: 'papers', dir: -1 } },
+  { key: 'promising', label: 'Most promising', plain: 'Most promising', sort: { key: 'score', dir: -1 } },
+  { key: 'gaps', label: 'Biggest gaps', plain: 'Most worth testing', sort: { key: 'gaps', dir: -1 } },
 ]
 
 const STATE_ICON: Record<State, string> = { met: '✓', partial: '◐', unknown: '?', fails: '✕' }
@@ -76,6 +79,7 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
   const [neuronOnly, setNeuronOnly] = useState(false)
   const [page, setPage] = useState(0)
   const [expanded, setExpanded] = useState<string | null>(null)
+  const t = useModeText()
 
   const byId = useMemo(() => new Map(records.map((r) => [r.record_id, r])), [records])
   const presentClasses = useMemo(
@@ -124,17 +128,24 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
 
   return (
     <div className={loading ? 'scorecard stale' : 'scorecard'} tabIndex={0} onKeyDown={onKey} aria-label="Candidate well fills">
-      <p className="confidence">
-        Ranking based on <strong>{s.ranked_materials}</strong> material{s.ranked_materials === 1 ? '' : 's'} and{' '}
-        <strong>{s.neuron_records}</strong> neuron record{s.neuron_records === 1 ? '' : 's'};{' '}
-        <strong>{s.unknown_cells}</strong> cells unknown. Add papers to firm this up.
-      </p>
+      {t(
+        <p className="confidence">
+          Early days: <strong>{s.ranked_materials}</strong> material{s.ranked_materials === 1 ? ' has' : 's have'} been tested
+          with neurons so far, and <strong>{s.unknown_cells}</strong> boxes are still unknown. More papers will change this.
+          Click a row to see why.
+        </p>,
+        <p className="confidence">
+          Ranking based on <strong>{s.ranked_materials}</strong> material{s.ranked_materials === 1 ? '' : 's'} and{' '}
+          <strong>{s.neuron_records}</strong> neuron record{s.neuron_records === 1 ? '' : 's'};{' '}
+          <strong>{s.unknown_cells}</strong> cells unknown. Add papers to firm this up.
+        </p>,
+      )}
 
       <div className="scorecard-controls">
         <div className="pills" role="group" aria-label="View">
           {VIEWS.map((v) => (
             <button key={v.key} type="button" className="pill" aria-pressed={view === v.key} onClick={() => chooseView(v)}>
-              {v.label}
+              {t(v.plain, v.label)}
             </button>
           ))}
         </div>
@@ -145,7 +156,7 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
                 setPage(0)
                 setClasses((cs) => (cs.includes(c.key) ? cs.filter((x) => x !== c.key) : [...cs, c.key]))
               }}>
-              {c.label}
+              {t(c.plain, c.label)}
             </button>
           ))}
         </div>
@@ -153,7 +164,7 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
           <input type="checkbox" checked={neuronOnly} onChange={(e) => {
             setPage(0)
             setNeuronOnly(e.target.checked)
-          }} /> Neuron evidence only
+          }} /> {t('Only materials tested with neurons', 'Neuron evidence only')}
         </label>
       </div>
 
@@ -164,13 +175,13 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
               <th scope="col"><button type="button" className="th-btn" onClick={() => sortBy('label')}>Material{headerArrow('label')}</button></th>
               {REQS.map((k) => (
                 <th key={k} scope="col" className="state-col">
-                  <button type="button" className="th-btn" onClick={() => sortBy(k)}>{SHORT_LABELS[k]}{headerArrow(k)}</button>
+                  <button type="button" className="th-btn" onClick={() => sortBy(k)}>{t(PLAIN_LABELS, SHORT_LABELS)[k]}{headerArrow(k)}</button>
                 </th>
               ))}
               <th scope="col" className="num"><button type="button" className="th-btn" onClick={() => sortBy('papers')}>Papers{headerArrow('papers')}</button></th>
               <th scope="col" className="num"><button type="button" className="th-btn" onClick={() => sortBy('score')}>Score{headerArrow('score')}</button></th>
               <th scope="col" className="survival-col">
-                <button type="button" className="th-btn" onClick={() => sortBy('survival')}>Best survival, 0–100%{headerArrow('survival')}</button>
+                <button type="button" className="th-btn" onClick={() => sortBy('survival')}>{t('Best neuron result', 'Best survival, 0–100%')}{headerArrow('survival')}</button>
               </th>
             </tr>
           </thead>
@@ -188,8 +199,8 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
                     <tr className="group-row">
                       <td colSpan={9}>
                         {group === 'none'
-                          ? 'No neuron evidence yet: not ranked, shown for their gaps'
-                          : 'Controls: comparison surfaces, never ranked as well fills'}
+                          ? t('Not yet tested with neurons, so not ranked', 'No neuron evidence yet: not ranked, shown for their gaps')
+                          : t('For comparison only (for example, ordinary lab dishes)', 'Controls: comparison surfaces, never ranked as well fills')}
                       </td>
                     </tr>
                   )}
@@ -207,9 +218,20 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
         <button type="button" className="pill" onClick={() => setPage(Math.max(current - 1, 0))} disabled={current === 0} aria-label="Previous page">←</button>
         <span>{from}–{to} of {rows.length}</span>
         <button type="button" className="pill" onClick={() => setPage(Math.min(current + 1, pages - 1))} disabled={current >= pages - 1} aria-label="Next page">→</button>
-        <span className="muted small">Arrow keys page when the table is focused.</span>
+        <span className="muted small">{t('Arrow keys turn the page.', 'Arrow keys page when the table is focused.')}</span>
       </div>
 
+      {t(
+      <ul className="legend scorecard-legend">
+        <li><span className="state met">✓</span> yes</li>
+        <li><span className="state partial">◐</span> partly</li>
+        <li><span className="state unknown">?</span> not known yet</li>
+        <li><span className="state fails">✕</span> no</li>
+        <li><span className="badge curated">curated</span> looked up by our team rather than pulled from a paper by AI</li>
+        <li><span className="badge unverified">unverified</span> not double-checked against the source yet</li>
+        <li><span className="badge some">some</span> true for some materials in the family, not all</li>
+        <li>Survival dot: further right is better; hollow means the result was in non-neuron cells</li>
+      </ul>,
       <ul className="legend scorecard-legend">
         <li><span className="state met">✓</span> met</li>
         <li><span className="state partial">◐</span> partial</li>
@@ -219,7 +241,8 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
         <li><span className="badge unverified">unverified</span> citation not yet checked</li>
         <li><span className="badge some">some</span> met by some family members, not all</li>
         <li>Survival marker: ● viability · ■ occupancy · ◆ retention · ▲ neurite outgrowth; hollow = non-neuron cells</li>
-      </ul>
+      </ul>,
+      )}
     </div>
   )
 }
@@ -241,6 +264,7 @@ function ScoreRowView({
   byId: Map<string, MaterialRecord>
   onOpenRecords: (ids: string[]) => void
 }) {
+  const t = useModeText()
   return (
     <>
       <tr className={['score-row', baseline && 'baseline', unranked && 'unranked', expanded && 'open'].filter(Boolean).join(' ')}
@@ -248,14 +272,14 @@ function ScoreRowView({
         <th scope="row">
           <span className="caret">{expanded ? '▾' : '▸'}</span>
           <span className="mat-label">{row.label}</span>
-          {baseline && <span className="badge baseline-badge">baseline</span>}
-          <span className="mat-class">{classLabel(row.material_class as never)}</span>
+          {baseline && <span className="badge baseline-badge">{t('today’s chip', 'baseline')}</span>}
+          <span className="mat-class">{classLabel(row.material_class as never, t(true, false))}</span>
         </th>
         {REQS.map((k) => {
           const req = row.requirements[k]
           return (
             <td key={k} className="state-col" title={`${req.state}: ${req.detail}`}>
-              <span className={`state ${req.state}`} role="img" aria-label={req.state}>{STATE_ICON[req.state]}</span>
+              <span className={`state ${req.state}`} role="img" aria-label={t(PLAIN_STATES[req.state], req.state)}>{STATE_ICON[req.state]}</span>
               {req.state === 'met' && req.coverage === 'some members' && (
                 <span className="badge some" title={`${req.members_met} of ${req.members_measured} members`}>some</span>
               )}
