@@ -29,7 +29,7 @@ RATE_LIMIT = int(os.environ.get("RATE_LIMIT_PER_MINUTE", "10"))
 # Set by the Dockerfile; unset in local dev, where Vite serves the frontend.
 FRONTEND_DIST = os.environ.get("FRONTEND_DIST")
 
-app = FastAPI(title="OSI4 Group4")
+app = FastAPI(title="Neuron Nursery")
 
 
 class ScifiRequest(BaseModel):

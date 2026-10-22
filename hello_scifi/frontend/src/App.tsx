@@ -11,8 +11,7 @@ import ScifiPage from './ScifiPage'
 import { ModeContext, useModeState } from './mode'
 import { getJson, type MaterialRecord, type References, type TargetWindow } from './records'
 
-// Placeholder until the team picks a project name.
-const PROJECT_NAME = 'OSI4 Group4'
+const PROJECT_NAME = 'Neuron Nursery'
 
 // Tabs after the divider (`secondary`) show how the data is made, not the story.
 const TABS = [
