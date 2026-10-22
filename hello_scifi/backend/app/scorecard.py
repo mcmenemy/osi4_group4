@@ -12,7 +12,7 @@ from pathlib import Path
 
 import yaml
 
-from app.materials import fallback_key, match_material, material
+from app.materials import fallback_key, load_materials, match_material, material
 from app.schemas import Record
 
 _DATA_DIR = Path(os.environ.get("DATA_DIR", Path(__file__).resolve().parents[2] / "data"))
@@ -219,6 +219,7 @@ def _row(key: str, recs: list[Record], cfg: dict, weights: dict) -> dict:
         "material_key": key,
         "label": fam["label"] if fam else recs[0].material,
         "material_class": fam["class"] if fam else recs[0].material_class,
+        "candidate": bool(fam and fam.get("candidate")),
         "note": fam.get("note") if fam else None,
         "curated": {
             "transparency": (fam or {}).get("transparency"),
@@ -245,6 +246,11 @@ def build_scorecard(records: list[Record], weight_overrides: dict[str, float] | 
     for r in records:
         # Older records may predate material_key; match them by name the same way extraction does.
         groups[r.material_key or match_material(r.material) or fallback_key(r.material)].append(r)
+
+    # Candidate families stay on the card with no records yet; their unknowns are the to-do list.
+    for fam in load_materials():
+        if fam.get("candidate"):
+            groups.setdefault(fam["key"], [])
 
     baseline = None
     ranked, no_neuron = [], []

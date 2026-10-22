@@ -56,7 +56,7 @@ def test_materials_without_neuron_records_are_not_ranked():
         ]
     )
     assert [r["material_key"] for r in card["ranked"]] == ["gelma"]
-    assert {r["material_key"] for r in card["no_neuron_evidence"]} == {"pedot_pss_hydrogel", "fibrin"}
+    assert {"pedot_pss_hydrogel", "fibrin"} <= {r["material_key"] for r in card["no_neuron_evidence"]}
 
 
 def test_evidence_multiplier_and_weight_override():
@@ -85,3 +85,12 @@ def test_soft_uses_extracted_modulus_before_curated():
 def test_uncurated_clear_degradable_is_unknown():
     card = build_scorecard([rec("a", "agarose", cells="primary_neuron", setting="in_vitro_2d", survival=[("viability", 80, 7)])])
     assert card["ranked"][0]["requirements"]["clear_degradable"]["state"] == "unknown"
+
+
+def test_candidate_families_without_records_are_listed_as_unknown():
+    card = build_scorecard([])
+    keys = {r["material_key"] for r in card["no_neuron_evidence"]}
+    assert {"gelma", "hyaluronic_acid", "alginate"} <= keys
+    gelma = next(r for r in card["no_neuron_evidence"] if r["material_key"] == "gelma")
+    assert gelma["record_count"] == 0
+    assert gelma["requirements"]["soft"]["source"] == "curated"

@@ -244,7 +244,7 @@ function StiffnessByFamily({ records, onPoint }: { records: MaterialRecord[]; on
           },
         ],
         annotations: [
-          { x: 5, xref: 'x', y: 1, yref: 'paper', yanchor: 'bottom', showarrow: false, text: '100 kPa', font: { size: 11, color: t.accent } },
+          { x: 5, xref: 'x', xanchor: 'left', y: 1, yref: 'paper', yanchor: 'top', showarrow: false, text: ' 100 kPa', font: { size: 11, color: t.accent } },
         ],
       },
     }
