@@ -1,0 +1,682 @@
+{
+ "survival": [
+  0.4,
+  0.55,
+  0.7,
+  0.85,
+  1.0
+ ],
+ "outgrowth": [
+  0.25,
+  0.5,
+  1.0,
+  2.0
+ ],
+ "seeds": 3,
+ "cells": [
+  {
+   "survival": 0.4,
+   "outgrowth": 0.25,
+   "conductive": false,
+   "retained": 0.6667,
+   "retained_sd": 0.0396,
+   "accuracy": [
+    0.8958,
+    0.9042,
+    0.8708,
+    0.8542,
+    0.5292,
+    0.4458
+   ],
+   "graft_rate_hz": 14.8767
+  },
+  {
+   "survival": 0.55,
+   "outgrowth": 0.25,
+   "conductive": false,
+   "retained": 0.6982,
+   "retained_sd": 0.0193,
+   "accuracy": [
+    0.9417,
+    0.9375,
+    0.9,
+    0.8208,
+    0.5833,
+    0.4583
+   ],
+   "graft_rate_hz": 14.83
+  },
+  {
+   "survival": 0.7,
+   "outgrowth": 0.25,
+   "conductive": false,
+   "retained": 0.7278,
+   "retained_sd": 0.0159,
+   "accuracy": [
+    0.9333,
+    0.9458,
+    0.9208,
+    0.8667,
+    0.625,
+    0.4833
+   ],
+   "graft_rate_hz": 14.9167
+  },
+  {
+   "survival": 0.85,
+   "outgrowth": 0.25,
+   "conductive": false,
+   "retained": 0.7491,
+   "retained_sd": 0.0216,
+   "accuracy": [
+    0.9417,
+    0.9542,
+    0.925,
+    0.8875,
+    0.6708,
+    0.4917
+   ],
+   "graft_rate_hz": 14.9067
+  },
+  {
+   "survival": 1.0,
+   "outgrowth": 0.25,
+   "conductive": false,
+   "retained": 0.7611,
+   "retained_sd": 0.0239,
+   "accuracy": [
+    0.9708,
+    0.9583,
+    0.95,
+    0.9,
+    0.6542,
+    0.4917
+   ],
+   "graft_rate_hz": 14.9367
+  },
+  {
+   "survival": 0.4,
+   "outgrowth": 0.5,
+   "conductive": false,
+   "retained": 0.7074,
+   "retained_sd": 0.0576,
+   "accuracy": [
+    0.9125,
+    0.8542,
+    0.8792,
+    0.8708,
+    0.6667,
+    0.5
+   ],
+   "graft_rate_hz": 15.2167
+  },
+  {
+   "survival": 0.55,
+   "outgrowth": 0.5,
+   "conductive": false,
+   "retained": 0.7491,
+   "retained_sd": 0.0352,
+   "accuracy": [
+    0.925,
+    0.8958,
+    0.8583,
+    0.9042,
+    0.7625,
+    0.525
+   ],
+   "graft_rate_hz": 15.22
+  },
+  {
+   "survival": 0.7,
+   "outgrowth": 0.5,
+   "conductive": false,
+   "retained": 0.7658,
+   "retained_sd": 0.0292,
+   "accuracy": [
+    0.9083,
+    0.9042,
+    0.9125,
+    0.8833,
+    0.7958,
+    0.5417
+   ],
+   "graft_rate_hz": 15.2433
+  },
+  {
+   "survival": 0.85,
+   "outgrowth": 0.5,
+   "conductive": false,
+   "retained": 0.7935,
+   "retained_sd": 0.0347,
+   "accuracy": [
+    0.9292,
+    0.9042,
+    0.9042,
+    0.9083,
+    0.8417,
+    0.5833
+   ],
+   "graft_rate_hz": 15.2267
+  },
+  {
+   "survival": 1.0,
+   "outgrowth": 0.5,
+   "conductive": false,
+   "retained": 0.8065,
+   "retained_sd": 0.0302,
+   "accuracy": [
+    0.9208,
+    0.9167,
+    0.9042,
+    0.9375,
+    0.8667,
+    0.5833
+   ],
+   "graft_rate_hz": 15.23
+  },
+  {
+   "survival": 0.4,
+   "outgrowth": 1.0,
+   "conductive": false,
+   "retained": 0.6991,
+   "retained_sd": 0.0203,
+   "accuracy": [
+    0.8667,
+    0.7917,
+    0.7583,
+    0.7708,
+    0.7917,
+    0.6667
+   ],
+   "graft_rate_hz": 15.12
+  },
+  {
+   "survival": 0.55,
+   "outgrowth": 1.0,
+   "conductive": false,
+   "retained": 0.7352,
+   "retained_sd": 0.0349,
+   "accuracy": [
+    0.8583,
+    0.8333,
+    0.8167,
+    0.8542,
+    0.775,
+    0.6708
+   ],
+   "graft_rate_hz": 15.0967
+  },
+  {
+   "survival": 0.7,
+   "outgrowth": 1.0,
+   "conductive": false,
+   "retained": 0.7481,
+   "retained_sd": 0.0263,
+   "accuracy": [
+    0.8792,
+    0.7625,
+    0.8167,
+    0.85,
+    0.8583,
+    0.7
+   ],
+   "graft_rate_hz": 15.1033
+  },
+  {
+   "survival": 0.85,
+   "outgrowth": 1.0,
+   "conductive": false,
+   "retained": 0.7861,
+   "retained_sd": 0.006,
+   "accuracy": [
+    0.8833,
+    0.8542,
+    0.8167,
+    0.8875,
+    0.8833,
+    0.7125
+   ],
+   "graft_rate_hz": 15.0967
+  },
+  {
+   "survival": 1.0,
+   "outgrowth": 1.0,
+   "conductive": false,
+   "retained": 0.7769,
+   "retained_sd": 0.0251,
+   "accuracy": [
+    0.9042,
+    0.85,
+    0.7625,
+    0.85,
+    0.8792,
+    0.75
+   ],
+   "graft_rate_hz": 15.0833
+  },
+  {
+   "survival": 0.4,
+   "outgrowth": 2.0,
+   "conductive": false,
+   "retained": 0.587,
+   "retained_sd": 0.0428,
+   "accuracy": [
+    0.8667,
+    0.775,
+    0.6958,
+    0.6542,
+    0.5708,
+    0.5792
+   ],
+   "graft_rate_hz": 15.0867
+  },
+  {
+   "survival": 0.55,
+   "outgrowth": 2.0,
+   "conductive": false,
+   "retained": 0.6176,
+   "retained_sd": 0.0374,
+   "accuracy": [
+    0.8417,
+    0.7292,
+    0.675,
+    0.7042,
+    0.6375,
+    0.6917
+   ],
+   "graft_rate_hz": 15.0833
+  },
+  {
+   "survival": 0.7,
+   "outgrowth": 2.0,
+   "conductive": false,
+   "retained": 0.5861,
+   "retained_sd": 0.0495,
+   "accuracy": [
+    0.7917,
+    0.7125,
+    0.6542,
+    0.6708,
+    0.6875,
+    0.6208
+   ],
+   "graft_rate_hz": 15.27
+  },
+  {
+   "survival": 0.85,
+   "outgrowth": 2.0,
+   "conductive": false,
+   "retained": 0.5879,
+   "retained_sd": 0.0287,
+   "accuracy": [
+    0.8792,
+    0.6958,
+    0.6667,
+    0.6583,
+    0.6292,
+    0.6167
+   ],
+   "graft_rate_hz": 15.1933
+  },
+  {
+   "survival": 1.0,
+   "outgrowth": 2.0,
+   "conductive": false,
+   "retained": 0.5704,
+   "retained_sd": 0.0649,
+   "accuracy": [
+    0.8417,
+    0.675,
+    0.675,
+    0.6542,
+    0.6208,
+    0.6
+   ],
+   "graft_rate_hz": 15.3933
+  },
+  {
+   "survival": 0.4,
+   "outgrowth": 0.25,
+   "conductive": true,
+   "retained": 0.6352,
+   "retained_sd": 0.0412,
+   "accuracy": [
+    0.8917,
+    0.8792,
+    0.8917,
+    0.775,
+    0.5875,
+    0.3333
+   ],
+   "graft_rate_hz": 19.06
+  },
+  {
+   "survival": 0.55,
+   "outgrowth": 0.25,
+   "conductive": true,
+   "retained": 0.663,
+   "retained_sd": 0.0442,
+   "accuracy": [
+    0.9333,
+    0.9,
+    0.8833,
+    0.825,
+    0.5708,
+    0.3708
+   ],
+   "graft_rate_hz": 16.8433
+  },
+  {
+   "survival": 0.7,
+   "outgrowth": 0.25,
+   "conductive": true,
+   "retained": 0.712,
+   "retained_sd": 0.0427,
+   "accuracy": [
+    0.9375,
+    0.9333,
+    0.9125,
+    0.875,
+    0.6417,
+    0.4042
+   ],
+   "graft_rate_hz": 15.4667
+  },
+  {
+   "survival": 0.85,
+   "outgrowth": 0.25,
+   "conductive": true,
+   "retained": 0.737,
+   "retained_sd": 0.0369,
+   "accuracy": [
+    0.9417,
+    0.9333,
+    0.95,
+    0.8875,
+    0.6458,
+    0.4583
+   ],
+   "graft_rate_hz": 14.58
+  },
+  {
+   "survival": 1.0,
+   "outgrowth": 0.25,
+   "conductive": true,
+   "retained": 0.7463,
+   "retained_sd": 0.0277,
+   "accuracy": [
+    0.9208,
+    0.9708,
+    0.9333,
+    0.8958,
+    0.6708,
+    0.4667
+   ],
+   "graft_rate_hz": 13.98
+  },
+  {
+   "survival": 0.4,
+   "outgrowth": 0.5,
+   "conductive": true,
+   "retained": 0.6426,
+   "retained_sd": 0.027,
+   "accuracy": [
+    0.8583,
+    0.85,
+    0.7708,
+    0.7625,
+    0.6833,
+    0.4667
+   ],
+   "graft_rate_hz": 19.55
+  },
+  {
+   "survival": 0.55,
+   "outgrowth": 0.5,
+   "conductive": true,
+   "retained": 0.6898,
+   "retained_sd": 0.0532,
+   "accuracy": [
+    0.9125,
+    0.8625,
+    0.8125,
+    0.8167,
+    0.7708,
+    0.4292
+   ],
+   "graft_rate_hz": 17.3467
+  },
+  {
+   "survival": 0.7,
+   "outgrowth": 0.5,
+   "conductive": true,
+   "retained": 0.7139,
+   "retained_sd": 0.0395,
+   "accuracy": [
+    0.8458,
+    0.875,
+    0.8875,
+    0.8417,
+    0.7625,
+    0.5
+   ],
+   "graft_rate_hz": 15.74
+  },
+  {
+   "survival": 0.85,
+   "outgrowth": 0.5,
+   "conductive": true,
+   "retained": 0.7342,
+   "retained_sd": 0.0347,
+   "accuracy": [
+    0.8667,
+    0.8708,
+    0.8583,
+    0.8542,
+    0.7958,
+    0.5583
+   ],
+   "graft_rate_hz": 14.7433
+  },
+  {
+   "survival": 1.0,
+   "outgrowth": 0.5,
+   "conductive": true,
+   "retained": 0.7574,
+   "retained_sd": 0.0584,
+   "accuracy": [
+    0.875,
+    0.8458,
+    0.8583,
+    0.825,
+    0.8375,
+    0.6667
+   ],
+   "graft_rate_hz": 14.0867
+  },
+  {
+   "survival": 0.4,
+   "outgrowth": 1.0,
+   "conductive": true,
+   "retained": 0.6268,
+   "retained_sd": 0.0515,
+   "accuracy": [
+    0.8417,
+    0.7958,
+    0.7167,
+    0.6917,
+    0.7042,
+    0.5708
+   ],
+   "graft_rate_hz": 19.3867
+  },
+  {
+   "survival": 0.55,
+   "outgrowth": 1.0,
+   "conductive": true,
+   "retained": 0.6824,
+   "retained_sd": 0.0296,
+   "accuracy": [
+    0.8125,
+    0.8167,
+    0.775,
+    0.7417,
+    0.8125,
+    0.6125
+   ],
+   "graft_rate_hz": 17.11
+  },
+  {
+   "survival": 0.7,
+   "outgrowth": 1.0,
+   "conductive": true,
+   "retained": 0.6759,
+   "retained_sd": 0.0203,
+   "accuracy": [
+    0.8375,
+    0.8375,
+    0.7667,
+    0.6583,
+    0.8125,
+    0.6292
+   ],
+   "graft_rate_hz": 15.6433
+  },
+  {
+   "survival": 0.85,
+   "outgrowth": 1.0,
+   "conductive": true,
+   "retained": 0.6917,
+   "retained_sd": 0.0568,
+   "accuracy": [
+    0.8375,
+    0.7875,
+    0.7625,
+    0.7292,
+    0.8458,
+    0.65
+   ],
+   "graft_rate_hz": 14.78
+  },
+  {
+   "survival": 1.0,
+   "outgrowth": 1.0,
+   "conductive": true,
+   "retained": 0.7324,
+   "retained_sd": 0.0309,
+   "accuracy": [
+    0.8125,
+    0.8292,
+    0.825,
+    0.75,
+    0.8375,
+    0.7417
+   ],
+   "graft_rate_hz": 14.04
+  },
+  {
+   "survival": 0.4,
+   "outgrowth": 2.0,
+   "conductive": true,
+   "retained": 0.562,
+   "retained_sd": 0.0661,
+   "accuracy": [
+    0.8167,
+    0.7667,
+    0.7583,
+    0.6042,
+    0.575,
+    0.5083
+   ],
+   "graft_rate_hz": 20.4333
+  },
+  {
+   "survival": 0.55,
+   "outgrowth": 2.0,
+   "conductive": true,
+   "retained": 0.5593,
+   "retained_sd": 0.0388,
+   "accuracy": [
+    0.8,
+    0.7708,
+    0.6583,
+    0.6083,
+    0.6083,
+    0.5708
+   ],
+   "graft_rate_hz": 18.03
+  },
+  {
+   "survival": 0.7,
+   "outgrowth": 2.0,
+   "conductive": true,
+   "retained": 0.5194,
+   "retained_sd": 0.0334,
+   "accuracy": [
+    0.8208,
+    0.7042,
+    0.6833,
+    0.5833,
+    0.5333,
+    0.5125
+   ],
+   "graft_rate_hz": 17.93
+  },
+  {
+   "survival": 0.85,
+   "outgrowth": 2.0,
+   "conductive": true,
+   "retained": 0.5231,
+   "retained_sd": 0.0274,
+   "accuracy": [
+    0.8333,
+    0.7792,
+    0.6167,
+    0.5792,
+    0.5583,
+    0.4875
+   ],
+   "graft_rate_hz": 17.8167
+  },
+  {
+   "survival": 1.0,
+   "outgrowth": 2.0,
+   "conductive": true,
+   "retained": 0.5121,
+   "retained_sd": 0.0706,
+   "accuracy": [
+    0.7958,
+    0.7542,
+    0.6667,
+    0.5542,
+    0.5,
+    0.5333
+   ],
+   "graft_rate_hz": 18.13
+  }
+ ],
+ "bare": {
+  "survival": 0.675,
+  "outgrowth": 0.5,
+  "conductive": false,
+  "retained": 0.7611,
+  "retained_sd": 0.0357,
+  "accuracy": [
+   0.9125,
+   0.8958,
+   0.8583,
+   0.8875,
+   0.8083,
+   0.5625
+  ],
+  "graft_rate_hz": 15.2367,
+  "reference": {
+   "citation": "Brown et al., bioRxiv 2024",
+   "url": "https://www.biorxiv.org/content/10.1101/2024.11.22.624907v1",
+   "occupancy_at_loading": 0.77,
+   "occupancy_at_3_weeks": 0.52
+  }
+ },
+ "model_sha": "9d14bad5384b95d9",
+ "specs_sha": "3b3ae82a07269d9c"
+}

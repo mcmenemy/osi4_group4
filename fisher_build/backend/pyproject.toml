@@ -1,0 +1,23 @@
+[project]
+name = "mind-substrates-backend"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "anthropic>=1.15.0",
+    "brian2>=2.10.1",
+    "fastapi>=0.149.0",
+    "pyphi==2.0.0rc4",
+    "scipy>=1.18.1",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+# Brian2 internally uses a pyparsing argument that newer pyparsing deprecates.
+filterwarnings = ["ignore::DeprecationWarning:brian2.*"]

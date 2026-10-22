@@ -1,0 +1,207 @@
+{
+ "reciprocity": [
+  0.0,
+  1.0,
+  2.0
+ ],
+ "timescale": [
+  0.5,
+  1.0,
+  2.0
+ ],
+ "seeds": 3,
+ "cells": [
+  {
+   "reciprocity": 0.0,
+   "timescale": 0.5,
+   "retained": {
+    "host_only": 0.4778,
+    "one_way_readout": 0.3982,
+    "closed_loop_chip": 0.3954,
+    "neural_graft": 0.6833,
+    "gel_neuron_hybrid": 0.6232
+   },
+   "ranking": [
+    "neural_graft",
+    "gel_neuron_hybrid",
+    "host_only",
+    "one_way_readout",
+    "closed_loop_chip"
+   ]
+  },
+  {
+   "reciprocity": 0.0,
+   "timescale": 1.0,
+   "retained": {
+    "host_only": 0.4778,
+    "one_way_readout": 0.3769,
+    "closed_loop_chip": 0.4129,
+    "neural_graft": 0.8093,
+    "gel_neuron_hybrid": 0.7231
+   },
+   "ranking": [
+    "neural_graft",
+    "gel_neuron_hybrid",
+    "host_only",
+    "closed_loop_chip",
+    "one_way_readout"
+   ]
+  },
+  {
+   "reciprocity": 0.0,
+   "timescale": 2.0,
+   "retained": {
+    "host_only": 0.4778,
+    "one_way_readout": 0.4102,
+    "closed_loop_chip": 0.4278,
+    "neural_graft": 0.7861,
+    "gel_neuron_hybrid": 0.6111
+   },
+   "ranking": [
+    "neural_graft",
+    "gel_neuron_hybrid",
+    "host_only",
+    "closed_loop_chip",
+    "one_way_readout"
+   ]
+  },
+  {
+   "reciprocity": 1.0,
+   "timescale": 0.5,
+   "retained": {
+    "host_only": 0.4778,
+    "one_way_readout": 0.3982,
+    "closed_loop_chip": 0.4204,
+    "neural_graft": 0.6778,
+    "gel_neuron_hybrid": 0.5972
+   },
+   "ranking": [
+    "neural_graft",
+    "gel_neuron_hybrid",
+    "host_only",
+    "closed_loop_chip",
+    "one_way_readout"
+   ]
+  },
+  {
+   "reciprocity": 1.0,
+   "timescale": 1.0,
+   "retained": {
+    "host_only": 0.4778,
+    "one_way_readout": 0.3769,
+    "closed_loop_chip": 0.4408,
+    "neural_graft": 0.7769,
+    "gel_neuron_hybrid": 0.6815
+   },
+   "ranking": [
+    "neural_graft",
+    "gel_neuron_hybrid",
+    "host_only",
+    "closed_loop_chip",
+    "one_way_readout"
+   ]
+  },
+  {
+   "reciprocity": 1.0,
+   "timescale": 2.0,
+   "retained": {
+    "host_only": 0.4778,
+    "one_way_readout": 0.4102,
+    "closed_loop_chip": 0.4472,
+    "neural_graft": 0.7352,
+    "gel_neuron_hybrid": 0.6028
+   },
+   "ranking": [
+    "neural_graft",
+    "gel_neuron_hybrid",
+    "host_only",
+    "closed_loop_chip",
+    "one_way_readout"
+   ]
+  },
+  {
+   "reciprocity": 2.0,
+   "timescale": 0.5,
+   "retained": {
+    "host_only": 0.4778,
+    "one_way_readout": 0.3982,
+    "closed_loop_chip": 0.3843,
+    "neural_graft": 0.6287,
+    "gel_neuron_hybrid": 0.5454
+   },
+   "ranking": [
+    "neural_graft",
+    "gel_neuron_hybrid",
+    "host_only",
+    "one_way_readout",
+    "closed_loop_chip"
+   ]
+  },
+  {
+   "reciprocity": 2.0,
+   "timescale": 1.0,
+   "retained": {
+    "host_only": 0.4778,
+    "one_way_readout": 0.3769,
+    "closed_loop_chip": 0.4296,
+    "neural_graft": 0.7324,
+    "gel_neuron_hybrid": 0.6444
+   },
+   "ranking": [
+    "neural_graft",
+    "gel_neuron_hybrid",
+    "host_only",
+    "closed_loop_chip",
+    "one_way_readout"
+   ]
+  },
+  {
+   "reciprocity": 2.0,
+   "timescale": 2.0,
+   "retained": {
+    "host_only": 0.4778,
+    "one_way_readout": 0.4102,
+    "closed_loop_chip": 0.412,
+    "neural_graft": 0.6713,
+    "gel_neuron_hybrid": 0.5954
+   },
+   "ranking": [
+    "neural_graft",
+    "gel_neuron_hybrid",
+    "host_only",
+    "closed_loop_chip",
+    "one_way_readout"
+   ]
+  }
+ ],
+ "summary": {
+  "default_ranking": [
+   "neural_graft",
+   "gel_neuron_hybrid",
+   "host_only",
+   "closed_loop_chip",
+   "one_way_readout"
+  ],
+  "same_ranking": 7,
+  "same_winner": 9,
+  "beats_no_implant": {
+   "neural_graft": 9,
+   "gel_neuron_hybrid": 9,
+   "closed_loop_chip": 0,
+   "one_way_readout": 0
+  },
+  "winners": {
+   "neural_graft": 9
+  },
+  "mean_rank": {
+   "neural_graft": 1.0,
+   "gel_neuron_hybrid": 2.0,
+   "host_only": 3.0,
+   "closed_loop_chip": 4.22,
+   "one_way_readout": 4.78
+  },
+  "total": 9
+ },
+ "model_sha": "9d14bad5384b95d9",
+ "specs_sha": "cc3511b27e412876"
+}

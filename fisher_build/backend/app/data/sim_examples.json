@@ -1,0 +1,2179 @@
+{
+ "host_only": {
+  "id": "host_only",
+  "name": "No implant",
+  "settings": {
+   "reciprocity": 1.0,
+   "timescale": 1.0
+  },
+  "chance": 0.25,
+  "n_trials": 80,
+  "task_ms": 16000,
+  "sizes": {
+   "host": 200
+  },
+  "feedback": false,
+  "brian2_version": "2.10.1",
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "levels": [
+   {
+    "host_lost": 0.0,
+    "alive": {
+     "host": 200
+    },
+    "rates_hz": {
+     "host": 12.26
+    },
+    "input_gain": null,
+    "accuracy": 0.8875,
+    "accuracy_sd": 0.0411,
+    "accuracy_implant": null,
+    "accuracy_implant_sd": null,
+    "te": null,
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2"
+     ],
+     "cm": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1495,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H1",
+     "states_observed": 4.0,
+     "states_analyzed": 4.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.2,
+    "alive": {
+     "host": 160
+    },
+    "rates_hz": {
+     "host": 12.558
+    },
+    "input_gain": null,
+    "accuracy": 0.805,
+    "accuracy_sd": 0.04,
+    "accuracy_implant": null,
+    "accuracy_implant_sd": null,
+    "te": null,
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2"
+     ],
+     "cm": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.15,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H1",
+     "states_observed": 4.0,
+     "states_analyzed": 4.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.4,
+    "alive": {
+     "host": 120
+    },
+    "rates_hz": {
+     "host": 11.722
+    },
+    "input_gain": null,
+    "accuracy": 0.6725,
+    "accuracy_sd": 0.0947,
+    "accuracy_implant": null,
+    "accuracy_implant_sd": null,
+    "te": null,
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2"
+     ],
+     "cm": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1472,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H1",
+     "states_observed": 4.0,
+     "states_analyzed": 4.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.6,
+    "alive": {
+     "host": 80
+    },
+    "rates_hz": {
+     "host": 11.05
+    },
+    "input_gain": null,
+    "accuracy": 0.57,
+    "accuracy_sd": 0.0805,
+    "accuracy_implant": null,
+    "accuracy_implant_sd": null,
+    "te": null,
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2"
+     ],
+     "cm": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1234,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H2",
+     "states_observed": 4.0,
+     "states_analyzed": 4.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.8,
+    "alive": {
+     "host": 40
+    },
+    "rates_hz": {
+     "host": 11.104
+    },
+    "input_gain": null,
+    "accuracy": 0.3775,
+    "accuracy_sd": 0.0696,
+    "accuracy_implant": null,
+    "accuracy_implant_sd": null,
+    "te": null,
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2"
+     ],
+     "cm": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1145,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H2",
+     "states_observed": 4.0,
+     "states_analyzed": 4.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.9,
+    "alive": {
+     "host": 20
+    },
+    "rates_hz": {
+     "host": 11.408
+    },
+    "input_gain": null,
+    "accuracy": 0.3175,
+    "accuracy_sd": 0.0785,
+    "accuracy_implant": null,
+    "accuracy_implant_sd": null,
+    "te": null,
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2"
+     ],
+     "cm": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.0881,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H2",
+     "states_observed": 4.0,
+     "states_analyzed": 4.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   }
+  ],
+  "retained_function": 0.4733,
+  "retained_sd": 0.0469,
+  "total_ms": 28984,
+  "spec_sha": "82a6852152b3447f",
+  "model_sha": "9d14bad5384b95d9"
+ },
+ "one_way_readout": {
+  "id": "one_way_readout",
+  "name": "One-way electronic readout",
+  "settings": {
+   "reciprocity": 1.0,
+   "timescale": 1.0
+  },
+  "chance": 0.25,
+  "n_trials": 80,
+  "task_ms": 16000,
+  "sizes": {
+   "host": 200,
+   "device": 100
+  },
+  "feedback": false,
+  "brian2_version": "2.10.1",
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "levels": [
+   {
+    "host_lost": 0.0,
+    "alive": {
+     "host": 200,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 12.336,
+     "device": 15.09
+    },
+    "input_gain": 1.1014,
+    "accuracy": 0.8225,
+    "accuracy_sd": 0.0477,
+    "accuracy_implant": 0.3575,
+    "accuracy_implant_sd": 0.0917,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.3348,
+      "null_95": 0.078,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0192,
+      "null_95": 0.0722,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "mean_phi_s": 0.153,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H1",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.2,
+    "alive": {
+     "host": 160,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 12.596,
+     "device": 15.086
+    },
+    "input_gain": 1.3336,
+    "accuracy": 0.7125,
+    "accuracy_sd": 0.0518,
+    "accuracy_implant": 0.3625,
+    "accuracy_implant_sd": 0.0887,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.3606,
+      "null_95": 0.081,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0205,
+      "null_95": 0.0723,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "mean_phi_s": 0.1523,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H1",
+     "states_observed": 15.8,
+     "states_analyzed": 15.8,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.4,
+    "alive": {
+     "host": 120,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 11.646,
+     "device": 15.174
+    },
+    "input_gain": 1.9124,
+    "accuracy": 0.64,
+    "accuracy_sd": 0.031,
+    "accuracy_implant": 0.335,
+    "accuracy_implant_sd": 0.032,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.4162,
+      "null_95": 0.0833,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0205,
+      "null_95": 0.0798,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "mean_phi_s": 0.1496,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H1",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.6,
+    "alive": {
+     "host": 80,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 11.002,
+     "device": 15.148
+    },
+    "input_gain": 3.072,
+    "accuracy": 0.515,
+    "accuracy_sd": 0.0709,
+    "accuracy_implant": 0.335,
+    "accuracy_implant_sd": 0.0457,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.4564,
+      "null_95": 0.0763,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0161,
+      "null_95": 0.0749,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "mean_phi_s": 0.1312,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H2",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.8,
+    "alive": {
+     "host": 40,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 11.186,
+     "device": 14.63
+    },
+    "input_gain": 5.8306,
+    "accuracy": 0.335,
+    "accuracy_sd": 0.0649,
+    "accuracy_implant": 0.3225,
+    "accuracy_implant_sd": 0.0521,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.4927,
+      "null_95": 0.0515,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.014,
+      "null_95": 0.0503,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "mean_phi_s": 0.1209,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H2",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.9,
+    "alive": {
+     "host": 20,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 11.514,
+     "device": 8.47
+    },
+    "input_gain": 7.8388,
+    "accuracy": 0.3,
+    "accuracy_sd": 0.0576,
+    "accuracy_implant": 0.25,
+    "accuracy_implant_sd": 0.0703,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.4474,
+      "null_95": 0.0267,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.01,
+      "null_95": 0.0379,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "mean_phi_s": 0.0829,
+     "implant_in_complex": 0.0,
+     "host_in_complex": 1.0,
+     "top_complex": "H2",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   }
+  ],
+  "retained_function": 0.4056,
+  "retained_sd": 0.0359,
+  "total_ms": 45789,
+  "spec_sha": "d7c6574c8deead79",
+  "model_sha": "9d14bad5384b95d9"
+ },
+ "closed_loop_chip": {
+  "id": "closed_loop_chip",
+  "name": "Closed-loop neuromorphic chip",
+  "settings": {
+   "reciprocity": 1.0,
+   "timescale": 1.0
+  },
+  "chance": 0.25,
+  "n_trials": 80,
+  "task_ms": 16000,
+  "sizes": {
+   "host": 200,
+   "device": 100
+  },
+  "feedback": true,
+  "brian2_version": "2.10.1",
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "levels": [
+   {
+    "host_lost": 0.0,
+    "alive": {
+     "host": 200,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 14.754,
+     "device": 14.988
+    },
+    "input_gain": 0.457,
+    "accuracy": 0.86,
+    "accuracy_sd": 0.0184,
+    "accuracy_implant": 0.2525,
+    "accuracy_implant_sd": 0.0464,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0971,
+      "null_95": 0.0334,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0277,
+      "null_95": 0.0362,
+      "significant": false,
+      "significant_seeds": 1
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1557,
+     "implant_in_complex": 0.2638,
+     "host_in_complex": 0.8082,
+     "top_complex": "H1",
+     "states_observed": 15.0,
+     "states_analyzed": 15.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.2,
+    "alive": {
+     "host": 160,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 15.118,
+     "device": 15.078
+    },
+    "input_gain": 0.5916,
+    "accuracy": 0.775,
+    "accuracy_sd": 0.0285,
+    "accuracy_implant": 0.2775,
+    "accuracy_implant_sd": 0.0242,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.1528,
+      "null_95": 0.0463,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0283,
+      "null_95": 0.0489,
+      "significant": false,
+      "significant_seeds": 1
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1441,
+     "implant_in_complex": 0.2404,
+     "host_in_complex": 0.8354,
+     "top_complex": "H1",
+     "states_observed": 15.6,
+     "states_analyzed": 15.6,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.4,
+    "alive": {
+     "host": 120,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 13.982,
+     "device": 15.108
+    },
+    "input_gain": 0.8782,
+    "accuracy": 0.69,
+    "accuracy_sd": 0.0242,
+    "accuracy_implant": 0.36,
+    "accuracy_implant_sd": 0.0604,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.2592,
+      "null_95": 0.0602,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0364,
+      "null_95": 0.0684,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1206,
+     "implant_in_complex": 0.5156,
+     "host_in_complex": 0.806,
+     "top_complex": "H1",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.6,
+    "alive": {
+     "host": 80,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 13.134,
+     "device": 15.124
+    },
+    "input_gain": 1.4278,
+    "accuracy": 0.55,
+    "accuracy_sd": 0.0487,
+    "accuracy_implant": 0.3075,
+    "accuracy_implant_sd": 0.0384,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.3556,
+      "null_95": 0.0555,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0353,
+      "null_95": 0.0676,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1134,
+     "implant_in_complex": 0.729,
+     "host_in_complex": 0.8554,
+     "top_complex": "H1 D1",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.8,
+    "alive": {
+     "host": 40,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 13.314,
+     "device": 15.308
+    },
+    "input_gain": 2.7004,
+    "accuracy": 0.32,
+    "accuracy_sd": 0.04,
+    "accuracy_implant": 0.3125,
+    "accuracy_implant_sd": 0.0675,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.4809,
+      "null_95": 0.0415,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0302,
+      "null_95": 0.0473,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.0972,
+     "implant_in_complex": 0.7102,
+     "host_in_complex": 0.5552,
+     "top_complex": "D2",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.9,
+    "alive": {
+     "host": 20,
+     "device": 100
+    },
+    "rates_hz": {
+     "host": 13.778,
+     "device": 15.004
+    },
+    "input_gain": 4.541,
+    "accuracy": 0.27,
+    "accuracy_sd": 0.0376,
+    "accuracy_implant": 0.2475,
+    "accuracy_implant_sd": 0.0382,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.5467,
+      "null_95": 0.0209,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0133,
+      "null_95": 0.0308,
+      "significant": false,
+      "significant_seeds": 1
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "D1",
+      "D2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.0802,
+     "implant_in_complex": 0.7978,
+     "host_in_complex": 0.5638,
+     "top_complex": "D1",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   }
+  ],
+  "retained_function": 0.4367,
+  "retained_sd": 0.0248,
+  "total_ms": 107127,
+  "spec_sha": "8bd356d47dcf2e05",
+  "model_sha": "9d14bad5384b95d9"
+ },
+ "neural_graft": {
+  "id": "neural_graft",
+  "name": "Engineered neural tissue graft",
+  "settings": {
+   "reciprocity": 1.0,
+   "timescale": 1.0
+  },
+  "chance": 0.25,
+  "n_trials": 80,
+  "task_ms": 16000,
+  "sizes": {
+   "host": 200,
+   "graft": 100
+  },
+  "feedback": true,
+  "brian2_version": "2.10.1",
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "levels": [
+   {
+    "host_lost": 0.0,
+    "alive": {
+     "host": 200,
+     "graft": 100
+    },
+    "rates_hz": {
+     "host": 14.622,
+     "graft": 15.098
+    },
+    "input_gain": 1.162,
+    "accuracy": 0.8975,
+    "accuracy_sd": 0.0146,
+    "accuracy_implant": 0.525,
+    "accuracy_implant_sd": 0.0771,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0772,
+      "null_95": 0.0242,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0004,
+      "null_95": 0.0249,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G1",
+      "G2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1934,
+     "implant_in_complex": 0.644,
+     "host_in_complex": 0.356,
+     "top_complex": "G1 G2",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.2,
+    "alive": {
+     "host": 160,
+     "graft": 100
+    },
+    "rates_hz": {
+     "host": 14.97,
+     "graft": 15.086
+    },
+    "input_gain": 1.4248,
+    "accuracy": 0.86,
+    "accuracy_sd": 0.031,
+    "accuracy_implant": 0.6125,
+    "accuracy_implant_sd": 0.0518,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.081,
+      "null_95": 0.0299,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0005,
+      "null_95": 0.0307,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G1",
+      "G2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1994,
+     "implant_in_complex": 0.5306,
+     "host_in_complex": 0.4694,
+     "top_complex": "G1 G2",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.4,
+    "alive": {
+     "host": 120,
+     "graft": 100
+    },
+    "rates_hz": {
+     "host": 13.86,
+     "graft": 15.226
+    },
+    "input_gain": 2.0398,
+    "accuracy": 0.7925,
+    "accuracy_sd": 0.0384,
+    "accuracy_implant": 0.72,
+    "accuracy_implant_sd": 0.0528,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0831,
+      "null_95": 0.0288,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0009,
+      "null_95": 0.0322,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G1",
+      "G2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1937,
+     "implant_in_complex": 0.5832,
+     "host_in_complex": 0.4168,
+     "top_complex": "G1",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.6,
+    "alive": {
+     "host": 80,
+     "graft": 100
+    },
+    "rates_hz": {
+     "host": 13.072,
+     "graft": 15.168
+    },
+    "input_gain": 3.2924,
+    "accuracy": 0.85,
+    "accuracy_sd": 0.0447,
+    "accuracy_implant": 0.85,
+    "accuracy_implant_sd": 0.0675,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0859,
+      "null_95": 0.028,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0,
+      "null_95": 0.0305,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G1",
+      "G2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1759,
+     "implant_in_complex": 0.691,
+     "host_in_complex": 0.309,
+     "top_complex": "G1",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.8,
+    "alive": {
+     "host": 40,
+     "graft": 100
+    },
+    "rates_hz": {
+     "host": 13.256,
+     "graft": 14.602
+    },
+    "input_gain": 6.013,
+    "accuracy": 0.885,
+    "accuracy_sd": 0.0654,
+    "accuracy_implant": 0.8475,
+    "accuracy_implant_sd": 0.0659,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0896,
+      "null_95": 0.0207,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0006,
+      "null_95": 0.0272,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G1",
+      "G2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.158,
+     "implant_in_complex": 0.8534,
+     "host_in_complex": 0.1466,
+     "top_complex": "G1",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.9,
+    "alive": {
+     "host": 20,
+     "graft": 100
+    },
+    "rates_hz": {
+     "host": 12.574,
+     "graft": 6.73
+    },
+    "input_gain": 7.8516,
+    "accuracy": 0.795,
+    "accuracy_sd": 0.0954,
+    "accuracy_implant": 0.7975,
+    "accuracy_implant_sd": 0.0889,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0664,
+      "null_95": 0.0121,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0,
+      "null_95": 0.0188,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G1",
+      "G2"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.1524,
+     "implant_in_complex": 0.8684,
+     "host_in_complex": 0.1316,
+     "top_complex": "G1",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   }
+  ],
+  "retained_function": 0.7956,
+  "retained_sd": 0.0383,
+  "total_ms": 94718,
+  "spec_sha": "ec8ce23222c9986d",
+  "model_sha": "9d14bad5384b95d9"
+ },
+ "gel_neuron_hybrid": {
+  "id": "gel_neuron_hybrid",
+  "name": "Gel–neuron hybrid",
+  "settings": {
+   "reciprocity": 1.0,
+   "timescale": 1.0
+  },
+  "chance": 0.25,
+  "n_trials": 80,
+  "task_ms": 16000,
+  "sizes": {
+   "host": 200,
+   "graft": 60,
+   "device": 40
+  },
+  "feedback": true,
+  "brian2_version": "2.10.1",
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "levels": [
+   {
+    "host_lost": 0.0,
+    "alive": {
+     "host": 200,
+     "graft": 60,
+     "device": 40
+    },
+    "rates_hz": {
+     "host": 13.764,
+     "graft": 16.428,
+     "device": 13.048
+    },
+    "input_gain": 1.0576,
+    "accuracy": 0.89,
+    "accuracy_sd": 0.0215,
+    "accuracy_implant": 0.4725,
+    "accuracy_implant_sd": 0.0502,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0319,
+      "null_95": 0.0107,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0005,
+      "null_95": 0.0121,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G",
+      "D"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.2783,
+     "implant_in_complex": 0.7248,
+     "host_in_complex": 0.2752,
+     "top_complex": "G",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.2,
+    "alive": {
+     "host": 160,
+     "graft": 60,
+     "device": 40
+    },
+    "rates_hz": {
+     "host": 14.156,
+     "graft": 16.354,
+     "device": 13.088
+    },
+    "input_gain": 1.2654,
+    "accuracy": 0.795,
+    "accuracy_sd": 0.051,
+    "accuracy_implant": 0.4575,
+    "accuracy_implant_sd": 0.1145,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0333,
+      "null_95": 0.0127,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0019,
+      "null_95": 0.0154,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G",
+      "D"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.2707,
+     "implant_in_complex": 0.7894,
+     "host_in_complex": 0.2106,
+     "top_complex": "G",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.4,
+    "alive": {
+     "host": 120,
+     "graft": 60,
+     "device": 40
+    },
+    "rates_hz": {
+     "host": 13.136,
+     "graft": 16.544,
+     "device": 13.312
+    },
+    "input_gain": 1.85,
+    "accuracy": 0.7325,
+    "accuracy_sd": 0.0719,
+    "accuracy_implant": 0.5225,
+    "accuracy_implant_sd": 0.1251,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.04,
+      "null_95": 0.0122,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0002,
+      "null_95": 0.0151,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G",
+      "D"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.2516,
+     "implant_in_complex": 0.7764,
+     "host_in_complex": 0.2236,
+     "top_complex": "G",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.6,
+    "alive": {
+     "host": 80,
+     "graft": 60,
+     "device": 40
+    },
+    "rates_hz": {
+     "host": 12.33,
+     "graft": 16.516,
+     "device": 13.386
+    },
+    "input_gain": 3.0416,
+    "accuracy": 0.7575,
+    "accuracy_sd": 0.0245,
+    "accuracy_implant": 0.68,
+    "accuracy_implant_sd": 0.0812,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0391,
+      "null_95": 0.0152,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0012,
+      "null_95": 0.0177,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G",
+      "D"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.2194,
+     "implant_in_complex": 0.7786,
+     "host_in_complex": 0.2214,
+     "top_complex": "G",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.8,
+    "alive": {
+     "host": 40,
+     "graft": 60,
+     "device": 40
+    },
+    "rates_hz": {
+     "host": 12.434,
+     "graft": 15.804,
+     "device": 12.902
+    },
+    "input_gain": 5.8782,
+    "accuracy": 0.745,
+    "accuracy_sd": 0.0491,
+    "accuracy_implant": 0.73,
+    "accuracy_implant_sd": 0.0872,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0406,
+      "null_95": 0.013,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0005,
+      "null_95": 0.0159,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G",
+      "D"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.2496,
+     "implant_in_complex": 0.8892,
+     "host_in_complex": 0.1108,
+     "top_complex": "G",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   },
+   {
+    "host_lost": 0.9,
+    "alive": {
+     "host": 20,
+     "graft": 60,
+     "device": 40
+    },
+    "rates_hz": {
+     "host": 12.11,
+     "graft": 6.87,
+     "device": 4.114
+    },
+    "input_gain": 7.8486,
+    "accuracy": 0.7475,
+    "accuracy_sd": 0.0599,
+    "accuracy_implant": 0.7075,
+    "accuracy_implant_sd": 0.0752,
+    "te": {
+     "host_to_implant": {
+      "bits": 0.0324,
+      "null_95": 0.008,
+      "significant": true,
+      "significant_seeds": 5
+     },
+     "implant_to_host": {
+      "bits": 0.0006,
+      "null_95": 0.0124,
+      "significant": false,
+      "significant_seeds": 0
+     },
+     "bin_ms": 5,
+     "history_bins": 2
+    },
+    "phi": {
+     "nodes": [
+      "H1",
+      "H2",
+      "G",
+      "D"
+     ],
+     "cm": [
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       1
+      ]
+     ],
+     "mean_phi_s": 0.2573,
+     "implant_in_complex": 1.0,
+     "host_in_complex": 0.0,
+     "top_complex": "D",
+     "states_observed": 16.0,
+     "states_analyzed": 16.0,
+     "coverage": 1.0,
+     "bin_ms": 10
+    }
+   }
+  ],
+  "retained_function": 0.7039,
+  "retained_sd": 0.0423,
+  "total_ms": 79179,
+  "spec_sha": "e3f6a464ee70ebd0",
+  "model_sha": "9d14bad5384b95d9"
+ }
+}
