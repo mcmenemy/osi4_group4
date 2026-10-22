@@ -5,7 +5,8 @@ from app.schemas import Biology, FieldValue, Properties, Record, Source, Surviva
 
 
 def rec(
-    rid, key, *, cells=None, setting=None, survival=(), modulus=None, site=None, paper="p1", electrode=None, conductivity=None
+    rid, key, *, cells=None, setting=None, survival=(), modulus=None, site=None, paper="p1", electrode=None,
+    conductivity=None, cls="nonconductive_hydrogel",
 ) -> Record:
     bio = None
     if cells:
@@ -28,7 +29,7 @@ def rec(
         conductivity=FieldValue(value=str(conductivity), unit="S/m", value_si=conductivity) if conductivity else None,
     )
     return Record(
-        record_id=rid, source=Source(title=paper), material_class="nonconductive_hydrogel",
+        record_id=rid, source=Source(title=paper), material_class=cls,
         material=key, material_key=key, properties=props, biology=bio, electrode_material=electrode,
     )
 
@@ -162,9 +163,25 @@ def test_electrode_values_do_not_set_family_properties():
     card = build_scorecard(
         [
             rec("cells", "fibrin", cells="primary_neuron", setting="in_vivo", site="peripheral_nerve"),
-            rec("array", "fibrin", electrode="PEDOT:PSS", conductivity=5000.0, modulus=2e9),
+            rec("array", "fibrin", electrode="PEDOT:PSS", conductivity=5000.0, modulus=2e9, cls="biohybrid_device"),
         ]
     )
     row = card["ranked"][0]
     assert row["requirements"]["conductive"]["state"] == "unknown"
     assert row["requirements"]["soft"]["state"] == "unknown"
+
+
+def test_gel_coating_on_an_electrode_keeps_its_own_values():
+    card = build_scorecard(
+        [rec("coat", "pva_pedot", electrode="Platinum", conductivity=0.234, cls="conductive_hydrogel")]
+    )
+    row = next(r for r in card["no_neuron_evidence"] if r["material_key"] == "pva_pedot")
+    assert row["requirements"]["conductive"]["state"] == "partial"
+
+
+def test_controls_are_never_ranked():
+    card = build_scorecard(
+        [rec("dish", "culture_plastic", cells="primary_neuron", setting="in_vitro_2d", survival=[("viability", 97, 10)])]
+    )
+    assert [r["material_key"] for r in card["controls"]] == ["culture_plastic"]
+    assert all(r["material_key"] != "culture_plastic" for r in card["ranked"])

@@ -11,12 +11,13 @@
   "material_class": "conductive_hydrogel",
   "material": "Pure PEDOT:PSS hydrogel (20 vol.% DMSO)",
   "material_key": "pedot_pss_hydrogel",
+  "electrode_material": null,
   "formulation": [
     {
       "component": "DMSO",
       "amount": "20",
       "unit": "vol.%",
-      "evidence": "The ultimate tensile strain of the pure PEDOT:PSS hydrogels (20 vol. % DMSO) can reach over 35% in PBS",
+      "evidence": "The ultimate tensile strain of the pure PEDOT:PSS hydrogels (20 vol. % DMSO) can reach over 35% in PBS and over 40% in deionized water",
       "evidence_verified": true
     }
   ],
@@ -35,9 +36,9 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Swollen hydrogel in PBS or DI water.",
+  "notes": "Tensile tests submerged in PBS or deionized water.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:33:27+00:00",
+  "extracted_at": "2026-10-22T13:03:20+00:00",
   "schema_version": "0.1.0"
 }

@@ -11,6 +11,7 @@
   "material_class": "omiec_film",
   "material": "PEDOT:PSTFSILi100",
   "material_key": "pedot_film",
+  "electrode_material": null,
   "formulation": [],
   "processing": [],
   "properties": {
@@ -45,9 +46,9 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Measured in 0.1 M NaCl.",
+  "notes": "Measured in 0.1 M NaCl. Mobility 0.23 cm2 V−1 s−1.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:32:01+00:00",
+  "extracted_at": "2026-10-22T13:01:01+00:00",
   "schema_version": "0.1.0"
 }

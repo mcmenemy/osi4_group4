@@ -76,6 +76,7 @@ export interface Scorecard {
   baseline: ScoreRow | null
   ranked: ScoreRow[]
   no_neuron_evidence: ScoreRow[]
+  controls?: ScoreRow[]
   summary: { materials: number; ranked_materials: number; neuron_records: number; unknown_cells: number }
 }
 

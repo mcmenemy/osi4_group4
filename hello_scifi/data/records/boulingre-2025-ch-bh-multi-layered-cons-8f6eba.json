@@ -1,0 +1,203 @@
+{
+  "record_id": "boulingre-2025-ch-bh-multi-layered-cons-8f6eba",
+  "source": {
+    "doi": "10.1039/d4tb02651a",
+    "title": "Multi-layered electrode constructs for neural tissue engineering",
+    "first_author": "Boulingre",
+    "year": 2025,
+    "url": "https://doi.org/10.1039/d4tb02651a",
+    "file": "boulingre2025.pdf"
+  },
+  "material_class": "biohybrid_device",
+  "material": "CH–BH multi-layered construct: Pt / PVA–PEDOT CH / PVA–GEL biosynthetic hydrogel with encapsulated astrocytes",
+  "material_key": "pva_pedot",
+  "electrode_material": "Platinum",
+  "formulation": [
+    {
+      "component": "PVA–Nb : gelatin–Nb",
+      "amount": "25 : 75",
+      "unit": "weight ratio",
+      "evidence": "PVA–Nb and gelatin–Nb were mixed in at 25 : 75 weight ratio to produce a 10% w/t solution",
+      "evidence_verified": true
+    },
+    {
+      "component": "PVA–GEL macromer",
+      "amount": "10",
+      "unit": "% w/t",
+      "evidence": "PVA–Nb and gelatin–Nb were mixed in at 25 : 75 weight ratio to produce a 10% w/t solution",
+      "evidence_verified": true
+    },
+    {
+      "component": "Eosin Y",
+      "amount": "0.1",
+      "unit": "mM",
+      "evidence": "Eosin Y was then added to a final concen￾tration of 0.1 mM.",
+      "evidence_verified": true
+    },
+    {
+      "component": "DTT thiol-to-norbornene ratio",
+      "amount": "1 : 2",
+      "unit": null,
+      "evidence": "dithiothreitol (DTT, Thermo ScientificTM) in DPBS at a thio-to-norbornene stoichio￾metric ratio of 1 : 2",
+      "evidence_verified": true
+    },
+    {
+      "component": "astrocytes",
+      "amount": "5 × 10^6",
+      "unit": "cells per mL",
+      "evidence": "astrocytes were added to the PVA–GEL macromer solution dissolved in DPBS at a density of 5  106 cells per mL",
+      "evidence_verified": true
+    }
+  ],
+  "processing": [
+    {
+      "step": "visible light photocrosslinking",
+      "parameter": "intensity",
+      "value": "15",
+      "unit": "mW cm2",
+      "evidence": "photo￾crosslinking via visible light (555 nm) at an intensity of 15 mW cm2 for 3 min",
+      "evidence_verified": true
+    },
+    {
+      "step": "visible light photocrosslinking",
+      "parameter": "wavelength",
+      "value": "555",
+      "unit": "nm",
+      "evidence": "photo￾crosslinking via visible light (555 nm) at an intensity of 15 mW cm2 for 3 min",
+      "evidence_verified": true
+    },
+    {
+      "step": "visible light photocrosslinking",
+      "parameter": "time",
+      "value": "3",
+      "unit": "min",
+      "evidence": "photo￾crosslinking via visible light (555 nm) at an intensity of 15 mW cm2 for 3 min",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": {
+      "value": "0.261",
+      "unit": "S m-1",
+      "value_si": 0.261,
+      "evidence": "the conductivity of both the CH and the CH–BH coating was estimated using eqn (3) and found to be 0.234 S m1 and 0.261 S m1",
+      "location": "p. 7",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "water_content": null,
+    "swelling_ratio": null,
+    "impedance_1khz": {
+      "value": "38.09",
+      "unit": "Ω",
+      "value_si": 38.09,
+      "evidence": "At 1 kHz, the real part of the impedance was found to be 42.58 O for the CH￾coated electrode, and 38.09 O for the CH–BH-coated one.",
+      "location": "p. 7",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": {
+      "description": {
+        "value": "No delamination; non-significant 1.25% decrease in impedance at 1 Hz; max CSC loss 1.38%",
+        "unit": null,
+        "value_si": null,
+        "evidence": "Samples were kept at 89 1C for 73 hours, to mimic four months of ageing at 37 1C. No delamination was observed during the incubation period.",
+        "location": "p. 9",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "duration_days": {
+        "value": "4",
+        "unit": "months",
+        "value_si": null,
+        "evidence": "The layered assembly was shown to be stable for up to an equivalent of 4 months of ageing.",
+        "location": "p. 12",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "conditions": "accelerated ageing at 89 °C in PBS, equivalent to 4 months at 37 °C"
+    }
+  },
+  "biology": {
+    "cell_type": "primary hippocampal astrocytes (also SCL4.1/F7 Schwann cells for indirect cytotoxicity)",
+    "cell_category": "glia",
+    "species": "rat (Sprague Dawley)",
+    "setting": "in_vitro_3d",
+    "tissue_site": "not_applicable",
+    "coating": "PVA–GEL (norbornene-functionalised PVA/gelatin) hydrogel",
+    "culture_days": {
+      "value": "14",
+      "unit": "days",
+      "value_si": 14.0,
+      "evidence": "primary astrocytes were then encapsulated in the BH layer and grown for 14 days",
+      "location": "p. 10",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "55 000",
+        "unit": "cells per cm2",
+        "value_si": null,
+        "evidence": "Astrocytes grown in coated electrodes exhibited a 1.5-fold higher cell density, with around 55 000 cells per cm2 compared to 35 000 cells per cm2 on stand-alone BHs",
+        "location": "p. 11",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "astrocyte cell density"
+      },
+      {
+        "value": "1800",
+        "unit": "μm2 per cell",
+        "value_si": null,
+        "evidence": "around 1400 mm2 per cell in stand-alone BHs and 1800 mm2 per cell in coated electrodes",
+        "location": "p. 11",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "cell spreading area"
+      },
+      {
+        "value": "41",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "an approximate 41% increase in fluorescence from day 3 to day 14 was observed for both CH–BH and BH scaffolds",
+        "location": "p. 11",
+        "confidence": "medium",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "increase in metabolic activity (Alamar blue) day 3 to day 14"
+      },
+      {
+        "value": "23.1",
+        "unit": "%",
+        "value_si": null,
+        "evidence": "a 23.1% increase in density was observed for medium conditioned with CH–BH￾coated electrodes compared to the tissue culture polystyrene (TCP) control",
+        "location": "p. 10",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "Schwann cell density increase in conditioned medium vs TCP"
+      }
+    ],
+    "survival": []
+  },
+  "notes": "Electrochemistry in PBS. Conductivity derived from equivalent circuit model.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T12:59:55+00:00",
+  "schema_version": "0.1.0"
+}

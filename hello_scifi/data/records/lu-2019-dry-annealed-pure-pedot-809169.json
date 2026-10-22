@@ -11,6 +11,7 @@
   "material_class": "omiec_film",
   "material": "Dry-annealed pure PEDOT:PSS film (before swelling)",
   "material_key": "pedot_film",
+  "electrode_material": null,
   "formulation": [],
   "processing": [],
   "properties": {
@@ -19,7 +20,7 @@
       "value": "~500",
       "unit": "S cm−1",
       "value_si": 50000.0,
-      "evidence": "decreasing its electrical conductivity from ~500 S cm−1 in the dry state to less than 50 S cm−1 in the swollen state",
+      "evidence": "significantly decreasing its electrical conductivity from ~500 S cm−1 in the dry state to less than 50 S cm−1 in the swollen state",
       "location": "p. 7",
       "confidence": "medium",
       "test_method": null,
@@ -36,9 +37,9 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Dry state, before rehydration.",
+  "notes": "Dry state, prior to rehydration.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:33:27+00:00",
+  "extracted_at": "2026-10-22T13:03:20+00:00",
   "schema_version": "0.1.0"
 }

@@ -11,6 +11,7 @@
   "material_class": "omiec_film",
   "material": "p(g2T-TT)",
   "material_key": "glycolated_polythiophene",
+  "electrode_material": null,
   "formulation": [],
   "processing": [],
   "properties": {
@@ -34,8 +35,8 @@
       "value": "261",
       "unit": "F cm−1 V−1 s−1",
       "value_si": 261.0,
-      "evidence": "p(g2T-TT)32 241 ± 94 0.94 ± 0.25 227 ± 107 261 ± 29",
-      "location": "p. 4, Table 1",
+      "evidence": "The top performer to date is p(g2T-TT), a glycolated thiophene-thienothiophene polymer22, with a µC* of 261 ± 29 F cm−1 V−1 s −1.",
+      "location": "p. 3",
       "confidence": "high",
       "test_method": null,
       "evidence_verified": true
@@ -45,9 +46,9 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Measured in 0.1 M NaCl with Ag/AgCl gate; C* by EIS normalized by dry film volume. µOECT 0.94 cm2 V−1 s−1.",
+  "notes": "Measured in 0.1 M NaCl with Ag/AgCl gate; thickness measured dry. Mobility 0.94 cm2 V−1 s−1.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:32:01+00:00",
+  "extracted_at": "2026-10-22T13:01:01+00:00",
   "schema_version": "0.1.0"
 }

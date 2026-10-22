@@ -11,6 +11,7 @@
   "material_class": "omiec_film",
   "material": "p(gNDI-g2T)",
   "material_key": "glycolated_polythiophene",
+  "electrode_material": null,
   "formulation": [],
   "processing": [],
   "properties": {
@@ -24,8 +25,8 @@
       "value": "397",
       "unit": "F cm−3",
       "value_si": 397.0,
-      "evidence": "p(gNDI-g2T)35 397 0.00031 ± 0.00009 0.12 0.18 ± 0.01",
-      "location": "p. 4, Table 1",
+      "evidence": "p(gNDI-g2T), shows the highest C* value (397 F cm−3)",
+      "location": "p. 4",
       "confidence": "high",
       "test_method": null,
       "evidence_verified": true
@@ -45,9 +46,9 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Only n-type material (glycolated NDI copolymer); measured in 0.1 M NaCl.",
+  "notes": "Only n-type material; glycolated naphthalene diimide polymer. Measured in 0.1 M NaCl. Mobility 0.00031 cm2 V−1 s−1.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:32:01+00:00",
+  "extracted_at": "2026-10-22T13:01:01+00:00",
   "schema_version": "0.1.0"
 }

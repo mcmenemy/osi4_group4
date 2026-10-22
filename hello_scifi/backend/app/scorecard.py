@@ -162,9 +162,17 @@ def _in_vivo_brain(recs: list[Record], cfg: dict) -> dict:
     )
 
 
+DEVICE_CLASSES = {"biohybrid_device", "oect_device"}
+
+
 def _property_members(recs: list[Record]) -> list[Record]:
-    # Values measured on a device's electrodes describe the electrode, not this family.
-    return [r for r in recs if not r.electrode_material]
+    """Records whose property values describe this family's material.
+
+    A device-level record with a separate electrode material (e.g. Rochford's PEDOT:PSS array under
+    a fibrin cell layer) measures the electrode, not the cell carrier, so it's left out. A gel coating
+    on a platinum electrode (material class: hydrogel) still reports the gel's own values.
+    """
+    return [r for r in recs if not (r.electrode_material and r.material_class in DEVICE_CLASSES)]
 
 
 def _soft(recs: list[Record], fam: dict | None, cfg: dict) -> dict:
@@ -315,12 +323,14 @@ def build_scorecard(records: list[Record], weight_overrides: dict[str, float] | 
             groups.setdefault(fam["key"], [])
 
     baseline = None
-    ranked, no_neuron = [], []
+    ranked, no_neuron, controls = [], [], []
     for key, recs in groups.items():
         row = _row(key, recs, cfg, weights)
         fam = material(key)
         if fam and fam.get("baseline"):
             baseline = row
+        elif fam and fam.get("control"):
+            controls.append(row)  # e.g. culture plastic: a comparison, never a candidate well fill
         elif row["neuron_record_count"] > 0:
             ranked.append(row)
         else:
@@ -339,6 +349,7 @@ def build_scorecard(records: list[Record], weight_overrides: dict[str, float] | 
         "baseline": baseline,
         "ranked": ranked,
         "no_neuron_evidence": no_neuron,
+        "controls": controls,
         "summary": {
             "materials": len(ranked) + len(no_neuron),
             "ranked_materials": len(ranked),

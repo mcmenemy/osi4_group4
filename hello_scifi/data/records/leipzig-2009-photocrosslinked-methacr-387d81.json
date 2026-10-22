@@ -1,5 +1,5 @@
 {
-  "record_id": "leipzig-2009-photocrosslinked-methacr-ce76cd",
+  "record_id": "leipzig-2009-photocrosslinked-methacr-387d81",
   "source": {
     "doi": "10.1016/j.biomaterials.2009.09.002",
     "title": "The effect of substrate stiffness on adult neural stem cell behavior",
@@ -9,31 +9,40 @@
     "file": "leipzig2009.pdf"
   },
   "material_class": "nonconductive_hydrogel",
-  "material": "Photocrosslinked methacrylamide chitosan (MAC) hydrogel, 7 kPa (6.0 mL DMAP/NVP per g MAC)",
+  "material": "Photocrosslinked methacrylamide chitosan (MAC) hydrogel, 7 kPa (6.0 uL DMAP/NVP per g MAC), laminin-coated",
   "material_key": "chitosan",
+  "electrode_material": null,
   "formulation": [
     {
-      "component": "methacrylamide chitosan",
+      "component": "methacrylamide chitosan (MAC) in water",
       "amount": "2",
       "unit": "wt%",
-      "evidence": "USA) at 2 wt%",
+      "evidence": "Three crosslinked MAC scaffolds were synthesized using 1.5, 3.0 and 6.0 mL of 300 mg/ mL DMAP/NMP with 1 g of 2 wt% MAC in water",
       "evidence_verified": true
     },
     {
-      "component": "DMAP/NVP (300 mg/mL)",
+      "component": "DMAP/NVP (300 mg/mL) per g MAC",
       "amount": "6.0",
-      "unit": "mL per g MAC",
-      "evidence": "synthesized using 1.5, 3.0 and 6.0 mL of 300 mg/",
+      "unit": "mL",
+      "evidence": "Three crosslinked MAC scaffolds were synthesized using 1.5, 3.0 and 6.0 mL of 300 mg/ mL DMAP/NMP with 1 g of 2 wt% MAC in water",
       "evidence_verified": true
     }
   ],
   "processing": [
     {
-      "step": "UV crosslinking",
-      "parameter": "time",
-      "value": "2",
-      "unit": "min",
-      "evidence": "crosslinked with 2 min UV",
+      "step": "UV photocrosslinking",
+      "parameter": "time / wavelength",
+      "value": "2 min / 365",
+      "unit": "nm",
+      "evidence": "crosslinked with 2 min UV light (365 nm) exposure.",
+      "evidence_verified": true
+    },
+    {
+      "step": "laminin coating",
+      "parameter": "concentration / time",
+      "value": "5 / 4",
+      "unit": "mg/mL / h",
+      "evidence": "coated with laminin (5 mg/mL in neurobasal media; Invitrogen, Carlsbad, CA, USA) for 4 h.",
       "evidence_verified": true
     }
   ],
@@ -42,7 +51,7 @@
       "value": "6.72",
       "unit": "kPa",
       "value_si": 6720.0,
-      "evidence": "0.51 and 6.72",
+      "evidence": "resulting in scaffolds with EY equal to 0.80  0.18, 3.59  0.51 and 6.72  0.58 kPa, referred to as <1, 3.5 and 7 kPa, respectively.",
       "location": "p. 4",
       "confidence": "high",
       "test_method": "compression",
@@ -60,18 +69,18 @@
     "stability": null
   },
   "biology": {
-    "cell_type": "adult SVZ-derived neural stem/progenitor cells",
+    "cell_type": "adult rat SVZ-derived neural stem/progenitor cells (NSPCs)",
     "cell_category": "sc_neuron",
     "species": "rat",
     "setting": "in_vitro_2d",
-    "in_brain": null,
+    "tissue_site": "not_applicable",
     "coating": "laminin",
     "culture_days": {
       "value": "8",
       "unit": "d",
       "value_si": 8.0,
-      "evidence": "after 0, 4 and 8 d of culture",
-      "location": "p. 2",
+      "evidence": "Immunohistochemistry for differentiation into (A) oligodendrocytes, (B) neurons and (C) astrocytes after 8 d of culture.",
+      "location": "p. 7, Fig. 6",
       "confidence": "high",
       "test_method": null,
       "evidence_verified": true
@@ -83,7 +92,7 @@
         "value": "185.67",
         "unit": "h",
         "value_si": null,
-        "evidence": "111.4 and 185.67 h, respectively",
+        "evidence": "The resulting cell doubling times on <1, 3.5 and 7 kPa MAC were 139.5, 111.4 and 185.67 h, respectively.",
         "location": "p. 5",
         "confidence": "high",
         "test_method": null,
@@ -94,30 +103,30 @@
         "value": "71.8",
         "unit": "%",
         "value_si": null,
-        "evidence": "dendrocytes (71.8",
+        "evidence": "The 7 kPa surfaces yielded more RIP-positive oligo￾dendrocytes (71.8  2.7%)",
         "location": "p. 5",
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "RIP-positive oligodendrocytes"
+        "name": "RIP+ oligodendrocytes"
       },
       {
         "value": "11.6",
         "unit": "%",
         "value_si": null,
-        "evidence": "the 7 kPa in 11.6",
+        "evidence": "The <1 kPa MAC resulted in 32.9  2.0% neurons whereas the 3.5 kPa resulted in 22.5 1.7% neurons and the 7 kPa in 11.6  0.8% neurons.",
         "location": "p. 5",
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true,
-        "name": "bIII-tubulin positive neurons"
+        "name": "bIII-tubulin+ neurons"
       }
     ],
     "survival": []
   },
-  "notes": "No GFAP-positive astrocytes observed on 7 kPa surfaces.",
+  "notes": "Modulus measured after 1 d equilibration in PBS with protease inhibitors at 4 C. No GFAP+ astrocytes observed on 7 kPa surfaces.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:46:34+00:00",
+  "extracted_at": "2026-10-22T13:02:10+00:00",
   "schema_version": "0.1.0"
 }

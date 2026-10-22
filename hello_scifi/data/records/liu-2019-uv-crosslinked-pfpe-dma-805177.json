@@ -1,5 +1,5 @@
 {
-  "record_id": "liu-2019-uv-crosslinked-pfpe-dma-f2452c",
+  "record_id": "liu-2019-uv-crosslinked-pfpe-dma-805177",
   "source": {
     "doi": "10.1038/s41551-018-0335-6",
     "title": "Soft and elastic hydrogel-based microelectronics for localized low-voltage neuromodulation",
@@ -9,11 +9,12 @@
     "file": "liu2019.pdf"
   },
   "material_class": "other",
-  "material": "UV-crosslinked PFPE-DMA elastomer (fluorinated elastic photoresist)",
-  "material_key": "other:uv-crosslinked-pfpe-dma-elastomer-fluori",
+  "material": "UV-crosslinked PFPE-DMA fluorinated elastomer (12 kDa)",
+  "material_key": "other:uv-crosslinked-pfpe-dma-fluorinated-elas",
+  "electrode_material": null,
   "formulation": [
     {
-      "component": "bis(2,4,6-trimethylbenzoyl)-phenylphosphineoxide photoinitiator",
+      "component": "photoinitiator bis(2,4,6-trimethylbenzoyl)-phenylphosphineoxide",
       "amount": "2",
       "unit": "wt%",
       "evidence": "The encapsulating PFPE-DMA with 2wt% photoinitiator bis(2,4,6-trimethylbenzoyl)-phenylphosphineoxide",
@@ -27,14 +28,6 @@
       "value": "500",
       "unit": "r.p.m.",
       "evidence": "was spin coated at 500 r.p.m. for 1min and then prebaked at 100 °C for 1min",
-      "evidence_verified": true
-    },
-    {
-      "step": "UV crosslinking",
-      "parameter": "intensity",
-      "value": "10",
-      "unit": "mWcm−2",
-      "evidence": "UV exposure (Quintel Q4000, Hg Lamp, 350–450nm) at 10mWcm−2 for 20 s was used to crosslink PFPE-DMA",
       "evidence_verified": true
     }
   ],
@@ -61,11 +54,11 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Stretchable up to 200%; dielectric constant 2.4±0.1.",
+  "notes": "Stretchable to 200%; dielectric constant 2.4±0.1 at 1 kHz.",
   "flags": [
     "material_key:unmatched"
   ],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:32:46+00:00",
+  "extracted_at": "2026-10-22T13:02:48+00:00",
   "schema_version": "0.1.0"
 }

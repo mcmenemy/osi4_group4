@@ -1,5 +1,5 @@
 {
-  "record_id": "boulingre-2025-pva-gel-biosynthetic-hyd-3bc3ce",
+  "record_id": "boulingre-2025-pva-gel-biosynthetic-hyd-4512ad",
   "source": {
     "doi": "10.1039/d4tb02651a",
     "title": "Multi-layered electrode constructs for neural tissue engineering",
@@ -9,14 +9,15 @@
     "file": "boulingre2025.pdf"
   },
   "material_class": "nonconductive_hydrogel",
-  "material": "PVA–GEL biosynthetic hydrogel (stand-alone BH)",
+  "material": "PVA–GEL biosynthetic hydrogel (stand-alone control) with encapsulated astrocytes",
   "material_key": "other:pva-gel-biosynthetic-hydrogel-stand-alon",
+  "electrode_material": null,
   "formulation": [
     {
-      "component": "PVA–Nb:gelatin–Nb",
+      "component": "PVA–Nb : gelatin–Nb",
       "amount": "25 : 75",
       "unit": "weight ratio",
-      "evidence": "PVA–Nb and gelatin–Nb were mixed in at 25 : 75 weight\nratio",
+      "evidence": "PVA–Nb and gelatin–Nb were mixed in at 25 : 75 weight ratio to produce a 10% w/t solution",
       "evidence_verified": true
     }
   ],
@@ -37,15 +38,15 @@
   "biology": {
     "cell_type": "primary hippocampal astrocytes",
     "cell_category": "glia",
-    "species": "rat",
+    "species": "rat (Sprague Dawley)",
     "setting": "in_vitro_3d",
-    "in_brain": null,
+    "tissue_site": "not_applicable",
     "coating": null,
     "culture_days": {
       "value": "14",
       "unit": "days",
       "value_si": 14.0,
-      "evidence": "samples were maintained in vitro for 14 days before\nbeing fixed for staining",
+      "evidence": "samples were maintained in vitro for 14 days before being fixed for staining",
       "location": "p. 5",
       "confidence": "high",
       "test_method": null,
@@ -58,7 +59,7 @@
         "value": "35 000",
         "unit": "cells per cm2",
         "value_si": null,
-        "evidence": "with around 55 000 cells per cm2 compared to 35 000\ncells per cm2 on stand-alone BHs",
+        "evidence": "with around 55 000 cells per cm2 compared to 35 000 cells per cm2 on stand-alone BHs",
         "location": "p. 11",
         "confidence": "medium",
         "test_method": null,
@@ -67,7 +68,7 @@
       },
       {
         "value": "1400",
-        "unit": "mm2 per cell",
+        "unit": "μm2 per cell",
         "value_si": null,
         "evidence": "around 1400 mm2 per cell in stand-alone BHs",
         "location": "p. 11",
@@ -79,11 +80,11 @@
     ],
     "survival": []
   },
-  "notes": "Formed in 6-mm PDMS moulds on glass coverslips as control.",
+  "notes": "Formed in 6-mm PDMS moulds on glass coverslips.",
   "flags": [
     "material_key:unmatched"
   ],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:31:09+00:00",
+  "extracted_at": "2026-10-22T12:59:55+00:00",
   "schema_version": "0.1.0"
 }

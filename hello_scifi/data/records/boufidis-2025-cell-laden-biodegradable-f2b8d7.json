@@ -1,5 +1,5 @@
 {
-  "record_id": "boufidis-2025-biodegradable-fibrin-hyd-348123",
+  "record_id": "boufidis-2025-cell-laden-biodegradable-f2b8d7",
   "source": {
     "doi": "10.1038/s41467-025-57016-0",
     "title": "Bio-inspired electronics: Soft, biohybrid, and \"living\" neural interfaces",
@@ -8,9 +8,10 @@
     "url": "https://doi.org/10.1038/s41467-025-57016-0",
     "file": "review2025.pdf"
   },
-  "material_class": "nonconductive_hydrogel",
-  "material": "Biodegradable fibrin hydrogel coating on cell-seeded microelectrodes",
+  "material_class": "biohybrid_device",
+  "material": "Cell-laden biodegradable fibrin hydrogel coating on hybrid intracortical microelectrodes",
   "material_key": "fibrin",
+  "electrode_material": null,
   "formulation": [],
   "processing": [],
   "properties": {
@@ -27,7 +28,7 @@
       "value": "7",
       "unit": "days",
       "value_si": 7.0,
-      "evidence": "complete reabsorption of the fibrin hydrogel within 7 days",
+      "evidence": "the complete reabsorption of the fibrin hydrogel within 7 days may overcome the issue of the hydrogel swelling in vivo",
       "location": "p. 7",
       "confidence": "medium",
       "test_method": null,
@@ -40,7 +41,7 @@
     "cell_category": "primary_neuron",
     "species": null,
     "setting": "in_vivo",
-    "in_brain": true,
+    "tissue_site": "brain",
     "coating": "fibrin hydrogel",
     "culture_days": null,
     "viability_percent": null,
@@ -48,11 +49,11 @@
     "other_outcomes": [],
     "survival": []
   },
-  "notes": "Value cited in a review article (ref. 164); intracortical implants; reduced reactive astrocytes without significantly altering electrode impedance.",
+  "notes": "Review article; cited from ref. 164. Hydrogel layer reduced reactive astrocytes without significantly altering electrode impedance.",
   "flags": [
     "cell_category:check_glia"
   ],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:33:44+00:00",
+  "extracted_at": "2026-10-22T13:03:35+00:00",
   "schema_version": "0.1.0"
 }

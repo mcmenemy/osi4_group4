@@ -89,7 +89,10 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
     const rest = neuronOnly
       ? []
       : sortRows(card.no_neuron_evidence.filter(keep), sort).map((r) => ({ row: r, group: 'none' as const }))
-    return [...ranked, ...rest]
+    const controls = neuronOnly
+      ? []
+      : (card.controls ?? []).filter(keep).map((r) => ({ row: r, group: 'control' as const }))
+    return [...ranked, ...rest, ...controls]
   }, [card, sort, classes, neuronOnly])
 
   const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE))
@@ -181,14 +184,18 @@ export default function ScorecardTable({ card, records, loading, onOpenRecords }
               const first = i === 0 || visible[i - 1].group !== group
               return (
                 <Fragment key={row.material_key}>
-                  {first && group === 'none' && (
+                  {first && group !== 'ranked' && (
                     <tr className="group-row">
-                      <td colSpan={9}>No neuron evidence yet: not ranked, shown for their gaps</td>
+                      <td colSpan={9}>
+                        {group === 'none'
+                          ? 'No neuron evidence yet: not ranked, shown for their gaps'
+                          : 'Controls: comparison surfaces, never ranked as well fills'}
+                      </td>
                     </tr>
                   )}
                   <ScoreRowView row={row} expanded={expanded === row.material_key}
                     onToggle={() => setExpanded((e) => (e === row.material_key ? null : row.material_key))}
-                    byId={byId} onOpenRecords={onOpenRecords} unranked={group === 'none'} />
+                    byId={byId} onOpenRecords={onOpenRecords} unranked={group !== 'ranked'} />
                 </Fragment>
               )
             })}

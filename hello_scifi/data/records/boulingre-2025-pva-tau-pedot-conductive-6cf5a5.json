@@ -1,5 +1,5 @@
 {
-  "record_id": "boulingre-2025-pva-tau-pedot-conductive-73f826",
+  "record_id": "boulingre-2025-pva-tau-pedot-conductive-6cf5a5",
   "source": {
     "doi": "10.1039/d4tb02651a",
     "title": "Multi-layered electrode constructs for neural tissue engineering",
@@ -9,8 +9,9 @@
     "file": "boulingre2025.pdf"
   },
   "material_class": "conductive_hydrogel",
-  "material": "PVA–Tau/PEDOT conductive hydrogel (CH) coating on Pt electrode",
+  "material": "PVA–Tau/PEDOT conductive hydrogel (CH) coating on Pt",
   "material_key": "pva_pedot",
+  "electrode_material": "Platinum",
   "formulation": [
     {
       "component": "PVA–MA–Tau",
@@ -30,18 +31,18 @@
       "component": "EDOT (pre-layer)",
       "amount": "0.1",
       "unit": "M",
-      "evidence": "0.1 M 3,4-ethylenedioxythiophene (EDOT) mono￾mer",
+      "evidence": "composed of 0.1 M 3,4-ethylenedioxythiophene (EDOT) mono￾mer",
       "evidence_verified": true
     },
     {
       "component": "pTS (pre-layer)",
       "amount": "0.05",
       "unit": "M",
-      "evidence": "0.05 M pTS",
+      "evidence": "0.05 M pTS (95% purity, Sigma-Aldrich 152536)",
       "evidence_verified": true
     },
     {
-      "component": "EDOT (in-gel polymerisation)",
+      "component": "EDOT (in PBS for PEDOT growth)",
       "amount": "0.03",
       "unit": "mM",
       "evidence": "from an aqueous solution of 0.03 mM EDOT in PBS",
@@ -50,16 +51,8 @@
   ],
   "processing": [
     {
-      "step": "PEDOT/pTS pre-layer galvanostatic electrodeposition",
-      "parameter": "current density",
-      "value": "1",
-      "unit": "mA cm2",
-      "evidence": "galvanostatic electrodeposition using a current density of 1 mA cm2 for 1 min",
-      "evidence_verified": true
-    },
-    {
-      "step": "PEDOT/pTS pre-layer galvanostatic electrodeposition",
-      "parameter": "time",
+      "step": "PEDOT/pTS pre-layer electrodeposition",
+      "parameter": "duration",
       "value": "1",
       "unit": "min",
       "evidence": "galvanostatic electrodeposition using a current density of 1 mA cm2 for 1 min",
@@ -70,23 +63,31 @@
       "parameter": "intensity",
       "value": "30",
       "unit": "mW cm2",
-      "evidence": "photocrosslinking via UV light at an intensity of 30\nmW cm2 for 3 min",
+      "evidence": "photocrosslinking via UV light at an intensity of 30 mW cm2 for 3 min",
+      "evidence_verified": true
+    },
+    {
+      "step": "UV photocrosslinking",
+      "parameter": "time",
+      "value": "3",
+      "unit": "min",
+      "evidence": "photocrosslinking via UV light at an intensity of 30 mW cm2 for 3 min",
       "evidence_verified": true
     },
     {
       "step": "PEDOT electrodeposition in hydrogel",
-      "parameter": "time",
+      "parameter": "duration",
       "value": "10",
       "unit": "min",
-      "evidence": "applying\na current density of 1 mA cm2 for 10 min",
+      "evidence": "applying a current density of 1 mA cm2 for 10 min",
       "evidence_verified": true
     },
     {
       "step": "autoclave sterilisation",
-      "parameter": "time",
-      "value": "15",
-      "unit": "minutes",
-      "evidence": "sterilized in\nan autoclave at 121 1C for 15 minutes",
+      "parameter": "temperature",
+      "value": "121",
+      "unit": "°C",
+      "evidence": "CH-coated electrodes were sterilized in an autoclave at 121 1C for 15 minutes",
       "evidence_verified": true
     }
   ],
@@ -94,9 +95,9 @@
     "youngs_modulus": null,
     "conductivity": {
       "value": "0.234",
-      "unit": "S m1",
+      "unit": "S m-1",
       "value_si": 0.234,
-      "evidence": "0.234 S m1 and 0.261 S m1\n, respectively",
+      "evidence": "the conductivity of both the CH and the CH–BH coating was estimated using eqn (3) and found to be 0.234 S m1 and 0.261 S m1",
       "location": "p. 7",
       "confidence": "high",
       "test_method": null,
@@ -106,24 +107,15 @@
     "swelling_ratio": null,
     "impedance_1khz": {
       "value": "43.78",
-      "unit": "O cm1",
+      "unit": "Ω cm-1",
       "value_si": null,
-      "evidence": "43.78 \n5.40 O cm1 for CH-coated electrodes",
+      "evidence": "At 1 kHz, the impedance modulus of bare Pt was 47.58  8.35 O cm1 and 43.78  5.40 O cm1 for CH-coated electrodes.",
       "location": "p. 6",
       "confidence": "high",
       "test_method": null,
       "evidence_verified": true
     },
-    "electrode_area": {
-      "value": "8",
-      "unit": "mm",
-      "value_si": null,
-      "evidence": "Platinum disks of\n8 mm in diameter",
-      "location": "p. 2",
-      "confidence": "medium",
-      "test_method": null,
-      "evidence_verified": true
-    },
+    "electrode_area": null,
     "volumetric_capacitance": null,
     "mu_c_star": null,
     "ionic_time_constant": null,
@@ -131,9 +123,9 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Electrochemistry measured in PBS on 8 mm Pt disk.",
+  "notes": "Electrochemical measurements in PBS. 8 mm Pt disk electrode.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:31:09+00:00",
+  "extracted_at": "2026-10-22T12:59:55+00:00",
   "schema_version": "0.1.0"
 }

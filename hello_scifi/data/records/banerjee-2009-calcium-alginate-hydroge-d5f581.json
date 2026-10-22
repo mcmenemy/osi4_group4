@@ -1,5 +1,5 @@
 {
-  "record_id": "banerjee-2009-calcium-alginate-hydroge-86551e",
+  "record_id": "banerjee-2009-calcium-alginate-hydroge-d5f581",
   "source": {
     "doi": "10.1016/j.biomaterials.2009.05.050",
     "title": "The influence of hydrogel modulus on the proliferation and differentiation of encapsulated neural stem cells",
@@ -9,21 +9,22 @@
     "file": "banerjee2009.pdf"
   },
   "material_class": "nonconductive_hydrogel",
-  "material": "Calcium alginate hydrogel 0.25% alginate/10 mM CaCl2 (0.25-10)",
+  "material": "Calcium alginate hydrogel 0.25% alginate / 50 mM CaCl2 (0.25–50)",
   "material_key": "alginate",
+  "electrode_material": null,
   "formulation": [
     {
-      "component": "sodium alginate",
+      "component": "sodium alginate (PRONOVA SLG 100)",
       "amount": "0.25",
       "unit": "% wt/vol",
-      "evidence": "yielding final alginate concentrations of 0.25% or 1% wt/vol",
+      "evidence": "0.25% alginate/50 mM CaCl2 (0.25–50)",
       "evidence_verified": true
     },
     {
       "component": "CaCl2",
-      "amount": "10",
+      "amount": "50",
       "unit": "mM",
-      "evidence": "0.25% alginate/10 mM CaCl2 (0.25–10)",
+      "evidence": "0.25% alginate/50 mM CaCl2 (0.25–50)",
       "evidence_verified": true
     }
   ],
@@ -39,12 +40,12 @@
   ],
   "properties": {
     "youngs_modulus": {
-      "value": "180",
+      "value": "1028",
       "unit": "Pa",
-      "value_si": 180.0,
-      "evidence": "The lowest modulus (w180 Pa) was observed for the ‘‘0.25–10’’ hydrogel",
-      "location": "p. 3",
-      "confidence": "medium",
+      "value_si": 1028.0,
+      "evidence": "(B) 0.25–50 (1028 Pa)",
+      "location": "p. 4, Fig. 4",
+      "confidence": "high",
       "test_method": "shear_rheology",
       "evidence_verified": true
     },
@@ -61,54 +62,53 @@
   },
   "biology": {
     "cell_type": "adult hippocampal neural stem cells",
-    "cell_category": "primary_neuron",
+    "cell_category": "sc_neuron",
     "species": "rat",
     "setting": "in_vitro_3d",
-    "in_brain": null,
+    "tissue_site": "not_applicable",
     "coating": null,
     "culture_days": {
       "value": "7",
       "unit": "days",
       "value_si": 7.0,
-      "evidence": "After 7 days of culture, the NSC number had increased 17-fold in the lowest modulus hydrogel (0.25–10)",
-      "location": "p. 3",
+      "evidence": "We performed a 50% media change every other day for 7 days.",
+      "location": "p. 2",
       "confidence": "high",
       "test_method": null,
       "evidence_verified": true
     },
-    "viability_percent": null,
+    "viability_percent": {
+      "value": ">80",
+      "unit": "%",
+      "value_si": 80.0,
+      "evidence": "we found that NSC viability was greater than 80% inside the hydrogels (data not shown)",
+      "location": "p. 3",
+      "confidence": "medium",
+      "test_method": null,
+      "evidence_verified": true
+    },
     "neurite_length": null,
-    "other_outcomes": [
+    "other_outcomes": [],
+    "survival": [
       {
-        "value": "17",
-        "unit": "fold",
-        "value_si": null,
-        "evidence": "After 7 days of culture, the NSC number had increased 17-fold in the lowest modulus hydrogel (0.25–10)",
+        "value": ">80",
+        "unit": "%",
+        "value_si": 80.0,
+        "evidence": "we found that NSC viability was greater than 80% inside the hydrogels (data not shown)",
         "location": "p. 3",
-        "confidence": "high",
-        "test_method": null,
-        "evidence_verified": true,
-        "name": "NSC number fold increase"
-      },
-      {
-        "value": "20",
-        "unit": "fold",
-        "value_si": null,
-        "evidence": "the relative expression of b-tubulin III is w20-fold greater in cells cultured in alginate hydrogels having the lowest value of modulus",
-        "location": "p. 4",
         "confidence": "medium",
         "test_method": null,
         "evidence_verified": true,
-        "name": "relative b-tubulin III expression vs 1-100"
+        "measure": "viability",
+        "timepoint": null,
+        "culture_days": null,
+        "setting": "in_vitro_3d"
       }
-    ],
-    "survival": []
+    ]
   },
-  "notes": "Rheology at 25 °C, parallel plate; G' reported. NSC viability >80% stated across hydrogels generally.",
-  "flags": [
-    "cell_category:check_sc_neuron"
-  ],
+  "notes": "Rheology at 25 C; G' at 8 Hz.",
+  "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:45:59+00:00",
+  "extracted_at": "2026-10-22T13:06:28+00:00",
   "schema_version": "0.1.0"
 }

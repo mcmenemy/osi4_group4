@@ -1,5 +1,5 @@
 {
-  "record_id": "liu-2019-pedot-pss-electrically-c-1c9c99",
+  "record_id": "liu-2019-pedot-pss-electrically-c-0d8f39",
   "source": {
     "doi": "10.1038/s41551-018-0335-6",
     "title": "Soft and elastic hydrogel-based microelectronics for localized low-voltage neuromodulation",
@@ -9,13 +9,14 @@
     "file": "liu2019.pdf"
   },
   "material_class": "conductive_hydrogel",
-  "material": "PEDOT:PSS electrically conductive hydrogel (ECH/MECH) from ionic liquid-modified PEDOT:PSS after water exchange",
+  "material": "PEDOT:PSS electrically conductive hydrogel (ECH) from ionic-liquid ion gel after water exchange",
   "material_key": "pedot_pss_hydrogel",
+  "electrode_material": null,
   "formulation": [
     {
       "component": "ionic liquid (4-(3-butyl-1-imidazolio)-1-butanesulfonic acid triflate)",
       "amount": "50",
-      "unit": "wt% vs PEDOT:PSS",
+      "unit": "wt%",
       "evidence": "Approximately 50wt% of ionic liquid versus PEDOT:PSS was added to PEDOT:PSS aqueous solution (0.172 g in 15ml of PH1000 solution)",
       "evidence_verified": true
     }
@@ -26,7 +27,7 @@
       "parameter": "speed",
       "value": "2,000",
       "unit": "r.p.m.",
-      "evidence": "spun coated on SiO2, PFPE or PDMS substrate at a speed of 2,000 r.p.m. for 1min",
+      "evidence": "the filtered PEDOT:PSS–ionic liquid solution was spun coated on SiO2, PFPE or PDMS substrate at a speed of 2,000 r.p.m. for 1min, followed by annealing at 130 °C for 30min",
       "evidence_verified": true
     },
     {
@@ -38,17 +39,9 @@
       "evidence_verified": true
     },
     {
-      "step": "oxygen plasma substrate treatment",
-      "parameter": "power",
-      "value": "150",
-      "unit": "W",
-      "evidence": "treated with oxygen plasma (Technics Micro-RIE Series 800) at 150W for 1min before spin coating",
-      "evidence_verified": true
-    },
-    {
       "step": "ionic liquid–water exchange",
       "parameter": "duration",
-      "value": "over 24",
+      "value": "24",
       "unit": "h",
       "evidence": "the film was soaked in a copious amount of deionized water (Millipore water purification system) for over 24h",
       "evidence_verified": true
@@ -76,7 +69,7 @@
       "evidence_verified": true
     },
     "water_content": {
-      "value": "~82",
+      "value": "82",
       "unit": "wt%",
       "value_si": null,
       "evidence": "The water content in the hydrogel was estimated to be ~82wt% within 1min of soaking in water",
@@ -85,16 +78,7 @@
       "test_method": null,
       "evidence_verified": true
     },
-    "swelling_ratio": {
-      "value": "2.1",
-      "unit": null,
-      "value_si": null,
-      "evidence": "with a swelling ratio of 2.1 when sandwiched by the elastic PFPE-DMA",
-      "location": "p. 2",
-      "confidence": "high",
-      "test_method": null,
-      "evidence_verified": true
-    },
+    "swelling_ratio": null,
     "impedance_1khz": null,
     "electrode_area": null,
     "volumetric_capacitance": null,
@@ -103,12 +87,12 @@
     "degradation_time": null,
     "stability": {
       "description": {
-        "value": "resistance stabilized",
+        "value": "only slight decrease in UV–visible absorption at 800 nm",
         "unit": null,
         "value_si": null,
-        "evidence": "Resistance then became stabilized at a more constant value from 1,000 to 10,000 cycles",
+        "evidence": "after 48h of soaking in water, the ECH film showed only a slight decrease in UV–visible absorption intensity",
         "location": "p. 2",
-        "confidence": "medium",
+        "confidence": "high",
         "test_method": null,
         "evidence_verified": true
       },
@@ -116,31 +100,19 @@
         "value": "48",
         "unit": "h",
         "value_si": 2.0,
-        "evidence": "after 48h of soaking in water",
+        "evidence": "after 48h of soaking in water, the ECH film showed only a slight decrease in UV–visible absorption intensity",
         "location": "p. 2",
         "confidence": "high",
         "test_method": null,
         "evidence_verified": true
       },
-      "conditions": "stretch-and-release cycling"
+      "conditions": "thin film (1.4 µm) soaked in water"
     }
   },
-  "biology": {
-    "cell_type": "mouse sciatic nerve (chronic implant, 6 weeks)",
-    "cell_category": "tissue",
-    "species": "mouse (C57BL/6J)",
-    "setting": "in_vivo",
-    "in_brain": false,
-    "coating": null,
-    "culture_days": null,
-    "viability_percent": null,
-    "neurite_length": null,
-    "other_outcomes": [],
-    "survival": []
-  },
-  "notes": "Moduli on fully hydrated hydrogel. CSC 164 mC cm−2 and areal capacitance 9,800 µF cm−2 reported. Implant showed no significant change in neurofilament/S-100 intensity vs sham and minimal inflammation. Stimulation at 50 mV in vivo.",
+  "biology": null,
+  "notes": "Hydrated in water. CSC 164 mC cm−2. 200 nm films sustained 20% strain; <20% impedance increase at 1 kHz under 10% strain. PEDOT/PSS ratio 0.4 to 0.78 after washing.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:32:46+00:00",
+  "extracted_at": "2026-10-22T13:02:48+00:00",
   "schema_version": "0.1.0"
 }

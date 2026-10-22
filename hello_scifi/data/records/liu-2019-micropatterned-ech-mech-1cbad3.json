@@ -1,0 +1,111 @@
+{
+  "record_id": "liu-2019-micropatterned-ech-mech-1cbad3",
+  "source": {
+    "doi": "10.1038/s41551-018-0335-6",
+    "title": "Soft and elastic hydrogel-based microelectronics for localized low-voltage neuromodulation",
+    "first_author": "Liu",
+    "year": 2019,
+    "url": "https://doi.org/10.1038/s41551-018-0335-6",
+    "file": "liu2019.pdf"
+  },
+  "material_class": "conductive_hydrogel",
+  "material": "Micropatterned ECH (MECH) elastronic electrode array encapsulated in PFPE-DMA",
+  "material_key": "pedot_pss_hydrogel",
+  "electrode_material": null,
+  "formulation": [],
+  "processing": [
+    {
+      "step": "PFPE-DMA encapsulation UV exposure",
+      "parameter": "dose",
+      "value": "10",
+      "unit": "mWcm−2",
+      "evidence": "UV exposure (Quintel Q4000, Hg Lamp, 350–450nm) at 10mWcm−2 for 20 s was used to crosslink PFPE-DMA",
+      "evidence_verified": true
+    }
+  ],
+  "properties": {
+    "youngs_modulus": null,
+    "conductivity": null,
+    "water_content": null,
+    "swelling_ratio": {
+      "value": "2.1",
+      "unit": null,
+      "value_si": null,
+      "evidence": "with a swelling ratio of 2.1 when sandwiched by the elastic PFPE-DMA",
+      "location": "p. 2",
+      "confidence": "high",
+      "test_method": null,
+      "evidence_verified": true
+    },
+    "impedance_1khz": null,
+    "electrode_area": null,
+    "volumetric_capacitance": null,
+    "mu_c_star": null,
+    "ionic_time_constant": null,
+    "degradation_time": null,
+    "stability": {
+      "description": {
+        "value": "stable impedance",
+        "unit": null,
+        "value_si": null,
+        "evidence": "the MECH microelectrodes showed stable impedance when soaked in PBS for 19 days",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "duration_days": {
+        "value": "19",
+        "unit": "days",
+        "value_si": 19.0,
+        "evidence": "the MECH microelectrodes showed stable impedance when soaked in PBS for 19 days",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true
+      },
+      "conditions": "MECH microelectrodes soaked in PBS"
+    }
+  },
+  "biology": {
+    "cell_type": "mouse sciatic nerve (C57BL/6J)",
+    "cell_category": "tissue",
+    "species": "mouse",
+    "setting": "in_vivo",
+    "tissue_site": "peripheral_nerve",
+    "coating": null,
+    "culture_days": null,
+    "viability_percent": null,
+    "neurite_length": null,
+    "other_outcomes": [
+      {
+        "value": "50",
+        "unit": "mV",
+        "value_si": null,
+        "evidence": "Our MECH electrode stimulated leg response at an ultralow voltage of 50mV, without the need to remove or penetrate the epineurium layer",
+        "location": "p. 7",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "leg stimulation threshold voltage on sciatic nerve"
+      },
+      {
+        "value": "6",
+        "unit": "weeks",
+        "value_si": null,
+        "evidence": "implanted the freestanding thin-film device (100μm in thickness) by wrapping it around the sciatic nerve of mice and leaving it inside the freely moving mice for 6 weeks",
+        "location": "p. 4",
+        "confidence": "high",
+        "test_method": null,
+        "evidence_verified": true,
+        "name": "chronic implantation duration around sciatic nerve"
+      }
+    ],
+    "survival": []
+  },
+  "notes": "Areal capacitance 9,800 µF cm−2; current density 1,359 mA cm−2 at 0.5 V, 50 Hz in DMEM. No significant change in neurofilament/S-100 vs sham; inflammatory ED1 area comparable to sham. Impedance at 1 kHz of insulated electrodes >100 MΩ.",
+  "flags": [],
+  "extraction_model": "claude-opus-5-5",
+  "extracted_at": "2026-10-22T13:02:48+00:00",
+  "schema_version": "0.1.0"
+}

@@ -11,6 +11,7 @@
   "material_class": "omiec_film",
   "material": "PTHS + EG",
   "material_key": "other:pths-eg",
+  "electrode_material": null,
   "formulation": [],
   "processing": [],
   "properties": {
@@ -45,11 +46,11 @@
     "stability": null
   },
   "biology": null,
-  "notes": "Conjugated polyelectrolyte; measured in 0.1 M NaCl.",
+  "notes": "Conjugated polyelectrolyte. Measured in 0.1 M NaCl. Mobility 0.0013 cm2 V−1 s−1.",
   "flags": [
     "material_key:unmatched"
   ],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:32:01+00:00",
+  "extracted_at": "2026-10-22T13:01:01+00:00",
   "schema_version": "0.1.0"
 }

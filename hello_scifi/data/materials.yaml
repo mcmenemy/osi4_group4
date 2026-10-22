@@ -14,6 +14,7 @@
 # transparency: clear | translucent | opaque | unknown
 # degradable:   "yes" | "no" | tunable | unknown  (quoted so YAML keeps them as strings)
 # literature_typical_stiffness_kpa: only used when no modulus was extracted; plotted hollow.
+# control: true marks comparison surfaces (culture plastic, glass): listed separately, never ranked.
 # candidate: true keeps a family on the scorecard even with no records yet (its unknowns are the to-do list).
 
 materials:
@@ -39,6 +40,24 @@ materials:
     citation: SU-8 2000 series data sheet (Kayaku Advanced Materials), Young's modulus about 2 GPa.
     verified: false
   candidate: true
+- key: culture_plastic
+  label: Tissue-culture plastic / glass (controls)
+  class: other
+  control: true
+  patterns:
+  - polystyrene
+  - tissue[- ]culture (plastic|polystyrene)
+  - \btcp\b
+  - glass coverslip
+  - planar .*cultur
+  note: Standard culture surfaces used as controls; shown for comparison, never ranked as a well fill.
+  transparency:
+    value: unknown
+    citation: null
+  degradable:
+    value: unknown
+    citation: null
+  literature_typical_stiffness_kpa: null
 - key: gelma
   label: GelMA (gelatin methacryloyl)
   class: nonconductive_hydrogel

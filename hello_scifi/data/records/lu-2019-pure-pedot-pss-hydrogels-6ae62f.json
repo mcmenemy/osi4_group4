@@ -1,5 +1,5 @@
 {
-  "record_id": "lu-2019-pure-pedot-pss-hydrogels-7265e3",
+  "record_id": "lu-2019-pure-pedot-pss-hydrogels-6ae62f",
   "source": {
     "doi": "10.1038/s41467-019-09003-5",
     "title": "Pure PEDOT:PSS hydrogels",
@@ -9,8 +9,9 @@
     "file": "lu2019.pdf"
   },
   "material_class": "conductive_hydrogel",
-  "material": "Pure PEDOT:PSS hydrogels (5–50 vol.% DMSO, general)",
+  "material": "Pure PEDOT:PSS hydrogels (DMSO 5–50 vol.%, general)",
   "material_key": "pedot_pss_hydrogel",
+  "electrode_material": null,
   "formulation": [
     {
       "component": "DMSO",
@@ -22,19 +23,11 @@
   ],
   "processing": [
     {
-      "step": "drying",
-      "parameter": "temperature/time",
-      "value": "60 °C for 24 h",
+      "step": "dry-annealing",
+      "parameter": "condition",
+      "value": "24 h at 60 °C drying followed by three cycles of 30 min annealing at 130 °C",
       "unit": null,
-      "evidence": "dried at 60 °C for 24 h followed by multiple cycles of annealing at 130 °C",
-      "evidence_verified": true
-    },
-    {
-      "step": "anneal",
-      "parameter": "temperature",
-      "value": "130",
-      "unit": "°C",
-      "evidence": "three cycles of 30 min annealing at 130 °C",
+      "evidence": "keep the same dry￾annealing condition of 24 h at 60 °C drying followed by three cycles of 30 min annealing at 130 °C to make a batch of pure PEDOT:PSS hydrogels",
       "evidence_verified": true
     }
   ],
@@ -43,7 +36,7 @@
       "value": "2–10",
       "unit": "MPa",
       "value_si": 6000000.0,
-      "evidence": "the Young’s moduli of pure PEDOT:PSS hydrogels in PBS are in the range of 2–10 MPa",
+      "evidence": "Nominal strain vs. stress curves in tensile tests show that the Young’s moduli of pure PEDOT:PSS hydrogels in PBS are in the range of 2–10 MPa",
       "location": "p. 5",
       "confidence": "high",
       "test_method": "tension",
@@ -69,10 +62,10 @@
     "degradation_time": null,
     "stability": {
       "description": {
-        "value": "electrical conductivity negligible decrease",
+        "value": "negligible decrease in electrical conductivity",
         "unit": null,
         "value_si": null,
-        "evidence": "with negligible decrease over 3 months both in PBS and in deionized water",
+        "evidence": "the electrical conductivity of pure PEDOT:PSS hydrogels exhibit superior stability in wet environments with negligible decrease over 3 months both in PBS and in deionized water",
         "location": "p. 7",
         "confidence": "high",
         "test_method": null,
@@ -82,7 +75,7 @@
         "value": "3",
         "unit": "months",
         "value_si": null,
-        "evidence": "with negligible decrease over 3 months both in PBS and in deionized water",
+        "evidence": "negligible decrease over 3 months both in PBS and in deionized water",
         "location": "p. 7",
         "confidence": "high",
         "test_method": null,
@@ -92,9 +85,9 @@
     }
   },
   "biology": null,
-  "notes": "Values reported across DMSO concentration series; swollen state in PBS or DI water.",
+  "notes": "Values span hydrogels prepared with varying DMSO concentrations; measured in PBS or deionized water.",
   "flags": [],
   "extraction_model": "claude-opus-5-5",
-  "extracted_at": "2026-10-22T12:33:27+00:00",
+  "extracted_at": "2026-10-22T13:03:20+00:00",
   "schema_version": "0.1.0"
 }
