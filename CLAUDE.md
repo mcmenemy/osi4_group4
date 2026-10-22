@@ -2,6 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Current direction (Oct 21, 2026 pivot)
+
+The app now builds an evidence base for a gel-filled vs. bare microwell neuron study (audiences: Science Corp and the Seifrid lab). Key pieces, all under `hello_scifi/`:
+- Record schema: `backend/app/schemas.py`, mirrored in `frontend/src/records.ts`; keep them in sync. Every value is a FieldValue with a verbatim evidence quote.
+- Extraction: `backend/app/extraction/` (prompt in `prompts.py`), batch run via `backend/scripts/extract_batch.py`. `MOCK_LLM=1` returns a canned record; `EXTRACTION_MODEL` picks the model.
+- Data: `data/records/*.json` are committed and loaded at startup (no database). `data/papers/*.pdf` are gitignored (public repo). Hand-entered values in `data/references.json` must carry a citation or be labeled "approximate, to verify". Don't invent data.
+- Render builds from `hello_scifi/` (Root Directory), so anything the app reads must live under it; the Dockerfile copies `data/` and `docs/` and sets `DATA_DIR`/`DOCS_DIR`.
+- The theory-of-mind benchmark described below now lives on the Context tab.
+
 ## Project
 
 `osi4_group4` is the public project repo for the OSI 4 hackathon (Oct 21–22, 2026), seeded from the private `osi4_prep` planning repo. The project ("What can carry a mind?") is a scoring tool: given a text description of a candidate substrate that could take on brain function for a patient losing tissue to neurodegeneration (digital computers, quantum computers, neuromorphic chips, OECT networks, ionic hydrogels, engineered neural tissue, gel–neuron hybrids, user submissions), score it 0–3 against each theory-of-mind framework with criterion-level reasoning, plus a combined support score and a maintainability score (how hard the substrate is to keep running). The v1 frameworks are functionalism, global workspace, IIT, active inference, EM field theory and Orch-OR, and the MVP may cut these to 2–3. It is a structured way to compare and debate architectures, not a predictor. App plan (see README "App Plan"):

@@ -2,6 +2,19 @@
 
 Project repo for our [OSI Hackathon @ NC State](https://ncsu-osi-hackathon-materials-2026.github.io/) project (Oct 21–22, 2026). The planning docs, references and hello-world stack test were brought over from our private prep repo.
 
+## The app (current direction)
+
+Science Corporation's cortical biohybrid implant holds ~90,000 neurons in SU-8 microwells (a rigid epoxy, gigapascal stiffness) coated with poly-D-lysine and laminin. In their preprint, wells with labeled neurons dropped from 77% at loading to 52% at ~3 weeks, and neurites mostly stayed in superficial cortex ([Brown et al., bioRxiv 2024](https://www.biorxiv.org/content/10.1101/2024.11.22.624907v1)). Soft hydrogels, including conductive PEDOT:PSS gels, are the leading approach for keeping grafted cells alive and integrated, but we haven't found a published comparison of neurons in bare vs. gel-filled microwells.
+
+The app builds the evidence base for that experiment. An LLM pipeline extracts structured, source-linked records from papers on conductive hydrogels, OECT/OMIEC materials and neurons on soft substrates, and the site shows them as materials maps whose empty regions are untested candidate formulations. Audiences: Science Corp and the Seifrid lab (NC State MSE).
+
+- **Use it:** the app lives in [`hello_scifi/`](hello_scifi/README.md) (Overview, Maps, Records, Extract, Review, Proposal, Context tabs).
+- **Add papers and run extraction:** drop PDFs in `hello_scifi/data/papers/` and run `scripts/extract_batch.py` ([steps](hello_scifi/README.md#adding-papers-and-running-extraction)).
+- **Review records:** use the Review tab and export your reviews as JSON ([steps](hello_scifi/README.md#reviewing-records)).
+- **Proposal draft:** [`hello_scifi/docs/proposal.md`](hello_scifi/docs/proposal.md).
+
+The sections below are the earlier theory-of-mind plan; that benchmark now lives on the Context tab.
+
 ## Background
 [Science Corporation](https://science.xyz) is building brain–computer interfaces that connect to the brain through living neurons instead of wires.
 

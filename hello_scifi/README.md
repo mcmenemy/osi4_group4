@@ -1,13 +1,24 @@
-# 10x Sci-Fi (hello world)
+# Hackathon app
 
-A test app for trying out the hackathon stack end to end. You type some text, and Claude rewrites it as science fiction turned up ten times. Below that, **package checks** run small [Brian2](https://brian2.readthedocs.io/) and [PyPhi](https://pyphi.readthedocs.io/) examples on the server to confirm those libraries work in the same stack (see [Package checks](#package-checks)).
+The app builds the evidence base for a gel-filled vs. bare microwell experiment on biohybrid neural implants. An LLM pipeline extracts structured, source-linked records from papers on conductive hydrogels, OECT/OMIEC materials, and neurons on soft substrates, and the site shows them as materials maps whose empty regions are untested formulations. Tabs:
 
-- **Backend:** Python 3.13 + FastAPI (`backend/`). It calls Claude (Haiku 5.5 by default) with the Anthropic Python SDK.
+- **Overview:** the framing and the Science Corp reference numbers (Brown et al., bioRxiv 2024).
+- **Maps:** stiffness vs. conductivity, cell outcome vs. stiffness, and a coverage heatmap of untested gaps. Click any point or cell to see the record's values, evidence quotes, and source.
+- **Records:** searchable table of every record.
+- **Extract:** run the extraction live on an uploaded PDF or pasted text.
+- **Review:** accept, reject, or correct records one at a time (see [Reviewing records](#reviewing-records)).
+- **Proposal:** renders `docs/proposal.md`.
+- **Context:** the earlier theory-of-mind benchmark, the organic neuron model, and the stack-test **package checks** ([Brian2](https://brian2.readthedocs.io/) and [PyPhi](https://pyphi.readthedocs.io/); see [Package checks](#package-checks)).
+
+The original 10x Sci-Fi stack test still works at `#/scifi`; it's just not in the nav.
+
+- **Backend:** Python 3.13 + FastAPI (`backend/`). It calls Claude with the Anthropic Python SDK.
 - **Frontend:** React + TypeScript, built with Vite (`frontend/`).
 - **Deploy:** a single Docker container on Render. FastAPI serves both `/api` and the built React app.
 
 ```
-Browser ──> /api/scifi (FastAPI) ──> Claude API
+Browser ──> /api/* (FastAPI) ──> Claude API (extraction, scoring)
+        │          └─> data/records/*.json, data/references.json (loaded at startup)
         └─> everything else: React app (Vite dev server locally, static files in prod)
 ```
 
@@ -111,6 +122,39 @@ Notes:
 - With both Brian2 and PyPhi loaded, the server peaked at about 310 MB locally, under the 512 MB of a Render instance.
 - `uv run pytest tests/test_phi.py` runs real (tiny) analyses, so it confirms PyPhi is installed correctly.
 
+## Literature pipeline
+
+Records are JSON files in `data/records/`, committed to the repo and loaded when the server starts. There's no database.
+
+### Adding papers and running extraction
+
+1. Download the PDFs yourself and put them in `data/papers/` with short names like `lu2019.pdf`. The seed list is in [`data/papers/README.md`](data/papers/README.md). PDFs are gitignored because the repo is public; only the records get committed.
+2. Run the batch extraction:
+
+   ```bash
+   cd hello_scifi/backend
+   uv run --env-file .env python scripts/extract_batch.py            # skips papers already extracted
+   uv run --env-file .env python scripts/extract_batch.py --force    # re-extract everything
+   uv run --env-file .env python scripts/extract_batch.py --only lu2019.pdf
+   ```
+
+   It prints a summary (papers, records, fields filled, flags) and writes one file per record to `data/records/`. Use `MOCK_LLM=1` for a dry run without an API key.
+3. Restart the backend (or redeploy) to load the new records, then commit `data/records/`.
+
+How it works (`backend/app/extraction/`):
+
+- `pdf_text.py` pulls text per page and adds `[page N]` markers so the model can cite locations.
+- `extract.py` splits long papers into chunks, asks Claude for structured output matching the schema in `app/schemas.py`, and merges chunk results per material and formulation. The prompt is in `prompts.py`; edit it there.
+- `validate.py` checks that every evidence quote appears in the source text (whitespace, hyphenation, and symbol differences are normalized, with a fuzzy fallback), converts units to SI (`value_si`), and range-checks values. Problems become `flags` on the record; nothing is dropped.
+
+### Reviewing records
+
+Open the **Review** tab, enter your name, and go through the records: compare each value with its quote, then **Accept** or **Reject**, use **Edit field** to correct a value or unit, and add a note. Reviews are saved in your browser's localStorage, so they survive reloads but not a different browser. When you're done, click **Export reviews as JSON** and commit the file under `data/reviews/`.
+
+### Reference markers
+
+`data/references.json` holds the hand-entered reference values on the maps (brain tissue, SU-8, dry PEDOT:PSS, polyimide, silicon) and the Science Corp numbers. Each carries a citation and is labeled "approximate literature value, to verify". `data/target_window.json` sets the shaded soft-and-conductive region; its bounds are a team choice, not a literature value.
+
 ## Configuration
 
 These are environment variables. Locally they live in `backend/.env`; on Render, set them in the dashboard.
@@ -120,6 +164,9 @@ These are environment variables. Locally they live in `backend/.env`; on Render,
 | `ANTHROPIC_API_KEY` | (required) | Your Claude API key |
 | `CLAUDE_MODEL` | `claude-haiku-5-5` | Switch to `claude-sonnet-5-5` or `claude-opus-5-5` for better writing at a higher cost |
 | `RATE_LIMIT_PER_MINUTE` | `10` | Requests allowed per visitor IP per minute |
+| `EXTRACTION_MODEL` | `claude-opus-5-5` | Model for literature extraction (batch script and the Extract tab) |
+| `MOCK_LLM` | unset | Set to `1` to return a canned example record from extraction, so the UI works without a key |
+| `DATA_DIR`, `DOCS_DIR` | `hello_scifi/data`, `hello_scifi/docs` | Where records and docs live; the Dockerfile sets them to `/app/data` and `/app/docs` |
 
 Because the site is public, the backend guards against runaway spend: input is capped at 2,000 characters, output tokens are capped, and each IP is rate-limited. The rate limiter keeps its counts in memory, so they reset whenever the server restarts. That's fine for a single small instance.
 
@@ -158,13 +205,20 @@ hello_scifi/
 ├── Dockerfile            # multi-stage: build React → Python image serving both
 ├── backend/
 │   ├── app/main.py       # FastAPI routes, rate limit, serves the frontend in prod
-│   ├── app/llm.py        # Claude call and system prompt
+│   ├── app/schemas.py    # record schema (mirrored in frontend/src/records.ts)
+│   ├── app/extraction/   # PDF text, prompt, Claude extraction, quote/unit validation
+│   ├── app/data.py       # loads data/records, references, docs
+│   ├── scripts/extract_batch.py
+│   ├── app/llm.py        # Claude calls for the sci-fi demo and benchmark scoring
 │   ├── app/sim.py        # Brian2 package check
 │   ├── app/phi.py        # PyPhi package check
-│   └── tests/            # test_api.py (Claude mocked); test_sim.py, test_phi.py (real runs)
+│   └── tests/            # API, schema, units, quote checks (Claude mocked); sim/phi real runs
+├── data/                 # papers/ (local PDFs, gitignored), records/, references.json, target_window.json
+├── docs/proposal.md      # rendered on the Proposal tab
 └── frontend/
     ├── vite.config.ts    # dev proxy /api → :8000
-    ├── src/App.tsx       # the UI
+    ├── src/App.tsx       # tabs and data loading
+    ├── src/MapsTab.tsx   # Plotly maps (Plotly is loaded lazily)
     ├── src/SimCheck.tsx  # Brian2 check: inputs and SVG plots
     └── src/PhiCheck.tsx  # PyPhi check: network diagram, results, run history
 ```
