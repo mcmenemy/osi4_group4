@@ -6,6 +6,8 @@ import { withPrefix } from './records'
 
 // Mirrors backend/app/survival_map.py.
 type TierKey = 'in_vivo' | 'neurons_in_dish' | 'cell_lines'
+type Measure = 'viability' | 'retention' | 'occupancy' | 'neurite_outgrowth'
+type YMode = 'percent' | 'score'
 
 interface XValue {
   value: number
@@ -23,7 +25,7 @@ interface SurvivalPoint {
   family_label: string
   baseline: boolean
   source: string
-  measure: string
+  measure: Measure
   percent: number
   days: number | null
   setting: string | null
@@ -49,6 +51,13 @@ const TIER_PLAIN: Record<TierKey, string> = {
   neurons_in_dish: 'Real neurons in a dish',
   cell_lines: 'Lab-grown neuron-like cells',
 }
+const MEASURES: { key: Measure; label: string; plain: string; axis: string }[] = [
+  { key: 'viability', label: 'Viability', plain: 'Cells alive', axis: 'Viability (%)' },
+  { key: 'retention', label: 'Retention', plain: 'Cells kept', axis: 'Retention (%)' },
+  { key: 'occupancy', label: 'Well occupancy', plain: 'Wells with cells', axis: 'Well occupancy (%)' },
+  { key: 'neurite_outgrowth', label: 'Neurite outgrowth', plain: 'Cells growing fibers', axis: 'Cells with neurites (%)' },
+]
+const MIN_DAYS = [0, 7, 21]
 const MAX_FAMILY_COLORS = 5
 
 function formatX(v: number, unit: string): string {
@@ -56,12 +65,18 @@ function formatX(v: number, unit: string): string {
   return `${Number(v.toPrecision(3))}${unit ? ` ${unit}` : ''}`
 }
 
+// Duration is shown as marker size (how much a point says about lasting survival), not folded into y.
+const sizeFor = (days: number | null, fullDays: number) => 10 + 12 * Math.min((days ?? 0) / fullDays, 1)
+
 export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: string) => void }) {
   const theme = useTheme()
   const t = useModeText()
   const [data, setData] = useState<SurvivalMapData | null>(null)
   const [error, setError] = useState('')
   const [prop, setProp] = useState('youngs_modulus')
+  const [yMode, setYMode] = useState<YMode>('percent')
+  const [measure, setMeasure] = useState<Measure>('viability')
+  const [minDays, setMinDays] = useState(0)
   const [tiers, setTiers] = useState<TierKey[]>(['in_vivo', 'neurons_in_dish', 'cell_lines'])
   const [familyLevel, setFamilyLevel] = useState(true)
 
@@ -73,7 +88,20 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
   }, [])
 
   const property = data?.properties.find((p) => p.key === prop)
-  const usable = (p: SurvivalPoint, key: string, family: boolean) => !!p.x[key] && (family || p.x[key].source === 'record')
+
+  // Every filter except the x axis; the x-axis buttons count against this.
+  const filtered = useMemo(
+    () =>
+      (data?.points ?? []).filter(
+        (p) =>
+          tiers.includes(p.tier) &&
+          (yMode === 'score' || p.measure === measure) &&
+          (minDays === 0 || (p.days != null && p.days >= minDays)),
+      ),
+    [data, tiers, yMode, measure, minDays],
+  )
+  const hasX = (p: SurvivalPoint, key: string) => !!p.x[key] && (familyLevel || p.x[key].source === 'record')
+  const shown = filtered.filter((p) => hasX(p, prop))
 
   // Colors follow the family, ranked by how many points it has overall, so filters never repaint.
   const colorOf = useMemo(() => {
@@ -83,18 +111,20 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
     return (p: SurvivalPoint) => (p.baseline ? theme.accent : top.includes(p.material_key) ? theme.categorical[top.indexOf(p.material_key)] : theme.other)
   }, [data, theme])
 
-  const shown = useMemo(
-    () => (data?.points ?? []).filter((p) => tiers.includes(p.tier) && usable(p, prop, familyLevel)),
-    [data, tiers, prop, familyLevel],
-  )
+  const measureInfo = MEASURES.find((m) => m.key === measure)!
+  const baselinePts = (data?.points ?? []).filter((p) => p.baseline && p.measure === 'occupancy').sort((a, b) => (a.days ?? 0) - (b.days ?? 0))
 
-  const plot = useMemo(() => {
-    if (!data || !property) return null
+  let plot: { data: object[]; layout: object } | null = null
+  if (data && property && shown.length) {
+    const full = data.config.full_credit_days
     const groups = new Map<string, SurvivalPoint[]>()
     for (const p of shown) groups.set(p.family_label, [...(groups.get(p.family_label) ?? []), p])
-    const scoreLine = (p: SurvivalPoint) => {
-      const days = p.days_stated ? `${p.days} d` : `time not stated (counted as ${data.config.unknown_days} d)`
-      return `${p.percent}% ${p.measure.replace('_', ' ')} at ${days}<br>Score ${p.score.toFixed(1)} = ${p.percent} × ${p.time_factor} (time) × ${p.measure_weight} (measure)`
+    const resultLine = (p: SurvivalPoint) => {
+      const days = p.days_stated ? `${p.days} d` : 'time not stated'
+      const base = `${p.percent}% ${p.measure.replace('_', ' ')} at ${days}`
+      return yMode === 'score'
+        ? `${base}<br>Score ${p.score.toFixed(1)} = ${p.percent} × ${p.time_factor} (time${p.days_stated ? '' : `, counted as ${data.config.unknown_days} d`}) × ${p.measure_weight} (measure)`
+        : base
     }
     const xLine = (x: XValue) => {
       const v = formatX(x.value, property.unit)
@@ -109,82 +139,83 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
       mode: 'markers',
       name: label,
       x: pts.map((p) => p.x[prop].value),
-      y: pts.map((p) => p.score),
+      y: pts.map((p) => (yMode === 'score' ? p.score : p.percent)),
       customdata: pts.map((p) => p.record_id),
       hovertemplate: pts.map(
         (p) =>
-          `<b>${p.family_label}</b><br>${p.material}<br>${p.source} · ${p.cell_type ?? 'cells'} · ${TIER_PLAIN[p.tier]}<br>${scoreLine(p)}<br>${xLine(p.x[prop])}<extra></extra>`,
+          `<b>${p.family_label}</b><br>${p.material}<br>${p.source} · ${p.cell_type ?? 'cells'} · ${TIER_PLAIN[p.tier]}<br>${resultLine(p)}<br>${xLine(p.x[prop])}<extra></extra>`,
       ),
       marker: {
-        size: 12,
+        size: pts.map((p) => sizeFor(p.days, full)),
         color: pts.map(colorOf),
         symbol: pts.map((p) => TIER_SYMBOL[p.tier] + (p.x[prop].source === 'record' ? '' : '-open')),
         line: { width: 2, color: pts.map((p) => (p.x[prop].source === 'record' ? theme.panel : colorOf(p))) },
       },
     }))
-    // Symbol key, in gray so it doesn't read as a family.
-    for (const tier of data.tiers.filter((x) => tiers.includes(x.key))) {
-      traces.push({
-        type: 'scatter', mode: 'markers', x: [null], y: [null], hoverinfo: 'skip',
-        name: t(TIER_PLAIN[tier.key], tier.label),
-        marker: { symbol: TIER_SYMBOL[tier.key], size: 10, color: theme.muted },
-      })
-    }
+    // Symbol and size key, in gray so it doesn't read as a family.
+    const key = (name: string, marker: object) =>
+      traces.push({ type: 'scatter', mode: 'markers', x: [null], y: [null], hoverinfo: 'skip', name, marker: { color: theme.muted, ...marker } })
+    for (const tier of data.tiers.filter((x) => tiers.includes(x.key)))
+      key(t(TIER_PLAIN[tier.key], tier.label), { symbol: TIER_SYMBOL[tier.key], size: 10 })
     if (familyLevel)
-      traces.push({
-        type: 'scatter', mode: 'markers', x: [null], y: [null], hoverinfo: 'skip',
-        name: t('Hollow: property from other papers', 'Hollow: family-level or curated x value'),
-        marker: { symbol: 'circle-open', size: 10, color: theme.muted, line: { width: 2 } },
-      })
+      key(t('Hollow: property from other papers', 'Hollow: family-level or curated x value'), { symbol: 'circle-open', size: 10, line: { width: 2 } })
+    key(t('Small: under a day · large: 3+ weeks', `Size: experiment length (largest at ≥${full} d)`), { symbol: 'circle', size: 14 })
 
-    const baseline = data.points.filter((p) => p.baseline).sort((a, b) => b.score - a.score)[0]
+    // Today's chip is a reference for the measure it was measured in (occupancy), not a competitor.
+    const shapes: object[] = []
+    const annotations: object[] = []
+    const ref = (y: number, text: string) => {
+      shapes.push({ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: y, y1: y, line: { color: theme.accent, width: 1.5, dash: 'dash' } })
+      annotations.push({ xref: 'paper', x: 0, xanchor: 'left', y, yanchor: 'bottom', showarrow: false, text, font: { size: 11, color: theme.accent } })
+    }
+    const [load, later] = [baselinePts[0], baselinePts[baselinePts.length - 1]]
+    if (yMode === 'percent' && measure === 'occupancy' && load && later && load !== later)
+      ref(later.percent, t(
+        `Today's chip: ${load.percent}% at loading → ${later.percent}% at 3 weeks (in mice)`,
+        `SU-8 baseline: ${load.percent}% at loading (in vitro) → ${later.percent}% at ~${later.days} d (in vivo)`,
+      ))
+    const bestBaseline = data.points.filter((p) => p.baseline).sort((a, b) => b.score - a.score)[0]
+    if (yMode === 'score' && bestBaseline) ref(bestBaseline.score, `SU-8 baseline score: ${bestBaseline.score.toFixed(1)}`)
+
     const xs = shown.map((p) => p.x[prop].value)
-    const xAxis = property.log
-      ? logAxis(theme, `${property.label}${property.unit ? ` (${property.unit})` : ''}`,
-          xs.length ? [Math.min(...xs) / 3, Math.max(...xs) * 3] : undefined)
-      : { title: { text: `${property.label}${property.unit ? ` (${property.unit})` : ''}`, font: { color: theme.muted } }, gridcolor: theme.border, zeroline: false }
-    return {
+    const xTitle = `${property.label}${property.unit ? ` (${property.unit})` : ''}`
+    plot = {
       data: traces,
       layout: {
         ...baseLayout(theme),
-        xaxis: xAxis,
-        yaxis: { title: { text: 'Survival score (0–100)', font: { color: theme.muted } }, range: [0, 100], gridcolor: theme.border, zeroline: false },
-        shapes: baseline
-          ? [{ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: baseline.score, y1: baseline.score, line: { color: theme.accent, width: 1.5, dash: 'dash' } }]
-          : [],
-        annotations: baseline
-          ? [{
-              xref: 'paper', x: 0, xanchor: 'left', y: baseline.score, yanchor: 'bottom', showarrow: false,
-              text: t(`Today's chip (SU-8), in mice: ${baseline.score.toFixed(0)}`, `SU-8 baseline, in vivo occupancy: ${baseline.score.toFixed(1)}`),
-              font: { size: 11, color: theme.accent },
-            }]
-          : [],
+        xaxis: property.log
+          ? logAxis(theme, xTitle, [Math.min(...xs) / 3, Math.max(...xs) * 3])
+          : { title: { text: xTitle, font: { color: theme.muted } }, gridcolor: theme.border, zeroline: false },
+        yaxis: {
+          title: { text: yMode === 'score' ? 'Weighted survival score (0–100)' : measureInfo.axis, font: { color: theme.muted } },
+          range: [0, 105], gridcolor: theme.border, zeroline: false,
+        },
+        shapes,
+        annotations,
       },
     }
-  }, [data, property, shown, prop, tiers, familyLevel, colorOf, theme, t])
+  }
 
-  const count = (key: string) => (data?.points ?? []).filter((p) => tiers.includes(p.tier) && usable(p, key, familyLevel)).length
   const cfg = data?.config
+  const countBy = (pred: (p: SurvivalPoint) => boolean) => (data?.points ?? []).filter(pred).length
 
   return (
     <figure className="map-card survival-map">
       <figcaption>
-        <h2>{t('Do neurons last longer on some materials?', 'Survival score vs. material properties')}</h2>
+        <h2>{t('Do neurons last longer on some materials?', 'Neuron survival vs. material properties')}</h2>
         {cfg &&
           t(
             <p>
-              Each point is one result from a paper: how well neurons survived on a material, as a score from 0 to 100. A
-              result only gets full credit if it lasted at least 3 weeks, and counts for less if it measured something
-              less direct than survival. Pick a property to see whether it lines up with survival. The dashed line is
-              Science Corp's chip today. Numbers were pulled from papers by AI, and not all have been checked by a person
-              yet.
+              Each point is one result from a paper: what share of neurons survived on a material. Bigger points come
+              from longer experiments, which say more about whether neurons last. Pick a property to see whether it lines
+              up with survival. Numbers were pulled from papers by AI, and not all have been checked by a person yet.
             </p>,
             <p>
-              One point per survival result. Score = reported % × min(days / {cfg.full_credit_days}, 1) × measure weight
-              ({Object.entries(cfg.measure_weights).map(([k, v]) => `${k.replace('_', ' ')} ${v}`).join(', ')}); a
-              missing timepoint counts as day {cfg.unknown_days}. Weights live in <code>data/scorecard.yaml</code>.
-              Filled points have the property from the same paper; hollow points use the family median or the curated
-              literature range, so the cells and the property come from different formulations. Values are extracted by
+              One point per survival result, plotted as the reported %, one measure at a time (measures aren't
+              comparable). Marker size is experiment length, full size at ≥{cfg.full_credit_days} d; use the minimum-days
+              filter for long-term evidence only. Filled points have the property from the same paper; hollow points use
+              the family median or curated literature range, so cells and property come from different formulations.
+              The SU-8 baseline is shown on the occupancy view, the measure it was reported in. Values are extracted by
               an LLM and partly unreviewed.
             </p>,
           )}
@@ -193,11 +224,33 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
       {error && <p className="error">{error}</p>}
       {data && (
         <div className="survival-controls">
+          <div className="pills" role="group" aria-label={t('Show', 'Y axis')}>
+            <span className="control-label">{t('Show', 'Y axis')}</span>
+            {yMode === 'percent' &&
+              MEASURES.map((m) => (
+                <button key={m.key} type="button" className="pill" aria-pressed={measure === m.key} onClick={() => setMeasure(m.key)}>
+                  {t(m.plain, m.label)}{' '}
+                  <span className="pill-count">{countBy((p) => p.measure === m.key && tiers.includes(p.tier))}</span>
+                </button>
+              ))}
+            <button type="button" className="pill" aria-pressed={yMode === 'score'}
+              onClick={() => setYMode((y) => (y === 'score' ? 'percent' : 'score'))}>
+              {yMode === 'score' ? t('← Back to percentages', '← Reported %') : t('Weighted score', 'Weighted score')}
+            </button>
+          </div>
+          <div className="pills" role="group" aria-label={t('Experiment length', 'Minimum days')}>
+            <span className="control-label">{t('Experiment length', 'Minimum days')}</span>
+            {MIN_DAYS.map((d) => (
+              <button key={d} type="button" className="pill" aria-pressed={minDays === d} onClick={() => setMinDays(d)}>
+                {d === 0 ? t('Any', 'Any') : d === 21 ? t('3+ weeks', '≥21 d') : t(`${d}+ days`, `≥${d} d`)}
+              </button>
+            ))}
+          </div>
           <div className="pills" role="group" aria-label={t('Compare against', 'X axis')}>
             <span className="control-label">{t('Compare against', 'X axis')}</span>
             {data.properties.map((p) => (
               <button key={p.key} type="button" className="pill" aria-pressed={prop === p.key} onClick={() => setProp(p.key)}>
-                {p.label} <span className="pill-count">{count(p.key)}</span>
+                {p.label} <span className="pill-count">{filtered.filter((pt) => hasX(pt, p.key)).length}</span>
               </button>
             ))}
           </div>
@@ -207,7 +260,7 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
               <button key={tier.key} type="button" className="pill" aria-pressed={tiers.includes(tier.key)}
                 onClick={() => setTiers((ts) => (ts.includes(tier.key) ? ts.filter((x) => x !== tier.key) : [...ts, tier.key]))}>
                 {t(TIER_PLAIN[tier.key], tier.label)}{' '}
-                <span className="pill-count">{data.points.filter((p) => p.tier === tier.key).length}</span>
+                <span className="pill-count">{countBy((p) => p.tier === tier.key)}</span>
               </button>
             ))}
           </div>
@@ -215,18 +268,26 @@ export default function SurvivalMap({ onOpenRecord }: { onOpenRecord: (id: strin
             <input type="checkbox" checked={familyLevel} onChange={(e) => setFamilyLevel(e.target.checked)} />{' '}
             {t('Also use property values from other papers on the same material (hollow)', 'Include family-level pairing (hollow points)')}
           </label>
+          {yMode === 'score' && cfg && (
+            <p className="muted small">
+              {t(
+                'The weighted score multiplies survival by how long the experiment ran, so it rewards long studies as much as good materials. Use it to rank, not to compare.',
+                `Weighted score = % × min(days / ${cfg.full_credit_days}, 1) × measure weight (${Object.entries(cfg.measure_weights).map(([k, v]) => `${k.replace('_', ' ')} ${v}`).join(', ')}); missing timepoints count as day ${cfg.unknown_days}. It mixes study length with outcome, so long studies score higher regardless of material. Settings in data/scorecard.yaml.`,
+              )}
+            </p>
+          )}
         </div>
       )}
 
-      {plot && shown.length > 0 && (
-        <Plot data={plot.data} layout={plot.layout} height={480} label="Scatter of survival score against the chosen material property"
+      {plot && (
+        <Plot data={plot.data} layout={plot.layout} height={480} label="Scatter of neuron survival against the chosen material property"
           onClick={(p: PlotPoint) => typeof p.customdata === 'string' && onOpenRecord(p.customdata)} />
       )}
       {data && property && shown.length === 0 && (
         <p className="notice">
           {t(
-            `No survival results can be paired with ${property.label.toLowerCase()} yet. Papers that measure both are on the wanted list.`,
-            `No survival results pair with ${property.label.toLowerCase()} under these settings.${familyLevel ? '' : ' Try including family-level pairing.'}${tiers.length < 3 ? ' Try more tiers.' : ''} Otherwise this needs papers that report both, or a family that has both survival and ${property.label.toLowerCase()} data.`,
+            `No results match these choices yet. Try a different property, a shorter experiment length, or more kinds of results.`,
+            `No points under these settings.${familyLevel ? '' : ' Try including family-level pairing.'}${minDays ? ' Try a lower minimum.' : ''}${tiers.length < 3 ? ' Try more tiers.' : ''} Otherwise this needs papers that report both ${yMode === 'score' ? 'survival' : measureInfo.label.toLowerCase()} and ${property.label.toLowerCase()}.`,
           )}
         </p>
       )}
