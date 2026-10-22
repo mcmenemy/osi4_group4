@@ -20,7 +20,7 @@ const TABS = [
   { id: 'extract', label: 'Extract' },
   { id: 'review', label: 'Review' },
   { id: 'proposal', label: 'Proposal' },
-  { id: 'context', label: 'Context' },
+  { id: 'context', label: 'Big picture' },
 ] as const
 
 const HIDDEN_ROUTES = ['scifi'] as const

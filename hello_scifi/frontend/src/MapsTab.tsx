@@ -63,6 +63,7 @@ export default function MapsTab({ records, references, targetWindow }: Props) {
       <StiffnessConductivity records={records} references={references} targetWindow={targetWindow} onPoint={onPoint} />
       <CellOutcomes records={records} references={references} onPoint={onPoint} />
       <Degradation records={records} onPoint={onPoint} />
+      <MixedConductors records={records} onPoint={onPoint} />
       <Coverage records={records} onCell={openIds} />
 
       {selected && (
@@ -469,7 +470,89 @@ function Degradation({ records, onPoint }: { records: MaterialRecord[]; onPoint:
   )
 }
 
-/* 4. Coverage heatmap */
+/* 4. Mixed conductors: μC* vs C* */
+
+const MOBILITIES = [0.001, 0.01, 0.1, 1, 10] // cm² V⁻¹ s⁻¹; μC* = μ · C*, so each is a straight line in log-log
+
+function MixedConductors({ records, onPoint }: { records: MaterialRecord[]; onPoint: (p: PlotPoint) => void }) {
+  const t = useTheme()
+  const points = useMemo(
+    () =>
+      records.filter(
+        (r) => r.properties.volumetric_capacitance?.value_si != null && r.properties.mu_c_star?.value_si != null,
+      ),
+    [records],
+  )
+  const { data, layout } = useMemo(() => {
+    const X: [number, number] = [10, 1000]
+    const traces: object[] = MOBILITIES.map((mu) => ({
+      type: 'scatter',
+      mode: 'lines',
+      x: X,
+      y: X.map((c) => mu * c),
+      line: { color: t.border, width: 1, dash: 'dot' },
+      hoverinfo: 'skip',
+      showlegend: false,
+    }))
+    traces.push(
+      ...MATERIAL_CLASSES.map((c) => {
+        const rs = points.filter((r) => r.material_class === c.key)
+        return {
+          type: 'scatter',
+          mode: 'markers+text',
+          name: c.label,
+          x: rs.map((r) => r.properties.volumetric_capacitance!.value_si),
+          y: rs.map((r) => r.properties.mu_c_star!.value_si),
+          text: rs.map((r) => r.material),
+          textposition: 'top center',
+          textfont: { size: 10, color: t.muted },
+          customdata: rs.map((r) => r.record_id),
+          hovertemplate: rs.map((r) => {
+            const cs = r.properties.volumetric_capacitance!.value_si!
+            const mc = r.properties.mu_c_star!.value_si!
+            return hoverFor(r, [`C* = ${cs} F cm⁻³`, `μC* = ${mc} F cm⁻¹ V⁻¹ s⁻¹`, `implied μ ≈ ${Number((mc / cs).toPrecision(2))} cm² V⁻¹ s⁻¹`])
+          }),
+          marker: { size: 11, color: classColor(t, c.key), line: { width: 2, color: t.panel } },
+          showlegend: rs.length > 0,
+        }
+      }),
+    )
+    return {
+      data: traces,
+      layout: {
+        ...baseLayout(t),
+        xaxis: logAxis(t, 'Volumetric capacitance C* (F cm⁻³)', X),
+        yaxis: logAxis(t, 'μC* (F cm⁻¹ V⁻¹ s⁻¹)', [0.05, 2000]),
+        annotations: MOBILITIES.filter((mu) => mu * 1000 <= 2000 && mu * 1000 >= 0.05).map((mu) => ({
+          x: Math.log10(1000),
+          y: Math.log10(mu * 1000),
+          xanchor: 'right',
+          yanchor: 'bottom',
+          showarrow: false,
+          text: `μ = ${mu} cm²/Vs`,
+          font: { size: 10, color: t.muted },
+        })),
+      },
+    }
+  }, [points, t])
+
+  return (
+    <figure className="map-card">
+      <figcaption>
+        <h2>Mixed conductors: μC* vs. C*</h2>
+        <p>
+          The standard figure of merit for organic mixed ionic-electronic conductors: μC* (higher is better for
+          transistors) against volumetric capacitance C*; dotted lines are constant electronic mobility μ = μC*/C*. These
+          are the film materials a self-driving lab like the Seifrid lab's would optimize. {CAVEAT}
+        </p>
+      </figcaption>
+      <Plot data={data} layout={layout} height={480} label="Log-log scatter of μC* against volumetric capacitance" onClick={onPoint} />
+      <p className="muted small">{points.length} records report both C* and μC*.</p>
+    </figure>
+  )
+}
+
+/* 5. Coverage heatmap */
 
 function Coverage({ records, onCell }: { records: MaterialRecord[]; onCell: (ids: string[]) => void }) {
   const t = useTheme()

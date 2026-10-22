@@ -7,7 +7,7 @@ const TAB_LINKS = [
   { href: '#/extract', title: 'Extract', text: 'Upload a paper and watch the pipeline pull out source-linked records.' },
   { href: '#/review', title: 'Review', text: 'Accept, reject, or correct records one at a time.' },
   { href: '#/proposal', title: 'Proposal', text: 'Draft study: neurons in gel-filled vs. bare microwells.' },
-  { href: '#/context', title: 'Context', text: 'Why the device side matters: a benchmark across theories of mind.' },
+  { href: '#/context', title: 'Big picture', text: 'What can carry a mind? Score substrates across theories of mind, including your own.' },
 ]
 
 export default function Overview({ records, references }: { records: MaterialRecord[]; references: References | null }) {
@@ -45,6 +45,10 @@ export default function Overview({ records, references }: { records: MaterialRec
               This app builds the evidence base for that experiment: an LLM pipeline extracts structured, source-linked
               records from papers on conductive hydrogels, OECT/OMIEC materials and neurons on soft substrates, and
               visualizes them as materials maps whose empty regions are untested candidate formulations.
+            </p>
+            <p>
+              Longer term, a gel-filled well is a first step toward a gel–neuron hybrid, one of the two most promising rows in our{' '}
+              <a href="#/context">“What can carry a mind?” benchmark</a> of what could sit behind a biohybrid implant.
             </p>
             <p className="muted">
               Built for Science Corporation and the Seifrid lab (NC State MSE: organic mixed ionic-electronic conductors

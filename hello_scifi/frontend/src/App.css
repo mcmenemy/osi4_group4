@@ -675,6 +675,55 @@ th .cell-btn:hover {
   color: var(--muted);
 }
 
+/* Bridge from the benchmark to the microwell work */
+.bridge-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.92rem;
+  background: var(--accent-soft);
+  border-radius: 6px;
+}
+
+.bridge-tag {
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+table.benchmark tbody tr.bridge th {
+  background: var(--accent-soft);
+}
+
+.bridge-callout {
+  margin: 2rem 0 0;
+  padding: 1.1rem 1.25rem;
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+}
+
+.bridge-callout h3 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+}
+
+.bridge-callout p {
+  margin: 0 0 0.6rem;
+}
+
+.bridge-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-weight: 600;
+}
+
 /* Inline text buttons */
 .link-btn {
   padding: 0;

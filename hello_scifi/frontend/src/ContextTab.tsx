@@ -4,10 +4,10 @@ export default function ContextTab() {
   return (
     <>
       <div className="container tab context-intro">
-        <p className="kicker">Context</p>
+        <p className="kicker">Big picture</p>
         <p className="lede">
-          Why the device side matters: if a patient loses cortex, what sits behind the implant decides how much function
-          it could ever carry. This benchmark scores candidate substrates across theories of mind.
+          Where the microwell work leads. Science Corp's implant is a living bridge into the brain; this benchmark asks
+          what should sit behind it if the brain itself starts to fail. Try scoring your own substrate at the bottom.
         </p>
       </div>
       <MindSection />

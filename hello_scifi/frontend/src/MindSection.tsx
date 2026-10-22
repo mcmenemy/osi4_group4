@@ -26,13 +26,13 @@ export default function MindSection() {
   return (
     <section id="mind" className="mind">
       <div className="container">
-        <p className="kicker">The benchmark</p>
-        <h2 className="section-title">What carries a mind?</h2>
+        <p className="kicker">The big picture</p>
+        <h2 className="section-title">What can carry a mind?</h2>
         <p className="lede">
-          Each candidate device-side substrate is scored 0–3 under six theories of mind.
-          Carry-over is the sum (0–18). Maintainability (0–3) is how hard the substrate is to keep
-          running inside a patient. All scores are provisional judgment calls, made to be argued
-          with.
+          For a patient losing cortex, could anything on the device side take over some of the lost
+          function? We score candidate substrates 0–3 under six theories of mind (carry-over, 0–18) and
+          on how hard each is to keep running in a patient (maintainability, 0–3). The scores are
+          provisional judgment calls, made to be argued with.
         </p>
 
         <div className="explorer">
@@ -90,6 +90,7 @@ export default function MindSection() {
                 {substrate.reasons[framework.key]}
               </p>
             </div>
+            {substrate.key === 'gel_neuron' && <BridgeNote />}
           </div>
         </div>
 
@@ -120,7 +121,7 @@ export default function MindSection() {
               {ranked.map((s) => (
                 <tr
                   key={s.key}
-                  className={[s.key === substrate.key && 'active', s.key === 'custom' && 'custom']
+                  className={[s.key === substrate.key && 'active', s.key === 'custom' && 'custom', s.key === 'gel_neuron' && 'bridge']
                     .filter(Boolean)
                     .join(' ')}
                 >
@@ -128,6 +129,7 @@ export default function MindSection() {
                     <button type="button" className="cell-btn" onClick={() => select(s.key)}>
                       {s.name}
                     </button>
+                    {s.key === 'gel_neuron' && <span className="bridge-tag">our first step</span>}
                   </th>
                   {FRAMEWORKS.map((f) => (
                     <td
@@ -158,8 +160,31 @@ export default function MindSection() {
           in one character.
         </p>
 
+        <aside className="bridge-callout">
+          <h3>From this table to the microwell experiment</h3>
+          <p>
+            Pure neural tissue tops every framework but is the hardest to keep alive; silicon is easy to maintain but
+            carries little. The <strong>gel–neuron hybrid</strong> sits between them, and it's the least grounded row:
+            our draft found no published system that couples a computing gel bidirectionally to living neurons. Filling Science Corp's microwells with a soft
+            gel is the first measurable step toward it, which is why the rest of this app maps soft, conductive, and
+            degradable materials and their effects on neurons.
+          </p>
+          <p className="bridge-links">
+            <a href="#/maps">See the materials maps →</a> <a href="#/proposal">Read the proposal →</a>
+          </p>
+        </aside>
+
         <CustomScore result={custom} onResult={handleCustom} />
       </div>
     </section>
+  )
+}
+
+function BridgeNote() {
+  return (
+    <p className="bridge-note">
+      This is the row our project starts to measure: a gel-filled microwell is the first step toward a gel–neuron
+      hybrid. <a href="#/proposal">See the proposal →</a>
+    </p>
   )
 }
